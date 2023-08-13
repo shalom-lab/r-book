@@ -1,0 +1,33 @@
+project:
+  type: book
+
+book:
+  title: "R语言快速入门-干货满满"
+  author: "Shalom"
+  date: "2023/8/13"
+  repo-url: https://github.com/malcolmbarrett/causal-inference-in-r
+  repo-actions: [edit, issue]
+  chapters:
+    - index.qmd
+    
+    - part: 基础篇
+      chapters: 
+        - text: 安装
+          href: install.qmd
+        - text: 数据读写
+          href: data_import_export.qmd
+
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    toc-title: 目录
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
+comments:
+  hypothesis: true
