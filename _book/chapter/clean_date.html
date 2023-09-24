@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Shalom">
-<meta name="dcterms.date" content="2023-08-13">
 
-<title>R语言快速入门</title>
+<title>R语言快速入门 – clean_date</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./chapter/base_install.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapter/clean_string.html" rel="next">
+<link href="../chapter/clean_dplyr.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -66,7 +65,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating">
+<body class="nav-sidebar floating fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -75,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">前言</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/clean_tidyverse.html">数据清理</a></li><li class="breadcrumb-item"><a href="../chapter/clean_date.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">日期处理</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -90,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R语言快速入门</a> 
+      <a href="../">R语言快速入门</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/malcolmbarrett/causal-inference-in-r" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -105,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">前言</span></a>
   </div>
 </li>
@@ -120,37 +119,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_install.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">安装</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_data_type.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_function.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_package.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_package.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R包</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
   </div>
 </li>
@@ -167,32 +166,32 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_date.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_string.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_string.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_tips.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
+  <a href="../chapter/clean_transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用转换</span></span></a>
   </div>
 </li>
       </ul>
@@ -202,88 +201,14 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">目录</h2>
-   
-  <ul>
-  <li><a href="#前言" id="toc-前言" class="nav-link active" data-scroll-target="#前言">前言</a>
-  <ul class="collapse">
-  <li><a href="#r能做什么" id="toc-r能做什么" class="nav-link" data-scroll-target="#r能做什么">R能做什么？</a></li>
-  <li><a href="#如何学好r语言" id="toc-如何学好r语言" class="nav-link" data-scroll-target="#如何学好r语言">如何学好R语言?</a></li>
-  <li><a href="#r语言学习资料" id="toc-r语言学习资料" class="nav-link" data-scroll-target="#r语言学习资料">R语言学习资料</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">R语言快速入门</h1>
-</div>
 
 
 
-<div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Shalom </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 13, 2023</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-</header>
-
-<section id="前言" class="level1 unnumbered">
-<h1 class="unnumbered">前言</h1>
-<p>这是一本只讲干货的R语言入门书籍，希望对您有所帮助.</p>
-<section id="r能做什么" class="level2">
-<h2 class="anchored" data-anchor-id="r能做什么">R能做什么？</h2>
-<ul>
-<li><p>数据分析</p></li>
-<li><p>数据可视化 <a href="https://rrr.is/covid">上海新冠</a> <a href="https://chart.rlearner.com">R作图</a></p></li>
-<li><p>爬取数据 <a href="https://blog.rlearner.com/r/rvest-base.html">爬数据</a></p></li>
-<li><p>写博客 <a href="https://blog.rlearner.com">Shalom的博客</a></p></li>
-<li><p>做网站 <a href="https://shiny.posit.co/r/gallery/">Shiny</a> <a href="https://learn-r.shinyapps.io/epi-china/">中华流病</a></p></li>
-<li><p>写书 <a href="https://bookdown.org/">bookdown</a></p></li>
-</ul>
-</section>
-<section id="如何学好r语言" class="level2">
-<h2 class="anchored" data-anchor-id="如何学好r语言">如何学好R语言?</h2>
-<ul>
-<li><p><strong>夯实基础</strong>。欲速则不达，打好基础，后续学起来会很轻松。</p>
-<p>比如，你要懂得什么是数据框(dataframe)，什么是行(row)和列(column)，什么是观测(observation)和变量(variable)，什么是包(package)和函数(function)，什么是向量(vector)和列表(list)，基本的术语不算多，掌握好基础你才能很好地组织你的问题，学会提问也是一门学问。初学者切忌啥都不懂，就一心只想实现某个功能，别的一概不问，这样的学习者注定学不好一门语言。</p></li>
-<li><p><strong>博观约取</strong>。多了解R能做什么，在遇到问题的时候才会想起来用什么。如果自己阅读过的话那就翻出来针对性地仔细阅读，如果是自己也没遇到过得问题，那么请用基本的数据科学术语描述你的问题(例如：如何给数据框增加一列新的变量)，然后在互联网上或者交流社区提出你的问题，我相信，当你把你的问题表述清楚的时候，别人是很乐意回答你的问题的。学会正确的提问真的很重要!</p></li>
-<li><p><strong>勤敲代码</strong>。眼过千遍不如手敲一遍。刚开始写代码总是需要模仿或者参考别人的代码，当敲的多了，你自然会记住代码。学R的最好方式是实践，所有在Excel中的操作都能在R中实现，从一个简单的筛选做起，将你之前用EXCEL完成的工作换成用R来完成，每一次练习都会提升你的编程技能。</p></li>
-</ul>
-</section>
-<section id="r语言学习资料" class="level2">
-<h2 class="anchored" data-anchor-id="r语言学习资料">R语言学习资料</h2>
-<ul>
-<li><p><a href="https://hub.rlearner.com">hub.rlearner.com</a> 该网站汇集了众多R学习资源</p></li>
-<li><p><a href="https://rlearner.com">R论坛</a> R学习交流社区</p></li>
-<li><p><a href="https://blog.rlearner.com/r-index.html">我的博客</a></p></li>
-<li><p>微信公众号：R数据分析与可视化</p>
-<p><img src="images/gzh-green.png" class="img-fluid"></p></li>
-</ul>
-
-
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -521,10 +446,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../chapter/clean_dplyr.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">必会操作</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter/base_install.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">安装</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapter/clean_string.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -532,4 +460,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/chapter/clean_date.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>

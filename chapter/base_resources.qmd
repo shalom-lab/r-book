@@ -1,0 +1,175 @@
+# R语言包
+
+## 官网-tidyverse
+
+https://www.tidyverse.org/
+
+## 数据清理-dplyr
+
+https://dplyr.tidyverse.org/
+
+## 字符串处理-stringr
+
+https://stringr.tidyverse.org/
+
+## 数据读取-readr
+
+https://readr.tidyverse.org/
+
+## 数据转换-tidyr
+
+https://tidyr.tidyverse.org/
+
+## 统计图表• sjPlot⁤
+
+https://strengejacke.github.io/sjPlot/index.html
+
+## 爬虫• rvest
+
+https://rvest.tidyverse.org/
+
+## 数据读取 · haven
+
+https://haven.tidyverse.org/
+
+## Excel数据 • openxlsx
+
+https://ycphs.github.io/openxlsx/ \# 流行病学 \## The Epidemiologist R Handbook⁤ https://epirhandbook.com/en/
+
+## 马尔科夫链蒙特卡洛方法和吉布斯采样
+
+https://leovan.me/cn/2017/12/mcmc-and-gibbs-sampling/#fnref1:1
+
+## CI / CL of risk ratio odds ratio rate ratio
+
+https://influentialpoints.com/Training/confidence_intervals_of_risk_ratio_odds_ratio_and_rate_ratio-principles-properties-assumptions.htm
+
+## 马尔可夫模型在流行病学筛查成本效果分析中的应用
+
+https://mp.weixin.qq.com/s?\_\_biz=MzI4NzI5MzM0Ng==&mid=2247492506&idx=1&sn=ac301049deb03db0ae8f81e350e24bd2&chksm=ebcd4957dcbac0411d67a43c9fbd5133901512ef6b996fff41e6728f61caf7c7e4005a50ad68&scene=27
+
+## epiR·Measures of Association
+
+https://cran.r-project.org/web/packages/epiR/vignettes/epiR_measures_of_association.html \# 统计分析 \## Tidymodels⁤ https://www.tidymodels.org/
+
+## R语言实现聚类kmeans - 知乎
+
+https://zhuanlan.zhihu.com/p/266569418
+
+## Table1
+
+https://cran.r-project.org/web/packages/table1/vignettes/table1-examples.html
+
+## 生存分析• survminer
+
+https://rpkgs.datanovia.com/survminer/
+
+## ggsurvplot • survminer
+
+http://rpkgs.datanovia.com/survminer/reference/ggsurvplot.html \# Shiny应用 \## Shiny - Gallery https://shiny.rstudio.com/gallery/
+
+## Mastering Shiny
+
+https://mastering-shiny.org/index.html
+
+## Shiny Dashboard⁤
+
+https://rstudio.github.io/shinydashboard/index.html
+
+## Shiny扩展
+
+https://github.com/nanxstats/awesome-shiny-extensions
+
+## huyingjie/Awesome-shiny-apps-for-statistics: 🌟 A curated list of Awesome Shiny Apps for Statistics (ASAS)🌟
+
+https://github.com/huyingjie/Awesome-shiny-apps-for-statistics#Common-Distribution \# 学习资源 \## 字符串匹配-正则表达式 https://rolkra.github.io/regex-for-beginners-detect/
+
+## RStudio使用指南
+
+https://docs.posit.co/ide/user/ide/guide/code/projects.html
+
+## RStudio Extensions
+
+https://rstudio.github.io/rstudio-extensions/rstudio_snippets.html
+
+## 缺失值处理------ MICE 和 Amelia 篇
+
+https://jiangjun.netlify.app/post/r-missing-data/ \# 数据可视化 \## ggplot2: Elegant Graphics for Data Analysis https://ggplot2-book.org/
+
+## 交互式图表 • echarts4r
+
+https://echarts4r.john-coene.com/articles/chart_types.html
+
+## ggplot2-教程
+
+https://ggplot2tor.com/tutorials/
+
+## 交互式图表• g2r
+
+https://g2r.opifex.org/
+
+## 可视化面板-flexdashboard
+
+https://pkgs.rstudio.com/flexdashboard/
+
+## ggplot2-多图组合
+
+https://medium.com/@pawanjangra1198/combining-plots-in-ggplot2-9699acaa2942
+
+## Laying out multiple plots on a page
+
+https://cran.r-project.org/web/packages/egg/vignettes/Ecosystem.html \# rmarkdown \## Markdown 教程 https://www.runoob.com/markdown/md-tutorial.html
+
+## R Markdown-指南
+
+https://bookdown.org/yihui/rmarkdown/
+
+## Quarto
+
+https://quarto.org/ \# 书籍 \## Bookdown https://bookdown.org/
+
+## 数据科学中的R语言
+
+https://bookdown.org/wangminjie/R4DS/
+
+## Advanced R
+
+https://adv-r.hadley.nz/index.html
+
+## R for Data Science
+
+https://r4ds.had.co.nz/ \# 网站 \## 统计之都 https://cosx.org/
+
+## R Weekly
+
+https://rweekly.org/
+
+## RDocumentation
+
+https://www.rdocumentation.org/
+
+## Big Book of R
+
+https://www.bigbookofr.com/
+
+## R语言论坛
+
+https://www.rlearner.com/
+
+## Stats and Machine Learning With R
+
+http://r-statistics.co/
+
+## R-universe
+
+https://r-universe.dev/search/
+
+## Shalom's Blog
+
+https://blog.rlearner.com/r-index.html
+
+## R-bloggers⁤
+
+https://www.r-bloggers.com/
+
+这么多怎记不住怎么办，帮你整理好了：**hub.rlearner.com** 还不赶快收藏起来\~

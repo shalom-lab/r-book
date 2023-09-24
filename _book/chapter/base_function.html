@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Shalom">
-<meta name="dcterms.date" content="2023-08-13">
 
-<title>R语言快速入门</title>
+<title>R语言快速入门 - 4&nbsp; 什么是函数</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./chapter/base_install.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapter/base_package.html" rel="next">
+<link href="../chapter/base_data_type.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -75,7 +74,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">前言</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/base_install.html">基础篇</a></li><li class="breadcrumb-item"><a href="../chapter/base_function.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -90,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R语言快速入门</a> 
+      <a href="../">R语言快速入门</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/malcolmbarrett/causal-inference-in-r" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
@@ -105,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">前言</span></a>
   </div>
 </li>
@@ -120,37 +119,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_install.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">安装</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_rstudio.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_rstudio.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_data_type.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_function.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_package.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_package.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R包</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
   </div>
 </li>
@@ -167,31 +166,31 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_date.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_string.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_string.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter/clean_tips.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/clean_tips.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
   </div>
 </li>
@@ -207,40 +206,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#前言" id="toc-前言" class="nav-link active" data-scroll-target="#前言">前言</a>
-  <ul class="collapse">
-  <li><a href="#r能做什么" id="toc-r能做什么" class="nav-link" data-scroll-target="#r能做什么">R能做什么？</a></li>
-  <li><a href="#如何学好r语言" id="toc-如何学好r语言" class="nav-link" data-scroll-target="#如何学好r语言">如何学好R语言?</a></li>
-  <li><a href="#r语言学习资料" id="toc-r语言学习资料" class="nav-link" data-scroll-target="#r语言学习资料">R语言学习资料</a></li>
-  </ul></li>
+  <li><a href="#函数的构成要素" id="toc-函数的构成要素" class="nav-link active" data-scroll-target="#函数的构成要素"><span class="header-section-number">4.1</span> 函数的构成要素</a></li>
+  <li><a href="#r语言函数的分类" id="toc-r语言函数的分类" class="nav-link" data-scroll-target="#r语言函数的分类"><span class="header-section-number">4.2</span> R语言函数的分类</a></li>
+  <li><a href="#函数示例" id="toc-函数示例" class="nav-link" data-scroll-target="#函数示例"><span class="header-section-number">4.3</span> 函数示例</a></li>
+  <li><a href="#定义函数可以不写return吗" id="toc-定义函数可以不写return吗" class="nav-link" data-scroll-target="#定义函数可以不写return吗"><span class="header-section-number">4.4</span> 定义函数可以不写return吗？</a></li>
+  <li><a href="#函数的调用" id="toc-函数的调用" class="nav-link" data-scroll-target="#函数的调用"><span class="header-section-number">4.5</span> 函数的调用</a></li>
+  <li><a href="#写一个计算偏度和峰度的函数" id="toc-写一个计算偏度和峰度的函数" class="nav-link" data-scroll-target="#写一个计算偏度和峰度的函数"><span class="header-section-number">4.6</span> 写一个计算偏度和峰度的函数</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/index.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/chapter/base_function.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R语言快速入门</h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">什么是函数</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Shalom </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 13, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -248,41 +235,114 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="前言" class="level1 unnumbered">
-<h1 class="unnumbered">前言</h1>
-<p>这是一本只讲干货的R语言入门书籍，希望对您有所帮助.</p>
-<section id="r能做什么" class="level2">
-<h2 class="anchored" data-anchor-id="r能做什么">R能做什么？</h2>
-<ul>
-<li><p>数据分析</p></li>
-<li><p>数据可视化 <a href="https://rrr.is/covid">上海新冠</a> <a href="https://chart.rlearner.com">R作图</a></p></li>
-<li><p>爬取数据 <a href="https://blog.rlearner.com/r/rvest-base.html">爬数据</a></p></li>
-<li><p>写博客 <a href="https://blog.rlearner.com">Shalom的博客</a></p></li>
-<li><p>做网站 <a href="https://shiny.posit.co/r/gallery/">Shiny</a> <a href="https://learn-r.shinyapps.io/epi-china/">中华流病</a></p></li>
-<li><p>写书 <a href="https://bookdown.org/">bookdown</a></p></li>
-</ul>
+<p>R语言的函数是一种特殊的程序，它可以接收参数，并返回一个结果。函数的返回值是函数运行完成后返回给调用者的结果。</p>
+<p>例如，假设你有一个名为<code>add()</code>的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：</p>
+<pre><code>
+add &lt;- function(x, y) {
+
+return (x + y)
+
+}</code></pre>
+<p>这个函数定义中，我们用<code>function()</code>关键字来定义函数，然后在括号内指定函数的参数，在花括号内指定函数的运算过程。最后，我们使用<code>return()</code>函数来指定函数的返回值。</p>
+<p>在这个例子中，函数<code>add()</code>的两个参数分别是<code>x</code>和<code>y</code>，返回值是它们的和。你可以用以下代码来调用这个函数：</p>
+<pre><code>
+result &lt;- add(3, 5)</code></pre>
+<p>在这里，我们将3和5作为参数传递给函数<code>add()</code>，然后将它们相加，并将结果保存到变量<code>result</code>中。</p>
+<section id="函数的构成要素" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="函数的构成要素"><span class="header-section-number">4.1</span> 函数的构成要素</h2>
+<p>一个函数通常由以下几个要素构成：</p>
+<ol type="1">
+<li><p>函数名：这是函数的标识符，用于调用函数。</p></li>
+<li><p>参数（或形参）：这是函数的输入，函数在执行时需要根据参数进行计算。</p></li>
+<li><p>函数体：这是函数执行的代码块，包含了函数所要完成的操作。</p></li>
+<li><p>返回值（或实参）：这是函数的输出，函数执行完成后会返回一个值。</p></li>
+</ol>
+<p>这些要素构成了一个完整的函数，它们各自扮演着不同的角色，协同工作以完成函数的目标。</p>
+<p>例如，如果你要定义一个函数来计算数据集的平均值，那么可以这样写：</p>
+<pre><code>
+mean &lt;- function(x) {
+
+sum = sum(x)
+
+n = length(x)
+
+return(sum / n)
+
+}</code></pre>
+<p>这个函数的名称是mean，它有一个参数x，函数体中包含了计算平均值的代码，最后会返回计算结果。</p>
 </section>
-<section id="如何学好r语言" class="level2">
-<h2 class="anchored" data-anchor-id="如何学好r语言">如何学好R语言?</h2>
-<ul>
-<li><p><strong>夯实基础</strong>。欲速则不达，打好基础，后续学起来会很轻松。</p>
-<p>比如，你要懂得什么是数据框(dataframe)，什么是行(row)和列(column)，什么是观测(observation)和变量(variable)，什么是包(package)和函数(function)，什么是向量(vector)和列表(list)，基本的术语不算多，掌握好基础你才能很好地组织你的问题，学会提问也是一门学问。初学者切忌啥都不懂，就一心只想实现某个功能，别的一概不问，这样的学习者注定学不好一门语言。</p></li>
-<li><p><strong>博观约取</strong>。多了解R能做什么，在遇到问题的时候才会想起来用什么。如果自己阅读过的话那就翻出来针对性地仔细阅读，如果是自己也没遇到过得问题，那么请用基本的数据科学术语描述你的问题(例如：如何给数据框增加一列新的变量)，然后在互联网上或者交流社区提出你的问题，我相信，当你把你的问题表述清楚的时候，别人是很乐意回答你的问题的。学会正确的提问真的很重要!</p></li>
-<li><p><strong>勤敲代码</strong>。眼过千遍不如手敲一遍。刚开始写代码总是需要模仿或者参考别人的代码，当敲的多了，你自然会记住代码。学R的最好方式是实践，所有在Excel中的操作都能在R中实现，从一个简单的筛选做起，将你之前用EXCEL完成的工作换成用R来完成，每一次练习都会提升你的编程技能。</p></li>
-</ul>
+<section id="r语言函数的分类" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="r语言函数的分类"><span class="header-section-number">4.2</span> R语言函数的分类</h2>
+<p>R语言中的函数可以分为几大类：</p>
+<ol type="1">
+<li><p>基本函数：这些函数是R语言的内置函数，包括常见的数学运算、统计分析、数据处理和可视化等操作。例如，mean()函数可以计算数据集的平均值，plot()函数可以绘制数据的图形。</p></li>
+<li><p>用户自定义函数：这些函数是用户自己定义的，用于执行特定的任务。例如，如果你有一个复杂的分析流程，可以将这个流程封装成一个函数，以便在需要时调用。</p></li>
+<li><p>包中的函数：R语言中有许多第三方包，这些包提供了额外的函数和功能。例如，ggplot2包提供了用于绘制复杂图形的函数，dplyr包提供了高效的数据处理函数。要使用这些函数，需要先安装并加载相应的包。</p></li>
+</ol>
 </section>
-<section id="r语言学习资料" class="level2">
-<h2 class="anchored" data-anchor-id="r语言学习资料">R语言学习资料</h2>
-<ul>
-<li><p><a href="https://hub.rlearner.com">hub.rlearner.com</a> 该网站汇集了众多R学习资源</p></li>
-<li><p><a href="https://rlearner.com">R论坛</a> R学习交流社区</p></li>
-<li><p><a href="https://blog.rlearner.com/r-index.html">我的博客</a></p></li>
-<li><p>微信公众号：R数据分析与可视化</p>
-<p><img src="images/gzh-green.png" class="img-fluid"></p></li>
-</ul>
+<section id="函数示例" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="函数示例"><span class="header-section-number">4.3</span> 函数示例</h2>
+<p>请写一个名叫f1的函数，作用是打印两个数的和，返回两个数的差。</p>
+<p>你可以用以下代码定义函数<code>f1()</code>：</p>
+<pre><code>
+f1 &lt;- function(x, y) {
+
+print(x + y)
+
+return (x - y)
+
+}</code></pre>
+<p>在这个例子中，我们使用<code>print()</code>函数打印出两个数的和，并使用<code>return()</code>函数返回两个数的差。</p>
+<p>你可以用以下代码来调用这个函数：</p>
+<pre><code>
+result &lt;- f1(3, 5)</code></pre>
+<p>在这里，我们将3和5作为参数传递给函数<code>f1()</code>，然后函数会先打印出两个数的和，再返回两个数的差。执行完这个代码后，变量<code>result</code>的值为-2。</p>
+</section>
+<section id="定义函数可以不写return吗" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="定义函数可以不写return吗"><span class="header-section-number">4.4</span> 定义函数可以不写return吗？</h2>
+<p>是的，在R语言中，定义函数时可以不写<code>return()</code>函数。如果函数没有使用<code>return()</code>函数指定返回值，则函数会自动返回最后一个计算结果作为返回值。例如，假设你有一个名为<code>add()</code>的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：</p>
+<pre><code>
+add &lt;- function(x, y) {
+
+x + y
+
+}</code></pre>
+<p>在这个例子中，我们省略了<code>return()</code>函数，直接将两个数的和作为函数的返回值。你可以用以下代码来调用这个函数：</p>
+<pre><code>
+result &lt;- add(3, 5)</code></pre>
+<p>在这里，我们将3和5作为参数传递给函数<code>add()</code>，函数会自动返回它们的和。执行完这个代码后，变量<code>result</code>的值为8。</p>
+</section>
+<section id="函数的调用" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="函数的调用"><span class="header-section-number">4.5</span> 函数的调用</h2>
+<p>在R语言中，可以通过使用函数名称来调用函数。例如，要调用mean()函数，可以这样写：</p>
+<pre><code>
+mean(data)</code></pre>
+<p>其中，data是你要分析的数据集。</p>
+<p>当然，你也可以在调用函数时向函数传递额外的参数。例如，要计算一个数据集的中位数，可以这样写：</p>
+<pre><code>
+median(data, na.rm = TRUE)</code></pre>
+<p>在这个例子中，我们向median()函数传递了一个参数，即na.rm = TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失值。</p>
+</section>
+<section id="写一个计算偏度和峰度的函数" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="写一个计算偏度和峰度的函数"><span class="header-section-number">4.6</span> 写一个计算偏度和峰度的函数</h2>
+<p>下面是一个计算偏度和峰度的函数：</p>
+<pre><code>
+skew_kurtosis &lt;- function(x) {
+
+skew = sum((x - mean(x))^3) / (length(x) * sd(x)^3)
+
+kurtosis = sum((x - mean(x))^4) / (length(x) * sd(x)^4) - 3
+
+return(c(skew, kurtosis))
+
+}</code></pre>
+<p>这个函数接收一个向量x作为参数，并计算x的偏度和峰度。计算完成后，会将结果放在一个向量中返回。</p>
+<p>例如，要计算一个数据集的偏度和峰度，可以这样写：</p>
+<pre><code>
+skew_kurtosis(data)</code></pre>
+<p>这个函数会计算data的偏度和峰度，并将结果作为向量返回。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -521,10 +581,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../chapter/base_data_type.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter/base_install.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">安装</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapter/base_package.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R包</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

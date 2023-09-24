@@ -37,4 +37,3 @@
 -   微信公众号：R数据分析与可视化
 
     ![](images/gzh-green.png)
-

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.43">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>R语言快速入门 - 3&nbsp; 基本数据类型</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapter/base_function.html" rel="next">
+<link href="../chapter/base_rstudio.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://hypothes.is/embed.js"></script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/base_install.html">基础篇</a></li><li class="breadcrumb-item"><a href="../chapter/base_data_type.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">R语言快速入门</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/malcolmbarrett/causal-inference-in-r" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">基础篇</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">安装</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_package.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R包</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">数据清理</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#数据结构类型" id="toc-数据结构类型" class="nav-link active" data-scroll-target="#数据结构类型"><span class="header-section-number">3.1</span> 数据结构类型</a></li>
+  <li><a href="#数据框dataframe的常见操作" id="toc-数据框dataframe的常见操作" class="nav-link" data-scroll-target="#数据框dataframe的常见操作"><span class="header-section-number">3.2</span> 数据框(dataframe)的常见操作</a></li>
+  <li><a href="#代码示例" id="toc-代码示例" class="nav-link" data-scroll-target="#代码示例"><span class="header-section-number">3.3</span> 代码示例</a></li>
+  <li><a href="#行索引和列索引" id="toc-行索引和列索引" class="nav-link" data-scroll-target="#行索引和列索引"><span class="header-section-number">3.4</span> 行索引和列索引</a></li>
+  <li><a href="#行索引和列索引的常见用法" id="toc-行索引和列索引的常见用法" class="nav-link" data-scroll-target="#行索引和列索引的常见用法"><span class="header-section-number">3.5</span> 行索引和列索引的常见用法</a></li>
+  <li><a href="#在r语言中的含义" id="toc-在r语言中的含义" class="nav-link" data-scroll-target="#在r语言中的含义"><span class="header-section-number">3.6</span> []在R语言中的含义</a></li>
+  <li><a href="#r语言中-和的区别" id="toc-r语言中-和的区别" class="nav-link" data-scroll-target="#r语言中-和的区别"><span class="header-section-number">3.7</span> R语言中&lt;-和=的区别</a></li>
+  <li><a href="#中缺省行索引和列索引的意义" id="toc-中缺省行索引和列索引的意义" class="nav-link" data-scroll-target="#中缺省行索引和列索引的意义"><span class="header-section-number">3.8</span> []中缺省行索引和列索引的意义</a></li>
+  <li><a href="#行索引和列索引也可以填写布尔值吗" id="toc-行索引和列索引也可以填写布尔值吗" class="nav-link" data-scroll-target="#行索引和列索引也可以填写布尔值吗"><span class="header-section-number">3.9</span> 行索引和列索引也可以填写布尔值吗？</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/chapter/base_data_type.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">基本数据类型</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>R语言有多种基本的数据类型，包括整型数据(integer)、浮点型数据(floating point)、字符型数据(character)、布尔型数据(logical)、复数型数据(complex)和因子类型数据(factor)。</p>
+<ul>
+<li>整型数据: 表示整数值，例如 <code>1</code> 或 <code>-4</code>。</li>
+<li>浮点型数据: 表示带小数点的数值，例如 <code>3.14</code> 或 <code>-0.12</code>。</li>
+<li>字符型数据: 表示文本字符串，例如 <code>"hello"</code> 或 <code>"R is a programming language"</code>。</li>
+<li>布尔型数据: 表示布尔值，即逻辑值，只有两个值，即 <code>TRUE</code> 或 <code>FALSE</code>。</li>
+<li>复数型数据: 表示复数，例如 <code>3 + 2i</code> 或 <code>-1 + 4i</code>。</li>
+<li>因子类型数据: 用于表示分类变量，例如性别 (男、女) 或季节 (春、夏、秋、冬)。</li>
+</ul>
+<section id="数据结构类型" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="数据结构类型"><span class="header-section-number">3.1</span> 数据结构类型</h2>
+<p>R语言中有多种数据结构类型，这些类型都有各自的名称和意义。下面是一些常见的数据结构类型：</p>
+<ol type="1">
+<li><p>向量（vector）：这种类型的数据是一个一维的数值序列，例如c(1, 2, 3, 4)。</p></li>
+<li><p>矩阵（matrix）：这种类型的数据是一个二维的数值表格，例如matrix(1:9, nrow = 3)。</p></li>
+<li><p>数组（array）：这种类型的数据是一个多维的数值表格，例如array(1:8, dim = c(2, 2, 2))。</p></li>
+<li><p>数据框（data.frame）：这种类型的数据是一个二维的表格，可以包含不同类型的变量，例如data.frame(x = 1:3, y = c(“a”, “b”, “c”))。</p></li>
+<li><p>列表（list）：这种类型的数据是一个有序的元素集合，可以包含不同类型的对象，例如list(1, “hello”, TRUE)。</p></li>
+</ol>
+</section>
+<section id="数据框dataframe的常见操作" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="数据框dataframe的常见操作"><span class="header-section-number">3.2</span> 数据框(dataframe)的常见操作</h2>
+<p>数据框是 R 语言中一种常用的数据结构，它是一个二维数据表，用于存储一组不同类型的数据，每列数据都有一个对应的列名。</p>
+<p>一些常见的数据框操作包括:</p>
+<ul>
+<li>创建数据框: 使用 <code>data.frame()</code> 函数创建数据框。</li>
+<li>查看数据框: 使用 <code>head()</code> 和 <code>tail()</code> 函数查看数据框的前几行和后几行，使用 <code>str()</code> 函数查看数据框的数据类型和结构。</li>
+<li>选择数据框中的某一列: 使用 <code>$</code> 操作符选择某一列。</li>
+<li>选择数据框中的某一行: 使用行索引选择某一行。</li>
+<li>选择数据框中的某一个值: 使用行索引和列名选择某一个值。</li>
+<li>添加数据框列: 使用 <code>$</code> 操作符添加新的列。</li>
+<li>添加数据框行: 使用 <code>rbind()</code> 函数添加新的行。</li>
+<li>删除数据框列: 使用 <code>$</code> 操作符删除某一列。</li>
+<li>删除数据框行: 使用行索引删除某一行。</li>
+<li>排序数据框: 使用 <code>order()</code> 函数对某一列或多列进行排序。</li>
+<li>过滤数据框: 使用布尔运算符过滤数据框中符合条件的行。</li>
+</ul>
+</section>
+<section id="代码示例" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="代码示例"><span class="header-section-number">3.3</span> 代码示例</h2>
+<pre><code># 创建一个数据框
+my_data_frame &lt;- data.frame(
+  id = c(1, 2, 3),
+  name = c("Alice", "Bob", "Charlie"),
+  age = c(20, 25, 30),
+  gender = c("F", "M", "M")
+)
+
+# 查看数据框的前几行
+head(my_data_frame)
+
+# 查看数据框的后几行
+tail(my_data_frame)
+
+# 查看数据框的数据类型和结构
+str(my_data_frame)
+
+# 选择数据框中的某一列
+my_data_frame$name
+
+# 选择数据框中的某一行
+my_data_frame[2, ]
+
+# 选择数据框中的某一个值
+my_data_frame[2, "name"]
+
+# 添加数据框列
+my_data_frame$score &lt;- c(90, 85, 80)
+
+# 添加数据框行
+new_row &lt;- data.frame(id = 4, name = "David", age = 32, gender = "M", score = 75)
+my_data_frame &lt;- rbind(my_data_frame, new_row)
+
+# 删除数据框列
+my_data_frame$score &lt;- NULL
+
+# 删除数据框行
+my_data_frame &lt;- my_data_frame[-2, ]
+
+# 排序数据框
+my_data_frame &lt;- my_data_frame[order(my_data_frame$age), ]
+
+# 过滤数据框
+my_data_frame[my_data_frame$age &gt;= 25, ]</code></pre>
+</section>
+<section id="行索引和列索引" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="行索引和列索引"><span class="header-section-number">3.4</span> 行索引和列索引</h2>
+<p>在 R 语言中，数据框是一种二维数据表，其中每行表示一个观察值，每列表示一个变量。数据框的行索引和列索引是用来确定某一个特定的数据值的位置的方法。</p>
+<ul>
+<li>行索引: 数据框的行索引是从 1 开始的正整数，用来标识每一行。例如，在上面的代码中，第一行的行索引是 1，第二行的行索引是 2，以此类推。</li>
+<li>列索引: 数据框的列索引是列名，用来标识每一列。例如，在上面的代码中，第一列的列索引是 <code>id</code>，第二列的列索引是 <code>name</code>，以此类推。</li>
+</ul>
+<p>我们可以使用行索引和列索引来选择数据框中的某一个值。例如，如果我们想选择第二行第三列的值，可以使用 <code>my_data_frame[2, "age"]</code> 这样的语法。</p>
+</section>
+<section id="行索引和列索引的常见用法" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="行索引和列索引的常见用法"><span class="header-section-number">3.5</span> 行索引和列索引的常见用法</h2>
+<p>行索引和列索引在 R 语言中都非常常见，它们有许多用途。下面是一些常见的行索引和列索引的用法:</p>
+<ul>
+<li>选择数据框中的某一个值: 可以使用行索引和列索引选择数据框中的某一个值。例如，<code>my_data_frame[2, "name"]</code> 表示选择第二行第 <code>name</code> 列的值。</li>
+<li>添加数据框行: 可以使用行索引和 <code>rbind()</code> 函数添加新的行到数据框中。例如，<code>my_data_frame &lt;- rbind(my_data_frame, new_row)</code> 表示将新的行 <code>new_row</code> 添加到数据框 <code>my_data_frame</code> 的末尾。</li>
+<li>删除数据框行: 可以使用行索引删除数据框中的某一行。例如，<code>my_data_frame &lt;- my_data_frame[-2, ]</code> 表示删除数据框 <code>my_data_frame</code> 中的第二行。</li>
+<li>排序数据框: 可以使用行索引和 <code>order()</code> 函数对数据框进行排序。例如，<code>my_data_frame &lt;- my_data_frame[order(my_data_frame$age), ]</code> 表示根据 <code>age</code> 列对数据框 `</li>
+</ul>
+</section>
+<section id="在r语言中的含义" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="在r语言中的含义"><span class="header-section-number">3.6</span> []在R语言中的含义</h2>
+<p>在 R 语言中，<code>[]</code> 符号用来表示数据结构的索引。具体来说，它表示选择数据结构中的某一部分。例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[2, "name"]</code> 表示选择数据框 <code>my_data</code> 中的第二行第 <code>name</code> 列的值。</p>
+<p>在 R 语言中，<code>[]</code> 符号还可以用来进行其他操作，例如排序、过滤、删除等。它还可以用来创建新的数据结构，例如向量、数组、数据框等。有关具体用法，您可以参考 R 语言的相关文档和教程。</p>
+</section>
+<section id="r语言中-和的区别" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="r语言中-和的区别"><span class="header-section-number">3.7</span> R语言中&lt;-和=的区别</h2>
+<p>在 R 语言中，<code>&lt;-</code> 和 <code>=</code> 都可以用来赋值，但它们之间还是有一些区别的。</p>
+<ul>
+<li><code>&lt;-</code>: 这是 R 语言中最常用的赋值操作符。它用来将右侧的值赋给左侧的变量。例如，<code>x &lt;- 5</code> 表示将 5 赋给变量 <code>x</code>。</li>
+<li><code>=</code>: 这是 R 语言中次常用的赋值操作符。它的语法与 <code>&lt;-</code> 类似，也用来将右侧的值赋给左侧的变量。例如，<code>x = 5</code> 也表示将 5 赋给变量 <code>x</code>。</li>
+</ul>
+<p>在实际使用中，<code>&lt;-</code> 和 <code>=</code> 的区别主要在于语义上的差异。通常来说，<code>&lt;-</code> 操作符更加符合人类的思维方式，因为它更加形象地表达了赋值的意义（即将值从右向左流动）。而 <code>=</code> 操作符则更像是一个等号，表示变量与值相等。</p>
+<p>在 R 语言中，一般来说，<code>&lt;-</code> 操作符更加常用，并且在 R 语言的文档和教程中也更常见。但 <code>=</code> 操作符也是可以使用的，它们之间并没有严格的限制。您可以根据个人喜好来选择使用哪一个。</p>
+<p>总的来说，建议使用 <code>&lt;-</code> 操作符进行赋值，这样能够更好地保持统一，并且能够更方便地理解代码。</p>
+</section>
+<section id="中缺省行索引和列索引的意义" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="中缺省行索引和列索引的意义"><span class="header-section-number">3.8</span> []中缺省行索引和列索引的意义</h2>
+<p>在 R 语言中，当 <code>[]</code> 符号中的行索引或列索引缺省时，它们会被自动填充为默认值。</p>
+<p>对于行索引，如果缺省，默认值是 1:n，其中 n 是数据框中的行数。例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[, "name"]</code> 和 <code>my_data[1:n, "name"]</code> 是等价的，都表示选择数据框 <code>my_data</code> 中的所有行的 <code>name</code> 列。</p>
+<p>对于列索引，如果缺省，默认值是所有列的名称。例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[2, ]</code> 和 <code>my_data[2, colnames(my_data)]</code> 是等价的，都表示选择数据框 <code>my_data</code> 中的第二行的所有列。</p>
+<p>通过使用缺省行索引和列索引，可以使代码更简洁易读。例如，我们可以使用 <code>my_data[, "name"]</code> 表示选择数据框 <code>my_data</code> 中的所有行的 <code>name</code> 列，而不用写出每一行的行索引。这样做既能够保证代码的正确性，又能够提高代码的可读性。</p>
+<p>当然，在实际使用中，还需要注意一些特殊情况。例如，如果缺省行索引和列索引可能导致代码不易理解，或者会与其他语法产生冲突，那么就需要明确指定行索引和列索引了。总之，在使用 <code>[]</code> 符号时，应该根据实际情况谨慎选择是否使用缺省行索引和列索引。</p>
+</section>
+<section id="行索引和列索引也可以填写布尔值吗" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="行索引和列索引也可以填写布尔值吗"><span class="header-section-number">3.9</span> 行索引和列索引也可以填写布尔值吗？</h2>
+<p>是的，在 R 语言中，行索引和列索引也可以填写布尔值。这种用法可以用来选择数据框中满足某一条件的行和列。</p>
+<p>例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[my_data$age &gt; 30, ]</code> 表示选择数据框 <code>my_data</code> 中 <code>age</code> 列大于 30 的所有行。如果我们还想选择其中的 <code>name</code> 和 <code>age</code> 列，可以使用如下语句:</p>
+<pre><code>my_data[my_data$age &gt; 30, c("name", "age")]</code></pre>
+<p>这样，我们就可以快速选择数据框中满足某一条件的行和列了。这种方法非常方便，并且能够有效地过滤数据，为进一步的分析提供更为精细的数据。</p>
+<p>需要注意的是，在使用行索引和列索引时，需要确保它们的长度与数据框的行数和列数相同。如果长度不匹配，那么可能会导致代码出错或不能正常运行。因此，在使用行索引和列索引时，应该认真检查代码是否正确。</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapter/base_rstudio.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapter/base_function.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
