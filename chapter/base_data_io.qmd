@@ -5,5 +5,4 @@ In summary, this book has no content whatsoever.
 ```{r}
 library(rio)
 getwd()
-data<-import('data/his.xlsx')
 ```
