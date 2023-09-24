@@ -43,7 +43,7 @@ R语言中有多种数据结构类型，这些类型都有各自的名称和意�
 
 ## 代码示例
 
-```         
+```{r}      
 # 创建一个数据框
 my_data_frame <- data.frame(
   id = c(1, 2, 3),
@@ -145,8 +145,14 @@ my_data_frame[my_data_frame$age >= 25, ]
 
 例如，如果 `my_data` 是一个数据框，那么 `my_data[my_data$age > 30, ]` 表示选择数据框 `my_data` 中 `age` 列大于 30 的所有行。如果我们还想选择其中的 `name` 和 `age` 列，可以使用如下语句:
 
-```         
-my_data[my_data$age > 30, c("name", "age")]
+```{r}
+my_data <- data.frame(
+  id = c(1, 2, 3),
+  name = c("Alice", "Bob", "Charlie"),
+  age = c(20, 25, 30),
+  gender = c("F", "M", "M")
+)
+my_data[my_data$age > 25, c("name", "age")]
 ```
 
 这样，我们就可以快速选择数据框中满足某一条件的行和列了。这种方法非常方便，并且能够有效地过滤数据，为进一步的分析提供更为精细的数据。

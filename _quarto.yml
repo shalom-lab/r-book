@@ -6,7 +6,7 @@ book:
   title: "R语言快速入门"
   author: "Shalom"
   date: "2023/8/13"
-  repo-url: https://github.com/malcolmbarrett/causal-inference-in-r
+  repo-url: https://github.com/shalom-lab/r-book/
   repo-actions: [edit, issue]
   chapters:
     - index.qmd
@@ -44,6 +44,7 @@ format:
   html:
     theme: cosmo
     toc-title: 目录
+    df-print: paged
   pdf:
     documentclass: scrreprt
 

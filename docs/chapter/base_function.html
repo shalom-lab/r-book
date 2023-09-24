@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -62,6 +96,9 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script async="" src="https://hypothes.is/embed.js"></script>
 
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
 
 </head>
 
@@ -91,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">R语言快速入门</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/malcolmbarrett/causal-inference-in-r" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/shalom-lab/r-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -213,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#函数的调用" id="toc-函数的调用" class="nav-link" data-scroll-target="#函数的调用"><span class="header-section-number">4.5</span> 函数的调用</a></li>
   <li><a href="#写一个计算偏度和峰度的函数" id="toc-写一个计算偏度和峰度的函数" class="nav-link" data-scroll-target="#写一个计算偏度和峰度的函数"><span class="header-section-number">4.6</span> 写一个计算偏度和峰度的函数</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/chapter/base_function.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/base_function.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -237,16 +274,20 @@ ul.task-list li input[type="checkbox"] {
 
 <p>R语言的函数是一种特殊的程序，它可以接收参数，并返回一个结果。函数的返回值是函数运行完成后返回给调用者的结果。</p>
 <p>例如，假设你有一个名为<code>add()</code>的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：</p>
-<pre><code>
-add &lt;- function(x, y) {
-
-return (x + y)
-
-}</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>add <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x<span class="sc">-</span>y)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (x <span class="sc">+</span> y)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>这个函数定义中，我们用<code>function()</code>关键字来定义函数，然后在括号内指定函数的参数，在花括号内指定函数的运算过程。最后，我们使用<code>return()</code>函数来指定函数的返回值。</p>
 <p>在这个例子中，函数<code>add()</code>的两个参数分别是<code>x</code>和<code>y</code>，返回值是它们的和。你可以用以下代码来调用这个函数：</p>
-<pre><code>
-result &lt;- add(3, 5)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">add</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2</code></pre>
+</div>
+</div>
 <p>在这里，我们将3和5作为参数传递给函数<code>add()</code>，然后将它们相加，并将结果保存到变量<code>result</code>中。</p>
 <section id="函数的构成要素" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="函数的构成要素"><span class="header-section-number">4.1</span> 函数的构成要素</h2>
@@ -259,17 +300,14 @@ result &lt;- add(3, 5)</code></pre>
 </ol>
 <p>这些要素构成了一个完整的函数，它们各自扮演着不同的角色，协同工作以完成函数的目标。</p>
 <p>例如，如果你要定义一个函数来计算数据集的平均值，那么可以这样写：</p>
-<pre><code>
-mean &lt;- function(x) {
-
-sum = sum(x)
-
-n = length(x)
-
-return(sum / n)
-
-}</code></pre>
-<p>这个函数的名称是mean，它有一个参数x，函数体中包含了计算平均值的代码，最后会返回计算结果。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  sum <span class="ot">=</span> <span class="fu">sum</span>(x)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">length</span>(x)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(sum <span class="sc">/</span> n)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>这个函数的名称是<code>mean</code>，它有一个参数<code>x</code>，函数体中包含了计算平均值的代码，最后会返回计算结果。</p>
 </section>
 <section id="r语言函数的分类" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="r语言函数的分类"><span class="header-section-number">4.2</span> R语言函数的分类</h2>
@@ -284,62 +322,85 @@ return(sum / n)
 <h2 data-number="4.3" class="anchored" data-anchor-id="函数示例"><span class="header-section-number">4.3</span> 函数示例</h2>
 <p>请写一个名叫f1的函数，作用是打印两个数的和，返回两个数的差。</p>
 <p>你可以用以下代码定义函数<code>f1()</code>：</p>
-<pre><code>
-f1 &lt;- function(x, y) {
-
-print(x + y)
-
-return (x - y)
-
-}</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(x <span class="sc">+</span> y)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (x <span class="sc">-</span> y)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>在这个例子中，我们使用<code>print()</code>函数打印出两个数的和，并使用<code>return()</code>函数返回两个数的差。</p>
 <p>你可以用以下代码来调用这个函数：</p>
-<pre><code>
-result &lt;- f1(3, 5)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">f1</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2</code></pre>
+</div>
+</div>
 <p>在这里，我们将3和5作为参数传递给函数<code>f1()</code>，然后函数会先打印出两个数的和，再返回两个数的差。执行完这个代码后，变量<code>result</code>的值为-2。</p>
 </section>
 <section id="定义函数可以不写return吗" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="定义函数可以不写return吗"><span class="header-section-number">4.4</span> 定义函数可以不写return吗？</h2>
 <p>是的，在R语言中，定义函数时可以不写<code>return()</code>函数。如果函数没有使用<code>return()</code>函数指定返回值，则函数会自动返回最后一个计算结果作为返回值。例如，假设你有一个名为<code>add()</code>的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：</p>
-<pre><code>
-add &lt;- function(x, y) {
-
-x + y
-
-}</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>add <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a> x <span class="sc">+</span> y</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>在这个例子中，我们省略了<code>return()</code>函数，直接将两个数的和作为函数的返回值。你可以用以下代码来调用这个函数：</p>
-<pre><code>
-result &lt;- add(3, 5)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">add</span>(<span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
 <p>在这里，我们将3和5作为参数传递给函数<code>add()</code>，函数会自动返回它们的和。执行完这个代码后，变量<code>result</code>的值为8。</p>
 </section>
 <section id="函数的调用" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="函数的调用"><span class="header-section-number">4.5</span> 函数的调用</h2>
 <p>在R语言中，可以通过使用函数名称来调用函数。例如，要调用mean()函数，可以这样写：</p>
-<pre><code>
-mean(data)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.5</code></pre>
+</div>
+</div>
 <p>其中，data是你要分析的数据集。</p>
 <p>当然，你也可以在调用函数时向函数传递额外的参数。例如，要计算一个数据集的中位数，可以这样写：</p>
-<pre><code>
-median(data, na.rm = TRUE)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,<span class="cn">NA</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.5</code></pre>
+</div>
+</div>
 <p>在这个例子中，我们向median()函数传递了一个参数，即na.rm = TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失值。</p>
 </section>
 <section id="写一个计算偏度和峰度的函数" class="level2" data-number="4.6">
 <h2 data-number="4.6" class="anchored" data-anchor-id="写一个计算偏度和峰度的函数"><span class="header-section-number">4.6</span> 写一个计算偏度和峰度的函数</h2>
 <p>下面是一个计算偏度和峰度的函数：</p>
-<pre><code>
-skew_kurtosis &lt;- function(x) {
-
-skew = sum((x - mean(x))^3) / (length(x) * sd(x)^3)
-
-kurtosis = sum((x - mean(x))^4) / (length(x) * sd(x)^4) - 3
-
-return(c(skew, kurtosis))
-
-}</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>skew_kurtosis <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  skew <span class="ot">=</span> <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">3</span>) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">^</span><span class="dv">3</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  kurtosis <span class="ot">=</span> <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">4</span>) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">*</span> <span class="fu">sd</span>(x)<span class="sc">^</span><span class="dv">4</span>) <span class="sc">-</span> <span class="dv">3</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">c</span>(skew, kurtosis))</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>这个函数接收一个向量x作为参数，并计算x的偏度和峰度。计算完成后，会将结果放在一个向量中返回。</p>
 <p>例如，要计算一个数据集的偏度和峰度，可以这样写：</p>
-<pre><code>
-skew_kurtosis(data)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">skew_kurtosis</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  0.000000 -1.561636</code></pre>
+</div>
+</div>
 <p>这个函数会计算data的偏度和峰度，并将结果作为向量返回。</p>
 
 

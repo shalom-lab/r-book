@@ -201,7 +201,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, enhanced, borderline west={3pt}{0pt}{shadecolor}, boxrule=0pt, breakable, frame hidden, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[breakable, sharp corners, boxrule=0pt, enhanced, borderline west={3pt}{0pt}{shadecolor}, interior hidden, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -504,51 +504,118 @@ R语言中有多种数据结构类型，这些类型都有各自的名称和意�
 \hypertarget{ux4ee3ux7801ux793aux4f8b}{%
 \section{代码示例}\label{ux4ee3ux7801ux793aux4f8b}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 创建一个数据框}
+\NormalTok{my\_data\_frame }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{id =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+  \AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Alice"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{, }\StringTok{"Charlie"}\NormalTok{),}
+  \AttributeTok{age =} \FunctionTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+  \AttributeTok{gender =} \FunctionTok{c}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"M"}\NormalTok{)}
+\NormalTok{)}
+
+\CommentTok{\# 查看数据框的前几行}
+\FunctionTok{head}\NormalTok{(my\_data\_frame)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
-# 创建一个数据框
-my_data_frame <- data.frame(
-  id = c(1, 2, 3),
-  name = c("Alice", "Bob", "Charlie"),
-  age = c(20, 25, 30),
-  gender = c("F", "M", "M")
-)
+  id    name age gender
+1  1   Alice  20      F
+2  2     Bob  25      M
+3  3 Charlie  30      M
+\end{verbatim}
 
-# 查看数据框的前几行
-head(my_data_frame)
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 查看数据框的后几行}
+\FunctionTok{tail}\NormalTok{(my\_data\_frame)}
+\end{Highlighting}
+\end{Shaded}
 
-# 查看数据框的后几行
-tail(my_data_frame)
+\begin{verbatim}
+  id    name age gender
+1  1   Alice  20      F
+2  2     Bob  25      M
+3  3 Charlie  30      M
+\end{verbatim}
 
-# 查看数据框的数据类型和结构
-str(my_data_frame)
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 查看数据框的数据类型和结构}
+\FunctionTok{str}\NormalTok{(my\_data\_frame)}
+\end{Highlighting}
+\end{Shaded}
 
-# 选择数据框中的某一列
-my_data_frame$name
+\begin{verbatim}
+'data.frame':   3 obs. of  4 variables:
+ $ id    : num  1 2 3
+ $ name  : chr  "Alice" "Bob" "Charlie"
+ $ age   : num  20 25 30
+ $ gender: chr  "F" "M" "M"
+\end{verbatim}
 
-# 选择数据框中的某一行
-my_data_frame[2, ]
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 选择数据框中的某一列}
+\NormalTok{my\_data\_frame}\SpecialCharTok{$}\NormalTok{name}
+\end{Highlighting}
+\end{Shaded}
 
-# 选择数据框中的某一个值
-my_data_frame[2, "name"]
+\begin{verbatim}
+[1] "Alice"   "Bob"     "Charlie"
+\end{verbatim}
 
-# 添加数据框列
-my_data_frame$score <- c(90, 85, 80)
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 选择数据框中的某一行}
+\NormalTok{my\_data\_frame[}\DecValTok{2}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
 
-# 添加数据框行
-new_row <- data.frame(id = 4, name = "David", age = 32, gender = "M", score = 75)
-my_data_frame <- rbind(my_data_frame, new_row)
+\begin{verbatim}
+  id name age gender
+2  2  Bob  25      M
+\end{verbatim}
 
-# 删除数据框列
-my_data_frame$score <- NULL
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 选择数据框中的某一个值}
+\NormalTok{my\_data\_frame[}\DecValTok{2}\NormalTok{, }\StringTok{"name"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
 
-# 删除数据框行
-my_data_frame <- my_data_frame[-2, ]
+\begin{verbatim}
+[1] "Bob"
+\end{verbatim}
 
-# 排序数据框
-my_data_frame <- my_data_frame[order(my_data_frame$age), ]
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 添加数据框列}
+\NormalTok{my\_data\_frame}\SpecialCharTok{$}\NormalTok{score }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{90}\NormalTok{, }\DecValTok{85}\NormalTok{, }\DecValTok{80}\NormalTok{)}
 
-# 过滤数据框
-my_data_frame[my_data_frame$age >= 25, ]
+\CommentTok{\# 添加数据框行}
+\NormalTok{new\_row }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{id =} \DecValTok{4}\NormalTok{, }\AttributeTok{name =} \StringTok{"David"}\NormalTok{, }\AttributeTok{age =} \DecValTok{32}\NormalTok{, }\AttributeTok{gender =} \StringTok{"M"}\NormalTok{, }\AttributeTok{score =} \DecValTok{75}\NormalTok{)}
+\NormalTok{my\_data\_frame }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(my\_data\_frame, new\_row)}
+
+\CommentTok{\# 删除数据框列}
+\NormalTok{my\_data\_frame}\SpecialCharTok{$}\NormalTok{score }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+
+\CommentTok{\# 删除数据框行}
+\NormalTok{my\_data\_frame }\OtherTok{\textless{}{-}}\NormalTok{ my\_data\_frame[}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, ]}
+
+\CommentTok{\# 排序数据框}
+\NormalTok{my\_data\_frame }\OtherTok{\textless{}{-}}\NormalTok{ my\_data\_frame[}\FunctionTok{order}\NormalTok{(my\_data\_frame}\SpecialCharTok{$}\NormalTok{age), ]}
+
+\CommentTok{\# 过滤数据框}
+\NormalTok{my\_data\_frame[my\_data\_frame}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textgreater{}=} \DecValTok{25}\NormalTok{, ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  id    name age gender
+3  3 Charlie  30      M
+4  4   David  32      M
 \end{verbatim}
 
 \hypertarget{ux884cux7d22ux5f15ux548cux5217ux7d22ux5f15}{%
@@ -679,8 +746,21 @@ R 语言的相关文档和教程。
 的所有行。如果我们还想选择其中的 \texttt{name} 和 \texttt{age}
 列，可以使用如下语句:
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{id =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{),}
+  \AttributeTok{name =} \FunctionTok{c}\NormalTok{(}\StringTok{"Alice"}\NormalTok{, }\StringTok{"Bob"}\NormalTok{, }\StringTok{"Charlie"}\NormalTok{),}
+  \AttributeTok{age =} \FunctionTok{c}\NormalTok{(}\DecValTok{20}\NormalTok{, }\DecValTok{25}\NormalTok{, }\DecValTok{30}\NormalTok{),}
+  \AttributeTok{gender =} \FunctionTok{c}\NormalTok{(}\StringTok{"F"}\NormalTok{, }\StringTok{"M"}\NormalTok{, }\StringTok{"M"}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{my\_data[my\_data}\SpecialCharTok{$}\NormalTok{age }\SpecialCharTok{\textgreater{}} \DecValTok{25}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\StringTok{"name"}\NormalTok{, }\StringTok{"age"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
-my_data[my_data$age > 30, c("name", "age")]
+     name age
+3 Charlie  30
 \end{verbatim}
 
 这样，我们就可以快速选择数据框中满足某一条件的行和列了。这种方法非常方便，并且能够有效地过滤数据，为进一步的分析提供更为精细的数据。
@@ -694,22 +774,27 @@ R语言的函数是一种特殊的程序，它可以接收参数，并返回一�
 
 例如，假设你有一个名为\texttt{add()}的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：
 
-\begin{verbatim}
-
-add <- function(x, y) {
-
-return (x + y)
-
-}
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{add }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+  \FunctionTok{print}\NormalTok{(x}\SpecialCharTok{{-}}\NormalTok{y)}
+  \FunctionTok{return}\NormalTok{ (x }\SpecialCharTok{+}\NormalTok{ y)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 这个函数定义中，我们用\texttt{function()}关键字来定义函数，然后在括号内指定函数的参数，在花括号内指定函数的运算过程。最后，我们使用\texttt{return()}函数来指定函数的返回值。
 
 在这个例子中，函数\texttt{add()}的两个参数分别是\texttt{x}和\texttt{y}，返回值是它们的和。你可以用以下代码来调用这个函数：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{add}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-result <- add(3, 5)
+\begin{verbatim}
+[1] -2
 \end{verbatim}
 
 在这里，我们将3和5作为参数传递给函数\texttt{add()}，然后将它们相加，并将结果保存到变量\texttt{result}中。
@@ -735,20 +820,17 @@ result <- add(3, 5)
 
 例如，如果你要定义一个函数来计算数据集的平均值，那么可以这样写：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  sum }\OtherTok{=} \FunctionTok{sum}\NormalTok{(x)}
+\NormalTok{  n }\OtherTok{=} \FunctionTok{length}\NormalTok{(x)}
+  \FunctionTok{return}\NormalTok{(sum }\SpecialCharTok{/}\NormalTok{ n)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
-mean <- function(x) {
-
-sum = sum(x)
-
-n = length(x)
-
-return(sum / n)
-
-}
-\end{verbatim}
-
-这个函数的名称是mean，它有一个参数x，函数体中包含了计算平均值的代码，最后会返回计算结果。
+这个函数的名称是\texttt{mean}，它有一个参数\texttt{x}，函数体中包含了计算平均值的代码，最后会返回计算结果。
 
 \hypertarget{rux8bedux8a00ux51fdux6570ux7684ux5206ux7c7b}{%
 \section{R语言函数的分类}\label{rux8bedux8a00ux51fdux6570ux7684ux5206ux7c7b}}
@@ -772,24 +854,37 @@ R语言中的函数可以分为几大类：
 
 你可以用以下代码定义函数\texttt{f1()}：
 
-\begin{verbatim}
-
-f1 <- function(x, y) {
-
-print(x + y)
-
-return (x - y)
-
-}
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f1 }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+  \FunctionTok{print}\NormalTok{(x }\SpecialCharTok{+}\NormalTok{ y)}
+  \FunctionTok{return}\NormalTok{ (x }\SpecialCharTok{{-}}\NormalTok{ y)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 在这个例子中，我们使用\texttt{print()}函数打印出两个数的和，并使用\texttt{return()}函数返回两个数的差。
 
 你可以用以下代码来调用这个函数：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{f1}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-result <- f1(3, 5)
+\begin{verbatim}
+[1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -2
 \end{verbatim}
 
 在这里，我们将3和5作为参数传递给函数\texttt{f1()}，然后函数会先打印出两个数的和，再返回两个数的差。执行完这个代码后，变量\texttt{result}的值为-2。
@@ -799,20 +894,25 @@ result <- f1(3, 5)
 
 是的，在R语言中，定义函数时可以不写\texttt{return()}函数。如果函数没有使用\texttt{return()}函数指定返回值，则函数会自动返回最后一个计算结果作为返回值。例如，假设你有一个名为\texttt{add()}的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：
 
-\begin{verbatim}
-
-add <- function(x, y) {
-
-x + y
-
-}
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{add }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ y}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 在这个例子中，我们省略了\texttt{return()}函数，直接将两个数的和作为函数的返回值。你可以用以下代码来调用这个函数：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{add}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{result}
+\end{Highlighting}
+\end{Shaded}
 
-result <- add(3, 5)
+\begin{verbatim}
+[1] 8
 \end{verbatim}
 
 在这里，我们将3和5作为参数传递给函数\texttt{add()}，函数会自动返回它们的和。执行完这个代码后，变量\texttt{result}的值为8。
@@ -822,18 +922,28 @@ result <- add(3, 5)
 
 在R语言中，可以通过使用函数名称来调用函数。例如，要调用mean()函数，可以这样写：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-mean(data)
+\begin{verbatim}
+[1] 5.5
 \end{verbatim}
 
 其中，data是你要分析的数据集。
 
 当然，你也可以在调用函数时向函数传递额外的参数。例如，要计算一个数据集的中位数，可以这样写：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{,}\ConstantTok{NA}\NormalTok{), }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-median(data, na.rm = TRUE)
+\begin{verbatim}
+[1] 5.5
 \end{verbatim}
 
 在这个例子中，我们向median()函数传递了一个参数，即na.rm =
@@ -844,34 +954,38 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 
 下面是一个计算偏度和峰度的函数：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{skew\_kurtosis }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
 
-skew_kurtosis <- function(x) {
+\NormalTok{  skew }\OtherTok{=} \FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(x))}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{length}\NormalTok{(x) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(x)}\SpecialCharTok{\^{}}\DecValTok{3}\NormalTok{)}
 
-skew = sum((x - mean(x))^3) / (length(x) * sd(x)^3)
+\NormalTok{  kurtosis }\OtherTok{=} \FunctionTok{sum}\NormalTok{((x }\SpecialCharTok{{-}} \FunctionTok{mean}\NormalTok{(x))}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (}\FunctionTok{length}\NormalTok{(x) }\SpecialCharTok{*} \FunctionTok{sd}\NormalTok{(x)}\SpecialCharTok{\^{}}\DecValTok{4}\NormalTok{) }\SpecialCharTok{{-}} \DecValTok{3}
 
-kurtosis = sum((x - mean(x))^4) / (length(x) * sd(x)^4) - 3
+  \FunctionTok{return}\NormalTok{(}\FunctionTok{c}\NormalTok{(skew, kurtosis))}
 
-return(c(skew, kurtosis))
-
-}
-\end{verbatim}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
 这个函数接收一个向量x作为参数，并计算x的偏度和峰度。计算完成后，会将结果放在一个向量中返回。
 
 例如，要计算一个数据集的偏度和峰度，可以这样写：
 
-\begin{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+  \FunctionTok{skew\_kurtosis}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-skew_kurtosis(data)
+\begin{verbatim}
+[1]  0.000000 -1.561636
 \end{verbatim}
 
 这个函数会计算data的偏度和峰度，并将结果作为向量返回。
 
 \hypertarget{ux5305ux7684ux57faux672cux6982ux5ff5}{%
 \chapter{包的基本概念}\label{ux5305ux7684ux57faux672cux6982ux5ff5}}
-
-1 / 1
 
 在R语言中，包（packages）是一种非常重要的概念，它们包含了一组函数、数据集和文档，用于解决特定的问题或执行特定的任务。R语言本身提供了一些基本的函数和数据结构，但通过安装和加载不同的包，你可以扩展R的功能，以便更好地满足你的需求。本文将围绕R语言中的包进行入门介绍，以及如何使用这些包中的函数。
 
@@ -880,17 +994,31 @@ skew_kurtosis(data)
 
 在R中，你可以使用\texttt{install.packages()}函数来安装新的包。例如，要安装一个名为\texttt{ggplot2}的包，你可以执行以下命令：
 
-\begin{verbatim}
-install.packages("ggplot2")
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{) }\CommentTok{\#最常用的包安装方式，从CRAN上安装包}
+
+\CommentTok{\# 部分R包存放在github上,安装方式}
+\NormalTok{remotes}\SpecialCharTok{::}\FunctionTok{install\_github}\NormalTok{(}\StringTok{\textquotesingle{}shalom{-}lab/pcolor\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# 部分生信分析的R包的安装方式}
+\NormalTok{BiocManager}\SpecialCharTok{::}\FunctionTok{install}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"GenomicFeatures"}\NormalTok{, }\StringTok{"AnnotationDbi"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{ux52a0ux8f7dux5305}{%
 \subsection{加载包}\label{ux52a0ux8f7dux5305}}
 
 安装包后，你需要使用\texttt{library()}函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载\texttt{ggplot2}包，可以执行以下命令：
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
-library(ggplot2)
+Warning: package 'ggplot2' was built under R version 4.2.3
 \end{verbatim}
 
 \hypertarget{ux67e5ux770bux5df2ux5b89ux88c5ux7684ux5305}{%
@@ -898,9 +1026,70 @@ library(ggplot2)
 
 你可以使用\texttt{installed.packages()}函数来查看已经安装的包列表：
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{installed\_packages }\OtherTok{\textless{}{-}} \FunctionTok{installed.packages}\NormalTok{()}
+\FunctionTok{head}\NormalTok{(installed\_packages)}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
-installed_packages <- installed.packages()
-head(installed_packages)
+              Package         LibPath                              Version 
+abind         "abind"         "D:/Program Files/R/R-4.2.0/library" "1.4-5" 
+ADAPTS        "ADAPTS"        "D:/Program Files/R/R-4.2.0/library" "1.0.22"
+ambient       "ambient"       "D:/Program Files/R/R-4.2.0/library" "1.0.2" 
+ambiorix      "ambiorix"      "D:/Program Files/R/R-4.2.0/library" "2.1.0" 
+annotate      "annotate"      "D:/Program Files/R/R-4.2.0/library" "1.74.0"
+AnnotationDbi "AnnotationDbi" "D:/Program Files/R/R-4.2.0/library" "1.58.0"
+              Priority
+abind         NA      
+ADAPTS        NA      
+ambient       NA      
+ambiorix      NA      
+annotate      NA      
+AnnotationDbi NA      
+              Depends                                                                                        
+abind         "R (>= 1.5.0)"                                                                                 
+ADAPTS        "R (>= 3.3.0)"                                                                                 
+ambient       "R (>= 3.0.2)"                                                                                 
+ambiorix      "R (>= 4.1.0)"                                                                                 
+annotate      "R (>= 2.10), AnnotationDbi (>= 1.27.5), XML"                                                  
+AnnotationDbi "R (>= 2.7.0), methods, utils, stats4, BiocGenerics (>=\n0.29.2), Biobase (>= 1.17.0), IRanges"
+              Imports                                                                                                               
+abind         "methods, utils"                                                                                                      
+ADAPTS        "missForest, e1071, ComICS, pheatmap, doParallel, utils,\nquantmod, preprocessCore, pcaMethods, foreach, nnls, ranger"
+ambient       "rlang, grDevices, graphics, stats"                                                                                   
+ambiorix      "fs, log, cli, glue, httpuv, methods, promises, jsonlite,\nwebsocket, assertthat"                                     
+annotate      "Biobase, DBI, xtable, graphics, utils, stats, methods,\nBiocGenerics (>= 0.13.8), httr"                              
+AnnotationDbi "DBI, RSQLite, S4Vectors (>= 0.9.25), stats, KEGGREST"                                                                
+              LinkingTo         
+abind         NA                
+ADAPTS        NA                
+ambient       "cpp11 (>= 0.4.2)"
+ambiorix      NA                
+annotate      NA                
+AnnotationDbi NA                
+              Suggests                                                                                                                                                                                
+abind         NA                                                                                                                                                                                      
+ADAPTS        "R.rsp, DeconRNASeq, WGCNA"                                                                                                                                                             
+ambient       "covr"                                                                                                                                                                                  
+ambiorix      "mime, readr, ggplot2, htmltools, commonmark, htmlwidgets,\ntestthat (>= 3.0.0)"                                                                                                        
+annotate      "hgu95av2.db, genefilter, Biostrings (>= 2.25.10), IRanges,\nrae230a.db, rae230aprobe, tkWidgets, GO.db, org.Hs.eg.db,\norg.Mm.eg.db, humanCHRLOC, Rgraphviz, RUnit,"                   
+AnnotationDbi "hgu95av2.db, GO.db, org.Sc.sgd.db, org.At.tair.db, RUnit,\nTxDb.Hsapiens.UCSC.hg19.knownGene, org.Hs.eg.db, reactome.db,\nAnnotationForge, graph, EnsDb.Hsapiens.v75, BiocStyle, knitr"
+              Enhances License              License_is_FOSS
+abind         NA       "LGPL (>= 2)"        NA             
+ADAPTS        NA       "MIT + file LICENSE" NA             
+ambient       NA       "MIT + file LICENSE" NA             
+ambiorix      NA       "GPL-3"              NA             
+annotate      NA       "Artistic-2.0"       NA             
+AnnotationDbi NA       "Artistic-2.0"       NA             
+              License_restricts_use OS_type MD5sum NeedsCompilation Built  
+abind         NA                    NA      NA     "no"             "4.2.0"
+ADAPTS        NA                    NA      NA     "no"             "4.2.2"
+ambient       NA                    NA      NA     "yes"            "4.2.2"
+ambiorix      NA                    NA      NA     "no"             "4.2.0"
+annotate      NA                    NA      NA     "no"             "4.2.0"
+AnnotationDbi NA                    NA      NA     "no"             "4.2.0"
 \end{verbatim}
 
 这将显示一些关于已安装包的基本信息，如包名、版本等。
@@ -910,17 +1099,27 @@ head(installed_packages)
 
 一旦加载了一个包，你就可以使用其中包含的函数。例如，\texttt{ggplot2}包是一个用于数据可视化的常用包，它提供了各种绘图函数。以下是一个使用\texttt{ggplot2}包的简单示例，创建一个散点图：
 
-\begin{verbatim}
-# 加载ggplot2包
-library(ggplot2)
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 加载ggplot2包}
+\FunctionTok{library}\NormalTok{(ggplot2)}
 
-# 创建一个数据框
-data <- data.frame(x = c(1, 2, 3, 4, 5), y = c(10, 15, 7, 20, 12))
+\CommentTok{\# 创建一个数据框}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{), }\AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{20}\NormalTok{, }\DecValTok{12}\NormalTok{))}
 
-# 使用ggplot2创建散点图
-ggplot(data, aes(x = x, y = y)) +
-  geom_point()
-\end{verbatim}
+\CommentTok{\# 使用ggplot2创建散点图}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =}\NormalTok{ y)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/base_package_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
 
 在这个示例中，我们首先加载了\texttt{ggplot2}包，然后创建了一个包含x和y变量的数据框，最后使用\texttt{ggplot2}的函数创建了一个散点图。
 
@@ -936,10 +1135,529 @@ ggplot(data, aes(x = x, y = y)) +
   首先，使用\texttt{installed.packages()}函数查看已安装包的列表，找到要卸载的包的名称。
 \end{enumerate}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 查看已安装的包列表}
+\NormalTok{installed\_packages }\OtherTok{\textless{}{-}} \FunctionTok{installed.packages}\NormalTok{()}
+\NormalTok{installed\_packages[, }\StringTok{"Package"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
 \begin{verbatim}
-# 查看已安装的包列表
-installed_packages <- installed.packages()
-installed_packages[, "Package"]
+                  abind                  ADAPTS                 ambient 
+                "abind"                "ADAPTS"               "ambient" 
+               ambiorix                annotate           AnnotationDbi 
+             "ambiorix"              "annotate"         "AnnotationDbi" 
+                anytime                     ape            arrayhelpers 
+              "anytime"                   "ape"          "arrayhelpers" 
+                  arrow                 arsenal                     aRt 
+                "arrow"               "arsenal"                   "aRt" 
+            AsioHeaders                 askpass          assertive.base 
+          "AsioHeaders"               "askpass"        "assertive.base" 
+   assertive.properties         assertive.types                 assertr 
+ "assertive.properties"       "assertive.types"               "assertr" 
+             assertthat              attachment                 attempt 
+           "assertthat"            "attachment"               "attempt" 
+                  aweek               backports         bannerCommenter 
+                "aweek"             "backports"       "bannerCommenter" 
+                   base               base64enc               bayesplot 
+                 "base"             "base64enc"             "bayesplot" 
+             bayestestR               bdsmatrix                beachmat 
+           "bayestestR"             "bdsmatrix"              "beachmat" 
+                     BH               BiasedUrn             billboarder 
+                   "BH"             "BiasedUrn"           "billboarder" 
+                 binman                 Biobase            BiocGenerics 
+               "binman"               "Biobase"          "BiocGenerics" 
+            BiocManager           BiocNeighbors            BiocParallel 
+          "BiocManager"         "BiocNeighbors"          "BiocParallel" 
+           BiocSingular             BiocVersion              Biostrings 
+         "BiocSingular"           "BiocVersion"            "Biostrings" 
+                    bit                   bit64                  bitops 
+                  "bit"                 "bit64"                "bitops" 
+                   blob                     bmp                 bnlearn 
+                 "blob"                   "bmp"               "bnlearn" 
+               bnstruct                    boot                     box 
+             "bnstruct"                  "boot"                   "box" 
+                   brew                    brio                   broom 
+                 "brew"                  "brio"                 "broom" 
+                bs4Dash                 bsicons                   bslib 
+              "bs4Dash"               "bsicons"                 "bslib" 
+                 cachem                   Cairo                   callr 
+               "cachem"                 "Cairo"                 "callr" 
+                    car               carbonate                 carData 
+                  "car"             "carbonate"               "carData" 
+                  caret                 caTools              cellranger 
+                "caret"               "caTools"            "cellranger" 
+              checkmate                   chron                   class 
+            "checkmate"                 "chron"                 "class" 
+               classInt                     cli                   clipr 
+             "classInt"                   "cli"                 "clipr" 
+                  clock                    clue                 cluster 
+                "clock"                  "clue"               "cluster" 
+        coarseDataTools                    coda               codetools 
+      "coarseDataTools"                  "coda"             "codetools" 
+               colormap              colorspace            colourpicker 
+             "colormap"            "colorspace"          "colourpicker" 
+                 ComICS              commonmark           compareGroups 
+               "ComICS"            "commonmark"         "compareGroups" 
+               compiler            CompQuadForm                  config 
+             "compiler"          "CompQuadForm"                "config" 
+             conflicted                 corpcor                corrplot 
+           "conflicted"               "corpcor"              "corrplot" 
+            countrycode                 cowplot                   cpp11 
+          "countrycode"               "cowplot"                 "cpp11" 
+                 crayon             credentials               crosstalk 
+               "crayon"           "credentials"             "crosstalk" 
+                crsmeta                    crul                    curl 
+              "crsmeta"                  "crul"                  "curl" 
+              cyclocomp                 dagitty              data.table 
+            "cyclocomp"               "dagitty"            "data.table" 
+         data.validator               DataEditR                datamods 
+       "data.validator"             "DataEditR"              "datamods" 
+              datapasta                datasets              datawizard 
+            "datapasta"              "datasets"            "datawizard" 
+                    DBI                  dbplyr                    deal 
+                  "DBI"                "dbplyr"                  "deal" 
+           DelayedArray      DelayedMatrixStats                  deldir 
+         "DelayedArray"    "DelayedMatrixStats"                "deldir" 
+             dendextend                DEoptimR                   Deriv 
+           "dendextend"              "DEoptimR"                 "Deriv" 
+                   desc               DescrTab2               DescTools 
+                 "desc"             "DescrTab2"             "DescTools" 
+                details                devtools              DiagrammeR 
+              "details"              "devtools"            "DiagrammeR" 
+          DiagrammeRsvg                   dials              DiceDesign 
+        "DiagrammeRsvg"                 "dials"            "DiceDesign" 
+                diffobj                  digest          distributional 
+              "diffobj"                "digest"        "distributional" 
+      DistributionUtils             dockerfiler              doParallel 
+    "DistributionUtils"           "dockerfiler"            "doParallel" 
+                  doRNG               dotCall64                 downlit 
+                "doRNG"             "dotCall64"               "downlit" 
+             downloader                   dplyr                   dqrng 
+           "downloader"                 "dplyr"                 "dqrng" 
+                     DT                  DTedit                  dtplyr 
+                   "DT"                "DTedit"                "dtplyr" 
+               dygraphs          dynamicTreeCut                   e1071 
+             "dygraphs"        "dynamicTreeCut"                 "e1071" 
+               eburones               echarts4r          echarts4r.maps 
+             "eburones"             "echarts4r"        "echarts4r.maps" 
+                  edgeR                editData              effectsize 
+                "edgeR"              "editData"            "effectsize" 
+          electricShine                 elevatr                 ellipse 
+        "electricShine"               "elevatr"               "ellipse" 
+               ellipsis                 emmeans                 enrichR 
+             "ellipsis"               "emmeans"               "enrichR" 
+               EpiEstim                    epiR                esquisse 
+             "EpiEstim"                  "epiR"              "esquisse" 
+           estimability                evaluate                   Exact 
+         "estimability"              "evaluate"                 "Exact" 
+               exact2x2                 exactci          exactRankTests 
+             "exact2x2"               "exactci"        "exactRankTests" 
+                   expm                 ExtDist               extrafont 
+                 "expm"               "ExtDist"             "extrafont" 
+            extrafontdb              factoextra              FactoMineR 
+          "extrafontdb"            "factoextra"            "FactoMineR" 
+                  fansi                  farver             fastcluster 
+                "fansi"                "farver"           "fastcluster" 
+                fastICA                 fastmap                 fdrtool 
+              "fastICA"               "fastmap"               "fdrtool" 
+                feather                    fftw                  fields 
+              "feather"                  "fftw"                "fields" 
+                  figma            fitdistrplus              flashClust 
+                "figma"          "fitdistrplus"            "flashClust" 
+          flexdashboard               flextable                     FNN 
+        "flexdashboard"             "flextable"                   "FNN" 
+            fontawesome                 forcats                 foreach 
+          "fontawesome"               "forcats"               "foreach" 
+               forecast                 foreign              forestplot 
+             "forecast"               "foreign"            "forestplot" 
+                  forge                 formatR                 Formula 
+                "forge"               "formatR"               "Formula" 
+          formula.tools                fracdiff                   fresh 
+        "formula.tools"              "fracdiff"                 "fresh" 
+                     fs                     fst                 fstcore 
+                   "fs"                   "fst"               "fstcore" 
+                  furrr           futile.logger          futile.options 
+                "furrr"         "futile.logger"        "futile.options" 
+                 future            future.apply               fuzzyjoin 
+               "future"          "future.apply"             "fuzzyjoin" 
+                    g2r               gapminder                  gargle 
+                  "g2r"             "gapminder"                "gargle" 
+                  gdata                 gdtools              genefilter 
+                "gdata"               "gdtools"            "genefilter" 
+                GeneNet   GeneralizedHyperbolic                generics 
+              "GeneNet" "GeneralizedHyperbolic"              "generics" 
+           GenomeInfoDb        GenomeInfoDbData           GenomicRanges 
+         "GenomeInfoDb"      "GenomeInfoDbData"         "GenomicRanges" 
+                geojson               geojsonio               geojsonsf 
+              "geojson"             "geojsonio"             "geojsonsf" 
+             geometries               geosphere                    gert 
+           "geometries"             "geosphere"                  "gert" 
+                 GGally                   ggdag                  ggdist 
+               "GGally"                 "ggdag"                "ggdist" 
+                 ggedit               ggeffects                 ggExtra 
+               "ggedit"             "ggeffects"               "ggExtra" 
+              ggfittext                 ggforce                     ggm 
+            "ggfittext"               "ggforce"                   "ggm" 
+              ggpattern                 ggplot2                  ggpubr 
+            "ggpattern"               "ggplot2"                "ggpubr" 
+                 ggraph                 ggrepel                ggridges 
+               "ggraph"               "ggrepel"              "ggridges" 
+                  ggsci                ggsignif               ggspatial 
+                "ggsci"              "ggsignif"             "ggspatial" 
+               ggstream                  ggtext           ggThemeAssist 
+             "ggstream"                "ggtext"         "ggThemeAssist" 
+               ggthemes                  ggvenn               ggvoronoi 
+             "ggthemes"                "ggvenn"             "ggvoronoi" 
+                     gh                gitcreds                  glasso 
+                   "gh"              "gitcreds"                "glasso" 
+                    gld                  glmnet                 globals 
+                  "gld"                "glmnet"               "globals" 
+                   glue                      gm                 gmodels 
+                 "glue"                    "gm"               "gmodels" 
+                  GO.db                 goftest                   golem 
+                "GO.db"               "goftest"                 "golem" 
+            googledrive           googlesheets4                   gower 
+          "googledrive"         "googlesheets4"                 "gower" 
+                  GPfit                  gplots              gptchatteR 
+                "GPfit"                "gplots"            "gptchatteR" 
+                  graph                graphics            graphlayouts 
+                "graph"              "graphics"          "graphlayouts" 
+              grDevices                    grid               gridExtra 
+            "grDevices"                  "grid"             "gridExtra" 
+             gridlayout             gridpattern                gridtext 
+           "gridlayout"           "gridpattern"              "gridtext" 
+                 gsubfn                  gtable                  gtools 
+               "gsubfn"                "gtable"                "gtools" 
+                hardhat           HardyWeinberg                   haven 
+              "hardhat"         "HardyWeinberg"                 "haven" 
+             HDInterval                    here                  hexbin 
+           "HDInterval"                  "here"                "hexbin" 
+                hexView             highcharter                   highr 
+              "hexView"           "highcharter"                 "highr" 
+                  Hmisc                     hms              hrbrthemes 
+                "Hmisc"                   "hms"            "hrbrthemes" 
+              htmlTable               htmltools             htmlwidgets 
+            "htmlTable"             "htmltools"           "htmlwidgets" 
+               httpcode                  httpuv                    httr 
+             "httpcode"                "httpuv"                  "httr" 
+                  httr2                humanize                     ica 
+                "httr2"              "humanize"                   "ica" 
+                    ids                  igraph                  imager 
+                  "ids"                "igraph"                "imager" 
+                 impute               incidence                   infer 
+               "impute"             "incidence"                 "infer" 
+             influenceR                     ini                 insight 
+           "influenceR"                   "ini"               "insight" 
+                 interp                   ipred                 IRanges 
+               "interp"                 "ipred"               "IRanges" 
+                  irlba                    ISLR                 isoband 
+                "irlba"                  "ISLR"               "isoband" 
+              iterators               itertools                 janitor 
+            "iterators"             "itertools"               "janitor" 
+                   jpeg                     jqr               jquerylib 
+                 "jpeg"                   "jqr"             "jquerylib" 
+                jsonify                jsonlite              kableExtra 
+              "jsonify"              "jsonlite"            "kableExtra" 
+               KEGGREST                 kernlab              KernSmooth 
+             "KEGGREST"               "kernlab"            "KernSmooth" 
+                  km.ci                  KMsurv                   knitr 
+                "km.ci"                "KMsurv"                 "knitr" 
+                     ks                labeling                labelled 
+                   "ks"              "labeling"              "labelled" 
+               lambda.r                    lars                   later 
+             "lambda.r"                  "lars"                 "later" 
+              latex2exp                 lattice            latticeExtra 
+            "latex2exp"               "lattice"          "latticeExtra" 
+                   lava                  lavaan                lazyeval 
+                 "lava"                "lavaan"              "lazyeval" 
+                    LEA                 leaflet          leaflet.extras 
+                  "LEA"               "leaflet"        "leaflet.extras" 
+      leaflet.providers                   leaps                  learnr 
+    "leaflet.providers"                 "leaps"                "learnr" 
+                 leiden                   lemon                     lhs 
+               "leiden"                 "lemon"                   "lhs" 
+              lifecycle                   limma                   lintr 
+            "lifecycle"                 "limma"                 "lintr" 
+                listenv              listviewer                    lme4 
+              "listenv"            "listviewer"                  "lme4" 
+                   lmom                  lmtest                  locfit 
+                 "lmom"                "lmtest"                "locfit" 
+                    log                  logger            longitudinal 
+                  "log"                "logger"          "longitudinal" 
+                    loo                   lorem               lubridate 
+                  "loo"                 "lorem"             "lubridate" 
+                 magick                magrittr                mapplots 
+               "magick"              "magrittr"              "mapplots" 
+                   maps                maptools                markdown 
+                 "maps"              "maptools"              "markdown" 
+                   MASS                mathjaxr                  Matrix 
+                 "MASS"              "mathjaxr"                "Matrix" 
+         MatrixGenerics            MatrixModels             matrixStats 
+       "MatrixGenerics"          "MatrixModels"           "matrixStats" 
+                maxstat                  mclust                    mcmc 
+              "maxstat"                "mclust"                  "mcmc" 
+               MCMCpack                     mcp                mdatools 
+             "MCMCpack"                   "mcp"              "mdatools" 
+                memoise                    meta                 metadat 
+              "memoise"                  "meta"               "metadat" 
+                metafor               MetBrewer                 methods 
+              "metafor"             "MetBrewer"               "methods" 
+                   metR                 Metrics                    mgcv 
+                 "metR"               "Metrics"                  "mgcv" 
+                   mice                    mime                  miniUI 
+                 "mice"                  "mime"                "miniUI" 
+                  minqa                  misc3d              missForest 
+                "minqa"                "misc3d"            "missForest" 
+                mitools                 mlbench                  mnormt 
+              "mitools"               "mlbench"                "mnormt" 
+              modeldata            ModelMetrics                  modelr 
+            "modeldata"          "ModelMetrics"                "modelr" 
+              mongolite                multcomp               multicool 
+            "mongolite"              "multcomp"             "multicool" 
+                munsell                 music21                 mvtnorm 
+              "munsell"               "music21"               "mvtnorm" 
+             NestedMenu               neuralnet                    nlme 
+           "NestedMenu"             "neuralnet"                  "nlme" 
+                 nloptr                    nnet                    nnls 
+               "nloptr"                  "nnet"                  "nnls" 
+                nortest                numDeriv                    odbc 
+              "nortest"              "numDeriv"                  "odbc" 
+                officer                  openai                 openssl 
+              "officer"                "openai"               "openssl" 
+               openxlsx          operator.tools                  optimx 
+             "openxlsx"        "operator.tools"                "optimx" 
+                osmdata                  packer                 packrat 
+              "osmdata"                "packer"               "packrat" 
+                 pacman                     pak                  pander 
+               "pacman"                   "pak"                "pander" 
+               parallel              parallelly              parameters 
+             "parallel"            "parallelly"            "parameters" 
+               parsermd                 parsnip               particles 
+             "parsermd"               "parsnip"             "particles" 
+                pastecs               patchwork                 pbapply 
+              "pastecs"             "patchwork"               "pbapply" 
+               pbivnorm                pbkrtest                   pcalg 
+             "pbivnorm"              "pbkrtest"                 "pcalg" 
+                 pcolor                     pcv             performance 
+               "pcolor"                   "pcv"           "performance" 
+               pheatmap           phosphoricons                  pillar 
+             "pheatmap"         "phosphoricons"                "pillar" 
+                  pingr                  pinyin                pkgbuild 
+                "pingr"                "pinyin"              "pkgbuild" 
+              pkgconfig                 pkgdown                 pkgload 
+            "pkgconfig"               "pkgdown"               "pkgload" 
+                  plogr                  plot3D                  plotly 
+                "plogr"                "plot3D"                "plotly" 
+                plotrix                     pls                    plyr 
+              "plotrix"                   "pls"                  "plyr" 
+                    png               polspline                polyclip 
+                  "png"             "polspline"              "polyclip" 
+                polynom               posterior                  pracma 
+              "polynom"             "posterior"                "pracma" 
+                 praise          preprocessCore              prettymapr 
+               "praise"        "preprocessCore"            "prettymapr" 
+            prettyunits                    pROC                processx 
+          "prettyunits"                  "pROC"              "processx" 
+                prodlim                progress               progressr 
+              "prodlim"              "progress"             "progressr" 
+                   PROJ                   proj4                promises 
+                 "PROJ"                 "proj4"              "promises" 
+                  proto               protolite                   proxy 
+                "proto"             "protolite"                 "proxy" 
+                     ps                   psych                   purrr 
+                   "ps"                 "psych"                 "purrr" 
+                pushbar                    pzfx                  qgraph 
+              "pushbar"                  "pzfx"                "qgraph" 
+               quadprog                quantmod                quantreg 
+             "quadprog"              "quantmod"              "quantreg" 
+                 quarks                  quarto                  qvalue 
+               "quarks"                "quarto"                "qvalue" 
+                R.cache             R.methodsS3                    R.oo 
+              "R.cache"           "R.methodsS3"                  "R.oo" 
+                R.utils                    r2d3                      R6 
+              "R.utils"                  "r2d3"                    "R6" 
+                   ragg            randomForest                  ranger 
+                 "ragg"          "randomForest"                "ranger" 
+                   RANN              rapidjsonr                rappdirs 
+                 "RANN"            "rapidjsonr"              "rappdirs" 
+                 raster                rayimage               rayshader 
+               "raster"              "rayimage"             "rayshader" 
+                   RBGL             rcartocolor              rclipboard 
+                 "RBGL"           "rcartocolor"            "rclipboard" 
+              rcmdcheck            RColorBrewer                    Rcpp 
+            "rcmdcheck"          "RColorBrewer"                  "Rcpp" 
+              RcppAnnoy           RcppArmadillo               RcppEigen 
+            "RcppAnnoy"         "RcppArmadillo"             "RcppEigen" 
+               RcppHNSW            RcppProgress                RcppTOML 
+             "RcppHNSW"          "RcppProgress"              "RcppTOML" 
+                  RCurl               reactable           reactablefmtr 
+                "RCurl"             "reactable"         "reactablefmtr" 
+               reactlog                  reactR              readbitmap 
+             "reactlog"                "reactR"            "readbitmap" 
+                readODS                   readr                  readxl 
+              "readODS"                 "readr"                "readxl" 
+                recipes              regexplain                 rematch 
+              "recipes"            "regexplain"               "rematch" 
+               rematch2                 remotes                    renv 
+             "rematch2"               "remotes"                  "renv" 
+                   repr                  reprex                  reproj 
+                 "repr"                "reprex"                "reproj" 
+                reshape                reshape2              reticulate 
+              "reshape"              "reshape2"            "reticulate" 
+                    rex                   rgdal                   rgeos 
+                  "rex"                 "rgdal"                 "rgeos" 
+                    rgl               Rgraphviz           rhandsontable 
+                  "rgl"             "Rgraphviz"         "rhandsontable" 
+                  rhino                rintrojs                     rio 
+                "rhino"              "rintrojs"                   "rio" 
+                  rjags                   rJava                   rjson 
+                "rjags"                 "rJava"                 "rjson" 
+                RJSONIO                   rlang                   rlist 
+              "RJSONIO"                 "rlang"                 "rlist" 
+              rmarkdown                  rmatio                     rms 
+            "rmarkdown"                "rmatio"                   "rms" 
+               rngtools              robustbase                    ROCR 
+             "rngtools"            "robustbase"                  "ROCR" 
+                  RODBC               rootSolve                    rosm 
+                "RODBC"             "rootSolve"                  "rosm" 
+               roxygen2                  rpanel                   rpart 
+             "roxygen2"                "rpanel"                 "rpart" 
+             rpart.plot                    rpdf               RPostgres 
+           "rpart.plot"                  "rpdf"             "RPostgres" 
+              rprojroot                 rsample               rsconnect 
+            "rprojroot"               "rsample"             "rsconnect" 
+              RSelenium                  Rsolnp                 RSQLite 
+            "RSelenium"                "Rsolnp"               "RSQLite" 
+                rstatix              rstudioapi                    rsvd 
+              "rstatix"            "rstudioapi"                  "rsvd" 
+                   rsvg                   Rtsne                Rttf2pt1 
+                 "rsvg"                 "Rtsne"              "Rttf2pt1" 
+                 rtweet                 rugarch               rversions 
+               "rtweet"               "rugarch"             "rversions" 
+                  rvest                      s2               S4Vectors 
+                "rvest"                    "s2"             "S4Vectors" 
+               sandwich                    sass            ScaledMatrix 
+             "sandwich"                  "sass"          "ScaledMatrix" 
+                 scales             scattermore           scatterplot3d 
+               "scales"           "scattermore"         "scatterplot3d" 
+            sctransform                 seewave                 selectr 
+          "sctransform"               "seewave"               "selectr" 
+                 semver             sessioninfo                settings 
+               "semver"           "sessioninfo"              "settings" 
+                 Seurat            SeuratObject                      sf 
+               "Seurat"          "SeuratObject"                    "sf" 
+              sfheaders                 sfsmisc                  shades 
+            "sfheaders"               "sfsmisc"                "shades" 
+             shadowtext                   shape                   shiny 
+           "shadowtext"                 "shape"                 "shiny" 
+           shiny.router          shiny.semantic                shinyAce 
+         "shiny.router"        "shiny.semantic"              "shinyAce" 
+             shinyalert               ShinyAuth                 shinyBS 
+           "shinyalert"             "ShinyAuth"               "shinyBS" 
+              shinybusy     shinyCopy2clipboard       shinycustomloader 
+            "shinybusy"   "shinyCopy2clipboard"     "shinycustomloader" 
+         shinydashboard      shinydashboardPlus                shinyDND 
+       "shinydashboard"    "shinydashboardPlus"              "shinyDND" 
+              shinyjqui                 shinyjs             shinypanels 
+            "shinyjqui"               "shinyjs"           "shinypanels" 
+               shinysky           shinysnippets             shinythemes 
+             "shinysky"         "shinysnippets"           "shinythemes" 
+          shinyuieditor            shinyWidgets                showtext 
+        "shinyuieditor"          "shinyWidgets"              "showtext" 
+             showtextdb                  signal                 SingleR 
+           "showtextdb"                "signal"               "SingleR" 
+                  sitmo              sjlabelled                  sjmisc 
+                "sitmo"            "sjlabelled"                "sjmisc" 
+                 sjPlot                 sjstats          SkewHyperbolic 
+               "sjPlot"               "sjstats"        "SkewHyperbolic" 
+                  skimr                  slider              slippymath 
+                "skimr"                "slider"            "slippymath" 
+                 smoots               snakecase                    snow 
+               "smoots"             "snakecase"                  "snow" 
+               sortable             sourcetools                      sp 
+             "sortable"           "sourcetools"                    "sp" 
+                   spam                sparklyr                 SparseM 
+                 "spam"              "sparklyr"               "SparseM" 
+      sparseMatrixStats                 spatial           spatstat.data 
+    "sparseMatrixStats"               "spatial"         "spatstat.data" 
+       spatstat.explore           spatstat.geom         spatstat.random 
+     "spatstat.explore"         "spatstat.geom"       "spatstat.random" 
+        spatstat.sparse          spatstat.utils                     spd 
+      "spatstat.sparse"        "spatstat.utils"                   "spd" 
+                splines         splitstackshape                   sqldf 
+              "splines"       "splitstackshape"                 "sqldf" 
+                SQUAREM                   ssanv               stargazer 
+              "SQUAREM"                 "ssanv"             "stargazer" 
+                  stats                  stats4              stringdist 
+                "stats"                "stats4"            "stringdist" 
+                stringi                 stringr             strucchange 
+              "stringi"               "stringr"           "strucchange" 
+                 styler    SummarizedExperiment                  survey 
+               "styler"  "SummarizedExperiment"                "survey" 
+               survival               survminer                survMisc 
+             "survival"             "survminer"              "survMisc" 
+                    sva                 svglite                  svUnit 
+                  "sva"               "svglite"                "svUnit" 
+                    sys                sysfonts             systemfonts 
+                  "sys"              "sysfonts"           "systemfonts" 
+                 table1                tableone                   tcltk 
+               "table1"              "tableone"                 "tcltk" 
+                 tensor                 tensorA                   terra 
+               "tensor"               "tensorA"                 "terra" 
+           terrainmeshr                testthat             textshaping 
+         "terrainmeshr"              "testthat"           "textshaping" 
+                TH.data                thematic                  tibble 
+              "TH.data"              "thematic"                "tibble" 
+                 tictoc               tidybayes               tidygraph 
+               "tictoc"             "tidybayes"             "tidygraph" 
+               tidyjson              tidymodels                   tidyr 
+             "tidyjson"            "tidymodels"                 "tidyr" 
+             tidyselect               tidyverse                    tiff 
+           "tidyselect"             "tidyverse"                  "tiff" 
+             timechange                timeDate                 tinytex 
+           "timechange"              "timeDate"               "tinytex" 
+                  tippy                   tools            translations 
+                "tippy"                 "tools"          "translations" 
+             treemapify               triebeard               truncnorm 
+           "treemapify"             "triebeard"             "truncnorm" 
+                tseries                     TTR                    tune 
+              "tseries"                   "TTR"                  "tune" 
+                  tuneR                  tweenr                    tzdb 
+                "tuneR"                "tweenr"                  "tzdb" 
+                  units                    urca                urltools 
+                "units"                  "urca"              "urltools" 
+                usethis                    utf8                   utils 
+              "usethis"                  "utf8"                 "utils" 
+                   uuid                    uwot                      V8 
+                 "uuid"                  "uwot"                    "V8" 
+               validate                    vars                     vcd 
+             "validate"                  "vars"                   "vcd" 
+                  vctrs                 viridis             viridisLite 
+                "vctrs"               "viridis"           "viridisLite" 
+             visNetwork                 vistime                   vroom 
+           "visNetwork"               "vistime"                 "vroom" 
+                  vtree                  waiter                   waldo 
+                "vtree"                "waiter"                 "waldo" 
+                   warp                   wdman                 webshot 
+                 "warp"                 "wdman"               "webshot" 
+              websocket                   WGCNA                 whisker 
+            "websocket"                 "WGCNA"               "whisker" 
+                  withr                      wk               workflows 
+                "withr"                    "wk"             "workflows" 
+           workflowsets                 writexl                    xfun 
+         "workflowsets"               "writexl"                  "xfun" 
+                   xlsx                xlsxjars                     XML 
+                 "xlsx"              "xlsxjars"                   "XML" 
+                   xml2            xmlparsedata                   xopen 
+                 "xml2"          "xmlparsedata"                 "xopen" 
+                 xtable                     xts                 XVector 
+               "xtable"                   "xts"               "XVector" 
+                   yaml               yardstick                     yfR 
+                 "yaml"             "yardstick"                   "yfR" 
+                    zip                zlibbioc                     zoo 
+                  "zip"              "zlibbioc"                   "zoo" 
 \end{verbatim}
 
 \begin{enumerate}
@@ -950,10 +1668,12 @@ installed_packages[, "Package"]
   找到要卸载的包名称后，使用\texttt{remove.packages()}函数进行卸载。假设要卸载名为''mypackage''的包：
 \end{enumerate}
 
-\begin{verbatim}
-# 卸载包
-remove.packages("mypackage")
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 卸载包}
+\FunctionTok{remove.packages}\NormalTok{(}\StringTok{"mypackage"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{ux66f4ux65b0ux5305}{%
 \subsection{更新包}\label{ux66f4ux65b0ux5305}}
@@ -967,10 +1687,12 @@ remove.packages("mypackage")
   首先，使用\texttt{update.packages()}函数来检查可用的包更新。这将列出需要更新的包以及它们的版本信息。
 \end{enumerate}
 
-\begin{verbatim}
-# 检查可用的包更新
-update.packages(ask = FALSE)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 检查可用的包更新}
+\FunctionTok{update.packages}\NormalTok{(}\AttributeTok{ask =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -980,10 +1702,12 @@ update.packages(ask = FALSE)
   如果你希望更新所有可用的包，可以在\texttt{update.packages()}函数中设置\texttt{ask}参数为\texttt{FALSE}，然后运行函数。
 \end{enumerate}
 
-\begin{verbatim}
-# 更新所有可用的包（不询问）
-update.packages(ask = FALSE)
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 更新所有可用的包（不询问）}
+\FunctionTok{update.packages}\NormalTok{(}\AttributeTok{ask =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -993,28 +1717,23 @@ update.packages(ask = FALSE)
   如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新''ggplot2''和''dplyr''包：
 \end{enumerate}
 
-\begin{verbatim}
-# 更新特定的包
-update.packages(ask = FALSE, lib.loc = .libPaths(), oldPkgs = c("ggplot2", "dplyr"))
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 更新特定的包}
+\FunctionTok{update.packages}\NormalTok{(}\AttributeTok{ask =} \ConstantTok{FALSE}\NormalTok{, }\AttributeTok{lib.loc =} \FunctionTok{.libPaths}\NormalTok{(), }\AttributeTok{oldPkgs =} \FunctionTok{c}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
 
 上述方法允许你卸载和更新R包，确保你的R环境中始终使用最新版本的包。在数据分析和编程中，定期更新包非常重要，因为更新通常包含了错误修复和新功能。
 
-\hypertarget{summary}{%
-\chapter{Summary}\label{summary}}
-
-In summary, this book has no content whatsoever.
+\hypertarget{ux6700ux4f73ux63a8ux8350-rioux5305}{%
+\chapter{最佳推荐-rio包}\label{ux6700ux4f73ux63a8ux8350-rioux5305}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(rio)}
-\FunctionTok{getwd}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-[1] "D:/Github/r-book/chapter"
-\end{verbatim}
 
 \part{数据清理}
 
@@ -1889,8 +2608,8 @@ print(my_string_upper)
 \hypertarget{section-2}{%
 \chapter{}\label{section-2}}
 
-\hypertarget{annotated-cell-83}{%
-\label{annotated-cell-83}}%
+\hypertarget{annotated-cell-90}{%
+\label{annotated-cell-90}}%
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(tidyverse)}

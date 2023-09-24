@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -62,6 +96,9 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <script async="" src="https://hypothes.is/embed.js"></script>
 
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
 
 </head>
 
@@ -91,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="sidebar-title mb-0 py-0">
       <a href="../">R语言快速入门</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/malcolmbarrett/causal-inference-in-r" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/shalom-lab/r-book/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -209,13 +246,12 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#安装包" id="toc-安装包" class="nav-link active" data-scroll-target="#安装包"><span class="header-section-number">5.0.1</span> 安装包</a></li>
   <li><a href="#加载包" id="toc-加载包" class="nav-link" data-scroll-target="#加载包"><span class="header-section-number">5.0.2</span> 加载包</a></li>
   <li><a href="#查看已安装的包" id="toc-查看已安装的包" class="nav-link" data-scroll-target="#查看已安装的包"><span class="header-section-number">5.0.3</span> 查看已安装的包</a></li>
-  <li><a href="#使用包中的函数" id="toc-使用包中的函数" class="nav-link" data-scroll-target="#使用包中的函数"><span class="header-section-number">5.1</span> 使用包中的函数</a>
-  <ul class="collapse">
-  <li><a href="#卸载包" id="toc-卸载包" class="nav-link" data-scroll-target="#卸载包"><span class="header-section-number">5.1.1</span> 卸载包</a></li>
-  <li><a href="#更新包" id="toc-更新包" class="nav-link" data-scroll-target="#更新包"><span class="header-section-number">5.1.2</span> 更新包</a></li>
-  </ul></li>
+  <li><a href="#使用包中的函数" id="toc-使用包中的函数" class="nav-link" data-scroll-target="#使用包中的函数"><span class="header-section-number">5.0.4</span> 使用包中的函数</a></li>
+  <li><a href="#不加载调用包中的函数" id="toc-不加载调用包中的函数" class="nav-link" data-scroll-target="#不加载调用包中的函数"><span class="header-section-number">5.0.5</span> 不加载调用包中的函数</a></li>
+  <li><a href="#卸载包" id="toc-卸载包" class="nav-link" data-scroll-target="#卸载包"><span class="header-section-number">5.0.6</span> 卸载包</a></li>
+  <li><a href="#更新包" id="toc-更新包" class="nav-link" data-scroll-target="#更新包"><span class="header-section-number">5.0.7</span> 更新包</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/edit/main/chapter/base_package.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/malcolmbarrett/causal-inference-in-r/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/base_package.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -237,84 +273,132 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>1 / 1</p>
 <p>在R语言中，包（packages）是一种非常重要的概念，它们包含了一组函数、数据集和文档，用于解决特定的问题或执行特定的任务。R语言本身提供了一些基本的函数和数据结构，但通过安装和加载不同的包，你可以扩展R的功能，以便更好地满足你的需求。本文将围绕R语言中的包进行入门介绍，以及如何使用这些包中的函数。</p>
 <section id="安装包" class="level3" data-number="5.0.1">
 <h3 data-number="5.0.1" class="anchored" data-anchor-id="安装包"><span class="header-section-number">5.0.1</span> 安装包</h3>
 <p>在R中，你可以使用<code>install.packages()</code>函数来安装新的包。例如，要安装一个名为<code>ggplot2</code>的包，你可以执行以下命令：</p>
-<pre><code>install.packages("ggplot2")
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>) <span class="co">#最常用的包安装方式，从CRAN上安装包</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 部分R包存放在github上,安装方式</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'shalom-lab/pcolor'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 部分生信分析的R包的安装方式</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"GenomicFeatures"</span>, <span class="st">"AnnotationDbi"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="加载包" class="level3" data-number="5.0.2">
 <h3 data-number="5.0.2" class="anchored" data-anchor-id="加载包"><span class="header-section-number">5.0.2</span> 加载包</h3>
 <p>安装包后，你需要使用<code>library()</code>函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载<code>ggplot2</code>包，可以执行以下命令：</p>
-<pre><code>library(ggplot2)
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
+</div>
+</div>
 </section>
 <section id="查看已安装的包" class="level3" data-number="5.0.3">
 <h3 data-number="5.0.3" class="anchored" data-anchor-id="查看已安装的包"><span class="header-section-number">5.0.3</span> 查看已安装的包</h3>
 <p>你可以使用<code>installed.packages()</code>函数来查看已经安装的包列表：</p>
-<pre><code>installed_packages &lt;- installed.packages()
-head(installed_packages)
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(installed_packages)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Package"],"name":[1],"type":["chr"],"align":["left"]},{"label":["LibPath"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Version"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Priority"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Depends"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Imports"],"name":[6],"type":["chr"],"align":["left"]},{"label":["LinkingTo"],"name":[7],"type":["chr"],"align":["left"]},{"label":["Suggests"],"name":[8],"type":["chr"],"align":["left"]},{"label":["Enhances"],"name":[9],"type":["chr"],"align":["left"]},{"label":["License"],"name":[10],"type":["chr"],"align":["left"]},{"label":["License_is_FOSS"],"name":[11],"type":["chr"],"align":["left"]},{"label":["License_restricts_use"],"name":[12],"type":["chr"],"align":["left"]},{"label":["OS_type"],"name":[13],"type":["chr"],"align":["left"]},{"label":["MD5sum"],"name":[14],"type":["chr"],"align":["left"]},{"label":["NeedsCompilation"],"name":[15],"type":["chr"],"align":["left"]},{"label":["Built"],"name":[16],"type":["chr"],"align":["left"]}],"data":[{"1":"abind","2":"D:/Program Files/R/R-4.2.0/library","3":"1.4-5","4":"NA","5":"R (>= 1.5.0)","6":"methods, utils","7":"NA","8":"NA","9":"NA","10":"LGPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.2.0","_rn_":"abind"},{"1":"ADAPTS","2":"D:/Program Files/R/R-4.2.0/library","3":"1.0.22","4":"NA","5":"R (>= 3.3.0)","6":"missForest, e1071, ComICS, pheatmap, doParallel, utils,\\nquantmod, preprocessCore, pcaMethods, foreach, nnls, ranger","7":"NA","8":"R.rsp, DeconRNASeq, WGCNA","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.2.2","_rn_":"ADAPTS"},{"1":"ambient","2":"D:/Program Files/R/R-4.2.0/library","3":"1.0.2","4":"NA","5":"R (>= 3.0.2)","6":"rlang, grDevices, graphics, stats","7":"cpp11 (>= 0.4.2)","8":"covr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.2.2","_rn_":"ambient"},{"1":"ambiorix","2":"D:/Program Files/R/R-4.2.0/library","3":"2.1.0","4":"NA","5":"R (>= 4.1.0)","6":"fs, log, cli, glue, httpuv, methods, promises, jsonlite,\\nwebsocket, assertthat","7":"NA","8":"mime, readr, ggplot2, htmltools, commonmark, htmlwidgets,\\ntestthat (>= 3.0.0)","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.2.0","_rn_":"ambiorix"},{"1":"annotate","2":"D:/Program Files/R/R-4.2.0/library","3":"1.74.0","4":"NA","5":"R (>= 2.10), AnnotationDbi (>= 1.27.5), XML","6":"Biobase, DBI, xtable, graphics, utils, stats, methods,\\nBiocGenerics (>= 0.13.8), httr","7":"NA","8":"hgu95av2.db, genefilter, Biostrings (>= 2.25.10), IRanges,\\nrae230a.db, rae230aprobe, tkWidgets, GO.db, org.Hs.eg.db,\\norg.Mm.eg.db, humanCHRLOC, Rgraphviz, RUnit,","9":"NA","10":"Artistic-2.0","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.2.0","_rn_":"annotate"},{"1":"AnnotationDbi","2":"D:/Program Files/R/R-4.2.0/library","3":"1.58.0","4":"NA","5":"R (>= 2.7.0), methods, utils, stats4, BiocGenerics (>=\\n0.29.2), Biobase (>= 1.17.0), IRanges","6":"DBI, RSQLite, S4Vectors (>= 0.9.25), stats, KEGGREST","7":"NA","8":"hgu95av2.db, GO.db, org.Sc.sgd.db, org.At.tair.db, RUnit,\\nTxDb.Hsapiens.UCSC.hg19.knownGene, org.Hs.eg.db, reactome.db,\\nAnnotationForge, graph, EnsDb.Hsapiens.v75, BiocStyle, knitr","9":"NA","10":"Artistic-2.0","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.2.0","_rn_":"AnnotationDbi"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
 <p>这将显示一些关于已安装包的基本信息，如包名、版本等。</p>
 </section>
-<section id="使用包中的函数" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="使用包中的函数"><span class="header-section-number">5.1</span> 使用包中的函数</h2>
+<section id="使用包中的函数" class="level3" data-number="5.0.4">
+<h3 data-number="5.0.4" class="anchored" data-anchor-id="使用包中的函数"><span class="header-section-number">5.0.4</span> 使用包中的函数</h3>
 <p>一旦加载了一个包，你就可以使用其中包含的函数。例如，<code>ggplot2</code>包是一个用于数据可视化的常用包，它提供了各种绘图函数。以下是一个使用<code>ggplot2</code>包的简单示例，创建一个散点图：</p>
-<pre><code># 加载ggplot2包
-library(ggplot2)
-
-# 创建一个数据框
-data &lt;- data.frame(x = c(1, 2, 3, 4, 5), y = c(10, 15, 7, 20, 12))
-
-# 使用ggplot2创建散点图
-ggplot(data, aes(x = x, y = y)) +
-  geom_point()
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 加载ggplot2包</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个数据框</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">7</span>, <span class="dv">20</span>, <span class="dv">12</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用ggplot2创建散点图</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="base_package_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <p>在这个示例中，我们首先加载了<code>ggplot2</code>包，然后创建了一个包含x和y变量的数据框，最后使用<code>ggplot2</code>的函数创建了一个散点图。</p>
-<section id="卸载包" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="卸载包"><span class="header-section-number">5.1.1</span> 卸载包</h3>
+</section>
+<section id="不加载调用包中的函数" class="level3" data-number="5.0.5">
+<h3 data-number="5.0.5" class="anchored" data-anchor-id="不加载调用包中的函数"><span class="header-section-number">5.0.5</span> 不加载调用包中的函数</h3>
+<p>一般来说，调用包里的函数前要用<code>library(包名)</code>函数先加载包，随后调用函数。 一种不加载包，直接调用函数的方法如下：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(mtcars,<span class="fu">c</span>(<span class="st">'mpg'</span>,<span class="st">'cyl'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","_rn_":"Datsun 710"},{"1":"21.4","2":"6","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","_rn_":"Valiant"},{"1":"14.3","2":"8","_rn_":"Duster 360"},{"1":"24.4","2":"4","_rn_":"Merc 240D"},{"1":"22.8","2":"4","_rn_":"Merc 230"},{"1":"19.2","2":"6","_rn_":"Merc 280"},{"1":"17.8","2":"6","_rn_":"Merc 280C"},{"1":"16.4","2":"8","_rn_":"Merc 450SE"},{"1":"17.3","2":"8","_rn_":"Merc 450SL"},{"1":"15.2","2":"8","_rn_":"Merc 450SLC"},{"1":"10.4","2":"8","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"8","_rn_":"Lincoln Continental"},{"1":"14.7","2":"8","_rn_":"Chrysler Imperial"},{"1":"32.4","2":"4","_rn_":"Fiat 128"},{"1":"30.4","2":"4","_rn_":"Honda Civic"},{"1":"33.9","2":"4","_rn_":"Toyota Corolla"},{"1":"21.5","2":"4","_rn_":"Toyota Corona"},{"1":"15.5","2":"8","_rn_":"Dodge Challenger"},{"1":"15.2","2":"8","_rn_":"AMC Javelin"},{"1":"13.3","2":"8","_rn_":"Camaro Z28"},{"1":"19.2","2":"8","_rn_":"Pontiac Firebird"},{"1":"27.3","2":"4","_rn_":"Fiat X1-9"},{"1":"26.0","2":"4","_rn_":"Porsche 914-2"},{"1":"30.4","2":"4","_rn_":"Lotus Europa"},{"1":"15.8","2":"8","_rn_":"Ford Pantera L"},{"1":"19.7","2":"6","_rn_":"Ferrari Dino"},{"1":"15.0","2":"8","_rn_":"Maserati Bora"},{"1":"21.4","2":"4","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>也即采用<code>包名::函数名</code>的方式直接调用某个包里的函数，这段代码没有加载<code>dplyr</code>包，而是用<code>::</code>的方式直接调用了<code>dplyr</code>包里的<code>select</code>函数,该函数的作用是选择数据框的部分列作为新的数据框返回，相当于取数据框的子集。</p>
+</section>
+<section id="卸载包" class="level3" data-number="5.0.6">
+<h3 data-number="5.0.6" class="anchored" data-anchor-id="卸载包"><span class="header-section-number">5.0.6</span> 卸载包</h3>
 <p>要卸载一个已安装的包，你可以使用<code>remove.packages()</code>函数。以下是卸载包的步骤：</p>
 <ol type="1">
 <li>首先，使用<code>installed.packages()</code>函数查看已安装包的列表，找到要卸载的包的名称。</li>
 </ol>
-<pre><code># 查看已安装的包列表
-installed_packages &lt;- installed.packages()
-installed_packages[, "Package"]
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看已安装的包列表</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(installed_packages[, <span class="st">"Package"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "abind"         "ADAPTS"        "ambient"       "ambiorix"     
+[5] "annotate"      "AnnotationDbi"</code></pre>
+</div>
+</div>
 <ol start="2" type="1">
 <li>找到要卸载的包名称后，使用<code>remove.packages()</code>函数进行卸载。假设要卸载名为”mypackage”的包：</li>
 </ol>
-<pre><code># 卸载包
-remove.packages("mypackage")
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 卸载包</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">remove.packages</span>(<span class="st">"mypackage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="更新包" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="更新包"><span class="header-section-number">5.1.2</span> 更新包</h3>
+<section id="更新包" class="level3" data-number="5.0.7">
+<h3 data-number="5.0.7" class="anchored" data-anchor-id="更新包"><span class="header-section-number">5.0.7</span> 更新包</h3>
 <p>要更新已安装的包，你可以使用<code>update.packages()</code>函数。以下是更新包的步骤：</p>
 <ol type="1">
 <li>首先，使用<code>update.packages()</code>函数来检查可用的包更新。这将列出需要更新的包以及它们的版本信息。</li>
 </ol>
-<pre><code># 检查可用的包更新
-update.packages(ask = FALSE)
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 检查可用的包更新</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ol start="2" type="1">
 <li>如果你希望更新所有可用的包，可以在<code>update.packages()</code>函数中设置<code>ask</code>参数为<code>FALSE</code>，然后运行函数。</li>
 </ol>
-<pre><code># 更新所有可用的包（不询问）
-update.packages(ask = FALSE)
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新所有可用的包（不询问）</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ol start="3" type="1">
 <li>如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新”ggplot2”和”dplyr”包：</li>
 </ol>
-<pre><code># 更新特定的包
-update.packages(ask = FALSE, lib.loc = .libPaths(), oldPkgs = c("ggplot2", "dplyr"))
-</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新特定的包</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">lib.loc =</span> <span class="fu">.libPaths</span>(), <span class="at">oldPkgs =</span> <span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"dplyr"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>上述方法允许你卸载和更新R包，确保你的R环境中始终使用最新版本的包。在数据分析和编程中，定期更新包非常重要，因为更新通常包含了错误修复和新功能。</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
