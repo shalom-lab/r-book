@@ -261,6 +261,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_wider_longer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -274,10 +280,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#常见用法" id="toc-常见用法" class="nav-link active" data-scroll-target="#常见用法"><span class="header-section-number">12.0.1</span> 常见用法</a></li>
-  <li><a href="#指定位置" id="toc-指定位置" class="nav-link" data-scroll-target="#指定位置"><span class="header-section-number">12.1</span> 指定位置</a>
-  <ul class="collapse">
-  <li><a href="#实战应用" id="toc-实战应用" class="nav-link" data-scroll-target="#实战应用"><span class="header-section-number">12.1.1</span> 实战应用</a></li>
-  </ul></li>
+  <li><a href="#指定位置" id="toc-指定位置" class="nav-link" data-scroll-target="#指定位置"><span class="header-section-number">12.0.2</span> 指定位置</a></li>
+  <li><a href="#实战应用" id="toc-实战应用" class="nav-link" data-scroll-target="#实战应用"><span class="header-section-number">12.0.3</span> 实战应用</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/clean_pipe.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -344,8 +348,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="指定位置" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="指定位置"><span class="header-section-number">12.1</span> 指定位置</h2>
+<section id="指定位置" class="level3" data-number="12.0.2">
+<h3 data-number="12.0.2" class="anchored" data-anchor-id="指定位置"><span class="header-section-number">12.0.2</span> 指定位置</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">%&gt;%</span> <span class="fu">sub</span>(<span class="dv">2</span>,.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -372,8 +376,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>[1] 5.5</code></pre>
 </div>
 </div>
-<section id="实战应用" class="level3" data-number="12.1.1">
-<h3 data-number="12.1.1" class="anchored" data-anchor-id="实战应用"><span class="header-section-number">12.1.1</span> 实战应用</h3>
+</section>
+<section id="实战应用" class="level3" data-number="12.0.3">
+<h3 data-number="12.0.3" class="anchored" data-anchor-id="实战应用"><span class="header-section-number">12.0.3</span> 实战应用</h3>
 <p>管道符的优势即是连续调用</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">%&gt;%</span></span>
@@ -392,7 +397,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
