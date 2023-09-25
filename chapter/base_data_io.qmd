@@ -1,6 +1,28 @@
 ## 最佳推荐-rio包
 
 ```{r}
+#| context: setup
 library(rio)
+# 该包两个重要函数 import()导入,export()导出
+```
 
+### 导出
+
+```{r}
+#| warning: false
+export(mtcars,'data/mtcars.csv')
+export(mtcars,'data/mtcars.rds')
+export(mtcars,'data/mtcars.xlsx')
+export(mtcars,'data/mtcars.sav')
+export(mtcars,'data/mtcars.sas7bdat')
+```
+
+### 导入
+
+```{r}
+import('data/mtcars.csv')
+import('data/mtcars.rds')
+import('data/mtcars.xlsx')
+import('data/mtcars.sav')
+import('data/mtcars.sav')
 ```

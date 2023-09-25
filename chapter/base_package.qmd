@@ -21,82 +21,49 @@ BiocManager::install(c("GenomicFeatures", "AnnotationDbi"))
 
 安装包后，你需要使用`library()`函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载`ggplot2`包，可以执行以下命令：
 
-```{r}        
+```{r}
+#| context: setup
 library(ggplot2)
 ```
 
-### 查看已安装的包
+### 调用包里的函数
 
-你可以使用`installed.packages()`函数来查看已经安装的包列表：
+在加载包之后，即可调用包里的函数。
 
-```{r}         
-installed_packages <- as.data.frame(installed.packages())
-head(installed_packages)
-```
-
-这将显示一些关于已安装包的基本信息，如包名、版本等。
-
-### 使用包中的函数
-
-一旦加载了一个包，你就可以使用其中包含的函数。例如，`ggplot2`包是一个用于数据可视化的常用包，它提供了各种绘图函数。以下是一个使用`ggplot2`包的简单示例，创建一个散点图：
-
-```{r}        
-# 加载ggplot2包
-library(ggplot2)
-
-# 创建一个数据框
+```{r}
 data <- data.frame(x = c(1, 2, 3, 4, 5), y = c(10, 15, 7, 20, 12))
 
 # 使用ggplot2创建散点图
 ggplot(data, aes(x = x, y = y)) +
-  geom_point()
+  geom_point()+
+  theme_bw()
 ```
-
-在这个示例中，我们首先加载了`ggplot2`包，然后创建了一个包含x和y变量的数据框，最后使用`ggplot2`的函数创建了一个散点图。
 
 ### 不加载调用包中的函数
 
-一般来说，调用包里的函数前要用`library(包名)`函数先加载包，随后调用函数。
-一种不加载包，直接调用函数的方法如下：
+一般来说，调用包里的函数前要用`library(包名)`函数先加载包，随后调用函数。 一种不加载包，直接调用函数的方法如下：
+
 ```{r}
 dplyr::select(mtcars,c('mpg','cyl'))
 ```
-也即采用`包名::函数名`的方式直接调用某个包里的函数，这段代码没有加载`dplyr`包，而是用`::`的方式直接调用了`dplyr`包里的`select`函数,该函数的作用是选择数据框的部分列作为新的数据框返回，相当于取数据框的子集。
 
+也即采用`包名::函数名`的方式直接调用某个包里的函数，这段代码没有加载`dplyr`包，而是用`::`的方式直接调用了`dplyr`包里的`select`函数,该函数的作用是选择数据框的部分列作为新的数据框返回，相当于取数据框的子集。
 
 ### 卸载包
 
 要卸载一个已安装的包，你可以使用`remove.packages()`函数。以下是卸载包的步骤：
 
-1.  首先，使用`installed.packages()`函数查看已安装包的列表，找到要卸载的包的名称。
-
-```{r}        
-# 查看已安装的包列表
-installed_packages <- as.data.frame(installed.packages())
-head(installed_packages[, "Package"])
-```
-
-2.  找到要卸载的包名称后，使用`remove.packages()`函数进行卸载。假设要卸载名为"mypackage"的包：
-
 ```{r}
 #| eval: false
 # 卸载包
-remove.packages("mypackage")
+remove.packages("ggplot2")
 ```
 
 ### 更新包
 
 要更新已安装的包，你可以使用`update.packages()`函数。以下是更新包的步骤：
 
-1.  首先，使用`update.packages()`函数来检查可用的包更新。这将列出需要更新的包以及它们的版本信息。
-
-```{r}    
-#| eval: false
-# 检查可用的包更新
-update.packages(ask = FALSE)
-```
-
-2.  如果你希望更新所有可用的包，可以在`update.packages()`函数中设置`ask`参数为`FALSE`，然后运行函数。
+1. 如果你希望更新所有可用的包，可以在`update.packages()`函数中设置`ask`参数为`FALSE`，然后运行函数。
 
 ```{r}
 #| eval: false
@@ -104,7 +71,7 @@ update.packages(ask = FALSE)
 update.packages(ask = FALSE)
 ```
 
-3.  如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新"ggplot2"和"dplyr"包：
+2. 如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新"ggplot2"和"dplyr"包：
 
 ```{r}
 #| eval: false
@@ -113,3 +80,14 @@ update.packages(ask = FALSE, lib.loc = .libPaths(), oldPkgs = c("ggplot2", "dply
 ```
 
 上述方法允许你卸载和更新R包，确保你的R环境中始终使用最新版本的包。在数据分析和编程中，定期更新包非常重要，因为更新通常包含了错误修复和新功能。
+
+### 查看已安装的包
+
+你可以使用`installed.packages()`函数来查看已经安装的包列表：
+
+```{r}
+installed_packages <- as.data.frame(installed.packages())
+installed_packages
+```
+
+这将显示一些关于已安装包的基本信息，如包名、版本等。

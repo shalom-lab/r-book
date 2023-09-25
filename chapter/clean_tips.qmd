@@ -1,11 +1,33 @@
-``` r
+## 常用技巧
+
+## 类型转换
+
+```{r}
+#| context: setup
+#| warning: false
 library(tidyverse)
-penguins |>                                      # <1>
-  mutate(                                        # <2>
-    bill_ratio = bill_depth_mm / bill_length_mm, # <2>
-    bill_area  = bill_depth_mm * bill_length_mm  # <2>
-  )                                              # <2>
+data<-data.frame(id=1:12,age=c(0.5,1.2,3,4,5,6),sex=c('男','女'),virus=c('1','0'))
+data
 ```
 
-1.  Take `penguins`, and then,
-2.  add new columns for the bill ratio and bill area.
+```{r}
+#| context: setup
+data_new<-data %>%
+  mutate(id=as.character(id),
+         virus=as.numeric(virus))
+data_new
+```
+
+### 连续转分类/水平转换
+
+```{r}
+data_new %>%
+  mutate(agegroup=ifelse(age<1,'0~1y',
+                         ifelse(age<2,'1~2y','2y+'))) %>%
+  mutate(agegroup2=case_when(age<1~'0~1y',
+                             age<2~'1~2y',
+                             T~'2y+')) %>%
+  mutate(sex2=ifelse(sex=='男','Male','Female'),
+         sex3=case_when(sex=='男'~'Male',
+                        T~'Female'))
+```

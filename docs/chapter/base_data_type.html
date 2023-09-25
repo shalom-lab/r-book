@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R语言快速入门 - 3&nbsp; 基本数据类型</title>
+<title>R语言快速入门 - 4&nbsp; 基本数据类型</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapter/base_function.html" rel="next">
-<link href="../chapter/base_rstudio.html" rel="prev">
+<link href="../chapter/base_dataframe.html" rel="next">
+<link href="../chapter/base_operator.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/base_install.html">基础篇</a></li><li class="breadcrumb-item"><a href="../chapter/base_data_type.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/base_install.html">基础篇</a></li><li class="breadcrumb-item"><a href="../chapter/base_data_type.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">数据类型</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -168,26 +168,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
+  <a href="../chapter/base_operator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">运算符</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span></a>
+  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">数据框</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/base_package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R包</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R包</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_common_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">常用函数</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">向量化</span></span></a>
   </div>
 </li>
       </ul>
@@ -204,31 +228,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">管道符%&gt;%</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_string.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_tips.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
   </div>
 </li>
       </ul>
@@ -243,15 +273,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#数据结构类型" id="toc-数据结构类型" class="nav-link active" data-scroll-target="#数据结构类型"><span class="header-section-number">3.1</span> 数据结构类型</a></li>
-  <li><a href="#数据框dataframe的常见操作" id="toc-数据框dataframe的常见操作" class="nav-link" data-scroll-target="#数据框dataframe的常见操作"><span class="header-section-number">3.2</span> 数据框(dataframe)的常见操作</a></li>
-  <li><a href="#代码示例" id="toc-代码示例" class="nav-link" data-scroll-target="#代码示例"><span class="header-section-number">3.3</span> 代码示例</a></li>
-  <li><a href="#行索引和列索引" id="toc-行索引和列索引" class="nav-link" data-scroll-target="#行索引和列索引"><span class="header-section-number">3.4</span> 行索引和列索引</a></li>
-  <li><a href="#行索引和列索引的常见用法" id="toc-行索引和列索引的常见用法" class="nav-link" data-scroll-target="#行索引和列索引的常见用法"><span class="header-section-number">3.5</span> 行索引和列索引的常见用法</a></li>
-  <li><a href="#在r语言中的含义" id="toc-在r语言中的含义" class="nav-link" data-scroll-target="#在r语言中的含义"><span class="header-section-number">3.6</span> []在R语言中的含义</a></li>
-  <li><a href="#r语言中-和的区别" id="toc-r语言中-和的区别" class="nav-link" data-scroll-target="#r语言中-和的区别"><span class="header-section-number">3.7</span> R语言中&lt;-和=的区别</a></li>
-  <li><a href="#中缺省行索引和列索引的意义" id="toc-中缺省行索引和列索引的意义" class="nav-link" data-scroll-target="#中缺省行索引和列索引的意义"><span class="header-section-number">3.8</span> []中缺省行索引和列索引的意义</a></li>
-  <li><a href="#行索引和列索引也可以填写布尔值吗" id="toc-行索引和列索引也可以填写布尔值吗" class="nav-link" data-scroll-target="#行索引和列索引也可以填写布尔值吗"><span class="header-section-number">3.9</span> 行索引和列索引也可以填写布尔值吗？</a></li>
+  <li><a href="#数据结构类型" id="toc-数据结构类型" class="nav-link active" data-scroll-target="#数据结构类型"><span class="header-section-number">4.1</span> 数据结构类型</a></li>
+  <li><a href="#数据框dataframe的常见操作" id="toc-数据框dataframe的常见操作" class="nav-link" data-scroll-target="#数据框dataframe的常见操作"><span class="header-section-number">4.2</span> 数据框(dataframe)的常见操作</a></li>
+  <li><a href="#代码示例" id="toc-代码示例" class="nav-link" data-scroll-target="#代码示例"><span class="header-section-number">4.3</span> 代码示例</a></li>
+  <li><a href="#行索引和列索引" id="toc-行索引和列索引" class="nav-link" data-scroll-target="#行索引和列索引"><span class="header-section-number">4.4</span> 行索引和列索引</a></li>
+  <li><a href="#行索引和列索引的常见用法" id="toc-行索引和列索引的常见用法" class="nav-link" data-scroll-target="#行索引和列索引的常见用法"><span class="header-section-number">4.5</span> 行索引和列索引的常见用法</a></li>
+  <li><a href="#在r语言中的含义" id="toc-在r语言中的含义" class="nav-link" data-scroll-target="#在r语言中的含义"><span class="header-section-number">4.6</span> []在R语言中的含义</a></li>
+  <li><a href="#r语言中-和的区别" id="toc-r语言中-和的区别" class="nav-link" data-scroll-target="#r语言中-和的区别"><span class="header-section-number">4.7</span> R语言中&lt;-和=的区别</a></li>
+  <li><a href="#中缺省行索引和列索引的意义" id="toc-中缺省行索引和列索引的意义" class="nav-link" data-scroll-target="#中缺省行索引和列索引的意义"><span class="header-section-number">4.8</span> []中缺省行索引和列索引的意义</a></li>
+  <li><a href="#行索引和列索引也可以填写布尔值吗" id="toc-行索引和列索引也可以填写布尔值吗" class="nav-link" data-scroll-target="#行索引和列索引也可以填写布尔值吗"><span class="header-section-number">4.9</span> 行索引和列索引也可以填写布尔值吗？</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/base_data_type.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -260,7 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">基本数据类型</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">基本数据类型</span></h1>
 </div>
 
 
@@ -284,8 +314,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>复数型数据: 表示复数，例如 <code>3 + 2i</code> 或 <code>-1 + 4i</code>。</li>
 <li>因子类型数据: 用于表示分类变量，例如性别 (男、女) 或季节 (春、夏、秋、冬)。</li>
 </ul>
-<section id="数据结构类型" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="数据结构类型"><span class="header-section-number">3.1</span> 数据结构类型</h2>
+<section id="数据结构类型" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="数据结构类型"><span class="header-section-number">4.1</span> 数据结构类型</h2>
 <p>R语言中有多种数据结构类型，这些类型都有各自的名称和意义。下面是一些常见的数据结构类型：</p>
 <ol type="1">
 <li><p>向量（vector）：这种类型的数据是一个一维的数值序列，例如c(1, 2, 3, 4)。</p></li>
@@ -295,8 +325,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>列表（list）：这种类型的数据是一个有序的元素集合，可以包含不同类型的对象，例如list(1, “hello”, TRUE)。</p></li>
 </ol>
 </section>
-<section id="数据框dataframe的常见操作" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="数据框dataframe的常见操作"><span class="header-section-number">3.2</span> 数据框(dataframe)的常见操作</h2>
+<section id="数据框dataframe的常见操作" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="数据框dataframe的常见操作"><span class="header-section-number">4.2</span> 数据框(dataframe)的常见操作</h2>
 <p>数据框是 R 语言中一种常用的数据结构，它是一个二维数据表，用于存储一组不同类型的数据，每列数据都有一个对应的列名。</p>
 <p>一些常见的数据框操作包括:</p>
 <ul>
@@ -313,8 +343,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>过滤数据框: 使用布尔运算符过滤数据框中符合条件的行。</li>
 </ul>
 </section>
-<section id="代码示例" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="代码示例"><span class="header-section-number">3.3</span> 代码示例</h2>
+<section id="代码示例" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="代码示例"><span class="header-section-number">4.3</span> 代码示例</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 创建一个数据框</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_data_frame <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -401,8 +431,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="行索引和列索引" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="行索引和列索引"><span class="header-section-number">3.4</span> 行索引和列索引</h2>
+<section id="行索引和列索引" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="行索引和列索引"><span class="header-section-number">4.4</span> 行索引和列索引</h2>
 <p>在 R 语言中，数据框是一种二维数据表，其中每行表示一个观察值，每列表示一个变量。数据框的行索引和列索引是用来确定某一个特定的数据值的位置的方法。</p>
 <ul>
 <li>行索引: 数据框的行索引是从 1 开始的正整数，用来标识每一行。例如，在上面的代码中，第一行的行索引是 1，第二行的行索引是 2，以此类推。</li>
@@ -410,8 +440,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>我们可以使用行索引和列索引来选择数据框中的某一个值。例如，如果我们想选择第二行第三列的值，可以使用 <code>my_data_frame[2, "age"]</code> 这样的语法。</p>
 </section>
-<section id="行索引和列索引的常见用法" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="行索引和列索引的常见用法"><span class="header-section-number">3.5</span> 行索引和列索引的常见用法</h2>
+<section id="行索引和列索引的常见用法" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="行索引和列索引的常见用法"><span class="header-section-number">4.5</span> 行索引和列索引的常见用法</h2>
 <p>行索引和列索引在 R 语言中都非常常见，它们有许多用途。下面是一些常见的行索引和列索引的用法:</p>
 <ul>
 <li>选择数据框中的某一个值: 可以使用行索引和列索引选择数据框中的某一个值。例如，<code>my_data_frame[2, "name"]</code> 表示选择第二行第 <code>name</code> 列的值。</li>
@@ -420,13 +450,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>排序数据框: 可以使用行索引和 <code>order()</code> 函数对数据框进行排序。例如，<code>my_data_frame &lt;- my_data_frame[order(my_data_frame$age), ]</code> 表示根据 <code>age</code> 列对数据框 `</li>
 </ul>
 </section>
-<section id="在r语言中的含义" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="在r语言中的含义"><span class="header-section-number">3.6</span> []在R语言中的含义</h2>
+<section id="在r语言中的含义" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="在r语言中的含义"><span class="header-section-number">4.6</span> []在R语言中的含义</h2>
 <p>在 R 语言中，<code>[]</code> 符号用来表示数据结构的索引。具体来说，它表示选择数据结构中的某一部分。例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[2, "name"]</code> 表示选择数据框 <code>my_data</code> 中的第二行第 <code>name</code> 列的值。</p>
 <p>在 R 语言中，<code>[]</code> 符号还可以用来进行其他操作，例如排序、过滤、删除等。它还可以用来创建新的数据结构，例如向量、数组、数据框等。有关具体用法，您可以参考 R 语言的相关文档和教程。</p>
 </section>
-<section id="r语言中-和的区别" class="level2" data-number="3.7">
-<h2 data-number="3.7" class="anchored" data-anchor-id="r语言中-和的区别"><span class="header-section-number">3.7</span> R语言中&lt;-和=的区别</h2>
+<section id="r语言中-和的区别" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="r语言中-和的区别"><span class="header-section-number">4.7</span> R语言中&lt;-和=的区别</h2>
 <p>在 R 语言中，<code>&lt;-</code> 和 <code>=</code> 都可以用来赋值，但它们之间还是有一些区别的。</p>
 <ul>
 <li><code>&lt;-</code>: 这是 R 语言中最常用的赋值操作符。它用来将右侧的值赋给左侧的变量。例如，<code>x &lt;- 5</code> 表示将 5 赋给变量 <code>x</code>。</li>
@@ -436,16 +466,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>在 R 语言中，一般来说，<code>&lt;-</code> 操作符更加常用，并且在 R 语言的文档和教程中也更常见。但 <code>=</code> 操作符也是可以使用的，它们之间并没有严格的限制。您可以根据个人喜好来选择使用哪一个。</p>
 <p>总的来说，建议使用 <code>&lt;-</code> 操作符进行赋值，这样能够更好地保持统一，并且能够更方便地理解代码。</p>
 </section>
-<section id="中缺省行索引和列索引的意义" class="level2" data-number="3.8">
-<h2 data-number="3.8" class="anchored" data-anchor-id="中缺省行索引和列索引的意义"><span class="header-section-number">3.8</span> []中缺省行索引和列索引的意义</h2>
+<section id="中缺省行索引和列索引的意义" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="中缺省行索引和列索引的意义"><span class="header-section-number">4.8</span> []中缺省行索引和列索引的意义</h2>
 <p>在 R 语言中，当 <code>[]</code> 符号中的行索引或列索引缺省时，它们会被自动填充为默认值。</p>
 <p>对于行索引，如果缺省，默认值是 1:n，其中 n 是数据框中的行数。例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[, "name"]</code> 和 <code>my_data[1:n, "name"]</code> 是等价的，都表示选择数据框 <code>my_data</code> 中的所有行的 <code>name</code> 列。</p>
 <p>对于列索引，如果缺省，默认值是所有列的名称。例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[2, ]</code> 和 <code>my_data[2, colnames(my_data)]</code> 是等价的，都表示选择数据框 <code>my_data</code> 中的第二行的所有列。</p>
 <p>通过使用缺省行索引和列索引，可以使代码更简洁易读。例如，我们可以使用 <code>my_data[, "name"]</code> 表示选择数据框 <code>my_data</code> 中的所有行的 <code>name</code> 列，而不用写出每一行的行索引。这样做既能够保证代码的正确性，又能够提高代码的可读性。</p>
 <p>当然，在实际使用中，还需要注意一些特殊情况。例如，如果缺省行索引和列索引可能导致代码不易理解，或者会与其他语法产生冲突，那么就需要明确指定行索引和列索引了。总之，在使用 <code>[]</code> 符号时，应该根据实际情况谨慎选择是否使用缺省行索引和列索引。</p>
 </section>
-<section id="行索引和列索引也可以填写布尔值吗" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="行索引和列索引也可以填写布尔值吗"><span class="header-section-number">3.9</span> 行索引和列索引也可以填写布尔值吗？</h2>
+<section id="行索引和列索引也可以填写布尔值吗" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="行索引和列索引也可以填写布尔值吗"><span class="header-section-number">4.9</span> 行索引和列索引也可以填写布尔值吗？</h2>
 <p>是的，在 R 语言中，行索引和列索引也可以填写布尔值。这种用法可以用来选择数据框中满足某一条件的行和列。</p>
 <p>例如，如果 <code>my_data</code> 是一个数据框，那么 <code>my_data[my_data$age &gt; 30, ]</code> 表示选择数据框 <code>my_data</code> 中 <code>age</code> 列大于 30 的所有行。如果我们还想选择其中的 <code>name</code> 和 <code>age</code> 列，可以使用如下语句:</p>
 <div class="cell">
@@ -707,13 +737,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapter/base_rstudio.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio</span></span>
+      <a href="../chapter/base_operator.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">运算符</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapter/base_function.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapter/base_dataframe.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">数据框</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

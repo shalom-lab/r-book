@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R语言快速入门 – clean_tips</title>
+<title>R语言快速入门 - 16&nbsp; 常用技巧</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,10 +95,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script async="" src="https://hypothes.is/embed.js"></script>
 
+<link href="../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
 
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -107,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/clean_tidyverse.html">数据清理</a></li><li class="breadcrumb-item"><a href="../chapter/clean_tips.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用技巧</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/clean_tidyverse.html">数据清理</a></li><li class="breadcrumb-item"><a href="../chapter/clean_tips.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -164,26 +167,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
+  <a href="../chapter/base_operator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">运算符</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">函数</span></span></a>
+  <a href="../chapter/base_data_type.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">数据框</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/base_package.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R包</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R包</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_common_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">常用函数</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/base_data_io.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/base_vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">向量化</span></span></a>
   </div>
 </li>
       </ul>
@@ -200,31 +227,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_tidyverse.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapter/clean_pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">管道符%&gt;%</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_dplyr.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_string.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapter/clean_tips.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,30 +267,92 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#类型转换" id="toc-类型转换" class="nav-link active" data-scroll-target="#类型转换"><span class="header-section-number">16.1</span> 类型转换</a>
+  <ul class="collapse">
+  <li><a href="#连续转分类水平转换" id="toc-连续转分类水平转换" class="nav-link" data-scroll-target="#连续转分类水平转换"><span class="header-section-number">16.1.1</span> 连续转分类/水平转换</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/clean_tips.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></h1>
+</div>
 
 
-<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">|&gt;</span></span>
-<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-3" class="code-annotation-target"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_ratio =</span> bill_depth_mm <span class="sc">/</span> bill_length_mm,</span>
-<span id="annotated-cell-1-5"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">bill_area  =</span> bill_depth_mm <span class="sc">*</span> bill_length_mm</span>
-<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a>  )</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-lines="2" data-code-annotation="1" data-code-cell="annotated-cell-1">Take <code>penguins</code>, and then,</span>
-</dd>
-<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
-<dd>
-<span data-code-lines="3,4,5,6" data-code-annotation="2" data-code-cell="annotated-cell-1">add new columns for the bill ratio and bill area.</span>
-</dd>
-</dl>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="类型转换" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="类型转换"><span class="header-section-number">16.1</span> 类型转换</h2>
+<div class="cell" data-context="setup">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,<span class="at">age=</span><span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">1.2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>),<span class="at">sex=</span><span class="fu">c</span>(<span class="st">'男'</span>,<span class="st">'女'</span>),<span class="at">virus=</span><span class="fu">c</span>(<span class="st">'1'</span>,<span class="st">'0'</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["int"],"align":["right"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["sex"],"name":[3],"type":["chr"],"align":["left"]},{"label":["virus"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"0.5","3":"男","4":"1"},{"1":"2","2":"1.2","3":"女","4":"0"},{"1":"3","2":"3.0","3":"男","4":"1"},{"1":"4","2":"4.0","3":"女","4":"0"},{"1":"5","2":"5.0","3":"男","4":"1"},{"1":"6","2":"6.0","3":"女","4":"0"},{"1":"7","2":"0.5","3":"男","4":"1"},{"1":"8","2":"1.2","3":"女","4":"0"},{"1":"9","2":"3.0","3":"男","4":"1"},{"1":"10","2":"4.0","3":"女","4":"0"},{"1":"11","2":"5.0","3":"男","4":"1"},{"1":"12","2":"6.0","3":"女","4":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell" data-context="setup">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_new<span class="ot">&lt;-</span>data <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id=</span><span class="fu">as.character</span>(id),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">virus=</span><span class="fu">as.numeric</span>(virus))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>data_new</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["sex"],"name":[3],"type":["chr"],"align":["left"]},{"label":["virus"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0.5","3":"男","4":"1"},{"1":"2","2":"1.2","3":"女","4":"0"},{"1":"3","2":"3.0","3":"男","4":"1"},{"1":"4","2":"4.0","3":"女","4":"0"},{"1":"5","2":"5.0","3":"男","4":"1"},{"1":"6","2":"6.0","3":"女","4":"0"},{"1":"7","2":"0.5","3":"男","4":"1"},{"1":"8","2":"1.2","3":"女","4":"0"},{"1":"9","2":"3.0","3":"男","4":"1"},{"1":"10","2":"4.0","3":"女","4":"0"},{"1":"11","2":"5.0","3":"男","4":"1"},{"1":"12","2":"6.0","3":"女","4":"0"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<section id="连续转分类水平转换" class="level3" data-number="16.1.1">
+<h3 data-number="16.1.1" class="anchored" data-anchor-id="连续转分类水平转换"><span class="header-section-number">16.1.1</span> 连续转分类/水平转换</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_new <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">agegroup=</span><span class="fu">ifelse</span>(age<span class="sc">&lt;</span><span class="dv">1</span>,<span class="st">'0~1y'</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">ifelse</span>(age<span class="sc">&lt;</span><span class="dv">2</span>,<span class="st">'1~2y'</span>,<span class="st">'2y+'</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">agegroup2=</span><span class="fu">case_when</span>(age<span class="sc">&lt;</span><span class="dv">1</span><span class="sc">~</span><span class="st">'0~1y'</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                             age<span class="sc">&lt;</span><span class="dv">2</span><span class="sc">~</span><span class="st">'1~2y'</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                             T<span class="sc">~</span><span class="st">'2y+'</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex2=</span><span class="fu">ifelse</span>(sex<span class="sc">==</span><span class="st">'男'</span>,<span class="st">'Male'</span>,<span class="st">'Female'</span>),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">sex3=</span><span class="fu">case_when</span>(sex<span class="sc">==</span><span class="st">'男'</span><span class="sc">~</span><span class="st">'Male'</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                        T<span class="sc">~</span><span class="st">'Female'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["age"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["sex"],"name":[3],"type":["chr"],"align":["left"]},{"label":["virus"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["agegroup"],"name":[5],"type":["chr"],"align":["left"]},{"label":["agegroup2"],"name":[6],"type":["chr"],"align":["left"]},{"label":["sex2"],"name":[7],"type":["chr"],"align":["left"]},{"label":["sex3"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"0.5","3":"男","4":"1","5":"0~1y","6":"0~1y","7":"Male","8":"Male"},{"1":"2","2":"1.2","3":"女","4":"0","5":"1~2y","6":"1~2y","7":"Female","8":"Female"},{"1":"3","2":"3.0","3":"男","4":"1","5":"2y+","6":"2y+","7":"Male","8":"Male"},{"1":"4","2":"4.0","3":"女","4":"0","5":"2y+","6":"2y+","7":"Female","8":"Female"},{"1":"5","2":"5.0","3":"男","4":"1","5":"2y+","6":"2y+","7":"Male","8":"Male"},{"1":"6","2":"6.0","3":"女","4":"0","5":"2y+","6":"2y+","7":"Female","8":"Female"},{"1":"7","2":"0.5","3":"男","4":"1","5":"0~1y","6":"0~1y","7":"Male","8":"Male"},{"1":"8","2":"1.2","3":"女","4":"0","5":"1~2y","6":"1~2y","7":"Female","8":"Female"},{"1":"9","2":"3.0","3":"男","4":"1","5":"2y+","6":"2y+","7":"Male","8":"Male"},{"1":"10","2":"4.0","3":"女","4":"0","5":"2y+","6":"2y+","7":"Female","8":"Female"},{"1":"11","2":"5.0","3":"男","4":"1","5":"2y+","6":"2y+","7":"Male","8":"Male"},{"1":"12","2":"6.0","3":"女","4":"0","5":"2y+","6":"2y+","7":"Female","8":"Female"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -496,7 +591,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapter/clean_string.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">字符串处理</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">字符串处理</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -506,4 +601,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/clean_tips.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">Report an issue</a></p></div></div></div></div></footer></body></html>
+</body></html>
