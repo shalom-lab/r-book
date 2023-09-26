@@ -62,6 +62,6 @@ format:
     documentclass: scrreprt
 
 editor: visual
-
+lang: zh
 comments:
   hypothesis: true
