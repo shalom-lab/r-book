@@ -1,4 +1,4 @@
-## 常用技巧
+# 常用技巧
 
 ## 类型转换
 
@@ -13,12 +13,16 @@ data
 ```{r}
 #| context: setup
 data_new<-data %>%
-  mutate(id=as.character(id),
-         virus=as.numeric(virus))
+  mutate(id=as.character(id), #转为字符型
+         virus=as.numeric(virus)) #转为数值型
 data_new
 ```
 
-### 连续转分类/水平转换
+## 连续转分类/水平转换
+::: {.callout-tip}
+## 提示
+`ifelse()`和`case_when()`函数二选一。简单二分类用`ifelse()`即可，复杂情况推荐用`case_when()`可避免多个`ifelse()`嵌套结构。
+:::
 
 ```{r}
 data_new %>%
@@ -30,4 +34,29 @@ data_new %>%
   mutate(sex2=ifelse(sex=='男','Male','Female'),
          sex3=case_when(sex=='男'~'Male',
                         T~'Female'))
+```
+
+::: {.callout-tip}
+## 提示
+男性和女性贫血判定的界值不同，根据性别和界值判断是否贫血。
+:::
+
+```{r}
+data<-data.frame(
+  sex=rep(c('Female','Male'),3),
+  Hb=runif(6,100,150) %>% round())
+
+data
+
+data %>%
+  mutate(cutoff=ifelse(sex=='Female',115,130),
+         Hb_2=ifelse(Hb<=cutoff,'abnormal','normal')) %>%
+  select(-cutoff)
+
+data %>%
+  mutate(Hb_2=case_when(
+    Hb<=115 & sex=='Female'~'abnormal',
+    Hb<=130 & sex=='Male'~'abnormal',
+    T~'normal'
+  ))
 ```

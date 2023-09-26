@@ -61,7 +61,7 @@ format:
   pdf:
     documentclass: scrreprt
 
-editor: visual
+editor: source
 lang: zh
 comments:
   hypothesis: true

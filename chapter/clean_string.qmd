@@ -15,7 +15,7 @@
 
 `str_length()` 函数是 `stringr` 包中的一个函数，用于计算字符串的长度（即字符串中字符的数量）。例如，下面的代码使用 `str_length()` 函数来计算字符串的长度：
 
-```{r}        
+```{r}
 # 加载 stringr 包
 library(stringr)
 ```
@@ -44,7 +44,7 @@ str_replace(string, pattern, replacement)
 
 其中，`string` 是要进行替换操作的字符串，`pattern`是要替换的子串，`replacement` 是用来替换的新子串。例如，下面的代码使用 `str_replace()` 函数来替换字符串中的某个部分：
 
-```{r}         
+```{r}
 # 定义一个字符串
 my_string <- "Hello, world!"
 
@@ -66,7 +66,7 @@ str_detect(string, pattern)
 
 其中，`string` 是要检测的字符串，`pattern`是要查找的子串。例如，下面的代码使用 `str_detect()` 函数来检测字符串中是否包含某个指定的子串：
 
-```{r}         
+```{r}
 # 定义一个字符串
 my_string <- "Hello, world!"
 
@@ -90,7 +90,7 @@ str_count(string, pattern)
 
 其中，`string` 是要检测的字符串，`pattern` 是要查找的子串。例如，下面的代码使用 `str_count()` 函数来统计字符串中某个子串的出现次数：
 
-```{r}         
+```{r}
 # 定义一个字符串
 my_string <- "Hello, world!"
 
@@ -114,7 +114,7 @@ str_split(string, pattern)
 
 其中，`string` 是要分割的字符串，`pattern` 是用来分割字符串的分隔符。例如，下面的代码使用 `str_split()` 函数来将字符串按照逗号进行分割：
 
-```{r}        
+```{r}
 # 定义一个字符串
 my_string <- "Hello, world!"
 
@@ -138,7 +138,7 @@ str_c(..., sep = "")
 
 其中，`...` 表示可以传入任意多个字符串，`sep` 参数表示分隔符，即拼接后的字符串中，每两个字符串之间的分隔符。例如，下面的代码使用 `str_c()` 函数来将多个字符串拼接成一个新的字符串：
 
-```{r}       
+```{r}
 # 使用 str_c() 函数将多个字符串拼接成一个新的字符串
 my_string <- str_c("Hello", "world", "!")
 
@@ -148,7 +148,7 @@ print(my_string)
 
 ## str_to_lower()
 
-```{r}        
+```{r}
 # 定义一个字符串
 my_string <- "Hello, world!"
 
@@ -163,8 +163,7 @@ print(my_string_lower)
 
 `str_to_upper()` 函数是 `stringr` 包中的一个函数，用于将字符串中的所有字母转换为大写字母。该函数的语法格式如下：
 
-
-```{r}         
+```{r}
 str_to_upper("Hello, world!")
 ```
 

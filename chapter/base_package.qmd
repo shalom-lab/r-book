@@ -1,8 +1,6 @@
 在R语言中，包（packages）是一种非常重要的概念，它们包含了一组函数、数据集和文档，用于解决特定的问题或执行特定的任务。R语言本身提供了一些基本的函数和数据结构，但通过安装和加载不同的包，你可以扩展R的功能，以便更好地满足你的需求。本文将围绕R语言中的包进行入门介绍，以及如何使用这些包中的函数。
 
-## 包的基本概念
-
-### 安装包
+## 安装包
 
 在R中，你可以使用`install.packages()`函数来安装新的包。例如，要安装一个名为`ggplot2`的包，你可以执行以下命令：
 
@@ -17,7 +15,7 @@ remotes::install_github('shalom-lab/pcolor')
 BiocManager::install(c("GenomicFeatures", "AnnotationDbi"))
 ```
 
-### 加载包
+## 加载包
 
 安装包后，你需要使用`library()`函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载`ggplot2`包，可以执行以下命令：
 
@@ -26,7 +24,7 @@ BiocManager::install(c("GenomicFeatures", "AnnotationDbi"))
 library(ggplot2)
 ```
 
-### 调用包里的函数
+## 调用包里的函数
 
 在加载包之后，即可调用包里的函数。
 
@@ -39,7 +37,7 @@ ggplot(data, aes(x = x, y = y)) +
   theme_bw()
 ```
 
-### 不加载调用包中的函数
+## 不加载调用包中的函数
 
 一般来说，调用包里的函数前要用`library(包名)`函数先加载包，随后调用函数。 一种不加载包，直接调用函数的方法如下：
 
@@ -49,7 +47,7 @@ dplyr::select(mtcars,c('mpg','cyl'))
 
 也即采用`包名::函数名`的方式直接调用某个包里的函数，这段代码没有加载`dplyr`包，而是用`::`的方式直接调用了`dplyr`包里的`select`函数,该函数的作用是选择数据框的部分列作为新的数据框返回，相当于取数据框的子集。
 
-### 卸载包
+## 卸载包
 
 要卸载一个已安装的包，你可以使用`remove.packages()`函数。以下是卸载包的步骤：
 
@@ -59,11 +57,11 @@ dplyr::select(mtcars,c('mpg','cyl'))
 remove.packages("ggplot2")
 ```
 
-### 更新包
+## 更新包
 
 要更新已安装的包，你可以使用`update.packages()`函数。以下是更新包的步骤：
 
-1. 如果你希望更新所有可用的包，可以在`update.packages()`函数中设置`ask`参数为`FALSE`，然后运行函数。
+1.  如果你希望更新所有可用的包，可以在`update.packages()`函数中设置`ask`参数为`FALSE`，然后运行函数。
 
 ```{r}
 #| eval: false
@@ -71,7 +69,7 @@ remove.packages("ggplot2")
 update.packages(ask = FALSE)
 ```
 
-2. 如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新"ggplot2"和"dplyr"包：
+2.  如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新"ggplot2"和"dplyr"包：
 
 ```{r}
 #| eval: false

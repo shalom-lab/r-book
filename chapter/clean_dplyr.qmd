@@ -32,13 +32,13 @@ data
 
 `select()`是`dplyr`包中的一个函数，它用于选择数据框中的特定列。例如，假设你有一个名为`data`的数据框，其中包含多列，你可以用以下代码选择列`x`和列`y`：
 
-```{r}      
+```{r}
 select(data, x, y)
 ```
 
 在这个例子中，`select()`函数会返回一个新的数据框，其中只包含原来数据框中的列`x`和列`y`。你也可以使用通配符来选择多个列。例如：
 
-```{r}       
+```{r}
 select(data, starts_with("x"))
 ```
 
@@ -54,7 +54,7 @@ select(data, -x)
 
 你也可以使用类似的方式来排除多个列，例如：
 
-```{r}         
+```{r}
 select(data, -starts_with("x"))
 ```
 
@@ -62,7 +62,7 @@ select(data, -starts_with("x"))
 
 除了使用函数来选择或排除列，你还可以使用类似于SQL中的语法来指定要选择或排除的列。例如：
 
-```{r}         
+```{r}
 select(data, x, y, -a)
 ```
 
@@ -99,31 +99,31 @@ my_data %>% select(starts_with("age"))
 
 如果您想要选择 `my_data` 数据框中名称以 `age` 结尾的列，可以使用如下语句:
 
-```{r}       
+```{r}
 my_data %>% select(ends_with("age"))
 ```
 
 如果您想要选择 `my_data` 数据框中名称中包含 `age` 的列，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data %>% select(contains("age"))
 ```
 
 如果您想要选择 `my_data` 数据框中名称与正则表达式 `"a.e"` 相匹配的列，可以使用如下语句:
 
-``` {r}        
+```{r}
 my_data %>% select(matches("a.e"))
 ```
 
 如果您想要选择 `my_data` 数据框中名称在列表 `c("age", "height")` 中出现过的列，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data %>% select(one_of(c("age", "height")))
 ```
 
 如果您想要选择 `my_data` 数据框中的所有列，可以使用如下语句:
 
-```{r}        
+```{r}
 my_data %>% select(everything())
 ```
 
@@ -136,12 +136,11 @@ my_data %>% select(everything())
 
 例如，如果您想要选择 `my_data` 数据框中名称在数字范围 \[1,5\] 内的列，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data %>% select(num_range(1, 5))
 my_data %>% select(where(is.numeric))
 my_data %>% select(where(is.character))
 ```
-
 
 ### match选择器函数中的正则表达式
 
@@ -184,13 +183,13 @@ group_by(data, a) %>%
 
 `filter()`是`dplyr`包中的一个函数，它用于根据指定的条件选择数据框中的行。例如，假设你有一个名为`data`的数据框，其中包含多行多列，你可以用以下代码选择值大于0的行：
 
-```{r}         
+```{r}
 filter(data, x > 0)
 ```
 
 在这个例子中，`filter()`函数会返回一个新的数据框，其中只包含原数据框中值大于0的行。你也可以使用多个条件来进行筛选。例如：
 
-```{r}         
+```{r}
 filter(data, x > 0, y < 5)
 ```
 
@@ -198,7 +197,7 @@ filter(data, x > 0, y < 5)
 
 除了简单的条件判断，你还可以在`filter()`函数中使用复杂的逻辑表达式来进行筛选。例如：
 
-```{r}        
+```{r}
 filter(data, x > 0 & y < 5 | a == 'B')
 ```
 
@@ -221,7 +220,7 @@ my_data
 
 例如，假设我们有一个数据框 `my_data`，如果我们想要将数据框 `my_data` 按照 `age` 变量的值进行分组，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data_grouped <- group_by(my_data, age)
 ```
 
@@ -229,23 +228,21 @@ my_data_grouped <- group_by(my_data, age)
 
 接下来，我们可以对每个分组进行进一步的操作。例如，如果我们想要计算每个分组中 `los` 变量的平均值，可以使用 `summarise()` 函数来实现:
 
-```{r}         
+```{r}
 summarise(
   my_data_grouped, 
   mean_nlos = mean(los))
 ```
 
-
 ### 多级分组
 
 当然，您也可以使用 `group_by()` 函数进行多级分组。例如，如果您想要将数据框 `my_data` 按照 `age` 和 `sex` 两个变量的值进行多级分组，可以使用如下语句:
 
-``` {r}
+```{r}
 my_data %>%
   group_by(age, sex) %>%
   summarise(mean=mean(los),median=median(los))
 ```
-
 
 ### 重新分组
 
@@ -273,7 +270,7 @@ my_data %>%
 
 `summarise()`是`dplyr`包中的一个函数，它用于对数据框进行汇总。例如，假设你有一个名为`data`的数据框，其中包含多行多列，你可以用以下代码计算每个组的均值：
 
-```{r}         
+```{r}
 group_by(my_data, sex) %>%
   summarise(mean = mean(los))
 ```
@@ -282,7 +279,7 @@ group_by(my_data, sex) %>%
 
 除了计算均值，你还可以使用`summarise()`函数计算其他统计量，例如求和、求最大值求最小值等。例如：
 
-```{r}     
+```{r}
 group_by(my_data, sex) %>%
   summarise(sum = sum(los),
             max = max(los),
@@ -310,17 +307,19 @@ my_data %>% distinct(age)
 
 另外，您还可以使用 `distinct()` 函数中的 `.keep_all` 参数来指定是否保留所有列。例如，如果您想要保留所有列，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data %>% distinct(sex,age,.keep_all = TRUE)
 ```
 
 这条语句的意思是，在 `my_data` 数据框中选择出不同的行，并保留所有列。由于这条语句指定了 `.keep_all = TRUE` 参数，所以所有的列都会被保留。最终的结果会被保存到变量 `my_data_distinct` 中。
 
 ## arrange()
+
 ### 升序
+
 `arrange()` 函数是 `tidyverse` 包中的一个函数，用于对指定数据框中的行进行排序。例如，如果您想要对 `my_data` 数据框中的行按照 `age` 列的值进行排序，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data %>% arrange(id)
 ```
 
@@ -328,12 +327,13 @@ my_data %>% arrange(id)
 
 除了上述语句，您还可以使用 `arrange()` 函数中的 `desc()` 函数来指定是否按照降序进行排序。例如，如果您想要按照降序排序，可以使用如下语句:
 
-```{r}         
+```{r}
 my_data %>% 
   arrange(desc(id))
 ```
 
 ### 多个变量
+
 ```{r}
 my_data %>%
   arrange(sex,desc(id))

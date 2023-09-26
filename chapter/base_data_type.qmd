@@ -1,3 +1,4 @@
+# 数据类型
 ## 基本数据类型
 
 R语言有多种基本的数据类型，包括整型数据(integer)、浮点型数据(floating point)、字符型数据(character)、布尔型数据(logical)、复数型数据(complex)和因子类型数据(factor)。
