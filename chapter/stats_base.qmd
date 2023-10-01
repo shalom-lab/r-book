@@ -1,0 +1,95 @@
+# 基础知识
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+library(janitor)
+```
+
+## 连续型随机变量
+
+```{r}
+df<-data.frame(x=seq(-5,5,by=0.02)) %>%
+  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))
+
+df
+```
+
+### 密度函数/分布函数
+::: panel-tabset
+#### 概率密度函数
+
+```{r}
+df %>%
+  ggplot(aes(x,pdf))+
+  geom_line()+
+  theme_bw()
+```
+
+#### 累计分布函数
+
+```{r}
+df %>%
+  ggplot(aes(x,cdf))+
+  geom_line()+
+  theme_bw()
+```
+
+#### 累计分布函数的反函数
+
+```{r}
+df %>%
+  ggplot(aes(cdf,icdf))+
+  geom_line()+
+  theme_bw()
+```
+:::
+
+### 3$\sigma$(西格玛)准则
+
+```{r}
+pnorm(1:3)-pnorm(-1:-3)
+```
+
+### Z检验界值和参考值范围
+
+```{r}
+-qnorm(c(0.005,0.01,0.025,0.05,0.1))
+```
+
+### 频率分布直方图
+
+```{r}
+runif(10000) %>%
+  qnorm() %>%
+  hist(breaks = 50)
+```
+
+## 离散型随机变量
+
+### 分布列
+
+```{r}
+rpois(1000,5) %>% 
+  table() %>% as.data.frame() %>%
+  setNames(c('k','probality')) %>%
+  adorn_percentages(denominator = 'col') %>%
+  ggplot(aes(k,probality))+
+  geom_col()+
+  theme_bw()
+```
+
+## 95%CI的含义
+
+```{r}
+df<-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %>%
+  rowwise() %>%
+  mutate(sample=list(rnorm(25,miu,sigma)),
+         x_bar=mean(sample),
+         sd=sd(sample),
+         ci_lower=x_bar-1.96*sd/5,
+         ci_upper=x_bar+1.96*sd/5,
+         within_ci=ifelse(miu>ci_lower & miu <ci_upper,T,F))
+df
+mean(df$within_ci)
+```

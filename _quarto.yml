@@ -50,6 +50,10 @@ book:
           href: chapter/clean_tips.qmd
         - text: 长宽数据转换
           href: chapter/clean_wider_longer.qmd
+    - part: 统计
+      chapters: 
+        - text: 基础篇
+          href: chapter/stats_base.qmd
 
 bibliography: references.bib
 
