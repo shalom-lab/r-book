@@ -46,6 +46,6 @@
     "href": "chapter/stats_base.html#ci的含义",
     "title": "18  基础知识",
     "section": "18.3 95%CI的含义",
-    "text": "18.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\ndf\n\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.929"
+    "text": "18.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\ndf\n\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.939"
   }
 ]
