@@ -47,5 +47,12 @@
     "title": "18  基础知识",
     "section": "18.3 95%CI的含义",
     "text": "18.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\ndf\n\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.939"
+  },
+  {
+    "objectID": "chapter/clean_wider_longer.html",
+    "href": "chapter/clean_wider_longer.html",
+    "title": "17  长宽数据转换",
+    "section": "",
+    "text": "library(tidyverse)\n\ndata_longer&lt;-data.frame(region=LETTERS[1:3],\n                       year=rep(2019:2023,each=3),\n                       case=round(runif(15)*100))\ndata_longer\n\n\n\n  \n\n\n\n\n17.0.1 长转宽\n\ndata_wider1&lt;-data_longer %&gt;%\n  pivot_wider(id_cols = year,names_from = 'region',values_from = 'case' )\ndata_wider1\n\n\n\n  \n\n\ndata_wider2&lt;-data_longer %&gt;%\n  pivot_wider(id_cols = region,names_from = 'year',names_prefix = 'y_',values_from = 'case' )\ndata_wider2\n\n\n\n  \n\n\n\n\n\n17.0.2 宽转长\n\ndata_longer2&lt;-data_wider1 %&gt;%\n  pivot_longer(c(A,B,C),names_to = 'region',values_to='count')\ndata_longer2\n\n\n\n  \n\n\n\n\n\n17.0.3 作图多用长数据\n\nggplot(data_longer,aes(factor(year),y=case,fill=region))+\n  geom_col(position = 'dodge')+\n  theme_bw()+\n  ggsci::scale_fill_jama()"
   }
 ]
