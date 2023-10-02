@@ -431,7 +431,7 @@
     "href": "chapter/stats_base.html#ci的含义",
     "title": "18  基础知识",
     "section": "18.3 95%CI的含义",
-    "text": "18.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;ci_lower & miu &lt;ci_upper,T,F))\ndf\n\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.942"
+    "text": "18.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\ndf\n\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.935"
   },
   {
     "objectID": "chapter/stats_base.html#分布列",
@@ -487,7 +487,7 @@
     "href": "chapter/stats_base.html#离散型随机变量",
     "title": "18  基础知识",
     "section": "18.2 离散型随机变量",
-    "text": "18.2 离散型随机变量\n\n18.2.1 分布列\n\nrpois(1000,5) %&gt;% \n  table() %&gt;% as.data.frame() %&gt;%\n  setNames(c('k','probality')) %&gt;%\n  adorn_percentages(denominator = 'col') %&gt;%\n  ggplot(aes(k,probality))+\n  geom_col()+\n  theme_bw()"
+    "text": "18.2 离散型随机变量\n\n18.2.1 分布列\n\nrpois(1000,5) %&gt;% \n  table() %&gt;% as.data.frame() %&gt;%\n  setNames(c('k','probality')) %&gt;%\n  adorn_percentages(denominator = 'col') %&gt;%\n  ggplot(aes(k,probality))+\n  geom_col()"
   },
   {
     "objectID": "chapter/stats_base.html",
@@ -522,6 +522,13 @@
     "href": "chapter/stats_base.html#连续型随机变量",
     "title": "18  基础知识",
     "section": "18.1 连续型随机变量",
-    "text": "18.1 连续型随机变量\n\ndf&lt;-data.frame(x=seq(-5,5,by=0.02)) %&gt;%\n  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))\n\ndf\n\n\n\n  \n\n\n\n\n18.1.1 密度函数/分布函数\n\n概率密度函数累计分布函数累计分布函数的反函数\n\n\n\ndf %&gt;%\n  ggplot(aes(x,pdf))+\n  geom_line()+\n  theme_bw()\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(x,cdf))+\n  geom_line()+\n  theme_bw()\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(cdf,icdf))+\n  geom_line()+\n  theme_bw()\n\n\n\n\n\n\n\n\n\n18.1.2 3\\(\\sigma\\)(西格玛)准则\n\npnorm(1:3)-pnorm(-1:-3)\n\n[1] 0.6826895 0.9544997 0.9973002\n\n\n\n\n18.1.3 Z检验界值和参考值范围\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1))\n\n[1] 2.575829 2.326348 1.959964 1.644854 1.281552\n\n\n\n\n18.1.4 频率分布直方图\n\nrunif(10000) %&gt;%\n  qnorm() %&gt;%\n  hist(breaks = 50)"
+    "text": "18.1 连续型随机变量\n\ndf&lt;-data.frame(x=seq(-5,5,by=0.01)) %&gt;%\n  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))\n\ndf\n\n\n\n  \n\n\n\n\n18.1.1 密度函数/分布函数\n\n概率密度函数累计分布函数累计分布函数的反函数\n\n\n\ndf %&gt;%\n  ggplot(aes(x,pdf))+\n  geom_line()\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(x,cdf))+\n  geom_line()\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(cdf,icdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n18.1.2 3\\(\\sigma\\)(西格玛)准则\n\nggplot(df,aes(x,pdf))+\n  geom_line()+\n  geom_area(aes(x=ifelse(abs(x)&lt;3,x,NA),fill='0.9974'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;2,x,NA),fill='0.9545'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;1,x,NA),fill='0.6827'),alpha=0.5)+\n  geom_vline(xintercept =c(-3,-2,-1,1,2,3),linetype='dashed')+\n  scale_x_continuous(breaks=c(-5:5))+\n  labs(x='Z',y='概率密度(pdf)')+\n  scale_fill_futurama()+\n  guides(fill=guide_legend(title='曲线下面积',override.aes = list(alpha=0.2)))\n\n\n\n\n\npnorm(1:3)-pnorm(-1:-3)\n\n[1] 0.6826895 0.9544997 0.9973002\n\n\n\n(pnorm(1:3)-pnorm(-1:-3)) %&gt;%\n  `/`(2) %&gt;%\n  `-`(0.5,.) %&gt;%\n  qnorm()\n\n[1] -1 -2 -3\n\n\n\n\n18.1.3 Z检验界值和参考值范围\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1))\n\n[1] 2.575829 2.326348 1.959964 1.644854 1.281552\n\n\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1)) %&gt;%\n  pnorm()\n\n[1] 0.995 0.990 0.975 0.950 0.900\n\n\n\n\n18.1.4 频率分布直方图\n\nrunif(10000) %&gt;%\n  qnorm() %&gt;%\n  hist(breaks = 50)"
+  },
+  {
+    "objectID": "chapter/clean_wider_longer.html",
+    "href": "chapter/clean_wider_longer.html",
+    "title": "17  长宽数据转换",
+    "section": "",
+    "text": "library(tidyverse)\n\ndata_longer&lt;-data.frame(region=LETTERS[1:3],\n                       year=rep(2019:2023,each=3),\n                       case=round(runif(15)*100))\ndata_longer\n\n\n\n  \n\n\n\n\n17.0.1 长转宽\n\ndata_wider1&lt;-data_longer %&gt;%\n  pivot_wider(id_cols = year,names_from = 'region',values_from = 'case' )\ndata_wider1\n\n\n\n  \n\n\ndata_wider2&lt;-data_longer %&gt;%\n  pivot_wider(id_cols = region,names_from = 'year',names_prefix = 'y_',values_from = 'case' )\ndata_wider2\n\n\n\n  \n\n\n\n\n\n17.0.2 宽转长\n\ndata_longer2&lt;-data_wider1 %&gt;%\n  pivot_longer(c(A,B,C),names_to = 'region',values_to='count')\ndata_longer2\n\n\n\n  \n\n\n\n\n\n17.0.3 作图多用长数据\n\nggplot(data_longer,aes(factor(year),y=case,fill=region))+\n  geom_col(position = 'dodge')+\n  theme_bw()+\n  ggsci::scale_fill_jama()"
   }
 ]
