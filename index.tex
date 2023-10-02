@@ -120,6 +120,22 @@
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \@ifpackageloaded{bookmark}{}{\usepackage{bookmark}}
@@ -128,36 +144,36 @@
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
 \AtBeginDocument{%
 \ifdefined\contentsname
-  \renewcommand*\contentsname{Table of contents}
+  \renewcommand*\contentsname{目录}
 \else
-  \newcommand\contentsname{Table of contents}
+  \newcommand\contentsname{目录}
 \fi
 \ifdefined\listfigurename
-  \renewcommand*\listfigurename{List of Figures}
+  \renewcommand*\listfigurename{插图目录}
 \else
-  \newcommand\listfigurename{List of Figures}
+  \newcommand\listfigurename{插图目录}
 \fi
 \ifdefined\listtablename
-  \renewcommand*\listtablename{List of Tables}
+  \renewcommand*\listtablename{列表目录}
 \else
-  \newcommand\listtablename{List of Tables}
+  \newcommand\listtablename{列表目录}
 \fi
 \ifdefined\figurename
-  \renewcommand*\figurename{Figure}
+  \renewcommand*\figurename{图}
 \else
-  \newcommand\figurename{Figure}
+  \newcommand\figurename{图}
 \fi
 \ifdefined\tablename
-  \renewcommand*\tablename{Table}
+  \renewcommand*\tablename{表格}
 \else
-  \newcommand\tablename{Table}
+  \newcommand\tablename{表格}
 \fi
 }
 \@ifpackageloaded{float}{}{\usepackage{float}}
 \floatstyle{ruled}
 \@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
-\floatname{codelisting}{Listing}
-\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\floatname{codelisting}{列表}
+\newcommand*\listoflistings{\listof{codelisting}{列表目录}}
 \makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -174,14 +190,24 @@
 \makeatletter
 \makeatother
 \ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{chinese-hans}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={R语言快速入门},
+  pdftitle={R语言入门指南},
   pdfauthor={Shalom},
+  pdflang={zh-Hans},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
@@ -189,15 +215,15 @@
   urlcolor={Blue},
   pdfcreator={LaTeX via pandoc}}
 
-\title{R语言快速入门}
+\title{R语言入门指南}
 \author{Shalom}
 \date{2023-08-13}
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, breakable, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, sharp corners, boxrule=0pt, breakable, enhanced, frame hidden]}{\end{tcolorbox}}\fi
 
-\renewcommand*\contentsname{Table of contents}
+\renewcommand*\contentsname{目录}
 {
 \hypersetup{linkcolor=}
 \setcounter{tocdepth}{2}
@@ -414,7 +440,7 @@ project项目是一种用于管理R代码和数据的文件夹，通常包含以
 \chapter{常用操作}\label{ux5e38ux7528ux64cdux4f5c}}
 
 \hypertarget{ux8d4bux503c}{%
-\subsection{赋值}\label{ux8d4bux503c}}
+\section{赋值}\label{ux8d4bux503c}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -460,8 +486,8 @@ project项目是一种用于管理R代码和数据的文件夹，通常包含以
 [1] 4
 \end{verbatim}
 
-\hypertarget{rux8bedux8a00ux4e2d-ux548cux7684ux533aux522b}{%
-\subsection{R语言中\textless-和=的区别}\label{rux8bedux8a00ux4e2d-ux548cux7684ux533aux522b}}
+\hypertarget{ux548cux7684ux533aux522b}{%
+\section{\textless-和=的区别}\label{ux548cux7684ux533aux522b}}
 
 在 R 语言中，\texttt{\textless{}-} 和 \texttt{=}
 都可以用来赋值，但它们之间还是有一些区别的。
@@ -487,7 +513,7 @@ project项目是一种用于管理R代码和数据的文件夹，通常包含以
 操作符进行赋值，这样能够更好地保持统一，并且能够更方便地理解代码。
 
 \hypertarget{ux8fd0ux7b97}{%
-\subsection{运算}\label{ux8fd0ux7b97}}
+\section{运算}\label{ux8fd0ux7b97}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -560,7 +586,7 @@ project项目是一种用于管理R代码和数据的文件夹，通常包含以
 \end{verbatim}
 
 \hypertarget{ux5224ux65ad}{%
-\subsection{判断}\label{ux5224ux65ad}}
+\section{判断}\label{ux5224ux65ad}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -593,7 +619,7 @@ project项目是一种用于管理R代码和数据的文件夹，通常包含以
 \end{verbatim}
 
 \hypertarget{ux53d6ux5b50ux96c6}{%
-\subsection{取子集}\label{ux53d6ux5b50ux96c6}}
+\section{取子集}\label{ux53d6ux5b50ux96c6}}
 
 \texttt{{[}{]}} 取向量中的某些元素,起始为1
 
@@ -723,8 +749,11 @@ Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
  [1] "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"
 \end{verbatim}
 
+\hypertarget{ux6570ux636eux7c7bux578b}{%
+\chapter{数据类型}\label{ux6570ux636eux7c7bux578b}}
+
 \hypertarget{ux57faux672cux6570ux636eux7c7bux578b}{%
-\chapter{基本数据类型}\label{ux57faux672cux6570ux636eux7c7bux578b}}
+\section{基本数据类型}\label{ux57faux672cux6570ux636eux7c7bux578b}}
 
 R语言有多种基本的数据类型，包括整型数据(integer)、浮点型数据(floating
 point)、字符型数据(character)、布尔型数据(logical)、复数型数据(complex)和因子类型数据(factor)。
@@ -985,8 +1014,8 @@ R语言中有多种数据结构类型，这些类型都有各自的名称和意�
 符号还可以用来进行其他操作，例如排序、过滤、删除等。它还可以用来创建新的数据结构，例如向量、数组、数据框等。有关具体用法，您可以参考
 R 语言的相关文档和教程。
 
-\hypertarget{rux8bedux8a00ux4e2d-ux548cux7684ux533aux522b-1}{%
-\section{R语言中\textless-和=的区别}\label{rux8bedux8a00ux4e2d-ux548cux7684ux533aux522b-1}}
+\hypertarget{rux8bedux8a00ux4e2d-ux548cux7684ux533aux522b}{%
+\section{R语言中\textless-和=的区别}\label{rux8bedux8a00ux4e2d-ux548cux7684ux533aux522b}}
 
 在 R 语言中，\texttt{\textless{}-} 和 \texttt{=}
 都可以用来赋值，但它们之间还是有一些区别的。
@@ -1111,7 +1140,7 @@ R 语言的相关文档和教程。
 \end{itemize}
 
 \hypertarget{ux4ee3ux7801ux793aux4f8b-1}{%
-\subsection{代码示例}\label{ux4ee3ux7801ux793aux4f8b-1}}
+\section{代码示例}\label{ux4ee3ux7801ux793aux4f8b-1}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1390,13 +1419,10 @@ R 语言的相关文档和教程。
 
 需要注意的是，在使用行索引和列索引时，需要确保它们的长度与数据框的行数和列数相同。如果长度不匹配，那么可能会导致代码出错或不能正常运行。因此，在使用行索引和列索引时，应该认真检查代码是否正确。
 
-\hypertarget{ux5305ux7684ux57faux672cux6982ux5ff5}{%
-\chapter{包的基本概念}\label{ux5305ux7684ux57faux672cux6982ux5ff5}}
+\hypertarget{ux5b89ux88c5ux5305}{%
+\chapter{安装包}\label{ux5b89ux88c5ux5305}}
 
 在R语言中，包（packages）是一种非常重要的概念，它们包含了一组函数、数据集和文档，用于解决特定的问题或执行特定的任务。R语言本身提供了一些基本的函数和数据结构，但通过安装和加载不同的包，你可以扩展R的功能，以便更好地满足你的需求。本文将围绕R语言中的包进行入门介绍，以及如何使用这些包中的函数。
-
-\hypertarget{ux5b89ux88c5ux5305}{%
-\subsection{安装包}\label{ux5b89ux88c5ux5305}}
 
 在R中，你可以使用\texttt{install.packages()}函数来安装新的包。例如，要安装一个名为\texttt{ggplot2}的包，你可以执行以下命令：
 
@@ -1413,7 +1439,7 @@ R 语言的相关文档和教程。
 \end{Shaded}
 
 \hypertarget{ux52a0ux8f7dux5305}{%
-\subsection{加载包}\label{ux52a0ux8f7dux5305}}
+\section{加载包}\label{ux52a0ux8f7dux5305}}
 
 安装包后，你需要使用\texttt{library()}函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载\texttt{ggplot2}包，可以执行以下命令：
 
@@ -1428,7 +1454,7 @@ Warning: package 'ggplot2' was built under R version 4.2.3
 \end{verbatim}
 
 \hypertarget{ux8c03ux7528ux5305ux91ccux7684ux51fdux6570}{%
-\subsection{调用包里的函数}\label{ux8c03ux7528ux5305ux91ccux7684ux51fdux6570}}
+\section{调用包里的函数}\label{ux8c03ux7528ux5305ux91ccux7684ux51fdux6570}}
 
 在加载包之后，即可调用包里的函数。
 
@@ -1452,7 +1478,7 @@ Warning: package 'ggplot2' was built under R version 4.2.3
 \end{figure}
 
 \hypertarget{ux4e0dux52a0ux8f7dux8c03ux7528ux5305ux4e2dux7684ux51fdux6570}{%
-\subsection{不加载调用包中的函数}\label{ux4e0dux52a0ux8f7dux8c03ux7528ux5305ux4e2dux7684ux51fdux6570}}
+\section{不加载调用包中的函数}\label{ux4e0dux52a0ux8f7dux8c03ux7528ux5305ux4e2dux7684ux51fdux6570}}
 
 一般来说，调用包里的函数前要用\texttt{library(包名)}函数先加载包，随后调用函数。
 一种不加载包，直接调用函数的方法如下：
@@ -1502,7 +1528,7 @@ Volvo 142E          21.4   4
 也即采用\texttt{包名::函数名}的方式直接调用某个包里的函数，这段代码没有加载\texttt{dplyr}包，而是用\texttt{::}的方式直接调用了\texttt{dplyr}包里的\texttt{select}函数,该函数的作用是选择数据框的部分列作为新的数据框返回，相当于取数据框的子集。
 
 \hypertarget{ux5378ux8f7dux5305}{%
-\subsection{卸载包}\label{ux5378ux8f7dux5305}}
+\section{卸载包}\label{ux5378ux8f7dux5305}}
 
 要卸载一个已安装的包，你可以使用\texttt{remove.packages()}函数。以下是卸载包的步骤：
 
@@ -1514,7 +1540,7 @@ Volvo 142E          21.4   4
 \end{Shaded}
 
 \hypertarget{ux66f4ux65b0ux5305}{%
-\subsection{更新包}\label{ux66f4ux65b0ux5305}}
+\section{更新包}\label{ux66f4ux65b0ux5305}}
 
 要更新已安装的包，你可以使用\texttt{update.packages()}函数。以下是更新包的步骤：
 
@@ -9503,7 +9529,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \chapter{常用函数}\label{ux5e38ux7528ux51fdux6570}}
 
 \hypertarget{ux5e38ux6570}{%
-\subsection{常数}\label{ux5e38ux6570}}
+\section{常数}\label{ux5e38ux6570}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9549,7 +9575,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{verbatim}
 
 \hypertarget{ux57faux7840}{%
-\subsection{基础}\label{ux57faux7840}}
+\section{基础}\label{ux57faux7840}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -9724,7 +9750,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{verbatim}
 
 \hypertarget{ux7edfux8ba1}{%
-\subsection{统计}\label{ux7edfux8ba1}}
+\section{统计}\label{ux7edfux8ba1}}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -9737,7 +9763,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1]  0.1603652  0.8194565 -0.3219784  1.0929038  0.2523328 -0.1615048
+[1] -1.21953906 -0.57737323 -0.43711461  0.68172365 -1.30800789  0.04723051
 \end{verbatim}
 
 \begin{Shaded}
@@ -9747,7 +9773,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] -3.010663
+[1] -3.121087
 \end{verbatim}
 
 \begin{Shaded}
@@ -9757,7 +9783,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] 3.300181
+[1] 2.933451
 \end{verbatim}
 
 \begin{Shaded}
@@ -9767,7 +9793,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] -3.010663  3.300181
+[1] -3.121087  2.933451
 \end{verbatim}
 
 \begin{Shaded}
@@ -9777,7 +9803,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] 0.03241909
+[1] 0.02768936
 \end{verbatim}
 
 \begin{Shaded}
@@ -9787,7 +9813,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] 0.03849939
+[1] 0.04757805
 \end{verbatim}
 
 \begin{Shaded}
@@ -9797,7 +9823,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] 0.9944208
+[1] 1.02259
 \end{verbatim}
 
 \begin{Shaded}
@@ -9807,7 +9833,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] 0.9888727
+[1] 1.045691
 \end{verbatim}
 
 \begin{Shaded}
@@ -9818,7 +9844,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 
 \begin{verbatim}
          0%         25%         50%         75%        100% 
--3.01066272 -0.62603679  0.03849939  0.69554916  3.30018066 
+-3.12108672 -0.62325782  0.04757805  0.69425644  2.93345070 
 \end{verbatim}
 
 \begin{Shaded}
@@ -9828,7 +9854,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \begin{verbatim}
-[1] -3.01066272 -0.62625709  0.03849939  0.69562597  3.30018066
+[1] -3.12108672 -0.62371506  0.04757805  0.69433942  2.93345070
 \end{verbatim}
 
 \begin{Shaded}
@@ -9868,7 +9894,7 @@ TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失
 \end{Shaded}
 
 \hypertarget{ux5bfcux51fa}{%
-\subsection{导出}\label{ux5bfcux51fa}}
+\section{导出}\label{ux5bfcux51fa}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10097,7 +10123,7 @@ Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
 \chapter{向量化}\label{ux5411ux91cfux5316}}
 
 \hypertarget{ux5bf9ux5e94ux5143ux7d20ux8fd0ux7b97}{%
-\subsection{对应元素运算}\label{ux5bf9ux5e94ux5143ux7d20ux8fd0ux7b97}}
+\section{对应元素运算}\label{ux5bf9ux5e94ux5143ux7d20ux8fd0ux7b97}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -10947,12 +10973,12 @@ data frame with 0 columns and 3 rows
 
 \begin{verbatim}
   id age    sex los
-1  1   3 Female   8
+1  1   3 Female   7
 2  2   4 Female   8
-3  3   3 Female   9
-4  4   4   Male  10
-5  5   3   Male   4
-6  6   4   Male   5
+3  3   3 Female   7
+4  4   4   Male   3
+5  5   3   Male   5
+6  6   4   Male   3
 \end{verbatim}
 
 \texttt{group\_by()} 是
@@ -10988,8 +11014,8 @@ dplyr包中的一个函数，它能够将数据按照指定的条件进行分组
 # A tibble: 2 x 2
     age mean_nlos
   <int>     <dbl>
-1     3      7   
-2     4      7.67
+1     3      6.33
+2     4      4.67
 \end{verbatim}
 
 \hypertarget{ux591aux7ea7ux5206ux7ec4}{%
@@ -11017,10 +11043,10 @@ argument.
 # Groups:   age [2]
     age sex     mean median
   <int> <chr>  <dbl>  <dbl>
-1     3 Female   8.5    8.5
-2     3 Male     4      4  
-3     4 Female   8      8  
-4     4 Male     7.5    7.5
+1     3 Female     7      7
+2     3 Male       5      5
+3     4 Female     8      8
+4     4 Male       3      3
 \end{verbatim}
 
 \hypertarget{ux91cdux65b0ux5206ux7ec4}{%
@@ -11039,8 +11065,8 @@ argument.
 # A tibble: 2 x 3
   sex     mean median
   <chr>  <dbl>  <dbl>
-1 Female  8.33      8
-2 Male    6.33      5
+1 Female  7.33      7
+2 Male    3.67      3
 \end{verbatim}
 
 \hypertarget{ux53d6ux6d88ux5206ux7ec4}{%
@@ -11064,7 +11090,7 @@ argument.
 # A tibble: 1 x 2
    mean median
   <dbl>  <dbl>
-1  7.33      8
+1   5.5      6
 \end{verbatim}
 
 取消分组后，数据框会恢复到未分组的状态。
@@ -11085,8 +11111,8 @@ argument.
 # A tibble: 2 x 2
   sex     mean
   <chr>  <dbl>
-1 Female  8.33
-2 Male    6.33
+1 Female  7.33
+2 Male    3.67
 \end{verbatim}
 
 在这个例子中，我们首先使用\texttt{group\_by()}函数将数据框按照列\texttt{sex}进行分组，然后使用\texttt{summarise()}函数计算每个组的均值。\texttt{summarise()}函数会返回一个新的数据框，其中包含每个组的均值以及对应的组名。
@@ -11106,8 +11132,8 @@ argument.
 # A tibble: 2 x 4
   sex      sum   max   min
   <chr>  <dbl> <dbl> <dbl>
-1 Female    25     9     8
-2 Male      19    10     4
+1 Female    22     8     7
+2 Male      11     5     3
 \end{verbatim}
 
 \hypertarget{distinct}{%
@@ -11125,8 +11151,8 @@ argument.
 
 \begin{verbatim}
   id age    sex los
-1  1   3 Female   8
-2  4   4   Male  10
+1  1   3 Female   7
+2  4   4   Male   3
 \end{verbatim}
 
 这条语句的意思是，在 \texttt{my\_data}
@@ -11160,10 +11186,10 @@ argument.
 
 \begin{verbatim}
   id age    sex los
-1  1   3 Female   8
+1  1   3 Female   7
 2  2   4 Female   8
-3  4   4   Male  10
-4  5   3   Male   4
+3  4   4   Male   3
+4  5   3   Male   5
 \end{verbatim}
 
 这条语句的意思是，在 \texttt{my\_data}
@@ -11191,12 +11217,12 @@ argument.
 
 \begin{verbatim}
   id age    sex los
-1  1   3 Female   8
+1  1   3 Female   7
 2  2   4 Female   8
-3  3   3 Female   9
-4  4   4   Male  10
-5  5   3   Male   4
-6  6   4   Male   5
+3  3   3 Female   7
+4  4   4   Male   3
+5  5   3   Male   5
+6  6   4   Male   3
 \end{verbatim}
 
 \hypertarget{ux964dux5e8f}{%
@@ -11214,12 +11240,12 @@ argument.
 
 \begin{verbatim}
   id age    sex los
-1  6   4   Male   5
-2  5   3   Male   4
-3  4   4   Male  10
-4  3   3 Female   9
+1  6   4   Male   3
+2  5   3   Male   5
+3  4   4   Male   3
+4  3   3 Female   7
 5  2   4 Female   8
-6  1   3 Female   8
+6  1   3 Female   7
 \end{verbatim}
 
 \hypertarget{ux591aux4e2aux53d8ux91cf}{%
@@ -11234,12 +11260,12 @@ argument.
 
 \begin{verbatim}
   id age    sex los
-1  3   3 Female   9
+1  3   3 Female   7
 2  2   4 Female   8
-3  1   3 Female   8
-4  6   4   Male   5
-5  5   3   Male   4
-6  4   4   Male  10
+3  1   3 Female   7
+4  6   4   Male   3
+5  5   3   Male   5
+6  4   4   Male   3
 \end{verbatim}
 
 \hypertarget{ux6700ux4f73ux63a8ux8350-lubridateux5305}{%
@@ -11410,6 +11436,9 @@ argument.
 
 \hypertarget{ux5b9eux6218ux5e94ux7528-1}{%
 \section{实战应用}\label{ux5b9eux6218ux5e94ux7528-1}}
+
+\hypertarget{ux5e74ux9f84ux8ba1ux7b97}{%
+\subsection{年龄计算}\label{ux5e74ux9f84ux8ba1ux7b97}}
 
 HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天数
 
@@ -11819,8 +11848,8 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{data\_new}\OtherTok{\textless{}{-}}\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id=}\FunctionTok{as.character}\NormalTok{(id),}
-         \AttributeTok{virus=}\FunctionTok{as.numeric}\NormalTok{(virus))}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{id=}\FunctionTok{as.character}\NormalTok{(id), }\CommentTok{\#转为字符型}
+         \AttributeTok{virus=}\FunctionTok{as.numeric}\NormalTok{(virus)) }\CommentTok{\#转为数值型}
 \NormalTok{data\_new}
 \end{Highlighting}
 \end{Shaded}
@@ -11842,7 +11871,13 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 \end{verbatim}
 
 \hypertarget{ux8fdeux7eedux8f6cux5206ux7c7bux6c34ux5e73ux8f6cux6362}{%
-\subsection{连续转分类/水平转换}\label{ux8fdeux7eedux8f6cux5206ux7c7bux6c34ux5e73ux8f6cux6362}}
+\section{连续转分类/水平转换}\label{ux8fdeux7eedux8f6cux5206ux7c7bux6c34ux5e73ux8f6cux6362}}
+
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, arc=.35mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{提示}, left=2mm, toprule=.15mm, coltitle=black]
+
+\texttt{ifelse()}和\texttt{case\_when()}函数二选一。简单二分类用\texttt{ifelse()}即可，复杂情况推荐用\texttt{case\_when()}可避免多个\texttt{ifelse()}嵌套结构。
+
+\end{tcolorbox}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -11874,6 +11909,72 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 12 12 6.0  女     0      2y+       2y+ Female Female
 \end{verbatim}
 
+\begin{tcolorbox}[enhanced jigsaw, opacityback=0, opacitybacktitle=0.6, breakable, colframe=quarto-callout-tip-color-frame, bottomtitle=1mm, rightrule=.15mm, colbacktitle=quarto-callout-tip-color!10!white, bottomrule=.15mm, leftrule=.75mm, titlerule=0mm, toptitle=1mm, arc=.35mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{提示}, left=2mm, toprule=.15mm, coltitle=black]
+
+男性和女性贫血判定的界值不同，根据性别和界值判断是否贫血。
+
+\end{tcolorbox}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{sex=}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Female\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}Male\textquotesingle{}}\NormalTok{),}\DecValTok{3}\NormalTok{),}
+  \AttributeTok{Hb=}\FunctionTok{runif}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{100}\NormalTok{,}\DecValTok{150}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{round}\NormalTok{())}
+
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     sex  Hb
+1 Female 108
+2   Male 133
+3 Female 124
+4   Male 139
+5 Female 110
+6   Male 140
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{cutoff=}\FunctionTok{ifelse}\NormalTok{(sex}\SpecialCharTok{==}\StringTok{\textquotesingle{}Female\textquotesingle{}}\NormalTok{,}\DecValTok{115}\NormalTok{,}\DecValTok{130}\NormalTok{),}
+         \AttributeTok{Hb\_2=}\FunctionTok{ifelse}\NormalTok{(Hb}\SpecialCharTok{\textless{}=}\NormalTok{cutoff,}\StringTok{\textquotesingle{}abnormal\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}normal\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{cutoff)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     sex  Hb     Hb_2
+1 Female 108 abnormal
+2   Male 133   normal
+3 Female 124   normal
+4   Male 139   normal
+5 Female 110 abnormal
+6   Male 140   normal
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{Hb\_2=}\FunctionTok{case\_when}\NormalTok{(}
+\NormalTok{    Hb}\SpecialCharTok{\textless{}=}\DecValTok{115} \SpecialCharTok{\&}\NormalTok{ sex}\SpecialCharTok{==}\StringTok{\textquotesingle{}Female\textquotesingle{}}\SpecialCharTok{\textasciitilde{}}\StringTok{\textquotesingle{}abnormal\textquotesingle{}}\NormalTok{,}
+\NormalTok{    Hb}\SpecialCharTok{\textless{}=}\DecValTok{130} \SpecialCharTok{\&}\NormalTok{ sex}\SpecialCharTok{==}\StringTok{\textquotesingle{}Male\textquotesingle{}}\SpecialCharTok{\textasciitilde{}}\StringTok{\textquotesingle{}abnormal\textquotesingle{}}\NormalTok{,}
+\NormalTok{    T}\SpecialCharTok{\textasciitilde{}}\StringTok{\textquotesingle{}normal\textquotesingle{}}
+\NormalTok{  ))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     sex  Hb     Hb_2
+1 Female 108 abnormal
+2   Male 133   normal
+3 Female 124   normal
+4   Male 139   normal
+5 Female 110 abnormal
+6   Male 140   normal
+\end{verbatim}
+
 \hypertarget{ux957fux5bbdux6570ux636eux8f6cux6362}{%
 \chapter{长宽数据转换}\label{ux957fux5bbdux6570ux636eux8f6cux6362}}
 
@@ -11890,20 +11991,20 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 
 \begin{verbatim}
    region year case
-1       A 2019   16
-2       B 2019   40
-3       C 2019   29
-4       A 2020   16
-5       B 2020   41
-6       C 2020   30
-7       A 2021   26
-8       B 2021   91
-9       C 2021   40
-10      A 2022   21
-11      B 2022   92
-12      C 2022   31
-13      A 2023   27
-14      B 2023   50
+1       A 2019   80
+2       B 2019   95
+3       C 2019   10
+4       A 2020   17
+5       B 2020   76
+6       C 2020   94
+7       A 2021   40
+8       B 2021   63
+9       C 2021   84
+10      A 2022    3
+11      B 2022   46
+12      C 2022   48
+13      A 2023   19
+14      B 2023   44
 15      C 2023   50
 \end{verbatim}
 
@@ -11922,11 +12023,11 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 # A tibble: 5 x 4
    year     A     B     C
   <int> <dbl> <dbl> <dbl>
-1  2019    16    40    29
-2  2020    16    41    30
-3  2021    26    91    40
-4  2022    21    92    31
-5  2023    27    50    50
+1  2019    80    95    10
+2  2020    17    76    94
+3  2021    40    63    84
+4  2022     3    46    48
+5  2023    19    44    50
 \end{verbatim}
 
 \begin{Shaded}
@@ -11941,9 +12042,9 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 # A tibble: 3 x 6
   region y_2019 y_2020 y_2021 y_2022 y_2023
   <chr>   <dbl>  <dbl>  <dbl>  <dbl>  <dbl>
-1 A          16     16     26     21     27
-2 B          40     41     91     92     50
-3 C          29     30     40     31     50
+1 A          80     17     40      3     19
+2 B          95     76     63     46     44
+3 C          10     94     84     48     50
 \end{verbatim}
 
 \hypertarget{ux5bbdux8f6cux957f}{%
@@ -11961,20 +12062,20 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 # A tibble: 15 x 3
     year region count
    <int> <chr>  <dbl>
- 1  2019 A         16
- 2  2019 B         40
- 3  2019 C         29
- 4  2020 A         16
- 5  2020 B         41
- 6  2020 C         30
- 7  2021 A         26
- 8  2021 B         91
- 9  2021 C         40
-10  2022 A         21
-11  2022 B         92
-12  2022 C         31
-13  2023 A         27
-14  2023 B         50
+ 1  2019 A         80
+ 2  2019 B         95
+ 3  2019 C         10
+ 4  2020 A         17
+ 5  2020 B         76
+ 6  2020 C         94
+ 7  2021 A         40
+ 8  2021 B         63
+ 9  2021 C         84
+10  2022 A          3
+11  2022 B         46
+12  2022 C         48
+13  2023 A         19
+14  2023 B         44
 15  2023 C         50
 \end{verbatim}
 
@@ -11997,6 +12098,1257 @@ HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天�
 }
 
 \end{figure}
+
+\part{统计}
+
+\hypertarget{ux57faux7840ux77e5ux8bc6}{%
+\chapter{基础知识}\label{ux57faux7840ux77e5ux8bc6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(janitor)}
+\FunctionTok{library}\NormalTok{(ggsci)}
+\FunctionTok{theme\_set}\NormalTok{(}\FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}\FunctionTok{theme}\NormalTok{(}\AttributeTok{text=}\FunctionTok{element\_text}\NormalTok{(}\AttributeTok{size=}\DecValTok{30}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{ux8fdeux7eedux578bux968fux673aux53d8ux91cf}{%
+\section{连续型随机变量}\label{ux8fdeux7eedux578bux968fux673aux53d8ux91cf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x=}\FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{,}\DecValTok{5}\NormalTok{,}\AttributeTok{by=}\FloatTok{0.01}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{pdf=}\FunctionTok{dnorm}\NormalTok{(x),}\AttributeTok{cdf=}\FunctionTok{pnorm}\NormalTok{(x),}\AttributeTok{icdf=}\FunctionTok{qnorm}\NormalTok{(cdf))}
+
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         x          pdf          cdf  icdf
+1    -5.00 1.486720e-06 2.866516e-07 -5.00
+2    -4.99 1.562867e-06 3.018965e-07 -4.99
+3    -4.98 1.642751e-06 3.179214e-07 -4.98
+4    -4.97 1.726545e-06 3.347645e-07 -4.97
+5    -4.96 1.814431e-06 3.524659e-07 -4.96
+6    -4.95 1.906601e-06 3.710674e-07 -4.95
+7    -4.94 2.003252e-06 3.906129e-07 -4.94
+8    -4.93 2.104593e-06 4.111481e-07 -4.93
+9    -4.92 2.210839e-06 4.327211e-07 -4.92
+10   -4.91 2.322216e-06 4.553820e-07 -4.91
+11   -4.90 2.438961e-06 4.791833e-07 -4.90
+12   -4.89 2.561318e-06 5.041799e-07 -4.89
+13   -4.88 2.689545e-06 5.304292e-07 -4.88
+14   -4.87 2.823909e-06 5.579912e-07 -4.87
+15   -4.86 2.964689e-06 5.869288e-07 -4.86
+16   -4.85 3.112176e-06 6.173074e-07 -4.85
+17   -4.84 3.266673e-06 6.491956e-07 -4.84
+18   -4.83 3.428497e-06 6.826653e-07 -4.83
+19   -4.82 3.597978e-06 7.177911e-07 -4.82
+20   -4.81 3.775459e-06 7.546515e-07 -4.81
+21   -4.80 3.961299e-06 7.933282e-07 -4.80
+22   -4.79 4.155871e-06 8.339066e-07 -4.79
+23   -4.78 4.359564e-06 8.764760e-07 -4.78
+24   -4.77 4.572783e-06 9.211296e-07 -4.77
+25   -4.76 4.795951e-06 9.679648e-07 -4.76
+26   -4.75 5.029507e-06 1.017083e-06 -4.75
+27   -4.74 5.273910e-06 1.068591e-06 -4.74
+28   -4.73 5.529636e-06 1.122599e-06 -4.73
+29   -4.72 5.797183e-06 1.179223e-06 -4.72
+30   -4.71 6.077066e-06 1.238584e-06 -4.71
+31   -4.70 6.369825e-06 1.300807e-06 -4.70
+32   -4.69 6.676020e-06 1.366025e-06 -4.69
+33   -4.68 6.996234e-06 1.434375e-06 -4.68
+34   -4.67 7.331074e-06 1.505999e-06 -4.67
+35   -4.66 7.681171e-06 1.581047e-06 -4.66
+36   -4.65 8.047182e-06 1.659675e-06 -4.65
+37   -4.64 8.429791e-06 1.742046e-06 -4.64
+38   -4.63 8.829709e-06 1.828329e-06 -4.63
+39   -4.62 9.247674e-06 1.918700e-06 -4.62
+40   -4.61 9.684455e-06 2.013345e-06 -4.61
+41   -4.60 1.014085e-05 2.112455e-06 -4.60
+42   -4.59 1.061770e-05 2.216230e-06 -4.59
+43   -4.58 1.111585e-05 2.324880e-06 -4.58
+44   -4.57 1.163621e-05 2.438621e-06 -4.57
+45   -4.56 1.217972e-05 2.557681e-06 -4.56
+46   -4.55 1.274733e-05 2.682296e-06 -4.55
+47   -4.54 1.334007e-05 2.812711e-06 -4.54
+48   -4.53 1.395897e-05 2.949184e-06 -4.53
+49   -4.52 1.460512e-05 3.091982e-06 -4.52
+50   -4.51 1.527965e-05 3.241381e-06 -4.51
+51   -4.50 1.598374e-05 3.397673e-06 -4.50
+52   -4.49 1.671860e-05 3.561159e-06 -4.49
+53   -4.48 1.748550e-05 3.732152e-06 -4.48
+54   -4.47 1.828575e-05 3.910980e-06 -4.47
+55   -4.46 1.912071e-05 4.097983e-06 -4.46
+56   -4.45 1.999180e-05 4.293514e-06 -4.45
+57   -4.44 2.090048e-05 4.497944e-06 -4.44
+58   -4.43 2.184828e-05 4.711654e-06 -4.43
+59   -4.42 2.283677e-05 4.935045e-06 -4.42
+60   -4.41 2.386760e-05 5.168531e-06 -4.41
+61   -4.40 2.494247e-05 5.412544e-06 -4.40
+62   -4.39 2.606314e-05 5.667533e-06 -4.39
+63   -4.38 2.723144e-05 5.933965e-06 -4.38
+64   -4.37 2.844926e-05 6.212327e-06 -4.37
+65   -4.36 2.971857e-05 6.503122e-06 -4.36
+66   -4.35 3.104141e-05 6.806877e-06 -4.35
+67   -4.34 3.241989e-05 7.124136e-06 -4.34
+68   -4.33 3.385620e-05 7.455467e-06 -4.33
+69   -4.32 3.535260e-05 7.801460e-06 -4.32
+70   -4.31 3.691146e-05 8.162727e-06 -4.31
+71   -4.30 3.853520e-05 8.539905e-06 -4.30
+72   -4.29 4.022634e-05 8.933656e-06 -4.29
+73   -4.28 4.198750e-05 9.344666e-06 -4.28
+74   -4.27 4.382139e-05 9.773648e-06 -4.27
+75   -4.26 4.573080e-05 1.022135e-05 -4.26
+76   -4.25 4.771864e-05 1.068853e-05 -4.25
+77   -4.24 4.978790e-05 1.117599e-05 -4.24
+78   -4.23 5.194170e-05 1.168457e-05 -4.23
+79   -4.22 5.418326e-05 1.221512e-05 -4.22
+80   -4.21 5.651590e-05 1.276853e-05 -4.21
+81   -4.20 5.894307e-05 1.334575e-05 -4.20
+82   -4.19 6.146833e-05 1.394772e-05 -4.19
+83   -4.18 6.409536e-05 1.457545e-05 -4.18
+84   -4.17 6.682799e-05 1.522998e-05 -4.17
+85   -4.16 6.967015e-05 1.591238e-05 -4.16
+86   -4.15 7.262593e-05 1.662376e-05 -4.15
+87   -4.14 7.569954e-05 1.736529e-05 -4.14
+88   -4.13 7.889533e-05 1.813816e-05 -4.13
+89   -4.12 8.221782e-05 1.894362e-05 -4.12
+90   -4.11 8.567166e-05 1.978296e-05 -4.11
+91   -4.10 8.926166e-05 2.065751e-05 -4.10
+92   -4.09 9.299280e-05 2.156866e-05 -4.09
+93   -4.08 9.687021e-05 2.251785e-05 -4.08
+94   -4.07 1.008992e-04 2.350657e-05 -4.07
+95   -4.06 1.050853e-04 2.453636e-05 -4.06
+96   -4.05 1.094340e-04 2.560882e-05 -4.05
+97   -4.04 1.139514e-04 2.672560e-05 -4.04
+98   -4.03 1.186434e-04 2.788843e-05 -4.03
+99   -4.02 1.235162e-04 2.909907e-05 -4.02
+100  -4.01 1.285762e-04 3.035937e-05 -4.01
+101  -4.00 1.338302e-04 3.167124e-05 -4.00
+102  -3.99 1.392850e-04 3.303665e-05 -3.99
+103  -3.98 1.449476e-04 3.445763e-05 -3.98
+104  -3.97 1.508253e-04 3.593632e-05 -3.97
+105  -3.96 1.569256e-04 3.747488e-05 -3.96
+106  -3.95 1.632564e-04 3.907560e-05 -3.95
+107  -3.94 1.698256e-04 4.074080e-05 -3.94
+108  -3.93 1.766415e-04 4.247293e-05 -3.93
+109  -3.92 1.837125e-04 4.427448e-05 -3.92
+110  -3.91 1.910475e-04 4.614806e-05 -3.91
+111  -3.90 1.986555e-04 4.809634e-05 -3.90
+112  -3.89 2.065458e-04 5.012211e-05 -3.89
+113  -3.88 2.147280e-04 5.222823e-05 -3.88
+114  -3.87 2.232120e-04 5.441768e-05 -3.87
+115  -3.86 2.320080e-04 5.669351e-05 -3.86
+116  -3.85 2.411266e-04 5.905891e-05 -3.85
+117  -3.84 2.505784e-04 6.151716e-05 -3.84
+118  -3.83 2.603748e-04 6.407163e-05 -3.83
+119  -3.82 2.705270e-04 6.672584e-05 -3.82
+120  -3.81 2.810470e-04 6.948340e-05 -3.81
+121  -3.80 2.919469e-04 7.234804e-05 -3.80
+122  -3.79 3.032392e-04 7.532364e-05 -3.79
+123  -3.78 3.149368e-04 7.841418e-05 -3.78
+124  -3.77 3.270529e-04 8.162377e-05 -3.77
+125  -3.76 3.396012e-04 8.495668e-05 -3.76
+126  -3.75 3.525957e-04 8.841729e-05 -3.75
+127  -3.74 3.660508e-04 9.201013e-05 -3.74
+128  -3.73 3.799813e-04 9.573989e-05 -3.73
+129  -3.72 3.944025e-04 9.961139e-05 -3.72
+130  -3.71 4.093301e-04 1.036296e-04 -3.71
+131  -3.70 4.247803e-04 1.077997e-04 -3.70
+132  -3.69 4.407695e-04 1.121270e-04 -3.69
+133  -3.68 4.573148e-04 1.166170e-04 -3.68
+134  -3.67 4.744338e-04 1.212752e-04 -3.67
+135  -3.66 4.921443e-04 1.261076e-04 -3.66
+136  -3.65 5.104650e-04 1.311202e-04 -3.65
+137  -3.64 5.294147e-04 1.363190e-04 -3.64
+138  -3.63 5.490129e-04 1.417106e-04 -3.63
+139  -3.62 5.692798e-04 1.473015e-04 -3.62
+140  -3.61 5.902357e-04 1.530985e-04 -3.61
+141  -3.60 6.119019e-04 1.591086e-04 -3.60
+142  -3.59 6.343000e-04 1.653390e-04 -3.59
+143  -3.58 6.574522e-04 1.717971e-04 -3.58
+144  -3.57 6.813813e-04 1.784906e-04 -3.57
+145  -3.56 7.061107e-04 1.854274e-04 -3.56
+146  -3.55 7.316645e-04 1.926156e-04 -3.55
+147  -3.54 7.580672e-04 2.000635e-04 -3.54
+148  -3.53 7.853441e-04 2.077798e-04 -3.53
+149  -3.52 8.135212e-04 2.157734e-04 -3.52
+150  -3.51 8.426250e-04 2.240533e-04 -3.51
+151  -3.50 8.726827e-04 2.326291e-04 -3.50
+152  -3.49 9.037222e-04 2.415103e-04 -3.49
+153  -3.48 9.357722e-04 2.507069e-04 -3.48
+154  -3.47 9.688618e-04 2.602292e-04 -3.47
+155  -3.46 1.003021e-03 2.700877e-04 -3.46
+156  -3.45 1.038281e-03 2.802933e-04 -3.45
+157  -3.44 1.074673e-03 2.908571e-04 -3.44
+158  -3.43 1.112230e-03 3.017906e-04 -3.43
+159  -3.42 1.150983e-03 3.131057e-04 -3.42
+160  -3.41 1.190968e-03 3.248144e-04 -3.41
+161  -3.40 1.232219e-03 3.369293e-04 -3.40
+162  -3.39 1.274771e-03 3.494631e-04 -3.39
+163  -3.38 1.318661e-03 3.624291e-04 -3.38
+164  -3.37 1.363925e-03 3.758409e-04 -3.37
+165  -3.36 1.410602e-03 3.897124e-04 -3.36
+166  -3.35 1.458731e-03 4.040578e-04 -3.35
+167  -3.34 1.508351e-03 4.188919e-04 -3.34
+168  -3.33 1.559502e-03 4.342299e-04 -3.33
+169  -3.32 1.612227e-03 4.500872e-04 -3.32
+170  -3.31 1.666569e-03 4.664799e-04 -3.31
+171  -3.30 1.722569e-03 4.834241e-04 -3.30
+172  -3.29 1.780273e-03 5.009369e-04 -3.29
+173  -3.28 1.839726e-03 5.190354e-04 -3.28
+174  -3.27 1.900975e-03 5.377374e-04 -3.27
+175  -3.26 1.964066e-03 5.570611e-04 -3.26
+176  -3.25 2.029048e-03 5.770250e-04 -3.25
+177  -3.24 2.095971e-03 5.976485e-04 -3.24
+178  -3.23 2.164884e-03 6.189511e-04 -3.23
+179  -3.22 2.235839e-03 6.409530e-04 -3.22
+180  -3.21 2.308890e-03 6.636749e-04 -3.21
+181  -3.20 2.384088e-03 6.871379e-04 -3.20
+182  -3.19 2.461490e-03 7.113640e-04 -3.19
+183  -3.18 2.541150e-03 7.363753e-04 -3.18
+184  -3.17 2.623126e-03 7.621947e-04 -3.17
+185  -3.16 2.707476e-03 7.888457e-04 -3.16
+186  -3.15 2.794258e-03 8.163523e-04 -3.15
+187  -3.14 2.883534e-03 8.447392e-04 -3.14
+188  -3.13 2.975365e-03 8.740315e-04 -3.13
+189  -3.12 3.069813e-03 9.042552e-04 -3.12
+190  -3.11 3.166943e-03 9.354367e-04 -3.11
+191  -3.10 3.266819e-03 9.676032e-04 -3.10
+192  -3.09 3.369508e-03 1.000782e-03 -3.09
+193  -3.08 3.475077e-03 1.035003e-03 -3.08
+194  -3.07 3.583596e-03 1.070294e-03 -3.07
+195  -3.06 3.695134e-03 1.106685e-03 -3.06
+196  -3.05 3.809762e-03 1.144207e-03 -3.05
+197  -3.04 3.927554e-03 1.182891e-03 -3.04
+198  -3.03 4.048582e-03 1.222769e-03 -3.03
+199  -3.02 4.172923e-03 1.263873e-03 -3.02
+200  -3.01 4.300652e-03 1.306238e-03 -3.01
+201  -3.00 4.431848e-03 1.349898e-03 -3.00
+202  -2.99 4.566590e-03 1.394887e-03 -2.99
+203  -2.98 4.704958e-03 1.441242e-03 -2.98
+204  -2.97 4.847033e-03 1.488999e-03 -2.97
+205  -2.96 4.992899e-03 1.538195e-03 -2.96
+206  -2.95 5.142641e-03 1.588870e-03 -2.95
+207  -2.94 5.296344e-03 1.641061e-03 -2.94
+208  -2.93 5.454095e-03 1.694810e-03 -2.93
+209  -2.92 5.615984e-03 1.750157e-03 -2.92
+210  -2.91 5.782099e-03 1.807144e-03 -2.91
+211  -2.90 5.952532e-03 1.865813e-03 -2.90
+212  -2.89 6.127377e-03 1.926209e-03 -2.89
+213  -2.88 6.306726e-03 1.988376e-03 -2.88
+214  -2.87 6.490676e-03 2.052359e-03 -2.87
+215  -2.86 6.679324e-03 2.118205e-03 -2.86
+216  -2.85 6.872767e-03 2.185961e-03 -2.85
+217  -2.84 7.071105e-03 2.255677e-03 -2.84
+218  -2.83 7.274439e-03 2.327400e-03 -2.83
+219  -2.82 7.482873e-03 2.401182e-03 -2.82
+220  -2.81 7.696508e-03 2.477075e-03 -2.81
+221  -2.80 7.915452e-03 2.555130e-03 -2.80
+222  -2.79 8.139809e-03 2.635402e-03 -2.79
+223  -2.78 8.369689e-03 2.717945e-03 -2.78
+224  -2.77 8.605201e-03 2.802815e-03 -2.77
+225  -2.76 8.846454e-03 2.890068e-03 -2.76
+226  -2.75 9.093563e-03 2.979763e-03 -2.75
+227  -2.74 9.346638e-03 3.071959e-03 -2.74
+228  -2.73 9.605797e-03 3.166716e-03 -2.73
+229  -2.72 9.871154e-03 3.264096e-03 -2.72
+230  -2.71 1.014283e-02 3.364160e-03 -2.71
+231  -2.70 1.042093e-02 3.466974e-03 -2.70
+232  -2.69 1.070560e-02 3.572601e-03 -2.69
+233  -2.68 1.099694e-02 3.681108e-03 -2.68
+234  -2.67 1.129507e-02 3.792562e-03 -2.67
+235  -2.66 1.160014e-02 3.907033e-03 -2.66
+236  -2.65 1.191224e-02 4.024589e-03 -2.65
+237  -2.64 1.223153e-02 4.145301e-03 -2.64
+238  -2.63 1.255811e-02 4.269243e-03 -2.63
+239  -2.62 1.289213e-02 4.396488e-03 -2.62
+240  -2.61 1.323370e-02 4.527111e-03 -2.61
+241  -2.60 1.358297e-02 4.661188e-03 -2.60
+242  -2.59 1.394006e-02 4.798797e-03 -2.59
+243  -2.58 1.430511e-02 4.940016e-03 -2.58
+244  -2.57 1.467825e-02 5.084926e-03 -2.57
+245  -2.56 1.505962e-02 5.233608e-03 -2.56
+246  -2.55 1.544935e-02 5.386146e-03 -2.55
+247  -2.54 1.584758e-02 5.542623e-03 -2.54
+248  -2.53 1.625445e-02 5.703126e-03 -2.53
+249  -2.52 1.667010e-02 5.867742e-03 -2.52
+250  -2.51 1.709467e-02 6.036558e-03 -2.51
+251  -2.50 1.752830e-02 6.209665e-03 -2.50
+252  -2.49 1.797113e-02 6.387155e-03 -2.49
+253  -2.48 1.842331e-02 6.569119e-03 -2.48
+254  -2.47 1.888498e-02 6.755653e-03 -2.47
+255  -2.46 1.935628e-02 6.946851e-03 -2.46
+256  -2.45 1.983735e-02 7.142811e-03 -2.45
+257  -2.44 2.032836e-02 7.343631e-03 -2.44
+258  -2.43 2.082943e-02 7.549411e-03 -2.43
+259  -2.42 2.134071e-02 7.760254e-03 -2.42
+260  -2.41 2.186237e-02 7.976260e-03 -2.41
+261  -2.40 2.239453e-02 8.197536e-03 -2.40
+262  -2.39 2.293735e-02 8.424186e-03 -2.39
+263  -2.38 2.349099e-02 8.656319e-03 -2.38
+264  -2.37 2.405557e-02 8.894043e-03 -2.37
+265  -2.36 2.463127e-02 9.137468e-03 -2.36
+266  -2.35 2.521822e-02 9.386706e-03 -2.35
+267  -2.34 2.581658e-02 9.641870e-03 -2.34
+268  -2.33 2.642649e-02 9.903076e-03 -2.33
+269  -2.32 2.704810e-02 1.017044e-02 -2.32
+270  -2.31 2.768157e-02 1.044408e-02 -2.31
+271  -2.30 2.832704e-02 1.072411e-02 -2.30
+272  -2.29 2.898466e-02 1.101066e-02 -2.29
+273  -2.28 2.965458e-02 1.130384e-02 -2.28
+274  -2.27 3.033696e-02 1.160379e-02 -2.27
+275  -2.26 3.103193e-02 1.191063e-02 -2.26
+276  -2.25 3.173965e-02 1.222447e-02 -2.25
+277  -2.24 3.246027e-02 1.254546e-02 -2.24
+278  -2.23 3.319392e-02 1.287372e-02 -2.23
+279  -2.22 3.394076e-02 1.320938e-02 -2.22
+280  -2.21 3.470094e-02 1.355258e-02 -2.21
+281  -2.20 3.547459e-02 1.390345e-02 -2.20
+282  -2.19 3.626187e-02 1.426212e-02 -2.19
+283  -2.18 3.706291e-02 1.462873e-02 -2.18
+284  -2.17 3.787786e-02 1.500342e-02 -2.17
+285  -2.16 3.870686e-02 1.538633e-02 -2.16
+286  -2.15 3.955004e-02 1.577761e-02 -2.15
+287  -2.14 4.040755e-02 1.617738e-02 -2.14
+288  -2.13 4.127953e-02 1.658581e-02 -2.13
+289  -2.12 4.216611e-02 1.700302e-02 -2.12
+290  -2.11 4.306742e-02 1.742918e-02 -2.11
+291  -2.10 4.398360e-02 1.786442e-02 -2.10
+292  -2.09 4.491477e-02 1.830890e-02 -2.09
+293  -2.08 4.586108e-02 1.876277e-02 -2.08
+294  -2.07 4.682264e-02 1.922617e-02 -2.07
+295  -2.06 4.779957e-02 1.969927e-02 -2.06
+296  -2.05 4.879202e-02 2.018222e-02 -2.05
+297  -2.04 4.980009e-02 2.067516e-02 -2.04
+298  -2.03 5.082390e-02 2.117827e-02 -2.03
+299  -2.02 5.186358e-02 2.169169e-02 -2.02
+300  -2.01 5.291923e-02 2.221559e-02 -2.01
+301  -2.00 5.399097e-02 2.275013e-02 -2.00
+302  -1.99 5.507890e-02 2.329547e-02 -1.99
+303  -1.98 5.618314e-02 2.385176e-02 -1.98
+304  -1.97 5.730379e-02 2.441919e-02 -1.97
+305  -1.96 5.844094e-02 2.499790e-02 -1.96
+306  -1.95 5.959471e-02 2.558806e-02 -1.95
+307  -1.94 6.076517e-02 2.618984e-02 -1.94
+308  -1.93 6.195242e-02 2.680342e-02 -1.93
+309  -1.92 6.315656e-02 2.742895e-02 -1.92
+310  -1.91 6.437766e-02 2.806661e-02 -1.91
+311  -1.90 6.561581e-02 2.871656e-02 -1.90
+312  -1.89 6.687109e-02 2.937898e-02 -1.89
+313  -1.88 6.814357e-02 3.005404e-02 -1.88
+314  -1.87 6.943331e-02 3.074191e-02 -1.87
+315  -1.86 7.074039e-02 3.144276e-02 -1.86
+316  -1.85 7.206487e-02 3.215677e-02 -1.85
+317  -1.84 7.340681e-02 3.288412e-02 -1.84
+318  -1.83 7.476626e-02 3.362497e-02 -1.83
+319  -1.82 7.614327e-02 3.437950e-02 -1.82
+320  -1.81 7.753789e-02 3.514789e-02 -1.81
+321  -1.80 7.895016e-02 3.593032e-02 -1.80
+322  -1.79 8.038011e-02 3.672696e-02 -1.79
+323  -1.78 8.182778e-02 3.753798e-02 -1.78
+324  -1.77 8.329319e-02 3.836357e-02 -1.77
+325  -1.76 8.477636e-02 3.920390e-02 -1.76
+326  -1.75 8.627732e-02 4.005916e-02 -1.75
+327  -1.74 8.779607e-02 4.092951e-02 -1.74
+328  -1.73 8.933262e-02 4.181514e-02 -1.73
+329  -1.72 9.088698e-02 4.271622e-02 -1.72
+330  -1.71 9.245913e-02 4.363294e-02 -1.71
+331  -1.70 9.404908e-02 4.456546e-02 -1.70
+332  -1.69 9.565680e-02 4.551398e-02 -1.69
+333  -1.68 9.728227e-02 4.647866e-02 -1.68
+334  -1.67 9.892547e-02 4.745968e-02 -1.67
+335  -1.66 1.005864e-01 4.845723e-02 -1.66
+336  -1.65 1.022649e-01 4.947147e-02 -1.65
+337  -1.64 1.039611e-01 5.050258e-02 -1.64
+338  -1.63 1.056748e-01 5.155075e-02 -1.63
+339  -1.62 1.074061e-01 5.261614e-02 -1.62
+340  -1.61 1.091548e-01 5.369893e-02 -1.61
+341  -1.60 1.109208e-01 5.479929e-02 -1.60
+342  -1.59 1.127042e-01 5.591740e-02 -1.59
+343  -1.58 1.145048e-01 5.705343e-02 -1.58
+344  -1.57 1.163225e-01 5.820756e-02 -1.57
+345  -1.56 1.181573e-01 5.937994e-02 -1.56
+346  -1.55 1.200090e-01 6.057076e-02 -1.55
+347  -1.54 1.218775e-01 6.178018e-02 -1.54
+348  -1.53 1.237628e-01 6.300836e-02 -1.53
+349  -1.52 1.256646e-01 6.425549e-02 -1.52
+350  -1.51 1.275830e-01 6.552171e-02 -1.51
+351  -1.50 1.295176e-01 6.680720e-02 -1.50
+352  -1.49 1.314684e-01 6.811212e-02 -1.49
+353  -1.48 1.334353e-01 6.943662e-02 -1.48
+354  -1.47 1.354181e-01 7.078088e-02 -1.47
+355  -1.46 1.374165e-01 7.214504e-02 -1.46
+356  -1.45 1.394306e-01 7.352926e-02 -1.45
+357  -1.44 1.414600e-01 7.493370e-02 -1.44
+358  -1.43 1.435046e-01 7.635851e-02 -1.43
+359  -1.42 1.455641e-01 7.780384e-02 -1.42
+360  -1.41 1.476385e-01 7.926984e-02 -1.41
+361  -1.40 1.497275e-01 8.075666e-02 -1.40
+362  -1.39 1.518308e-01 8.226444e-02 -1.39
+363  -1.38 1.539483e-01 8.379332e-02 -1.38
+364  -1.37 1.560797e-01 8.534345e-02 -1.37
+365  -1.36 1.582248e-01 8.691496e-02 -1.36
+366  -1.35 1.603833e-01 8.850799e-02 -1.35
+367  -1.34 1.625551e-01 9.012267e-02 -1.34
+368  -1.33 1.647397e-01 9.175914e-02 -1.33
+369  -1.32 1.669370e-01 9.341751e-02 -1.32
+370  -1.31 1.691468e-01 9.509792e-02 -1.31
+371  -1.30 1.713686e-01 9.680048e-02 -1.30
+372  -1.29 1.736022e-01 9.852533e-02 -1.29
+373  -1.28 1.758474e-01 1.002726e-01 -1.28
+374  -1.27 1.781038e-01 1.020423e-01 -1.27
+375  -1.26 1.803712e-01 1.038347e-01 -1.26
+376  -1.25 1.826491e-01 1.056498e-01 -1.25
+377  -1.24 1.849373e-01 1.074877e-01 -1.24
+378  -1.23 1.872354e-01 1.093486e-01 -1.23
+379  -1.22 1.895432e-01 1.112324e-01 -1.22
+380  -1.21 1.918602e-01 1.131394e-01 -1.21
+381  -1.20 1.941861e-01 1.150697e-01 -1.20
+382  -1.19 1.965205e-01 1.170232e-01 -1.19
+383  -1.18 1.988631e-01 1.190001e-01 -1.18
+384  -1.17 2.012135e-01 1.210005e-01 -1.17
+385  -1.16 2.035714e-01 1.230244e-01 -1.16
+386  -1.15 2.059363e-01 1.250719e-01 -1.15
+387  -1.14 2.083078e-01 1.271432e-01 -1.14
+388  -1.13 2.106856e-01 1.292381e-01 -1.13
+389  -1.12 2.130691e-01 1.313569e-01 -1.12
+390  -1.11 2.154582e-01 1.334995e-01 -1.11
+391  -1.10 2.178522e-01 1.356661e-01 -1.10
+392  -1.09 2.202508e-01 1.378566e-01 -1.09
+393  -1.08 2.226535e-01 1.400711e-01 -1.08
+394  -1.07 2.250599e-01 1.423097e-01 -1.07
+395  -1.06 2.274696e-01 1.445723e-01 -1.06
+396  -1.05 2.298821e-01 1.468591e-01 -1.05
+397  -1.04 2.322970e-01 1.491700e-01 -1.04
+398  -1.03 2.347138e-01 1.515050e-01 -1.03
+399  -1.02 2.371320e-01 1.538642e-01 -1.02
+400  -1.01 2.395511e-01 1.562476e-01 -1.01
+401  -1.00 2.419707e-01 1.586553e-01 -1.00
+402  -0.99 2.443904e-01 1.610871e-01 -0.99
+403  -0.98 2.468095e-01 1.635431e-01 -0.98
+404  -0.97 2.492277e-01 1.660232e-01 -0.97
+405  -0.96 2.516443e-01 1.685276e-01 -0.96
+406  -0.95 2.540591e-01 1.710561e-01 -0.95
+407  -0.94 2.564713e-01 1.736088e-01 -0.94
+408  -0.93 2.588805e-01 1.761855e-01 -0.93
+409  -0.92 2.612863e-01 1.787864e-01 -0.92
+410  -0.91 2.636880e-01 1.814113e-01 -0.91
+411  -0.90 2.660852e-01 1.840601e-01 -0.90
+412  -0.89 2.684774e-01 1.867329e-01 -0.89
+413  -0.88 2.708640e-01 1.894297e-01 -0.88
+414  -0.87 2.732444e-01 1.921502e-01 -0.87
+415  -0.86 2.756182e-01 1.948945e-01 -0.86
+416  -0.85 2.779849e-01 1.976625e-01 -0.85
+417  -0.84 2.803438e-01 2.004542e-01 -0.84
+418  -0.83 2.826945e-01 2.032694e-01 -0.83
+419  -0.82 2.850364e-01 2.061081e-01 -0.82
+420  -0.81 2.873689e-01 2.089701e-01 -0.81
+421  -0.80 2.896916e-01 2.118554e-01 -0.80
+422  -0.79 2.920038e-01 2.147639e-01 -0.79
+423  -0.78 2.943050e-01 2.176954e-01 -0.78
+424  -0.77 2.965948e-01 2.206499e-01 -0.77
+425  -0.76 2.988724e-01 2.236273e-01 -0.76
+426  -0.75 3.011374e-01 2.266274e-01 -0.75
+427  -0.74 3.033893e-01 2.296500e-01 -0.74
+428  -0.73 3.056274e-01 2.326951e-01 -0.73
+429  -0.72 3.078513e-01 2.357625e-01 -0.72
+430  -0.71 3.100603e-01 2.388521e-01 -0.71
+431  -0.70 3.122539e-01 2.419637e-01 -0.70
+432  -0.69 3.144317e-01 2.450971e-01 -0.69
+433  -0.68 3.165929e-01 2.482522e-01 -0.68
+434  -0.67 3.187371e-01 2.514289e-01 -0.67
+435  -0.66 3.208638e-01 2.546269e-01 -0.66
+436  -0.65 3.229724e-01 2.578461e-01 -0.65
+437  -0.64 3.250623e-01 2.610863e-01 -0.64
+438  -0.63 3.271330e-01 2.643473e-01 -0.63
+439  -0.62 3.291840e-01 2.676289e-01 -0.62
+440  -0.61 3.312147e-01 2.709309e-01 -0.61
+441  -0.60 3.332246e-01 2.742531e-01 -0.60
+442  -0.59 3.352132e-01 2.775953e-01 -0.59
+443  -0.58 3.371799e-01 2.809573e-01 -0.58
+444  -0.57 3.391243e-01 2.843388e-01 -0.57
+445  -0.56 3.410458e-01 2.877397e-01 -0.56
+446  -0.55 3.429439e-01 2.911597e-01 -0.55
+447  -0.54 3.448180e-01 2.945985e-01 -0.54
+448  -0.53 3.466677e-01 2.980560e-01 -0.53
+449  -0.52 3.484925e-01 3.015318e-01 -0.52
+450  -0.51 3.502919e-01 3.050257e-01 -0.51
+451  -0.50 3.520653e-01 3.085375e-01 -0.50
+452  -0.49 3.538124e-01 3.120669e-01 -0.49
+453  -0.48 3.555325e-01 3.156137e-01 -0.48
+454  -0.47 3.572253e-01 3.191775e-01 -0.47
+455  -0.46 3.588903e-01 3.227581e-01 -0.46
+456  -0.45 3.605270e-01 3.263552e-01 -0.45
+457  -0.44 3.621349e-01 3.299686e-01 -0.44
+458  -0.43 3.637136e-01 3.335978e-01 -0.43
+459  -0.42 3.652627e-01 3.372427e-01 -0.42
+460  -0.41 3.667817e-01 3.409030e-01 -0.41
+461  -0.40 3.682701e-01 3.445783e-01 -0.40
+462  -0.39 3.697277e-01 3.482683e-01 -0.39
+463  -0.38 3.711539e-01 3.519727e-01 -0.38
+464  -0.37 3.725483e-01 3.556912e-01 -0.37
+465  -0.36 3.739106e-01 3.594236e-01 -0.36
+466  -0.35 3.752403e-01 3.631693e-01 -0.35
+467  -0.34 3.765372e-01 3.669283e-01 -0.34
+468  -0.33 3.778007e-01 3.707000e-01 -0.33
+469  -0.32 3.790305e-01 3.744842e-01 -0.32
+470  -0.31 3.802264e-01 3.782805e-01 -0.31
+471  -0.30 3.813878e-01 3.820886e-01 -0.30
+472  -0.29 3.825146e-01 3.859081e-01 -0.29
+473  -0.28 3.836063e-01 3.897388e-01 -0.28
+474  -0.27 3.846627e-01 3.935801e-01 -0.27
+475  -0.26 3.856834e-01 3.974319e-01 -0.26
+476  -0.25 3.866681e-01 4.012937e-01 -0.25
+477  -0.24 3.876166e-01 4.051651e-01 -0.24
+478  -0.23 3.885286e-01 4.090459e-01 -0.23
+479  -0.22 3.894038e-01 4.129356e-01 -0.22
+480  -0.21 3.902419e-01 4.168338e-01 -0.21
+481  -0.20 3.910427e-01 4.207403e-01 -0.20
+482  -0.19 3.918060e-01 4.246546e-01 -0.19
+483  -0.18 3.925315e-01 4.285763e-01 -0.18
+484  -0.17 3.932190e-01 4.325051e-01 -0.17
+485  -0.16 3.938684e-01 4.364405e-01 -0.16
+486  -0.15 3.944793e-01 4.403823e-01 -0.15
+487  -0.14 3.950517e-01 4.443300e-01 -0.14
+488  -0.13 3.955854e-01 4.482832e-01 -0.13
+489  -0.12 3.960802e-01 4.522416e-01 -0.12
+490  -0.11 3.965360e-01 4.562047e-01 -0.11
+491  -0.10 3.969525e-01 4.601722e-01 -0.10
+492  -0.09 3.973298e-01 4.641436e-01 -0.09
+493  -0.08 3.976677e-01 4.681186e-01 -0.08
+494  -0.07 3.979661e-01 4.720968e-01 -0.07
+495  -0.06 3.982248e-01 4.760778e-01 -0.06
+496  -0.05 3.984439e-01 4.800612e-01 -0.05
+497  -0.04 3.986233e-01 4.840466e-01 -0.04
+498  -0.03 3.987628e-01 4.880335e-01 -0.03
+499  -0.02 3.988625e-01 4.920217e-01 -0.02
+500  -0.01 3.989223e-01 4.960106e-01 -0.01
+501   0.00 3.989423e-01 5.000000e-01  0.00
+502   0.01 3.989223e-01 5.039894e-01  0.01
+503   0.02 3.988625e-01 5.079783e-01  0.02
+504   0.03 3.987628e-01 5.119665e-01  0.03
+505   0.04 3.986233e-01 5.159534e-01  0.04
+506   0.05 3.984439e-01 5.199388e-01  0.05
+507   0.06 3.982248e-01 5.239222e-01  0.06
+508   0.07 3.979661e-01 5.279032e-01  0.07
+509   0.08 3.976677e-01 5.318814e-01  0.08
+510   0.09 3.973298e-01 5.358564e-01  0.09
+511   0.10 3.969525e-01 5.398278e-01  0.10
+512   0.11 3.965360e-01 5.437953e-01  0.11
+513   0.12 3.960802e-01 5.477584e-01  0.12
+514   0.13 3.955854e-01 5.517168e-01  0.13
+515   0.14 3.950517e-01 5.556700e-01  0.14
+516   0.15 3.944793e-01 5.596177e-01  0.15
+517   0.16 3.938684e-01 5.635595e-01  0.16
+518   0.17 3.932190e-01 5.674949e-01  0.17
+519   0.18 3.925315e-01 5.714237e-01  0.18
+520   0.19 3.918060e-01 5.753454e-01  0.19
+521   0.20 3.910427e-01 5.792597e-01  0.20
+522   0.21 3.902419e-01 5.831662e-01  0.21
+523   0.22 3.894038e-01 5.870644e-01  0.22
+524   0.23 3.885286e-01 5.909541e-01  0.23
+525   0.24 3.876166e-01 5.948349e-01  0.24
+526   0.25 3.866681e-01 5.987063e-01  0.25
+527   0.26 3.856834e-01 6.025681e-01  0.26
+528   0.27 3.846627e-01 6.064199e-01  0.27
+529   0.28 3.836063e-01 6.102612e-01  0.28
+530   0.29 3.825146e-01 6.140919e-01  0.29
+531   0.30 3.813878e-01 6.179114e-01  0.30
+532   0.31 3.802264e-01 6.217195e-01  0.31
+533   0.32 3.790305e-01 6.255158e-01  0.32
+534   0.33 3.778007e-01 6.293000e-01  0.33
+535   0.34 3.765372e-01 6.330717e-01  0.34
+536   0.35 3.752403e-01 6.368307e-01  0.35
+537   0.36 3.739106e-01 6.405764e-01  0.36
+538   0.37 3.725483e-01 6.443088e-01  0.37
+539   0.38 3.711539e-01 6.480273e-01  0.38
+540   0.39 3.697277e-01 6.517317e-01  0.39
+541   0.40 3.682701e-01 6.554217e-01  0.40
+542   0.41 3.667817e-01 6.590970e-01  0.41
+543   0.42 3.652627e-01 6.627573e-01  0.42
+544   0.43 3.637136e-01 6.664022e-01  0.43
+545   0.44 3.621349e-01 6.700314e-01  0.44
+546   0.45 3.605270e-01 6.736448e-01  0.45
+547   0.46 3.588903e-01 6.772419e-01  0.46
+548   0.47 3.572253e-01 6.808225e-01  0.47
+549   0.48 3.555325e-01 6.843863e-01  0.48
+550   0.49 3.538124e-01 6.879331e-01  0.49
+551   0.50 3.520653e-01 6.914625e-01  0.50
+552   0.51 3.502919e-01 6.949743e-01  0.51
+553   0.52 3.484925e-01 6.984682e-01  0.52
+554   0.53 3.466677e-01 7.019440e-01  0.53
+555   0.54 3.448180e-01 7.054015e-01  0.54
+556   0.55 3.429439e-01 7.088403e-01  0.55
+557   0.56 3.410458e-01 7.122603e-01  0.56
+558   0.57 3.391243e-01 7.156612e-01  0.57
+559   0.58 3.371799e-01 7.190427e-01  0.58
+560   0.59 3.352132e-01 7.224047e-01  0.59
+561   0.60 3.332246e-01 7.257469e-01  0.60
+562   0.61 3.312147e-01 7.290691e-01  0.61
+563   0.62 3.291840e-01 7.323711e-01  0.62
+564   0.63 3.271330e-01 7.356527e-01  0.63
+565   0.64 3.250623e-01 7.389137e-01  0.64
+566   0.65 3.229724e-01 7.421539e-01  0.65
+567   0.66 3.208638e-01 7.453731e-01  0.66
+568   0.67 3.187371e-01 7.485711e-01  0.67
+569   0.68 3.165929e-01 7.517478e-01  0.68
+570   0.69 3.144317e-01 7.549029e-01  0.69
+571   0.70 3.122539e-01 7.580363e-01  0.70
+572   0.71 3.100603e-01 7.611479e-01  0.71
+573   0.72 3.078513e-01 7.642375e-01  0.72
+574   0.73 3.056274e-01 7.673049e-01  0.73
+575   0.74 3.033893e-01 7.703500e-01  0.74
+576   0.75 3.011374e-01 7.733726e-01  0.75
+577   0.76 2.988724e-01 7.763727e-01  0.76
+578   0.77 2.965948e-01 7.793501e-01  0.77
+579   0.78 2.943050e-01 7.823046e-01  0.78
+580   0.79 2.920038e-01 7.852361e-01  0.79
+581   0.80 2.896916e-01 7.881446e-01  0.80
+582   0.81 2.873689e-01 7.910299e-01  0.81
+583   0.82 2.850364e-01 7.938919e-01  0.82
+584   0.83 2.826945e-01 7.967306e-01  0.83
+585   0.84 2.803438e-01 7.995458e-01  0.84
+586   0.85 2.779849e-01 8.023375e-01  0.85
+587   0.86 2.756182e-01 8.051055e-01  0.86
+588   0.87 2.732444e-01 8.078498e-01  0.87
+589   0.88 2.708640e-01 8.105703e-01  0.88
+590   0.89 2.684774e-01 8.132671e-01  0.89
+591   0.90 2.660852e-01 8.159399e-01  0.90
+592   0.91 2.636880e-01 8.185887e-01  0.91
+593   0.92 2.612863e-01 8.212136e-01  0.92
+594   0.93 2.588805e-01 8.238145e-01  0.93
+595   0.94 2.564713e-01 8.263912e-01  0.94
+596   0.95 2.540591e-01 8.289439e-01  0.95
+597   0.96 2.516443e-01 8.314724e-01  0.96
+598   0.97 2.492277e-01 8.339768e-01  0.97
+599   0.98 2.468095e-01 8.364569e-01  0.98
+600   0.99 2.443904e-01 8.389129e-01  0.99
+601   1.00 2.419707e-01 8.413447e-01  1.00
+602   1.01 2.395511e-01 8.437524e-01  1.01
+603   1.02 2.371320e-01 8.461358e-01  1.02
+604   1.03 2.347138e-01 8.484950e-01  1.03
+605   1.04 2.322970e-01 8.508300e-01  1.04
+606   1.05 2.298821e-01 8.531409e-01  1.05
+607   1.06 2.274696e-01 8.554277e-01  1.06
+608   1.07 2.250599e-01 8.576903e-01  1.07
+609   1.08 2.226535e-01 8.599289e-01  1.08
+610   1.09 2.202508e-01 8.621434e-01  1.09
+611   1.10 2.178522e-01 8.643339e-01  1.10
+612   1.11 2.154582e-01 8.665005e-01  1.11
+613   1.12 2.130691e-01 8.686431e-01  1.12
+614   1.13 2.106856e-01 8.707619e-01  1.13
+615   1.14 2.083078e-01 8.728568e-01  1.14
+616   1.15 2.059363e-01 8.749281e-01  1.15
+617   1.16 2.035714e-01 8.769756e-01  1.16
+618   1.17 2.012135e-01 8.789995e-01  1.17
+619   1.18 1.988631e-01 8.809999e-01  1.18
+620   1.19 1.965205e-01 8.829768e-01  1.19
+621   1.20 1.941861e-01 8.849303e-01  1.20
+622   1.21 1.918602e-01 8.868606e-01  1.21
+623   1.22 1.895432e-01 8.887676e-01  1.22
+624   1.23 1.872354e-01 8.906514e-01  1.23
+625   1.24 1.849373e-01 8.925123e-01  1.24
+626   1.25 1.826491e-01 8.943502e-01  1.25
+627   1.26 1.803712e-01 8.961653e-01  1.26
+628   1.27 1.781038e-01 8.979577e-01  1.27
+629   1.28 1.758474e-01 8.997274e-01  1.28
+630   1.29 1.736022e-01 9.014747e-01  1.29
+631   1.30 1.713686e-01 9.031995e-01  1.30
+632   1.31 1.691468e-01 9.049021e-01  1.31
+633   1.32 1.669370e-01 9.065825e-01  1.32
+634   1.33 1.647397e-01 9.082409e-01  1.33
+635   1.34 1.625551e-01 9.098773e-01  1.34
+636   1.35 1.603833e-01 9.114920e-01  1.35
+637   1.36 1.582248e-01 9.130850e-01  1.36
+638   1.37 1.560797e-01 9.146565e-01  1.37
+639   1.38 1.539483e-01 9.162067e-01  1.38
+640   1.39 1.518308e-01 9.177356e-01  1.39
+641   1.40 1.497275e-01 9.192433e-01  1.40
+642   1.41 1.476385e-01 9.207302e-01  1.41
+643   1.42 1.455641e-01 9.221962e-01  1.42
+644   1.43 1.435046e-01 9.236415e-01  1.43
+645   1.44 1.414600e-01 9.250663e-01  1.44
+646   1.45 1.394306e-01 9.264707e-01  1.45
+647   1.46 1.374165e-01 9.278550e-01  1.46
+648   1.47 1.354181e-01 9.292191e-01  1.47
+649   1.48 1.334353e-01 9.305634e-01  1.48
+650   1.49 1.314684e-01 9.318879e-01  1.49
+651   1.50 1.295176e-01 9.331928e-01  1.50
+652   1.51 1.275830e-01 9.344783e-01  1.51
+653   1.52 1.256646e-01 9.357445e-01  1.52
+654   1.53 1.237628e-01 9.369916e-01  1.53
+655   1.54 1.218775e-01 9.382198e-01  1.54
+656   1.55 1.200090e-01 9.394292e-01  1.55
+657   1.56 1.181573e-01 9.406201e-01  1.56
+658   1.57 1.163225e-01 9.417924e-01  1.57
+659   1.58 1.145048e-01 9.429466e-01  1.58
+660   1.59 1.127042e-01 9.440826e-01  1.59
+661   1.60 1.109208e-01 9.452007e-01  1.60
+662   1.61 1.091548e-01 9.463011e-01  1.61
+663   1.62 1.074061e-01 9.473839e-01  1.62
+664   1.63 1.056748e-01 9.484493e-01  1.63
+665   1.64 1.039611e-01 9.494974e-01  1.64
+666   1.65 1.022649e-01 9.505285e-01  1.65
+667   1.66 1.005864e-01 9.515428e-01  1.66
+668   1.67 9.892547e-02 9.525403e-01  1.67
+669   1.68 9.728227e-02 9.535213e-01  1.68
+670   1.69 9.565680e-02 9.544860e-01  1.69
+671   1.70 9.404908e-02 9.554345e-01  1.70
+672   1.71 9.245913e-02 9.563671e-01  1.71
+673   1.72 9.088698e-02 9.572838e-01  1.72
+674   1.73 8.933262e-02 9.581849e-01  1.73
+675   1.74 8.779607e-02 9.590705e-01  1.74
+676   1.75 8.627732e-02 9.599408e-01  1.75
+677   1.76 8.477636e-02 9.607961e-01  1.76
+678   1.77 8.329319e-02 9.616364e-01  1.77
+679   1.78 8.182778e-02 9.624620e-01  1.78
+680   1.79 8.038011e-02 9.632730e-01  1.79
+681   1.80 7.895016e-02 9.640697e-01  1.80
+682   1.81 7.753789e-02 9.648521e-01  1.81
+683   1.82 7.614327e-02 9.656205e-01  1.82
+684   1.83 7.476626e-02 9.663750e-01  1.83
+685   1.84 7.340681e-02 9.671159e-01  1.84
+686   1.85 7.206487e-02 9.678432e-01  1.85
+687   1.86 7.074039e-02 9.685572e-01  1.86
+688   1.87 6.943331e-02 9.692581e-01  1.87
+689   1.88 6.814357e-02 9.699460e-01  1.88
+690   1.89 6.687109e-02 9.706210e-01  1.89
+691   1.90 6.561581e-02 9.712834e-01  1.90
+692   1.91 6.437766e-02 9.719334e-01  1.91
+693   1.92 6.315656e-02 9.725711e-01  1.92
+694   1.93 6.195242e-02 9.731966e-01  1.93
+695   1.94 6.076517e-02 9.738102e-01  1.94
+696   1.95 5.959471e-02 9.744119e-01  1.95
+697   1.96 5.844094e-02 9.750021e-01  1.96
+698   1.97 5.730379e-02 9.755808e-01  1.97
+699   1.98 5.618314e-02 9.761482e-01  1.98
+700   1.99 5.507890e-02 9.767045e-01  1.99
+701   2.00 5.399097e-02 9.772499e-01  2.00
+702   2.01 5.291923e-02 9.777844e-01  2.01
+703   2.02 5.186358e-02 9.783083e-01  2.02
+704   2.03 5.082390e-02 9.788217e-01  2.03
+705   2.04 4.980009e-02 9.793248e-01  2.04
+706   2.05 4.879202e-02 9.798178e-01  2.05
+707   2.06 4.779957e-02 9.803007e-01  2.06
+708   2.07 4.682264e-02 9.807738e-01  2.07
+709   2.08 4.586108e-02 9.812372e-01  2.08
+710   2.09 4.491477e-02 9.816911e-01  2.09
+711   2.10 4.398360e-02 9.821356e-01  2.10
+712   2.11 4.306742e-02 9.825708e-01  2.11
+713   2.12 4.216611e-02 9.829970e-01  2.12
+714   2.13 4.127953e-02 9.834142e-01  2.13
+715   2.14 4.040755e-02 9.838226e-01  2.14
+716   2.15 3.955004e-02 9.842224e-01  2.15
+717   2.16 3.870686e-02 9.846137e-01  2.16
+718   2.17 3.787786e-02 9.849966e-01  2.17
+719   2.18 3.706291e-02 9.853713e-01  2.18
+720   2.19 3.626187e-02 9.857379e-01  2.19
+721   2.20 3.547459e-02 9.860966e-01  2.20
+722   2.21 3.470094e-02 9.864474e-01  2.21
+723   2.22 3.394076e-02 9.867906e-01  2.22
+724   2.23 3.319392e-02 9.871263e-01  2.23
+725   2.24 3.246027e-02 9.874545e-01  2.24
+726   2.25 3.173965e-02 9.877755e-01  2.25
+727   2.26 3.103193e-02 9.880894e-01  2.26
+728   2.27 3.033696e-02 9.883962e-01  2.27
+729   2.28 2.965458e-02 9.886962e-01  2.28
+730   2.29 2.898466e-02 9.889893e-01  2.29
+731   2.30 2.832704e-02 9.892759e-01  2.30
+732   2.31 2.768157e-02 9.895559e-01  2.31
+733   2.32 2.704810e-02 9.898296e-01  2.32
+734   2.33 2.642649e-02 9.900969e-01  2.33
+735   2.34 2.581658e-02 9.903581e-01  2.34
+736   2.35 2.521822e-02 9.906133e-01  2.35
+737   2.36 2.463127e-02 9.908625e-01  2.36
+738   2.37 2.405557e-02 9.911060e-01  2.37
+739   2.38 2.349099e-02 9.913437e-01  2.38
+740   2.39 2.293735e-02 9.915758e-01  2.39
+741   2.40 2.239453e-02 9.918025e-01  2.40
+742   2.41 2.186237e-02 9.920237e-01  2.41
+743   2.42 2.134071e-02 9.922397e-01  2.42
+744   2.43 2.082943e-02 9.924506e-01  2.43
+745   2.44 2.032836e-02 9.926564e-01  2.44
+746   2.45 1.983735e-02 9.928572e-01  2.45
+747   2.46 1.935628e-02 9.930531e-01  2.46
+748   2.47 1.888498e-02 9.932443e-01  2.47
+749   2.48 1.842331e-02 9.934309e-01  2.48
+750   2.49 1.797113e-02 9.936128e-01  2.49
+751   2.50 1.752830e-02 9.937903e-01  2.50
+752   2.51 1.709467e-02 9.939634e-01  2.51
+753   2.52 1.667010e-02 9.941323e-01  2.52
+754   2.53 1.625445e-02 9.942969e-01  2.53
+755   2.54 1.584758e-02 9.944574e-01  2.54
+756   2.55 1.544935e-02 9.946139e-01  2.55
+757   2.56 1.505962e-02 9.947664e-01  2.56
+758   2.57 1.467825e-02 9.949151e-01  2.57
+759   2.58 1.430511e-02 9.950600e-01  2.58
+760   2.59 1.394006e-02 9.952012e-01  2.59
+761   2.60 1.358297e-02 9.953388e-01  2.60
+762   2.61 1.323370e-02 9.954729e-01  2.61
+763   2.62 1.289213e-02 9.956035e-01  2.62
+764   2.63 1.255811e-02 9.957308e-01  2.63
+765   2.64 1.223153e-02 9.958547e-01  2.64
+766   2.65 1.191224e-02 9.959754e-01  2.65
+767   2.66 1.160014e-02 9.960930e-01  2.66
+768   2.67 1.129507e-02 9.962074e-01  2.67
+769   2.68 1.099694e-02 9.963189e-01  2.68
+770   2.69 1.070560e-02 9.964274e-01  2.69
+771   2.70 1.042093e-02 9.965330e-01  2.70
+772   2.71 1.014283e-02 9.966358e-01  2.71
+773   2.72 9.871154e-03 9.967359e-01  2.72
+774   2.73 9.605797e-03 9.968333e-01  2.73
+775   2.74 9.346638e-03 9.969280e-01  2.74
+776   2.75 9.093563e-03 9.970202e-01  2.75
+777   2.76 8.846454e-03 9.971099e-01  2.76
+778   2.77 8.605201e-03 9.971972e-01  2.77
+779   2.78 8.369689e-03 9.972821e-01  2.78
+780   2.79 8.139809e-03 9.973646e-01  2.79
+781   2.80 7.915452e-03 9.974449e-01  2.80
+782   2.81 7.696508e-03 9.975229e-01  2.81
+783   2.82 7.482873e-03 9.975988e-01  2.82
+784   2.83 7.274439e-03 9.976726e-01  2.83
+785   2.84 7.071105e-03 9.977443e-01  2.84
+786   2.85 6.872767e-03 9.978140e-01  2.85
+787   2.86 6.679324e-03 9.978818e-01  2.86
+788   2.87 6.490676e-03 9.979476e-01  2.87
+789   2.88 6.306726e-03 9.980116e-01  2.88
+790   2.89 6.127377e-03 9.980738e-01  2.89
+791   2.90 5.952532e-03 9.981342e-01  2.90
+792   2.91 5.782099e-03 9.981929e-01  2.91
+793   2.92 5.615984e-03 9.982498e-01  2.92
+794   2.93 5.454095e-03 9.983052e-01  2.93
+795   2.94 5.296344e-03 9.983589e-01  2.94
+796   2.95 5.142641e-03 9.984111e-01  2.95
+797   2.96 4.992899e-03 9.984618e-01  2.96
+798   2.97 4.847033e-03 9.985110e-01  2.97
+799   2.98 4.704958e-03 9.985588e-01  2.98
+800   2.99 4.566590e-03 9.986051e-01  2.99
+801   3.00 4.431848e-03 9.986501e-01  3.00
+802   3.01 4.300652e-03 9.986938e-01  3.01
+803   3.02 4.172923e-03 9.987361e-01  3.02
+804   3.03 4.048582e-03 9.987772e-01  3.03
+805   3.04 3.927554e-03 9.988171e-01  3.04
+806   3.05 3.809762e-03 9.988558e-01  3.05
+807   3.06 3.695134e-03 9.988933e-01  3.06
+808   3.07 3.583596e-03 9.989297e-01  3.07
+809   3.08 3.475077e-03 9.989650e-01  3.08
+810   3.09 3.369508e-03 9.989992e-01  3.09
+811   3.10 3.266819e-03 9.990324e-01  3.10
+812   3.11 3.166943e-03 9.990646e-01  3.11
+813   3.12 3.069813e-03 9.990957e-01  3.12
+814   3.13 2.975365e-03 9.991260e-01  3.13
+815   3.14 2.883534e-03 9.991553e-01  3.14
+816   3.15 2.794258e-03 9.991836e-01  3.15
+817   3.16 2.707476e-03 9.992112e-01  3.16
+818   3.17 2.623126e-03 9.992378e-01  3.17
+819   3.18 2.541150e-03 9.992636e-01  3.18
+820   3.19 2.461490e-03 9.992886e-01  3.19
+821   3.20 2.384088e-03 9.993129e-01  3.20
+822   3.21 2.308890e-03 9.993363e-01  3.21
+823   3.22 2.235839e-03 9.993590e-01  3.22
+824   3.23 2.164884e-03 9.993810e-01  3.23
+825   3.24 2.095971e-03 9.994024e-01  3.24
+826   3.25 2.029048e-03 9.994230e-01  3.25
+827   3.26 1.964066e-03 9.994429e-01  3.26
+828   3.27 1.900975e-03 9.994623e-01  3.27
+829   3.28 1.839726e-03 9.994810e-01  3.28
+830   3.29 1.780273e-03 9.994991e-01  3.29
+831   3.30 1.722569e-03 9.995166e-01  3.30
+832   3.31 1.666569e-03 9.995335e-01  3.31
+833   3.32 1.612227e-03 9.995499e-01  3.32
+834   3.33 1.559502e-03 9.995658e-01  3.33
+835   3.34 1.508351e-03 9.995811e-01  3.34
+836   3.35 1.458731e-03 9.995959e-01  3.35
+837   3.36 1.410602e-03 9.996103e-01  3.36
+838   3.37 1.363925e-03 9.996242e-01  3.37
+839   3.38 1.318661e-03 9.996376e-01  3.38
+840   3.39 1.274771e-03 9.996505e-01  3.39
+841   3.40 1.232219e-03 9.996631e-01  3.40
+842   3.41 1.190968e-03 9.996752e-01  3.41
+843   3.42 1.150983e-03 9.996869e-01  3.42
+844   3.43 1.112230e-03 9.996982e-01  3.43
+845   3.44 1.074673e-03 9.997091e-01  3.44
+846   3.45 1.038281e-03 9.997197e-01  3.45
+847   3.46 1.003021e-03 9.997299e-01  3.46
+848   3.47 9.688618e-04 9.997398e-01  3.47
+849   3.48 9.357722e-04 9.997493e-01  3.48
+850   3.49 9.037222e-04 9.997585e-01  3.49
+851   3.50 8.726827e-04 9.997674e-01  3.50
+852   3.51 8.426250e-04 9.997759e-01  3.51
+853   3.52 8.135212e-04 9.997842e-01  3.52
+854   3.53 7.853441e-04 9.997922e-01  3.53
+855   3.54 7.580672e-04 9.997999e-01  3.54
+856   3.55 7.316645e-04 9.998074e-01  3.55
+857   3.56 7.061107e-04 9.998146e-01  3.56
+858   3.57 6.813813e-04 9.998215e-01  3.57
+859   3.58 6.574522e-04 9.998282e-01  3.58
+860   3.59 6.343000e-04 9.998347e-01  3.59
+861   3.60 6.119019e-04 9.998409e-01  3.60
+862   3.61 5.902357e-04 9.998469e-01  3.61
+863   3.62 5.692798e-04 9.998527e-01  3.62
+864   3.63 5.490129e-04 9.998583e-01  3.63
+865   3.64 5.294147e-04 9.998637e-01  3.64
+866   3.65 5.104650e-04 9.998689e-01  3.65
+867   3.66 4.921443e-04 9.998739e-01  3.66
+868   3.67 4.744338e-04 9.998787e-01  3.67
+869   3.68 4.573148e-04 9.998834e-01  3.68
+870   3.69 4.407695e-04 9.998879e-01  3.69
+871   3.70 4.247803e-04 9.998922e-01  3.70
+872   3.71 4.093301e-04 9.998964e-01  3.71
+873   3.72 3.944025e-04 9.999004e-01  3.72
+874   3.73 3.799813e-04 9.999043e-01  3.73
+875   3.74 3.660508e-04 9.999080e-01  3.74
+876   3.75 3.525957e-04 9.999116e-01  3.75
+877   3.76 3.396012e-04 9.999150e-01  3.76
+878   3.77 3.270529e-04 9.999184e-01  3.77
+879   3.78 3.149368e-04 9.999216e-01  3.78
+880   3.79 3.032392e-04 9.999247e-01  3.79
+881   3.80 2.919469e-04 9.999277e-01  3.80
+882   3.81 2.810470e-04 9.999305e-01  3.81
+883   3.82 2.705270e-04 9.999333e-01  3.82
+884   3.83 2.603748e-04 9.999359e-01  3.83
+885   3.84 2.505784e-04 9.999385e-01  3.84
+886   3.85 2.411266e-04 9.999409e-01  3.85
+887   3.86 2.320080e-04 9.999433e-01  3.86
+888   3.87 2.232120e-04 9.999456e-01  3.87
+889   3.88 2.147280e-04 9.999478e-01  3.88
+890   3.89 2.065458e-04 9.999499e-01  3.89
+891   3.90 1.986555e-04 9.999519e-01  3.90
+892   3.91 1.910475e-04 9.999539e-01  3.91
+893   3.92 1.837125e-04 9.999557e-01  3.92
+894   3.93 1.766415e-04 9.999575e-01  3.93
+895   3.94 1.698256e-04 9.999593e-01  3.94
+896   3.95 1.632564e-04 9.999609e-01  3.95
+897   3.96 1.569256e-04 9.999625e-01  3.96
+898   3.97 1.508253e-04 9.999641e-01  3.97
+899   3.98 1.449476e-04 9.999655e-01  3.98
+900   3.99 1.392850e-04 9.999670e-01  3.99
+901   4.00 1.338302e-04 9.999683e-01  4.00
+902   4.01 1.285762e-04 9.999696e-01  4.01
+903   4.02 1.235162e-04 9.999709e-01  4.02
+904   4.03 1.186434e-04 9.999721e-01  4.03
+905   4.04 1.139514e-04 9.999733e-01  4.04
+906   4.05 1.094340e-04 9.999744e-01  4.05
+907   4.06 1.050853e-04 9.999755e-01  4.06
+908   4.07 1.008992e-04 9.999765e-01  4.07
+909   4.08 9.687021e-05 9.999775e-01  4.08
+910   4.09 9.299280e-05 9.999784e-01  4.09
+911   4.10 8.926166e-05 9.999793e-01  4.10
+912   4.11 8.567166e-05 9.999802e-01  4.11
+913   4.12 8.221782e-05 9.999811e-01  4.12
+914   4.13 7.889533e-05 9.999819e-01  4.13
+915   4.14 7.569954e-05 9.999826e-01  4.14
+916   4.15 7.262593e-05 9.999834e-01  4.15
+917   4.16 6.967015e-05 9.999841e-01  4.16
+918   4.17 6.682799e-05 9.999848e-01  4.17
+919   4.18 6.409536e-05 9.999854e-01  4.18
+920   4.19 6.146833e-05 9.999861e-01  4.19
+921   4.20 5.894307e-05 9.999867e-01  4.20
+922   4.21 5.651590e-05 9.999872e-01  4.21
+923   4.22 5.418326e-05 9.999878e-01  4.22
+924   4.23 5.194170e-05 9.999883e-01  4.23
+925   4.24 4.978790e-05 9.999888e-01  4.24
+926   4.25 4.771864e-05 9.999893e-01  4.25
+927   4.26 4.573080e-05 9.999898e-01  4.26
+928   4.27 4.382139e-05 9.999902e-01  4.27
+929   4.28 4.198750e-05 9.999907e-01  4.28
+930   4.29 4.022634e-05 9.999911e-01  4.29
+931   4.30 3.853520e-05 9.999915e-01  4.30
+932   4.31 3.691146e-05 9.999918e-01  4.31
+933   4.32 3.535260e-05 9.999922e-01  4.32
+934   4.33 3.385620e-05 9.999925e-01  4.33
+935   4.34 3.241989e-05 9.999929e-01  4.34
+936   4.35 3.104141e-05 9.999932e-01  4.35
+937   4.36 2.971857e-05 9.999935e-01  4.36
+938   4.37 2.844926e-05 9.999938e-01  4.37
+939   4.38 2.723144e-05 9.999941e-01  4.38
+940   4.39 2.606314e-05 9.999943e-01  4.39
+941   4.40 2.494247e-05 9.999946e-01  4.40
+942   4.41 2.386760e-05 9.999948e-01  4.41
+943   4.42 2.283677e-05 9.999951e-01  4.42
+944   4.43 2.184828e-05 9.999953e-01  4.43
+945   4.44 2.090048e-05 9.999955e-01  4.44
+946   4.45 1.999180e-05 9.999957e-01  4.45
+947   4.46 1.912071e-05 9.999959e-01  4.46
+948   4.47 1.828575e-05 9.999961e-01  4.47
+949   4.48 1.748550e-05 9.999963e-01  4.48
+950   4.49 1.671860e-05 9.999964e-01  4.49
+951   4.50 1.598374e-05 9.999966e-01  4.50
+952   4.51 1.527965e-05 9.999968e-01  4.51
+953   4.52 1.460512e-05 9.999969e-01  4.52
+954   4.53 1.395897e-05 9.999971e-01  4.53
+955   4.54 1.334007e-05 9.999972e-01  4.54
+956   4.55 1.274733e-05 9.999973e-01  4.55
+957   4.56 1.217972e-05 9.999974e-01  4.56
+958   4.57 1.163621e-05 9.999976e-01  4.57
+959   4.58 1.111585e-05 9.999977e-01  4.58
+960   4.59 1.061770e-05 9.999978e-01  4.59
+961   4.60 1.014085e-05 9.999979e-01  4.60
+962   4.61 9.684455e-06 9.999980e-01  4.61
+963   4.62 9.247674e-06 9.999981e-01  4.62
+964   4.63 8.829709e-06 9.999982e-01  4.63
+965   4.64 8.429791e-06 9.999983e-01  4.64
+966   4.65 8.047182e-06 9.999983e-01  4.65
+967   4.66 7.681171e-06 9.999984e-01  4.66
+968   4.67 7.331074e-06 9.999985e-01  4.67
+969   4.68 6.996234e-06 9.999986e-01  4.68
+970   4.69 6.676020e-06 9.999986e-01  4.69
+971   4.70 6.369825e-06 9.999987e-01  4.70
+972   4.71 6.077066e-06 9.999988e-01  4.71
+973   4.72 5.797183e-06 9.999988e-01  4.72
+974   4.73 5.529636e-06 9.999989e-01  4.73
+975   4.74 5.273910e-06 9.999989e-01  4.74
+976   4.75 5.029507e-06 9.999990e-01  4.75
+977   4.76 4.795951e-06 9.999990e-01  4.76
+978   4.77 4.572783e-06 9.999991e-01  4.77
+979   4.78 4.359564e-06 9.999991e-01  4.78
+980   4.79 4.155871e-06 9.999992e-01  4.79
+981   4.80 3.961299e-06 9.999992e-01  4.80
+982   4.81 3.775459e-06 9.999992e-01  4.81
+983   4.82 3.597978e-06 9.999993e-01  4.82
+984   4.83 3.428497e-06 9.999993e-01  4.83
+985   4.84 3.266673e-06 9.999994e-01  4.84
+986   4.85 3.112176e-06 9.999994e-01  4.85
+987   4.86 2.964689e-06 9.999994e-01  4.86
+988   4.87 2.823909e-06 9.999994e-01  4.87
+989   4.88 2.689545e-06 9.999995e-01  4.88
+990   4.89 2.561318e-06 9.999995e-01  4.89
+991   4.90 2.438961e-06 9.999995e-01  4.90
+992   4.91 2.322216e-06 9.999995e-01  4.91
+993   4.92 2.210839e-06 9.999996e-01  4.92
+994   4.93 2.104593e-06 9.999996e-01  4.93
+995   4.94 2.003252e-06 9.999996e-01  4.94
+996   4.95 1.906601e-06 9.999996e-01  4.95
+997   4.96 1.814431e-06 9.999996e-01  4.96
+998   4.97 1.726545e-06 9.999997e-01  4.97
+999   4.98 1.642751e-06 9.999997e-01  4.98
+1000  4.99 1.562867e-06 9.999997e-01  4.99
+1001  5.00 1.486720e-06 9.999997e-01  5.00
+\end{verbatim}
+
+\hypertarget{ux5bc6ux5ea6ux51fdux6570ux5206ux5e03ux51fdux6570}{%
+\subsection{密度函数/分布函数}\label{ux5bc6ux5ea6ux51fdux6570ux5206ux5e03ux51fdux6570}}
+
+\subsubsection{概率密度函数}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(x,pdf))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/stats_base_files/figure-pdf/unnamed-chunk-3-1.pdf}
+
+}
+
+\end{figure}
+
+\subsubsection{累计分布函数}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(x,cdf))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/stats_base_files/figure-pdf/unnamed-chunk-4-1.pdf}
+
+}
+
+\end{figure}
+
+\subsubsection{累计分布函数的反函数}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(cdf,icdf))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/stats_base_files/figure-pdf/unnamed-chunk-5-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{sigmaux897fux683cux739bux51c6ux5219}{%
+\subsection{\texorpdfstring{3\(\sigma\)(西格玛)准则}{3\textbackslash sigma(西格玛)准则}}\label{sigmaux897fux683cux739bux51c6ux5219}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(df,}\FunctionTok{aes}\NormalTok{(x,pdf))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{geom\_area}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x)}\SpecialCharTok{\textless{}}\DecValTok{3}\NormalTok{,x,}\ConstantTok{NA}\NormalTok{),}\AttributeTok{fill=}\StringTok{\textquotesingle{}0.9974\textquotesingle{}}\NormalTok{),}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_area}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x)}\SpecialCharTok{\textless{}}\DecValTok{2}\NormalTok{,x,}\ConstantTok{NA}\NormalTok{),}\AttributeTok{fill=}\StringTok{\textquotesingle{}0.9545\textquotesingle{}}\NormalTok{),}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_area}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{ifelse}\NormalTok{(}\FunctionTok{abs}\NormalTok{(x)}\SpecialCharTok{\textless{}}\DecValTok{1}\NormalTok{,x,}\ConstantTok{NA}\NormalTok{),}\AttributeTok{fill=}\StringTok{\textquotesingle{}0.6827\textquotesingle{}}\NormalTok{),}\AttributeTok{alpha=}\FloatTok{0.5}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept =}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),}\AttributeTok{linetype=}\StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks=}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{5}\SpecialCharTok{:}\DecValTok{5}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{x=}\StringTok{\textquotesingle{}Z\textquotesingle{}}\NormalTok{,}\AttributeTok{y=}\StringTok{\textquotesingle{}概率密度(pdf)\textquotesingle{}}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_futurama}\NormalTok{()}\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill=}\FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title=}\StringTok{\textquotesingle{}曲线下面积\textquotesingle{}}\NormalTok{,}\AttributeTok{override.aes =} \FunctionTok{list}\NormalTok{(}\AttributeTok{alpha=}\FloatTok{0.2}\NormalTok{)))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/stats_base_files/figure-pdf/unnamed-chunk-6-1.pdf}
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{pnorm}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{:{-}}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.6826895 0.9544997 0.9973002
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(}\FunctionTok{pnorm}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{)}\SpecialCharTok{{-}}\FunctionTok{pnorm}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\SpecialCharTok{:{-}}\DecValTok{3}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \StringTok{\textasciigrave{}}\AttributeTok{/}\StringTok{\textasciigrave{}}\NormalTok{(}\DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \StringTok{\textasciigrave{}}\AttributeTok{{-}}\StringTok{\textasciigrave{}}\NormalTok{(}\FloatTok{0.5}\NormalTok{,.) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{qnorm}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] -1 -2 -3
+\end{verbatim}
+
+\hypertarget{zux68c0ux9a8cux754cux503cux548cux53c2ux8003ux503cux8303ux56f4}{%
+\subsection{Z检验界值和参考值范围}\label{zux68c0ux9a8cux754cux503cux548cux53c2ux8003ux503cux8303ux56f4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\FunctionTok{qnorm}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.005}\NormalTok{,}\FloatTok{0.01}\NormalTok{,}\FloatTok{0.025}\NormalTok{,}\FloatTok{0.05}\NormalTok{,}\FloatTok{0.1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 2.575829 2.326348 1.959964 1.644854 1.281552
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{{-}}\FunctionTok{qnorm}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FloatTok{0.005}\NormalTok{,}\FloatTok{0.01}\NormalTok{,}\FloatTok{0.025}\NormalTok{,}\FloatTok{0.05}\NormalTok{,}\FloatTok{0.1}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pnorm}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.995 0.990 0.975 0.950 0.900
+\end{verbatim}
+
+\hypertarget{ux9891ux7387ux5206ux5e03ux76f4ux65b9ux56fe}{%
+\subsection{频率分布直方图}\label{ux9891ux7387ux5206ux5e03ux76f4ux65b9ux56fe}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{runif}\NormalTok{(}\DecValTok{10000}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{qnorm}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{hist}\NormalTok{(}\AttributeTok{breaks =} \DecValTok{50}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/stats_base_files/figure-pdf/unnamed-chunk-11-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{ux79bbux6563ux578bux968fux673aux53d8ux91cf}{%
+\section{离散型随机变量}\label{ux79bbux6563ux578bux968fux673aux53d8ux91cf}}
+
+\hypertarget{ux5206ux5e03ux5217}{%
+\subsection{分布列}\label{ux5206ux5e03ux5217}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rpois}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.data.frame}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{setNames}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}k\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}probality\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{adorn\_percentages}\NormalTok{(}\AttributeTok{denominator =} \StringTok{\textquotesingle{}col\textquotesingle{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(k,probality))}\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{chapter/stats_base_files/figure-pdf/unnamed-chunk-12-1.pdf}
+
+}
+
+\end{figure}
+
+\hypertarget{ciux7684ux542bux4e49}{%
+\section{95\%CI的含义}\label{ciux7684ux542bux4e49}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{miu=}\FunctionTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\AttributeTok{min=}\DecValTok{1}\NormalTok{,}\AttributeTok{max=}\DecValTok{100}\NormalTok{),}\AttributeTok{sigma=}\FunctionTok{runif}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\AttributeTok{min=}\DecValTok{1}\NormalTok{,}\AttributeTok{max=}\DecValTok{20}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{rowwise}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample=}\FunctionTok{list}\NormalTok{(}\FunctionTok{rnorm}\NormalTok{(}\DecValTok{25}\NormalTok{,miu,sigma)),}
+         \AttributeTok{x\_bar=}\FunctionTok{mean}\NormalTok{(sample),}
+         \AttributeTok{sd=}\FunctionTok{sd}\NormalTok{(sample),}
+         \AttributeTok{ci\_lower=}\NormalTok{x\_bar}\FloatTok{{-}1.96}\SpecialCharTok{*}\NormalTok{sd}\SpecialCharTok{/}\DecValTok{5}\NormalTok{,}
+         \AttributeTok{ci\_upper=}\NormalTok{x\_bar}\FloatTok{+1.96}\SpecialCharTok{*}\NormalTok{sd}\SpecialCharTok{/}\DecValTok{5}\NormalTok{,}
+         \AttributeTok{within\_ci=}\FunctionTok{ifelse}\NormalTok{(miu}\SpecialCharTok{\textgreater{}=}\NormalTok{ci\_lower }\SpecialCharTok{\&}\NormalTok{ miu }\SpecialCharTok{\textless{}=}\NormalTok{ci\_upper,T,F)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric),}\SpecialCharTok{\textasciitilde{}}\FunctionTok{round}\NormalTok{(.x,}\DecValTok{2}\NormalTok{)))}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+# A tibble: 1,000 x 8
+# Rowwise: 
+     miu sigma sample     x_bar    sd ci_lower ci_upper within_ci
+   <dbl> <dbl> <list>     <dbl> <dbl>    <dbl>    <dbl> <lgl>    
+ 1 34.4  18.8  <dbl [25]> 34.8  18.4     27.6     42    TRUE     
+ 2  5.91  3.37 <dbl [25]>  6.54  3.32     5.24     7.84 TRUE     
+ 3 85.7   9.53 <dbl [25]> 86.9  10.3     82.9     91.0  TRUE     
+ 4 43.6  16.2  <dbl [25]> 45.6  18.1     38.5     52.7  TRUE     
+ 5 57.9   8.38 <dbl [25]> 61.2   7.06    58.4     64.0  FALSE    
+ 6 43.5  14.5  <dbl [25]> 44.8  13.7     39.4     50.2  TRUE     
+ 7 43.3   7.51 <dbl [25]> 40.6   7.33    37.7     43.4  TRUE     
+ 8 52.6  18.6  <dbl [25]> 49.7  15.7     43.5     55.8  TRUE     
+ 9  8.41 19.1  <dbl [25]>  9.68 19.2      2.16    17.2  TRUE     
+10 13.8  14.5  <dbl [25]> 26.0  15.0     20.2     31.9  FALSE    
+# i 990 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{within\_ci)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.927
+\end{verbatim}
 
 
 

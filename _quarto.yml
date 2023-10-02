@@ -33,7 +33,6 @@ book:
           href: chapter/base_data_io.qmd
         - text: 向量化
           href: chapter/base_vector.qmd
-      
     - part: 数据清理
       chapters :
         - text: tidyverse
