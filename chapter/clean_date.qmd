@@ -67,6 +67,6 @@ data %>%
          age=interval(birth_date,admit_date)/years(1),
          los=interval(admit_date,disch_date)/days(1)) %>%
   mutate(year=year(admit_date),
-         month=year(admit_date),
-         week=year(admit_date))
+         month=month(admit_date),
+         week=week(admit_date))
 ```

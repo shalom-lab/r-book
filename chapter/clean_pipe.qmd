@@ -50,3 +50,8 @@ mtcars %>%
   select(cyl,mpg,mpg2) %>%
   head()
 ```
+
+等价于
+```{r}
+head(select(mutate(filter(mtcars,cyl==4),mpg2=mpg+100),cyl,mpg,mpg2))
+```

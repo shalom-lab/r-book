@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R语言入门指南 - 14&nbsp; 最佳推荐-lubridate包</title>
+<title>R语言入门指南 - 18&nbsp; 主题</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapter/clean_string.html" rel="next">
-<link href="../chapter/clean_dplyr.html" rel="prev">
+<link href="../chapter/stats_base.html" rel="next">
+<link href="../chapter/clean_wider_longer.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/clean_tidyverse.html">数据清理</a></li><li class="breadcrumb-item"><a href="../chapter/clean_date.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">日期处理</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/viz_bar.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../chapter/viz_bar.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ggplot2</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapter/clean_date.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
   </div>
 </li>
@@ -292,7 +292,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/viz_bar.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/viz_bar.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ggplot2</span></span></a>
   </div>
 </li>
@@ -325,26 +325,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#基本用法" id="toc-基本用法" class="nav-link active" data-scroll-target="#基本用法"><span class="header-section-number">14.1</span> 基本用法</a>
-  <ul class="collapse">
-  <li><a href="#字符串转日期" id="toc-字符串转日期" class="nav-link" data-scroll-target="#字符串转日期"><span class="header-section-number">14.1.1</span> 字符串转日期</a></li>
-  <li><a href="#时间间隔" id="toc-时间间隔" class="nav-link" data-scroll-target="#时间间隔"><span class="header-section-number">14.1.2</span> 时间间隔</a></li>
-  <li><a href="#年月提取" id="toc-年月提取" class="nav-link" data-scroll-target="#年月提取"><span class="header-section-number">14.1.3</span> 年月提取</a></li>
-  <li><a href="#日期运算" id="toc-日期运算" class="nav-link" data-scroll-target="#日期运算"><span class="header-section-number">14.1.4</span> 日期运算</a></li>
-  </ul></li>
-  <li><a href="#实战应用" id="toc-实战应用" class="nav-link" data-scroll-target="#实战应用"><span class="header-section-number">14.2</span> 实战应用</a>
-  <ul class="collapse">
-  <li><a href="#年龄计算" id="toc-年龄计算" class="nav-link" data-scroll-target="#年龄计算"><span class="header-section-number">14.2.1</span> 年龄计算</a></li>
-  </ul></li>
+  <li><a href="#坐标轴标题-axis.title" id="toc-坐标轴标题-axis.title" class="nav-link active" data-scroll-target="#坐标轴标题-axis.title"><span class="header-section-number">18.0.1</span> 坐标轴标题-axis.title</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/clean_date.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>报告问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/viz_bar.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>报告问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/clean_tidyverse.html">数据清理</a></li><li class="breadcrumb-item"><a href="../chapter/clean_date.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">日期处理</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/viz_bar.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../chapter/viz_bar.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">ggplot2</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">最佳推荐-lubridate包</span></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">主题</span></h1>
 </div>
 
 
@@ -361,128 +351,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>该包属于tidyverse组成之一,用于日期和时间处理</p>
 <div class="cell" data-context="setup">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># or library(lubridate)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>())</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="基本用法" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="基本用法"><span class="header-section-number">14.1</span> 基本用法</h2>
-<section id="字符串转日期" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="字符串转日期"><span class="header-section-number">14.1.1</span> 字符串转日期</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'20221221'</span>,<span class="st">'2023-12-21'</span>,<span class="st">'2023/2/21'</span>,<span class="st">'20/2/21'</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-12-21" "2023-12-21" "2023-02-21" "2020-02-21"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mdy</span>(<span class="st">'12212022'</span>,<span class="st">'12212023'</span>,<span class="st">'12/21/2023'</span>,<span class="st">'2/21/20'</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-12-21" "2023-12-21" "2023-12-21" "2020-02-21"</code></pre>
-</div>
-</div>
-</section>
-<section id="时间间隔" class="level3" data-number="14.1.2">
-<h3 data-number="14.1.2" class="anchored" data-anchor-id="时间间隔"><span class="header-section-number">14.1.2</span> 时间间隔</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>),<span class="fu">ymd</span>(<span class="st">'20221221'</span>))<span class="sc">/</span><span class="fu">years</span>(<span class="dv">1</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>),<span class="fu">ymd</span>(<span class="st">'20221221'</span>))<span class="sc">/</span><span class="fu">months</span>(<span class="dv">3</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>),<span class="fu">ymd</span>(<span class="st">'20221221'</span>))<span class="sc">/</span><span class="fu">weeks</span>(<span class="dv">1</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 52.14286</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">interval</span>(<span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>),<span class="fu">ymd</span>(<span class="st">'20221221'</span>))<span class="sc">/</span><span class="fu">days</span>(<span class="dv">1</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 365</code></pre>
-</div>
-</div>
-</section>
-<section id="年月提取" class="level3" data-number="14.1.3">
-<h3 data-number="14.1.3" class="anchored" data-anchor-id="年月提取"><span class="header-section-number">14.1.3</span> 年月提取</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>) <span class="sc">%&gt;%</span> <span class="fu">year</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2021</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>) <span class="sc">%&gt;%</span> <span class="fu">month</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 12</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>) <span class="sc">%&gt;%</span> <span class="fu">week</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 51</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>) <span class="sc">%&gt;%</span> <span class="fu">day</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 21</code></pre>
-</div>
-</div>
-</section>
-<section id="日期运算" class="level3" data-number="14.1.4">
-<h3 data-number="14.1.4" class="anchored" data-anchor-id="日期运算"><span class="header-section-number">14.1.4</span> 日期运算</h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>)<span class="sc">+</span><span class="fu">days</span>(<span class="dv">365</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-12-21"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>)<span class="sc">+</span><span class="fu">weeks</span>(<span class="dv">52</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-12-20"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>)<span class="sc">+</span><span class="fu">months</span>(<span class="dv">12</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-12-21"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ymd</span>(<span class="st">'2021-12-21'</span>)<span class="sc">+</span><span class="fu">years</span>(<span class="dv">1</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "2022-12-21"</code></pre>
-</div>
-</div>
-</section>
-</section>
-<section id="实战应用" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="实战应用"><span class="header-section-number">14.2</span> 实战应用</h2>
-<section id="年龄计算" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="年龄计算"><span class="header-section-number">14.2.1</span> 年龄计算</h3>
-<p>HIS系统住院数据模拟，计算就诊年月周，就诊年龄，住院天数</p>
-<div class="cell" data-context="setup">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">birth_date=</span><span class="fu">paste</span>(<span class="dv">2021</span>,<span class="dv">1</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,<span class="at">sep=</span><span class="st">'-'</span>),</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">admit_date=</span><span class="fu">paste</span>(<span class="dv">2023</span>,<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">1</span>,<span class="at">sep=</span><span class="st">'-'</span>),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">disch_date=</span><span class="fu">paste</span>(<span class="dv">2023</span>,<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>,<span class="dv">6</span><span class="sc">:</span><span class="dv">11</span>,<span class="at">sep=</span><span class="st">'-'</span>))</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>),<span class="at">time=</span><span class="dv">2</span>),<span class="at">y=</span><span class="fu">c</span>(<span class="st">'Female'</span>,<span class="st">'Male'</span>),<span class="at">value=</span><span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">6</span>,<span class="dv">20</span>,<span class="dv">100</span>)))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["id"],"name":[1],"type":["int"],"align":["right"]},{"label":["birth_date"],"name":[2],"type":["chr"],"align":["left"]},{"label":["admit_date"],"name":[3],"type":["chr"],"align":["left"]},{"label":["disch_date"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"2021-1-1","3":"2023-5-6","4":"2023-5-6"},{"1":"2","2":"2021-1-2","3":"2023-6-5","4":"2023-6-7"},{"1":"3","2":"2021-1-3","3":"2023-7-4","4":"2023-7-8"},{"1":"4","2":"2021-1-4","3":"2023-8-3","4":"2023-8-9"},{"1":"5","2":"2021-1-5","3":"2023-9-2","4":"2023-9-10"},{"1":"6","2":"2021-1-6","3":"2023-10-1","4":"2023-10-11"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["x"],"name":[1],"type":["chr"],"align":["left"]},{"label":["y"],"name":[2],"type":["chr"],"align":["left"]},{"label":["value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"Female","3":"43"},{"1":"B","2":"Male","3":"57"},{"1":"C","2":"Female","3":"33"},{"1":"A","2":"Male","3":"89"},{"1":"B","2":"Female","3":"44"},{"1":"C","2":"Male","3":"38"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">birth_date=</span><span class="fu">ymd</span>(birth_date),</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">admit_date=</span><span class="fu">ymd</span>(admit_date),</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">disch_date=</span><span class="fu">ymd</span>(disch_date),</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">age=</span><span class="fu">interval</span>(birth_date,admit_date)<span class="sc">/</span><span class="fu">years</span>(<span class="dv">1</span>),</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">los=</span><span class="fu">interval</span>(admit_date,disch_date)<span class="sc">/</span><span class="fu">days</span>(<span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year=</span><span class="fu">year</span>(admit_date),</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">month=</span><span class="fu">month</span>(admit_date),</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">week=</span><span class="fu">week</span>(admit_date))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data,<span class="fu">aes</span>(x,value,<span class="at">fill=</span>y))<span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["id"],"name":[1],"type":["int"],"align":["right"]},{"label":["birth_date"],"name":[2],"type":["date"],"align":["right"]},{"label":["admit_date"],"name":[3],"type":["date"],"align":["right"]},{"label":["disch_date"],"name":[4],"type":["date"],"align":["right"]},{"label":["age"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["los"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["year"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["month"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["week"],"name":[9],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"2021-01-01","3":"2023-05-06","4":"2023-05-06","5":"2.342466","6":"0","7":"2023","8":"5","9":"18"},{"1":"2","2":"2021-01-02","3":"2023-06-05","4":"2023-06-07","5":"2.421918","6":"2","7":"2023","8":"6","9":"23"},{"1":"3","2":"2021-01-03","3":"2023-07-04","4":"2023-07-08","5":"2.498630","6":"4","7":"2023","8":"7","9":"27"},{"1":"4","2":"2021-01-04","3":"2023-08-03","4":"2023-08-09","5":"2.578082","6":"6","7":"2023","8":"8","9":"31"},{"1":"5","2":"2021-01-05","3":"2023-09-02","4":"2023-09-10","5":"2.657534","6":"8","7":"2023","8":"9","9":"35"},{"1":"6","2":"2021-01-06","3":"2023-10-01","4":"2023-10-11","5":"2.734247","6":"10","7":"2023","8":"10","9":"40"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div>
+<figure class="figure">
+<p><img src="viz_bar_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="坐标轴标题-axis.title" class="level3" data-number="18.0.1">
+<h3 data-number="18.0.1" class="anchored" data-anchor-id="坐标轴标题-axis.title"><span class="header-section-number">18.0.1</span> 坐标轴标题-axis.title</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(cyl,mpg))<span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'hjust=0.2,vjust = -3'</span>,<span class="at">y=</span><span class="st">'hjust=0.8,vjust = 3'</span>)<span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">'red'</span>,<span class="at">face=</span><span class="st">'bold'</span>),</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.2</span>,<span class="at">vjust =</span> <span class="sc">-</span><span class="dv">3</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.8</span>,<span class="at">vjust =</span> <span class="dv">3</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        )</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="viz_bar_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -875,13 +789,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapter/clean_dplyr.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">必会操作</span></span>
+      <a href="../chapter/clean_wider_longer.html" class="pagination-link  aria-label=" &lt;span="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapter/clean_string.html" class="pagination-link" aria-label="<span class='chapter-number'>15</span>&nbsp; <span class='chapter-title'>字符串处理</span>">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">字符串处理</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapter/stats_base.html" class="pagination-link" aria-label="<span class='chapter-number'>19</span>&nbsp; <span class='chapter-title'>基础篇</span>">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">基础篇</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -890,4 +804,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/clean_date.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>报告问题</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/viz_bar.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>报告问题</a></li></ul></div></div></div></footer></body></html>

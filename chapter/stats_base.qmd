@@ -117,7 +117,9 @@ df<-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %>%
          ci_upper=x_bar+1.96*sd/5,
          within_ci=ifelse(miu>=ci_lower & miu <=ci_upper,T,F)) %>%
   mutate(across(where(is.numeric),~round(.x,2)))
+
 df
 mean(df$within_ci)
+
 ```
 

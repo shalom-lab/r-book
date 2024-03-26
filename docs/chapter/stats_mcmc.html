@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R语言入门指南 - 17&nbsp; 长宽数据转换</title>
+<title>R语言入门指南 - 19&nbsp; MCMC(学习中)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapter/stats_base.html" rel="next">
-<link href="../chapter/clean_tips.html" rel="prev">
+<link href="../chapter/stats_base.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -111,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/clean_tidyverse.html">数据清理</a></li><li class="breadcrumb-item"><a href="../chapter/clean_wider_longer.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapter/stats_base.html">统计</a></li><li class="breadcrumb-item"><a href="../chapter/stats_mcmc.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">MCMC</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切换侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -263,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/clean_wider_longer.html" class="sidebar-item-text sidebar-link active">
+  <a href="../chapter/clean_wider_longer.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></span></a>
   </div>
 </li>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapter/stats_mcmc.html" class="sidebar-item-text sidebar-link">
+  <a href="../chapter/stats_mcmc.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">MCMC</span></span></a>
   </div>
 </li>
@@ -298,22 +297,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">目录</h2>
-   
-  <ul>
-  <li><a href="#长转宽" id="toc-长转宽" class="nav-link active" data-scroll-target="#长转宽"><span class="header-section-number">17.0.1</span> 长转宽</a></li>
-  <li><a href="#宽转长" id="toc-宽转长" class="nav-link" data-scroll-target="#宽转长"><span class="header-section-number">17.0.2</span> 宽转长</a></li>
-  <li><a href="#作图多用长数据" id="toc-作图多用长数据" class="nav-link" data-scroll-target="#作图多用长数据"><span class="header-section-number">17.0.3</span> 作图多用长数据</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/clean_wider_longer.qmd" class="toc-action">编辑该页面</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">报告问题</a></p></div></div></nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">MCMC(学习中)</span></h1>
 </div>
 
 
@@ -329,78 +320,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <div class="cell" data-context="setup">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data_longer<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">region=</span>LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>],</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">year=</span><span class="fu">rep</span>(<span class="dv">2019</span><span class="sc">:</span><span class="dv">2023</span>,<span class="at">each=</span><span class="dv">3</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">case=</span><span class="fu">round</span>(<span class="fu">runif</span>(<span class="dv">15</span>)<span class="sc">*</span><span class="dv">100</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_longer</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["int"],"align":["right"]},{"label":["case"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"2019","3":"56"},{"1":"B","2":"2019","3":"15"},{"1":"C","2":"2019","3":"46"},{"1":"A","2":"2020","3":"21"},{"1":"B","2":"2020","3":"12"},{"1":"C","2":"2020","3":"4"},{"1":"A","2":"2021","3":"68"},{"1":"B","2":"2021","3":"91"},{"1":"C","2":"2021","3":"57"},{"1":"A","2":"2022","3":"100"},{"1":"B","2":"2022","3":"73"},{"1":"C","2":"2022","3":"58"},{"1":"A","2":"2023","3":"82"},{"1":"B","2":"2023","3":"28"},{"1":"C","2":"2023","3":"26"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</div>
-<section id="长转宽" class="level3" data-number="17.0.1">
-<h3 data-number="17.0.1" class="anchored" data-anchor-id="长转宽"><span class="header-section-number">17.0.1</span> 长转宽</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_wider1<span class="ot">&lt;-</span>data_longer <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> year,<span class="at">names_from =</span> <span class="st">'region'</span>,<span class="at">values_from =</span> <span class="st">'case'</span> )</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>data_wider1</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    p     <span class="sc">*</span> <span class="fu">dnorm</span>(x, mu[<span class="dv">1</span>], sd[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span><span class="sc">-</span>p) <span class="sc">*</span> <span class="fu">dnorm</span>(x, mu[<span class="dv">2</span>], sd[<span class="dv">2</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">f</span>(x), <span class="at">col=</span><span class="st">"red"</span>, <span class="sc">-</span><span class="dv">4</span>, <span class="dv">8</span>, <span class="at">n=</span><span class="dv">301</span>, <span class="at">las=</span><span class="dv">1</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["year"],"name":[1],"type":["int"],"align":["right"]},{"label":["A"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["B"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["C"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"56","3":"15","4":"46"},{"1":"2020","2":"21","3":"12","4":"4"},{"1":"2021","2":"68","3":"91","4":"57"},{"1":"2022","2":"100","3":"73","4":"58"},{"1":"2023","2":"82","3":"28","4":"26"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<p><img src="stats_mcmc_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_wider2<span class="ot">&lt;-</span>data_longer <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> region,<span class="at">names_from =</span> <span class="st">'year'</span>,<span class="at">names_prefix =</span> <span class="st">'y_'</span>,<span class="at">values_from =</span> <span class="st">'case'</span> )</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data_wider2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["y_2019"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["y_2020"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["y_2021"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["y_2022"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["y_2023"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"56","3":"21","4":"68","5":"100","6":"82"},{"1":"B","2":"15","3":"12","4":"91","5":"73","6":"28"},{"1":"C","2":"46","3":"4","4":"57","5":"58","6":"26"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-</div>
-</section>
-<section id="宽转长" class="level3" data-number="17.0.2">
-<h3 data-number="17.0.2" class="anchored" data-anchor-id="宽转长"><span class="header-section-number">17.0.2</span> 宽转长</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_longer2<span class="ot">&lt;-</span>data_wider1 <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(A,B,C),<span class="at">names_to =</span> <span class="st">'region'</span>,<span class="at">values_to=</span><span class="st">'count'</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data_longer2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-
-<div data-pagedtable="false">
-  <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["year"],"name":[1],"type":["int"],"align":["right"]},{"label":["region"],"name":[2],"type":["chr"],"align":["left"]},{"label":["count"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"2019","2":"A","3":"56"},{"1":"2019","2":"B","3":"15"},{"1":"2019","2":"C","3":"46"},{"1":"2020","2":"A","3":"21"},{"1":"2020","2":"B","3":"12"},{"1":"2020","2":"C","3":"4"},{"1":"2021","2":"A","3":"68"},{"1":"2021","2":"B","3":"91"},{"1":"2021","2":"C","3":"57"},{"1":"2022","2":"A","3":"100"},{"1":"2022","2":"B","3":"73"},{"1":"2022","2":"C","3":"58"},{"1":"2023","2":"A","3":"82"},{"1":"2023","2":"B","3":"28"},{"1":"2023","2":"C","3":"26"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">integrate</span>(f, <span class="at">lower =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">upper =</span> <span class="cn">Inf</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1 with absolute error &lt; 7.6e-06</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="作图多用长数据" class="level3" data-number="17.0.3">
-<h3 data-number="17.0.3" class="anchored" data-anchor-id="作图多用长数据"><span class="header-section-number">17.0.3</span> 作图多用长数据</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_longer,<span class="fu">aes</span>(<span class="fu">factor</span>(year),<span class="at">y=</span>case,<span class="at">fill=</span>region))<span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">'dodge'</span>)<span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  ggsci<span class="sc">::</span><span class="fu">scale_fill_jama</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 定义概率密度函数（指数分布）</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pdf <span class="ot">&lt;-</span> <span class="cf">function</span>(x, lambda) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dexp</span>(x, <span class="at">rate =</span> lambda)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>pdf<span class="ot">&lt;-</span><span class="cf">function</span>(x){</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  sd <span class="ot">&lt;-</span> <span class="fu">c</span>(.<span class="dv">5</span>, <span class="dv">2</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    p     <span class="sc">*</span> <span class="fu">dnorm</span>(x, mu[<span class="dv">1</span>], sd[<span class="dv">1</span>]) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">1</span><span class="sc">-</span>p) <span class="sc">*</span> <span class="fu">dnorm</span>(x, mu[<span class="dv">2</span>], sd[<span class="dv">2</span>])</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 初始化MCMC参数</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">10000</span>  <span class="co"># 抽样次数</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>proposal_sd <span class="ot">&lt;-</span> <span class="fl">0.1</span>  <span class="co"># 提议分布标准差</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>current_sample <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1</span>)  <span class="co"># 初始样本值在0到1之间</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 存储抽样结果</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n_samples)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># 运行MCMC抽样</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_samples) {</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 从提议分布中抽样一个候选样本</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  candidate_sample <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> current_sample, <span class="at">sd =</span> proposal_sd)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 计算接受率</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># acceptance_prob &lt;- pdf(candidate_sample, lambda = 2) / pdf(current_sample, lambda = 2)</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>   acceptance_prob <span class="ot">&lt;-</span> <span class="fu">pdf</span>(candidate_sample) <span class="sc">/</span> <span class="fu">pdf</span>(current_sample)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 决定是否接受候选样本</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;</span> acceptance_prob) {</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    current_sample <span class="ot">&lt;-</span> candidate_sample</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 存储样本</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>  samples[i] <span class="ot">&lt;-</span> current_sample</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 打印抽样结果或进行后续分析</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(samples[<span class="dv">20000</span><span class="sc">:</span><span class="fu">length</span>(samples)], <span class="at">breaks =</span> <span class="dv">100</span>, <span class="at">main =</span> <span class="st">"MCMC抽样结果"</span>, <span class="at">xlab =</span> <span class="st">"样本值"</span>,<span class="at">freq =</span> F)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">f</span>(x), <span class="at">col=</span><span class="st">"red"</span>, <span class="sc">-</span><span class="dv">4</span>, <span class="dv">8</span>, <span class="at">n=</span><span class="dv">301</span>, <span class="at">las=</span><span class="dv">1</span>,<span class="at">add =</span> T)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="clean_wider_longer_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="stats_mcmc_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -638,18 +627,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../chapter/clean_tips.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></span>
+      <a href="../chapter/stats_base.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">基础篇</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapter/stats_base.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">基础篇</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
 
 
 
-</body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/stats_mcmc.qmd" class="toc-action">编辑该页面</a></p><p><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action">报告问题</a></p></div></div></div></div></footer></body></html>
