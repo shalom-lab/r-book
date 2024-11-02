@@ -8,7 +8,7 @@ book:
   date: "2023/8/13"
   repo-url: https://github.com/shalom-lab/r-book/
   repo-actions: [edit, issue]
-  cover-image: cover.png
+  cover-image: images/cover.png
   chapters:
     - index.qmd
     - part: 基础篇
