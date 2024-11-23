@@ -19,8 +19,10 @@ data_new
 ```
 
 ## 连续转分类/水平转换
-::: {.callout-tip}
+
+::: callout-tip
 ## 提示
+
 `ifelse()`和`case_when()`函数二选一。简单二分类用`ifelse()`即可，复杂情况推荐用`case_when()`可避免多个`ifelse()`嵌套结构。
 :::
 
@@ -36,8 +38,9 @@ data_new %>%
                         T~'Female'))
 ```
 
-::: {.callout-tip}
+::: callout-tip
 ## 提示
+
 男性和女性贫血判定的界值不同，根据性别和界值判断是否贫血。
 :::
 
@@ -59,4 +62,34 @@ data %>%
     Hb<=130 & sex=='Male'~'abnormal',
     T~'normal'
   ))
+```
+
+## 按层划分连续转分类
+
+::: callout-tip
+## 提示
+分别针对男性和女性按照血压/血脂/血糖高低划分为四组(Q1,Q2,Q3,Q4)
+:::
+
+```{r}
+library(tidyverse)
+df <- data.frame(
+  gender = rep(c("Male", "Female"), each = 200),
+  blood_pre = round(runif(400, min = 90, max = 140)),
+  blood_lip = round(runif(400, min = 1.5, max = 5.0),1),
+  blood_sug = round(runif(400, min = 3.5, max = 7.5),1)
+)
+
+# 定义函数计算四分位数
+gen_quantile <- function(x) {
+  quantiles <- quantile(x, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE)
+  cut(x, breaks = quantiles, include.lowest = TRUE, labels = c("Q1", "Q2", "Q3", "Q4"))
+}
+
+# 按性别分组并计算四分位数
+df %>%
+  group_by(gender) %>%
+  mutate(pre_group = gen_quantile(blood_pre),
+         lip_group = gen_quantile(blood_lip),
+         sug_group = gen_quantile(blood_sug))
 ```
