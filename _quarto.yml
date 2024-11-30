@@ -60,6 +60,14 @@ book:
       href: chapter/clean/tips.qmd
     - text: 长宽数据转换
       href: chapter/clean/wider_longer.qmd
+  - part: 数据可视化
+    chapters:
+    - text: 柱状图
+      href: chapter/viz/bar_plot.qmd
+  - part: 统计
+    chapters:
+    - text: 基础
+      href: chapter/stats/base.qmd
 format:
   html:
     theme: cosmo

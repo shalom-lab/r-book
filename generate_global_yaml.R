@@ -21,7 +21,7 @@ read_chapters <- function(path) {
 # 读取全局配置
 global_config<-read_yaml('_quarto.yml')
 
-chapter_dirs<-c('base','clean')
+chapter_dirs<-c('base','clean','viz','stats')
 chapter_ymls<-paste0('chapter/',chapter_dirs,'/_quarto.yml')
 global_chapters<-lapply(chapter_ymls,function(x){read_chapters(x)})
 global_chapters<-c('index.qmd',global_chapters)
