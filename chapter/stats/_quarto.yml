@@ -1,0 +1,4 @@
+part: 统计
+chapters:
+  - text: 基础
+    href: base.qmd

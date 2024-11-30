@@ -1,0 +1,4 @@
+part: 数据可视化
+chapters:
+  - text: 柱状图
+    href: bar_plot.qmd

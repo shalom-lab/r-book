@@ -1,0 +1,22 @@
+part: 基础篇
+chapters:
+  - text: 安装
+    href: install.qmd
+  - text: Rstudio
+    href: rstudio.qmd
+  - text: 运算符
+    href: operator.qmd
+  - text: 数据类型
+    href: data_type.qmd
+  - text: 数据框
+    href: dataframe.qmd
+  - text: R包
+    href: package.qmd
+  - text: 函数
+    href: function.qmd
+  - text: 常用函数
+    href: common_function.qmd
+  - text: 数据读写
+    href: data_io.qmd
+  - text: 向量化
+    href: vector.qmd

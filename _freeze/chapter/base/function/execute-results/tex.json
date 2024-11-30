@@ -1,0 +1,21 @@
+{
+  "hash": "3d97bb0ffe8110c30cac718a075d4038",
+  "result": {
+    "engine": "knitr",
+    "markdown": "## 什么是函数\n\nR语言的函数是一种特殊的程序，它可以接收参数，并返回一个结果。函数的返回值是函数运行完成后返回给调用者的结果。\n\n假设你有一个名为`add()`的函数，它可以接收两个数字，打印它们的差，并返回它们的和。你可以用以下代码定义这个函数：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nadd <- function(x, y) {\n  print(x-y)\n  return (x + y)\n}\n```\n:::\n\n\n\n\n\n\n这个函数定义中，我们用`function()`关键字来定义函数，然后在括号内指定函数的参数，在花括号内指定函数的运算过程。最后，我们使用`return()`函数来指定函数的返回值。\n\n在这个例子中，函数`add()`的两个参数分别是`x`和`y`，返回值是它们的和。你可以用以下代码来调用这个函数：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nresult <- add(3, 5)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] -2\n```\n\n\n:::\n:::\n\n\n\n\n\n\n在这里，我们将3和5作为参数传递给函数`add()`，然后将它们相加，并将结果保存到变量`result`中。\n\n## 函数的构成要素\n\n一个函数通常由以下几个要素构成：\n\n1.  函数名：这是函数的标识符，用于调用函数。\n\n2.  参数（或形参）：这是函数的输入，函数在执行时需要根据参数进行计算。\n\n3.  函数体：这是函数执行的代码块，包含了函数所要完成的操作。\n\n4.  返回值（或实参）：这是函数的输出，函数执行完成后会返回一个值。\n\n这些要素构成了一个完整的函数，它们各自扮演着不同的角色，协同工作以完成函数的目标。\n\n例如，如果你要定义一个函数来计算数据集的平均值，那么可以这样写：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmean <- function(x) {\n  sum = sum(x)\n  n = length(x)\n  return(sum / n)\n}\n```\n:::\n\n\n\n\n\n\n这个函数的名称是`mean`，它有一个参数`x`，函数体中包含了计算平均值的代码，最后会返回计算结果。\n\n## R语言函数的分类\n\nR语言中的函数可以分为几大类：\n\n1.  基础包中的函数：这些函数是R语言的内置函数，包括常见的数学运算、统计分析、数据处理和可视化等操作。例如，mean()函数可以计算数据集的平均值，plot()函数可以绘制数据的图形。\n\n2.  包中的函数：R语言中有许多第三方包，这些包提供了额外的函数和功能。例如，ggplot2包提供了用于绘制复杂图形的函数，dplyr包提供了高效的数据处理函数。要使用这些函数，需要先安装并加载相应的包。\n\n3.  用户自定义函数：这些函数是用户自己定义的，用于执行特定的任务。例如，如果你有一个复杂的分析流程，可以将这个流程封装成一个函数，以便在需要时调用。\n\n## 函数示例\n\n如下代码定义了一个名叫f1的函数，作用是打印两个数的和，返回两个数的差。\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nf1 <- function(x, y) {\n  print(x + y)\n  return (x - y)\n}\n```\n:::\n\n\n\n\n\n\n在这个例子中，我们使用`print()`函数打印出两个数的和，并使用`return()`函数返回两个数的差。\n\n你可以用以下代码来调用这个函数：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nresult <- f1(3, 5)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 8\n```\n\n\n:::\n\n```{.r .cell-code}\nresult\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] -2\n```\n\n\n:::\n:::\n\n\n\n\n\n\n在这里，我们将3和5作为参数传递给函数`f1()`，然后函数会先打印出两个数的和，再返回两个数的差。执行完这个代码后，变量`result`的值为-2。\n\n## 定义函数可以不写return吗？\n\n是的，在R语言中，定义函数时可以不写`return()`函数。如果函数没有使用`return()`函数指定返回值，则函数会自动返回最后一个计算结果作为返回值。例如，假设你有一个名为`add()`的函数，它可以接收两个数字，并返回它们的和。你可以用以下代码定义这个函数：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nadd <- function(x, y) {\n x + y\n}\n```\n:::\n\n\n\n\n\n\n在这个例子中，我们省略了`return()`函数，直接将两个数的和作为函数的返回值。你可以用以下代码来调用这个函数：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nresult <- add(3, 5)\nresult\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 8\n```\n\n\n:::\n:::\n\n\n\n\n\n\n在这里，我们将3和5作为参数传递给函数`add()`，函数会自动返回它们的和。执行完这个代码后，变量`result`的值为8。\n\n## 函数的调用\n\n在R语言中，可以通过使用函数名称来调用函数。例如，要调用mean()函数，可以这样写：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmean(1:10)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 5.5\n```\n\n\n:::\n:::\n\n\n\n\n\n\n当然，你也可以在调用函数时向函数传递额外的参数。例如，要计算一个数据集的中位数，可以这样写：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nmedian(c(1:10,NA), na.rm = TRUE)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 5.5\n```\n\n\n:::\n:::\n\n\n\n\n\n\n在这个例子中，我们向median()函数传递了一个参数，即na.rm = TRUE。这个参数告诉R语言在计算中位数时忽略数据集中的缺失值。\n\n## 写一个计算偏度和峰度的函数\n\n下面是一个计算偏度和峰度的函数：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nskew_kurtosis <- function(x) {\n\n  skew = sum((x - mean(x))^3) / (length(x) * sd(x)^3)\n\n  kurtosis = sum((x - mean(x))^4) / (length(x) * sd(x)^4) - 3\n\n  return(c(skew, kurtosis))\n\n}\n```\n:::\n\n\n\n\n\n\n这个函数接收一个向量x作为参数，并计算x的偏度和峰度。计算完成后，会将结果放在一个向量中返回。\n\n例如，要计算一个数据集的偏度和峰度，可以这样写：\n\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n  skew_kurtosis(1:10)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1]  0.000000 -1.561636\n```\n\n\n:::\n:::\n\n\n\n\n\n\n这个函数会计算data的偏度和峰度，并将结果作为向量返回。\n",
+    "supporting": [
+      "function_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

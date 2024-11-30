@@ -1,0 +1,60 @@
+# 常用函数
+
+## 常数
+
+```{r}
+month.abb
+month.name
+letters
+LETTERS
+```
+
+## 基础
+
+```{r}
+c(1,2,3,4) # 拼接
+
+seq(0,1,by=0.25) #序列
+
+length(1:10)
+
+rep(1:2,each=5)
+rep(1:2,time=5)
+
+head(1:10)
+tail(1:10)
+is.na(c(1:10,NA))
+
+class(mtcars)
+dim(mtcars)
+names(mtcars)
+
+paste(2011,1:5,01,sep='-')
+
+str(mtcars)
+summary(mtcars)
+```
+
+## 统计
+
+------------------------------------------------------------------------
+
+```{r}
+#统计
+x=rnorm(1000) #随机数
+head(x)
+
+min(x)
+max(x)
+range(x)
+
+mean(x)
+median(x)
+sd(x)
+var(x)
+quantile(x)
+fivenum(x)
+
+table(mtcars$cyl)
+table(mtcars$cyl,mtcars$cyl)
+```

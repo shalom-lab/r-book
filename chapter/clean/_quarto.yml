@@ -1,0 +1,17 @@
+part: 清理篇
+chapters:
+  - text: tidyverse
+    href: tidyverse.qmd
+  - text: 管道符%>%
+    href: pipe.qmd
+  - text: 必会操作
+    href: dplyr.qmd
+  - text: 日期处理
+    href: date.qmd
+  - text: 字符串处理
+    href: string.qmd
+  - text: 常用技巧
+    href: tips.qmd
+  - text: 长宽数据转换
+    href: wider_longer.qmd
+  

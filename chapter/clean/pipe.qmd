@@ -1,0 +1,57 @@
+## 管道符-%\>%
+
+### 常见用法
+
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+
+sub<-function(x,y){ #自定义求差函数
+  x-y
+}
+
+sub(1,2)
+sub(2,3)
+```
+
+```{r}
+#借用管道符调用
+1 %>% sub(2)
+2 %>% sub(3)
+#连续调用
+3 %>% sub(1) %>% sub(2)
+
+
+mean(1:10)
+1:10 %>% mean() %>% class()
+```
+
+### 指定位置
+
+```{r}
+1 %>% sub(2,.)
+1 %>% sub(.,2)
+1 %>% sub(.,.)
+
+mean(c(1:10,NA))
+mean(c(1:10,NA),na.rm=TRUE)
+TRUE %>% mean(c(1:10,NA),na.rm=.)
+```
+
+### 实战应用
+
+管道符的优势即是连续调用
+
+```{r}
+mtcars %>%
+  filter(cyl==4) %>%
+  mutate(mpg2=mpg+100) %>%
+  select(cyl,mpg,mpg2) %>%
+  head()
+```
+
+等价于
+```{r}
+head(select(mutate(filter(mtcars,cyl==4),mpg2=mpg+100),cyl,mpg,mpg2))
+```

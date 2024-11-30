@@ -1,0 +1,95 @@
+# 常用技巧
+
+## 类型转换
+
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+data<-data.frame(id=1:12,age=c(0.5,1.2,3,4,5,6),sex=c('男','女'),virus=c('1','0'))
+data
+```
+
+```{r}
+#| context: setup
+data_new<-data %>%
+  mutate(id=as.character(id), #转为字符型
+         virus=as.numeric(virus)) #转为数值型
+data_new
+```
+
+## 连续转分类/水平转换
+
+::: callout-tip
+## 提示
+
+`ifelse()`和`case_when()`函数二选一。简单二分类用`ifelse()`即可，复杂情况推荐用`case_when()`可避免多个`ifelse()`嵌套结构。
+:::
+
+```{r}
+data_new %>%
+  mutate(agegroup=ifelse(age<1,'0~1y',
+                         ifelse(age<2,'1~2y','2y+'))) %>%
+  mutate(agegroup2=case_when(age<1~'0~1y',
+                             age<2~'1~2y',
+                             T~'2y+')) %>%
+  mutate(sex2=ifelse(sex=='男','Male','Female'),
+         sex3=case_when(sex=='男'~'Male',
+                        T~'Female'))
+```
+
+::: callout-tip
+## 提示
+
+男性和女性贫血判定的界值不同，根据性别和界值判断是否贫血。
+:::
+
+```{r}
+data<-data.frame(
+  sex=rep(c('Female','Male'),3),
+  Hb=runif(6,100,150) %>% round())
+
+data
+
+data %>%
+  mutate(cutoff=ifelse(sex=='Female',115,130),
+         Hb_2=ifelse(Hb<=cutoff,'abnormal','normal')) %>%
+  select(-cutoff)
+
+data %>%
+  mutate(Hb_2=case_when(
+    Hb<=115 & sex=='Female'~'abnormal',
+    Hb<=130 & sex=='Male'~'abnormal',
+    T~'normal'
+  ))
+```
+
+## 按层划分连续转分类
+
+::: callout-tip
+## 提示
+分别针对男性和女性按照血压/血脂/血糖高低划分为四组(Q1,Q2,Q3,Q4)
+:::
+
+```{r}
+library(tidyverse)
+df <- data.frame(
+  gender = rep(c("Male", "Female"), each = 200),
+  blood_pre = round(runif(400, min = 90, max = 140)),
+  blood_lip = round(runif(400, min = 1.5, max = 5.0),1),
+  blood_sug = round(runif(400, min = 3.5, max = 7.5),1)
+)
+
+# 定义函数计算四分位数
+gen_quantile <- function(x) {
+  quantiles <- quantile(x, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE)
+  cut(x, breaks = quantiles, include.lowest = TRUE, labels = c("Q1", "Q2", "Q3", "Q4"))
+}
+
+# 按性别分组并计算四分位数
+df %>%
+  group_by(gender) %>%
+  mutate(pre_group = gen_quantile(blood_pre),
+         lip_group = gen_quantile(blood_lip),
+         sug_group = gen_quantile(blood_sug))
+```

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; 安装包 – R语言入门指南</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapter/base/function.html" rel="next">
+<link href="../../chapter/base/dataframe.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/base/install.html">基础篇</a></li><li class="breadcrumb-item"><a href="../../chapter/base/package.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R包</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">R语言入门指南</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/shalom-lab/r-book/" title="源代码" class="quarto-navigation-tool px-1" aria-label="源代码"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">前言</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">基础篇</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">安装</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/rstudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/operator.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">运算符</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/data_type.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">数据类型</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/dataframe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">数据框</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/package.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R包</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/common_function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">常用函数</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/data_io.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">数据读写</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/base/vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">向量化</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">清理篇</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">tidyverse</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/pipe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">管道符%&gt;%</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">必会操作</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/date.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">日期处理</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/string.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">字符串处理</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/tips.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">常用技巧</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/clean/wider_longer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#加载包" id="toc-加载包" class="nav-link active" data-scroll-target="#加载包"><span class="header-section-number">6.1</span> 加载包</a></li>
+  <li><a href="#调用包里的函数" id="toc-调用包里的函数" class="nav-link" data-scroll-target="#调用包里的函数"><span class="header-section-number">6.2</span> 调用包里的函数</a></li>
+  <li><a href="#不加载调用包中的函数" id="toc-不加载调用包中的函数" class="nav-link" data-scroll-target="#不加载调用包中的函数"><span class="header-section-number">6.3</span> 不加载调用包中的函数</a></li>
+  <li><a href="#卸载包" id="toc-卸载包" class="nav-link" data-scroll-target="#卸载包"><span class="header-section-number">6.4</span> 卸载包</a></li>
+  <li><a href="#更新包" id="toc-更新包" class="nav-link" data-scroll-target="#更新包"><span class="header-section-number">6.5</span> 更新包</a>
+  <ul class="collapse">
+  <li><a href="#查看已安装的包" id="toc-查看已安装的包" class="nav-link" data-scroll-target="#查看已安装的包"><span class="header-section-number">6.5.1</span> 查看已安装的包</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/base/package.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/base/install.html">基础篇</a></li><li class="breadcrumb-item"><a href="../../chapter/base/package.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">R包</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">安装包</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>在R语言中，包（packages）是一种非常重要的概念，它们包含了一组函数、数据集和文档，用于解决特定的问题或执行特定的任务。R语言本身提供了一些基本的函数和数据结构，但通过安装和加载不同的包，你可以扩展R的功能，以便更好地满足你的需求。本文将围绕R语言中的包进行入门介绍，以及如何使用这些包中的函数。</p>
+<p>在R中，你可以使用<code>install.packages()</code>函数来安装新的包。例如，要安装一个名为<code>ggplot2</code>的包，你可以执行以下命令：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>) <span class="co">#最常用的包安装方式，从CRAN上安装包</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 部分R包存放在github上,安装方式</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">'shalom-lab/pcolor'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 部分生信分析的R包的安装方式</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"GenomicFeatures"</span>, <span class="st">"AnnotationDbi"</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="加载包" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="加载包"><span class="header-section-number">6.1</span> 加载包</h2>
+<p>安装包后，你需要使用<code>library()</code>函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载<code>ggplot2</code>包，可以执行以下命令：</p>
+<div class="cell" data-context="setup">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="调用包里的函数" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="调用包里的函数"><span class="header-section-number">6.2</span> 调用包里的函数</h2>
+<p>在加载包之后，即可调用包里的函数。</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="at">y =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">7</span>, <span class="dv">20</span>, <span class="dv">12</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 使用ggplot2创建散点图</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="package_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="不加载调用包中的函数" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="不加载调用包中的函数"><span class="header-section-number">6.3</span> 不加载调用包中的函数</h2>
+<p>一般来说，调用包里的函数前要用<code>library(包名)</code>函数先加载包，随后调用函数。 一种不加载包，直接调用函数的方法如下：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">select</span>(mtcars,<span class="fu">c</span>(<span class="st">'mpg'</span>,<span class="st">'cyl'</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["mpg"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["cyl"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"21.0","2":"6","_rn_":"Mazda RX4"},{"1":"21.0","2":"6","_rn_":"Mazda RX4 Wag"},{"1":"22.8","2":"4","_rn_":"Datsun 710"},{"1":"21.4","2":"6","_rn_":"Hornet 4 Drive"},{"1":"18.7","2":"8","_rn_":"Hornet Sportabout"},{"1":"18.1","2":"6","_rn_":"Valiant"},{"1":"14.3","2":"8","_rn_":"Duster 360"},{"1":"24.4","2":"4","_rn_":"Merc 240D"},{"1":"22.8","2":"4","_rn_":"Merc 230"},{"1":"19.2","2":"6","_rn_":"Merc 280"},{"1":"17.8","2":"6","_rn_":"Merc 280C"},{"1":"16.4","2":"8","_rn_":"Merc 450SE"},{"1":"17.3","2":"8","_rn_":"Merc 450SL"},{"1":"15.2","2":"8","_rn_":"Merc 450SLC"},{"1":"10.4","2":"8","_rn_":"Cadillac Fleetwood"},{"1":"10.4","2":"8","_rn_":"Lincoln Continental"},{"1":"14.7","2":"8","_rn_":"Chrysler Imperial"},{"1":"32.4","2":"4","_rn_":"Fiat 128"},{"1":"30.4","2":"4","_rn_":"Honda Civic"},{"1":"33.9","2":"4","_rn_":"Toyota Corolla"},{"1":"21.5","2":"4","_rn_":"Toyota Corona"},{"1":"15.5","2":"8","_rn_":"Dodge Challenger"},{"1":"15.2","2":"8","_rn_":"AMC Javelin"},{"1":"13.3","2":"8","_rn_":"Camaro Z28"},{"1":"19.2","2":"8","_rn_":"Pontiac Firebird"},{"1":"27.3","2":"4","_rn_":"Fiat X1-9"},{"1":"26.0","2":"4","_rn_":"Porsche 914-2"},{"1":"30.4","2":"4","_rn_":"Lotus Europa"},{"1":"15.8","2":"8","_rn_":"Ford Pantera L"},{"1":"19.7","2":"6","_rn_":"Ferrari Dino"},{"1":"15.0","2":"8","_rn_":"Maserati Bora"},{"1":"21.4","2":"4","_rn_":"Volvo 142E"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>也即采用<code>包名::函数名</code>的方式直接调用某个包里的函数，这段代码没有加载<code>dplyr</code>包，而是用<code>::</code>的方式直接调用了<code>dplyr</code>包里的<code>select</code>函数,该函数的作用是选择数据框的部分列作为新的数据框返回，相当于取数据框的子集。</p>
+</section>
+<section id="卸载包" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="卸载包"><span class="header-section-number">6.4</span> 卸载包</h2>
+<p>要卸载一个已安装的包，你可以使用<code>remove.packages()</code>函数。以下是卸载包的步骤：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 卸载包</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">remove.packages</span>(<span class="st">"ggplot2"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="更新包" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="更新包"><span class="header-section-number">6.5</span> 更新包</h2>
+<p>要更新已安装的包，你可以使用<code>update.packages()</code>函数。以下是更新包的步骤：</p>
+<ol type="1">
+<li>如果你希望更新所有可用的包，可以在<code>update.packages()</code>函数中设置<code>ask</code>参数为<code>FALSE</code>，然后运行函数。</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新所有可用的包（不询问）</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>如果你只想更新特定的包，可以提供包名称的向量作为参数。例如，要更新”ggplot2”和”dplyr”包：</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 更新特定的包</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">update.packages</span>(<span class="at">ask =</span> <span class="cn">FALSE</span>, <span class="at">lib.loc =</span> <span class="fu">.libPaths</span>(), <span class="at">oldPkgs =</span> <span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"dplyr"</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>上述方法允许你卸载和更新R包，确保你的R环境中始终使用最新版本的包。在数据分析和编程中，定期更新包非常重要，因为更新通常包含了错误修复和新功能。</p>
+<section id="查看已安装的包" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="查看已安装的包"><span class="header-section-number">6.5.1</span> 查看已安装的包</h3>
+<p>你可以使用<code>installed.packages()</code>函数来查看已经安装的包列表：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>installed_packages <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>installed_packages</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Package"],"name":[1],"type":["chr"],"align":["left"]},{"label":["LibPath"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Version"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Priority"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Depends"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Imports"],"name":[6],"type":["chr"],"align":["left"]},{"label":["LinkingTo"],"name":[7],"type":["chr"],"align":["left"]},{"label":["Suggests"],"name":[8],"type":["chr"],"align":["left"]},{"label":["Enhances"],"name":[9],"type":["chr"],"align":["left"]},{"label":["License"],"name":[10],"type":["chr"],"align":["left"]},{"label":["License_is_FOSS"],"name":[11],"type":["chr"],"align":["left"]},{"label":["License_restricts_use"],"name":[12],"type":["chr"],"align":["left"]},{"label":["OS_type"],"name":[13],"type":["chr"],"align":["left"]},{"label":["MD5sum"],"name":[14],"type":["chr"],"align":["left"]},{"label":["NeedsCompilation"],"name":[15],"type":["chr"],"align":["left"]},{"label":["Built"],"name":[16],"type":["chr"],"align":["left"]}],"data":[{"1":"abind","2":"D:/Program Files/R/R-4.4.2/library","3":"1.4-8","4":"NA","5":"R (>= 1.5.0)","6":"methods, utils","7":"NA","8":"NA","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.1","_rn_":"abind"},{"1":"ambient","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.2","4":"NA","5":"R (>= 3.0.2)","6":"rlang, grDevices, graphics, stats","7":"cpp11 (>= 0.4.2)","8":"covr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"ambient"},{"1":"askpass","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.1","4":"NA","5":"NA","6":"sys (>= 2.1)","7":"NA","8":"testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"askpass"},{"1":"backports","2":"D:/Program Files/R/R-4.4.2/library","3":"1.5.0","4":"NA","5":"R (>= 3.0.0)","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"backports"},{"1":"base","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"NA","7":"NA","8":"methods","9":"chron, date, round","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"4.4.2","_rn_":"base"},{"1":"base64enc","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1-3","4":"NA","5":"R (>= 2.9.0)","6":"NA","7":"NA","8":"NA","9":"png","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"base64enc"},{"1":"BayesFactor","2":"D:/Program Files/R/R-4.4.2/library","3":"0.9.12-4.7","4":"NA","5":"R (>= 3.2.0), coda, Matrix (>= 1.1-1)","6":"pbapply, mvtnorm, stringr, utils, graphics, MatrixModels, Rcpp\\n(>= 0.11.2), methods, hypergeo","7":"Rcpp (>= 0.11.2), RcppEigen (>= 0.3.2.2.0)","8":"doMC, foreach, testthat, knitr, markdown, rmarkdown, arm,\\nlme4, xtable, languageR","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"BayesFactor"},{"1":"bayestestR","2":"D:/Program Files/R/R-4.4.2/library","3":"0.15.0","4":"NA","5":"R (>= 3.6)","6":"insight (>= 0.20.5), datawizard (>= 0.13.0), graphics,\\nmethods, stats, utils","7":"NA","8":"BayesFactor (>= 0.9.12-4.4), bayesQR, bayesplot, betareg, BH,\\nblavaan, bridgesampling, brms, collapse, curl, effectsize,\\nemmeans, gamm4, ggdist, ggplot2, glmmTMB, httr2, KernSmooth,\\nknitr, lavaan, lme4, logspline (>= 2.1.21), marginaleffects (>=\\n0.21.0), MASS, mclust, mediation, modelbased, ordbetareg,\\nparameters, patchwork, performance, quadprog, posterior,\\nRcppEigen, rmarkdown, rstan, rstanarm, see (>= 0.8.5),\\ntestthat, tweedie, withr","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"bayestestR"},{"1":"bit","2":"D:/Program Files/R/R-4.4.2/library","3":"4.5.0","4":"NA","5":"R (>= 3.4.0)","6":"NA","7":"NA","8":"testthat (>= 0.11.0), roxygen2, knitr, markdown, rmarkdown,\\nmicrobenchmark, bit64 (>= 4.0.0), ff (>= 4.0.0)","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"bit"},{"1":"bit64","2":"D:/Program Files/R/R-4.4.2/library","3":"4.5.2","4":"NA","5":"R (>= 3.0.1), bit (>= 4.0.0), utils, methods, stats","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"bit64"},{"1":"blob","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.4","4":"NA","5":"NA","6":"methods, rlang, vctrs (>= 0.2.1)","7":"NA","8":"covr, crayon, pillar (>= 1.2.1), testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"blob"},{"1":"boot","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3-31","4":"recommended","5":"R (>= 3.0.0), graphics, stats","6":"NA","7":"NA","8":"MASS, survival","9":"NA","10":"Unlimited","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"boot"},{"1":"broom","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.7","4":"NA","5":"R (>= 3.5)","6":"backports, dplyr (>= 1.0.0), generics (>= 0.0.2), glue,\\nlifecycle, purrr, rlang, stringr, tibble (>= 3.0.0), tidyr (>=\\n1.0.0)","7":"NA","8":"AER, AUC, bbmle, betareg (>= 3.2-1), biglm, binGroup, boot,\\nbtergm (>= 1.10.6), car (>= 3.1-2), carData, caret, cluster,\\ncmprsk, coda, covr, drc, e1071, emmeans, epiR, ergm (>=\\n3.10.4), fixest (>= 0.9.0), gam (>= 1.15), gee, geepack,\\nggplot2, glmnet, glmnetUtils, gmm, Hmisc, irlba, interp,\\njoineRML, Kendall, knitr, ks, Lahman, lavaan (>= 0.6.18),\\nleaps, lfe, lm.beta, lme4, lmodel2, lmtest (>= 0.9.38),\\nlsmeans, maps, margins, MASS, mclust, mediation, metafor, mfx,\\nmgcv, mlogit, modeldata, modeltests (>= 0.1.6), muhaz,\\nmultcomp, network, nnet, orcutt (>= 2.2), ordinal, plm, poLCA,\\npsych, quantreg, rmarkdown, robust, robustbase, rsample,\\nsandwich, spdep (>= 1.1), spatialreg, speedglm, spelling,\\nsurvey, survival (>= 3.6-4), systemfit, testthat (>= 2.1.0),\\ntseries, vars, zoo","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"broom"},{"1":"bslib","2":"D:/Program Files/R/R-4.4.2/library","3":"0.8.0","4":"NA","5":"R (>= 2.10)","6":"base64enc, cachem, fastmap (>= 1.1.1), grDevices, htmltools\\n(>= 0.5.8), jquerylib (>= 0.1.3), jsonlite, lifecycle, memoise\\n(>= 2.0.1), mime, rlang, sass (>= 0.4.9)","7":"NA","8":"bsicons, curl, fontawesome, future, ggplot2, knitr, magrittr,\\nrappdirs, rmarkdown (>= 2.7), shiny (> 1.8.1), testthat,\\nthematic, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"bslib"},{"1":"cachem","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.0","4":"NA","5":"NA","6":"rlang, fastmap (>= 1.2.0)","7":"NA","8":"testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"cachem"},{"1":"callr","2":"D:/Program Files/R/R-4.4.2/library","3":"3.7.6","4":"NA","5":"R (>= 3.4)","6":"processx (>= 3.6.1), R6, utils","7":"NA","8":"asciicast (>= 2.3.1), cli (>= 1.1.0), mockery, ps, rprojroot,\\nspelling, testthat (>= 3.2.0), withr (>= 2.3.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"callr"},{"1":"car","2":"D:/Program Files/R/R-4.4.2/library","3":"3.1-3","4":"NA","5":"R (>= 3.5.0), carData (>= 3.0-0)","6":"abind, Formula, MASS, mgcv, nnet, pbkrtest (>= 0.4-4),\\nquantreg, grDevices, utils, stats, graphics, lme4 (>=\\n1.1-27.1), nlme, scales","7":"NA","8":"alr4, boot, coxme, effects, knitr, leaps, lmtest, Matrix,\\nMatrixModels, ordinal, plotrix, mvtnorm, rgl (>= 0.111.3), rio,\\nsandwich, SparseM, survival, survey","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"car"},{"1":"carData","2":"D:/Program Files/R/R-4.4.2/library","3":"3.0-5","4":"NA","5":"R (>= 3.5.0)","6":"NA","7":"NA","8":"car (>= 3.0-0)","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"carData"},{"1":"cellranger","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.0","4":"NA","5":"R (>= 3.0.0)","6":"rematch, tibble","7":"NA","8":"covr, testthat (>= 1.0.0), knitr, rmarkdown","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"cellranger"},{"1":"circlize","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.16","4":"NA","5":"R (>= 4.0.0), graphics","6":"GlobalOptions (>= 0.1.2), shape, grDevices, utils, stats,\\ncolorspace, methods, grid","7":"NA","8":"knitr, dendextend (>= 1.0.1), ComplexHeatmap (>= 2.0.0),\\ngridBase, png, markdown, bezier, covr, rmarkdown","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"circlize"},{"1":"class","2":"D:/Program Files/R/R-4.4.2/library","3":"7.3-22","4":"recommended","5":"R (>= 3.0.0), stats, utils","6":"MASS","7":"NA","8":"NA","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"class"},{"1":"cli","2":"D:/Program Files/R/R-4.4.2/library","3":"3.6.3","4":"NA","5":"R (>= 3.4)","6":"utils","7":"NA","8":"callr, covr, crayon, digest, glue (>= 1.6.0), grDevices,\\nhtmltools, htmlwidgets, knitr, methods, mockery, processx, ps\\n(>= 1.3.4.9000), rlang (>= 1.0.2.9003), rmarkdown, rprojroot,\\nrstudioapi, testthat, tibble, whoami, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"cli"},{"1":"clipr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.8.0","4":"NA","5":"NA","6":"utils","7":"NA","8":"covr, knitr, rmarkdown, rstudioapi (>= 0.5), testthat (>=\\n2.0.0)","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"clipr"},{"1":"cluster","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.6","4":"recommended","5":"R (>= 3.5.0)","6":"graphics, grDevices, stats, utils","7":"NA","8":"MASS, Matrix","9":"mvoutlier, fpc, ellipse, sfsmisc","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"cluster"},{"1":"coda","2":"D:/Program Files/R/R-4.4.2/library","3":"0.19-4.1","4":"NA","5":"R (>= 2.14.0)","6":"lattice","7":"NA","8":"NA","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"coda"},{"1":"codetools","2":"D:/Program Files/R/R-4.4.2/library","3":"0.2-20","4":"recommended","5":"R (>= 2.1)","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"codetools"},{"1":"colorspace","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1-1","4":"NA","5":"R (>= 3.0.0), methods","6":"graphics, grDevices, stats","7":"NA","8":"datasets, utils, KernSmooth, MASS, kernlab, mvtnorm, vcd,\\ntcltk, shiny, shinyjs, ggplot2, dplyr, scales, grid, png, jpeg,\\nknitr, rmarkdown, RColorBrewer, rcartocolor, scico, viridis,\\nwesanderson","9":"NA","10":"BSD_3_clause + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"colorspace"},{"1":"colourpicker","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.0","4":"NA","5":"R (>= 3.1.0)","6":"ggplot2, htmltools, htmlwidgets (>= 0.7), jsonlite, miniUI (>=\\n0.1.1), shiny (>= 0.11.1), shinyjs (>= 2.0.0), utils","7":"NA","8":"knitr (>= 1.7), rmarkdown, rstudioapi (>= 0.5),\\nshinydisconnect","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"colourpicker"},{"1":"commonmark","2":"D:/Program Files/R/R-4.4.2/library","3":"1.9.2","4":"NA","5":"NA","6":"NA","7":"NA","8":"curl, testthat, xml2","9":"NA","10":"BSD_2_clause + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"commonmark"},{"1":"compiler","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"NA","7":"NA","8":"NA","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"4.4.2","_rn_":"compiler"},{"1":"conflicted","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.0","4":"NA","5":"R (>= 3.2)","6":"cli (>= 3.4.0), memoise, rlang (>= 1.0.0)","7":"NA","8":"callr, covr, dplyr, Matrix, methods, pkgload, testthat (>=\\n3.0.0), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"conflicted"},{"1":"contfrac","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1-12","4":"NA","5":"NA","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"contfrac"},{"1":"corrplot","2":"D:/Program Files/R/R-4.4.2/library","3":"0.95","4":"NA","5":"NA","6":"NA","7":"NA","8":"seriation, knitr, RColorBrewer, rmarkdown, magrittr,\\nprettydoc, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"corrplot"},{"1":"cowplot","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.3","4":"NA","5":"R (>= 3.5.0)","6":"ggplot2 (>= 3.4.0), grid, gtable, grDevices, methods, rlang,\\nscales","7":"NA","8":"Cairo, covr, dplyr, forcats, gridGraphics (>= 0.4-0), knitr,\\nlattice, magick, maps, PASWR, patchwork, rmarkdown, ragg,\\ntestthat (>= 1.0.0), tidyr, vdiffr (>= 0.3.0), VennDiagram","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"cowplot"},{"1":"cpp11","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5.0","4":"NA","5":"R (>= 3.6.0)","6":"NA","7":"NA","8":"bench, brio, callr, cli, covr, decor, desc, ggplot2, glue,\\nknitr, lobstr, mockery, progress, rmarkdown, scales, Rcpp,\\ntestthat (>= 3.2.0), tibble, utils, vctrs, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"cpp11"},{"1":"crayon","2":"D:/Program Files/R/R-4.4.2/library","3":"1.5.3","4":"NA","5":"NA","6":"grDevices, methods, utils","7":"NA","8":"mockery, rstudioapi, testthat, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"crayon"},{"1":"crosstalk","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.1","4":"NA","5":"NA","6":"htmltools (>= 0.3.6), jsonlite, lazyeval, R6","7":"NA","8":"shiny, ggplot2, testthat (>= 2.1.0), sass, bslib","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"crosstalk"},{"1":"curl","2":"D:/Program Files/R/R-4.4.2/library","3":"6.0.1","4":"NA","5":"R (>= 3.0.0)","6":"NA","7":"NA","8":"spelling, testthat (>= 1.0.0), knitr, jsonlite, later,\\nrmarkdown, httpuv (>= 1.4.4), webutils","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"curl"},{"1":"data.table","2":"D:/Program Files/R/R-4.4.2/library","3":"1.16.2","4":"NA","5":"R (>= 3.3.0)","6":"methods","7":"NA","8":"bit64 (>= 4.0.0), bit (>= 4.0.4), R.utils, xts, zoo (>=\\n1.8-1), yaml, knitr, markdown","9":"NA","10":"MPL-2.0 | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"data.table"},{"1":"datasets","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"NA","7":"NA","8":"NA","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"4.4.2","_rn_":"datasets"},{"1":"datawizard","2":"D:/Program Files/R/R-4.4.2/library","3":"0.13.0","4":"NA","5":"R (>= 3.6)","6":"insight (>= 0.20.5), stats, utils","7":"NA","8":"bayestestR, boot, brms, curl, data.table, dplyr (>= 1.1),\\neffectsize, emmeans, gamm4, ggplot2 (>= 3.5.0), gt, haven,\\nhttr, knitr, lme4, mediation, modelbased, parameters (>=\\n0.21.7), poorman (>= 0.2.7), psych, readxl, readr, rio,\\nrmarkdown, rstanarm, see, testthat (>= 3.2.1), tibble, tidyr,\\nwithr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"datawizard"},{"1":"DBI","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.3","4":"NA","5":"methods, R (>= 3.0.0)","6":"NA","7":"NA","8":"arrow, blob, covr, DBItest, dbplyr, downlit, dplyr, glue,\\nhms, knitr, magrittr, nanoarrow (>= 0.3.0.1), RMariaDB,\\nrmarkdown, rprojroot, RSQLite (>= 1.1-2), testthat (>= 3.0.0),\\nvctrs, xml2","9":"NA","10":"LGPL (>= 2.1)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"DBI"},{"1":"dbplyr","2":"D:/Program Files/R/R-4.4.2/library","3":"2.5.0","4":"NA","5":"R (>= 3.6)","6":"blob (>= 1.2.0), cli (>= 3.6.1), DBI (>= 1.1.3), dplyr (>=\\n1.1.2), glue (>= 1.6.2), lifecycle (>= 1.0.3), magrittr,\\nmethods, pillar (>= 1.9.0), purrr (>= 1.0.1), R6 (>= 2.2.2),\\nrlang (>= 1.1.1), tibble (>= 3.2.1), tidyr (>= 1.3.0),\\ntidyselect (>= 1.2.1), utils, vctrs (>= 0.6.3), withr (>=\\n2.5.0)","7":"NA","8":"bit64, covr, knitr, Lahman, nycflights13, odbc (>= 1.4.2),\\nRMariaDB (>= 1.2.2), rmarkdown, RPostgres (>= 1.4.5),\\nRPostgreSQL, RSQLite (>= 2.3.1), testthat (>= 3.1.10)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"dbplyr"},{"1":"deldir","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0-4","4":"NA","5":"R (>= 3.5.0)","6":"graphics, grDevices","7":"NA","8":"polyclip","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"deldir"},{"1":"Deriv","2":"D:/Program Files/R/R-4.4.2/library","3":"4.1.6","4":"NA","5":"NA","6":"methods","7":"NA","8":"testthat (>= 0.11.0)","9":"NA","10":"GPL (>= 3)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"Deriv"},{"1":"deSolve","2":"D:/Program Files/R/R-4.4.2/library","3":"1.40","4":"NA","5":"R (>= 3.3.0)","6":"methods, graphics, grDevices, stats","7":"NA","8":"scatterplot3d, FME","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"deSolve"},{"1":"digest","2":"D:/Program Files/R/R-4.4.2/library","3":"0.6.37","4":"NA","5":"R (>= 3.3.0)","6":"utils","7":"NA","8":"tinytest, simplermarkdown","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"digest"},{"1":"doBy","2":"D:/Program Files/R/R-4.4.2/library","3":"4.6.24","4":"NA","5":"R (>= 4.2.0), methods","6":"boot, broom, cowplot, Deriv, dplyr, ggplot2, MASS, Matrix,\\nmodelr, microbenchmark, rlang, tibble, tidyr,","7":"NA","8":"geepack, knitr, lme4, markdown, multcomp, pbkrtest (>=\\n0.5.2), survival, testthat (>= 2.1.0)","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"doBy"},{"1":"dplyr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.4","4":"NA","5":"R (>= 3.5.0)","6":"cli (>= 3.4.0), generics, glue (>= 1.3.2), lifecycle (>=\\n1.0.3), magrittr (>= 1.5), methods, pillar (>= 1.9.0), R6,\\nrlang (>= 1.1.0), tibble (>= 3.2.0), tidyselect (>= 1.2.0),\\nutils, vctrs (>= 0.6.4)","7":"NA","8":"bench, broom, callr, covr, DBI, dbplyr (>= 2.2.1), ggplot2,\\nknitr, Lahman, lobstr, microbenchmark, nycflights13, purrr,\\nrmarkdown, RMySQL, RPostgreSQL, RSQLite, stringi (>= 1.7.6),\\ntestthat (>= 3.1.5), tidyr (>= 1.3.0), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"dplyr"},{"1":"DT","2":"D:/Program Files/R/R-4.4.2/library","3":"0.33","4":"NA","5":"NA","6":"htmltools (>= 0.3.6), htmlwidgets (>= 1.3), httpuv, jsonlite\\n(>= 0.9.16), magrittr, crosstalk, jquerylib, promises","7":"NA","8":"knitr (>= 1.8), rmarkdown, shiny (>= 1.6), bslib, future,\\ntestit, tibble","9":"NA","10":"GPL-3 | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"DT"},{"1":"dtplyr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.1","4":"NA","5":"R (>= 3.3)","6":"cli (>= 3.4.0), data.table (>= 1.13.0), dplyr (>= 1.1.0),\\nglue, lifecycle, rlang (>= 1.0.4), tibble, tidyselect (>=\\n1.2.0), vctrs (>= 0.4.1)","7":"NA","8":"bench, covr, knitr, rmarkdown, testthat (>= 3.1.2), tidyr (>=\\n1.1.0), waldo (>= 0.3.1)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"dtplyr"},{"1":"effectsize","2":"D:/Program Files/R/R-4.4.2/library","3":"0.8.9","4":"NA","5":"R (>= 3.6)","6":"bayestestR (>= 0.13.2), insight (>= 0.20.1), parameters (>=\\n0.22.0), performance (>= 0.12.0), datawizard (>= 0.11.0),\\nstats, utils","7":"NA","8":"correlation (>= 0.8.4), see (>= 0.8.0), afex, BayesFactor,\\nboot, brms, car, emmeans, gt, knitr, lavaan, lme4, lmerTest,\\nmgcv, parsnip, pwr, rmarkdown, rms, rstanarm, rstantools,\\ntestthat (>= 3.1.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"effectsize"},{"1":"elliptic","2":"D:/Program Files/R/R-4.4.2/library","3":"1.4-0","4":"NA","5":"R (>= 2.5.0)","6":"MASS","7":"NA","8":"emulator, calibrator (>= 1.2-8)","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"elliptic"},{"1":"evaluate","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.1","4":"NA","5":"R (>= 3.6.0)","6":"NA","7":"NA","8":"covr, ggplot2 (>= 3.3.6), lattice, methods, rlang, testthat\\n(>= 3.0.0), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"evaluate"},{"1":"fansi","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.6","4":"NA","5":"R (>= 3.1.0)","6":"grDevices, utils","7":"NA","8":"unitizer, knitr, rmarkdown","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"fansi"},{"1":"farver","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.2","4":"NA","5":"NA","6":"NA","7":"NA","8":"covr, testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"farver"},{"1":"fastmap","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.0","4":"NA","5":"NA","6":"NA","7":"NA","8":"testthat (>= 2.1.1)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"fastmap"},{"1":"fontawesome","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5.3","4":"NA","5":"R (>= 3.3.0)","6":"rlang (>= 1.0.6), htmltools (>= 0.5.1.1)","7":"NA","8":"covr, dplyr (>= 1.0.8), gt (>= 0.9.0), knitr (>= 1.31),\\ntestthat (>= 3.0.0), rsvg","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"fontawesome"},{"1":"forcats","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.0","4":"NA","5":"R (>= 3.4)","6":"cli (>= 3.4.0), glue, lifecycle, magrittr, rlang (>= 1.0.0),\\ntibble","7":"NA","8":"covr, dplyr, ggplot2, knitr, readr, rmarkdown, testthat (>=\\n3.0.0), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"forcats"},{"1":"foreign","2":"D:/Program Files/R/R-4.4.2/library","3":"0.8-87","4":"recommended","5":"R (>= 4.0.0)","6":"methods, utils, stats","7":"NA","8":"NA","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"foreign"},{"1":"Formula","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2-5","4":"NA","5":"R (>= 2.0.0), stats","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.0","_rn_":"Formula"},{"1":"fs","2":"D:/Program Files/R/R-4.4.2/library","3":"1.6.5","4":"NA","5":"R (>= 3.6)","6":"methods","7":"NA","8":"covr, crayon, knitr, pillar (>= 1.0.0), rmarkdown, spelling,\\ntestthat (>= 3.0.0), tibble (>= 1.1.0), vctrs (>= 0.3.0), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"fs"},{"1":"gargle","2":"D:/Program Files/R/R-4.4.2/library","3":"1.5.2","4":"NA","5":"R (>= 3.6)","6":"cli (>= 3.0.1), fs (>= 1.3.1), glue (>= 1.3.0), httr (>=\\n1.4.5), jsonlite, lifecycle, openssl, rappdirs, rlang (>=\\n1.1.0), stats, utils, withr","7":"NA","8":"aws.ec2metadata, aws.signature, covr, httpuv, knitr,\\nrmarkdown, sodium, spelling, testthat (>= 3.1.7)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"gargle"},{"1":"generics","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.3","4":"NA","5":"R (>= 3.2)","6":"methods","7":"NA","8":"covr, pkgload, testthat (>= 3.0.0), tibble, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"generics"},{"1":"ggeffects","2":"D:/Program Files/R/R-4.4.2/library","3":"1.7.2","4":"NA","5":"R (>= 3.6)","6":"graphics, insight (>= 0.19.8), stats, utils","7":"NA","8":"AER, aod, bayestestR, betareg, brglm2, brms, broom, car,\\ncarData, clubSandwich, datawizard (>= 0.9.0), effects (>=\\n4.2-2), emmeans (>= 1.8.9), fixest, gam, gamlss, gamm4, gee,\\ngeepack, ggplot2, ggrepel, GLMMadaptive, glmmTMB (>= 1.1.7),\\ngridExtra, gt, haven, htmltools, httr, jsonlite, knitr, lme4\\n(>= 1.1-35), logistf, marginaleffects (>= 0.19.0), MASS,\\nMatrix, mice, MCMCglmm, mgcv, nestedLogit (>= 0.3.0), nlme,\\nnnet, ordinal, parameters, parsnip, patchwork, pscl, quantreg,\\nrmarkdown, rms, robustbase, rstanarm, rstantools, sandwich,\\nsdmTMB (>= 0.4.0), see, sjlabelled (>= 1.1.2), sjstats, survey,\\nsurvival, testthat, tibble, tinytable (>= 0.1.0), vdiffr,\\nwithr, VGAM","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ggeffects"},{"1":"ggforce","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.2","4":"NA","5":"ggplot2 (>= 3.3.6), R (>= 3.3.0)","6":"Rcpp (>= 0.12.2), grid, scales, MASS, tweenr (>= 0.1.5),\\ngtable, rlang, polyclip, stats, grDevices, tidyselect, withr,\\nutils, lifecycle, cli, vctrs, systemfonts","7":"Rcpp, RcppEigen","8":"sessioninfo, concaveman, deldir, latex2exp, reshape2, units\\n(>= 0.4-6), covr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"ggforce"},{"1":"ggplot2","2":"D:/Program Files/R/R-4.4.2/library","3":"3.5.1","4":"NA","5":"R (>= 3.5)","6":"cli, glue, grDevices, grid, gtable (>= 0.1.1), isoband,\\nlifecycle (> 1.0.1), MASS, mgcv, rlang (>= 1.1.0), scales (>=\\n1.3.0), stats, tibble, vctrs (>= 0.6.0), withr (>= 2.5.0)","7":"NA","8":"covr, dplyr, ggplot2movies, hexbin, Hmisc, knitr, mapproj,\\nmaps, multcomp, munsell, nlme, profvis, quantreg, ragg (>=\\n1.2.6), RColorBrewer, rmarkdown, rpart, sf (>= 0.7-3), svglite\\n(>= 2.1.2), testthat (>= 3.1.2), vdiffr (>= 1.0.6), xml2","9":"sp","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ggplot2"},{"1":"ggpubr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.6.0","4":"NA","5":"R (>= 3.1.0), ggplot2 (>= 3.4.0)","6":"ggrepel (>= 0.9.2), grid, ggsci, stats, utils, tidyr (>=\\n1.3.0), purrr, dplyr (>= 0.7.1), cowplot (>= 1.1.1), ggsignif,\\nscales, gridExtra, glue, polynom, rlang (>= 0.4.6), rstatix (>=\\n0.7.2), tibble, magrittr","7":"NA","8":"grDevices, knitr, RColorBrewer, gtable, testthat","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ggpubr"},{"1":"ggrepel","2":"D:/Program Files/R/R-4.4.2/library","3":"0.9.6","4":"NA","5":"R (>= 3.0.0), ggplot2 (>= 2.2.0)","6":"grid, Rcpp, rlang (>= 0.3.0), scales (>= 0.5.0), withr (>=\\n2.5.0)","7":"Rcpp","8":"knitr, rmarkdown, testthat, svglite, vdiffr, gridExtra, ggpp,\\npatchwork, devtools, prettydoc, ggbeeswarm, dplyr, magrittr,\\nreadr, stringr","9":"NA","10":"GPL-3 | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"ggrepel"},{"1":"ggsci","2":"D:/Program Files/R/R-4.4.2/library","3":"3.2.0","4":"NA","5":"R (>= 3.5.0)","6":"ggplot2 (>= 2.0.0), grDevices, scales","7":"NA","8":"gridExtra, knitr, ragg, rmarkdown","9":"NA","10":"GPL (>= 3)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ggsci"},{"1":"ggsignif","2":"D:/Program Files/R/R-4.4.2/library","3":"0.6.4","4":"NA","5":"NA","6":"ggplot2 (>= 3.3.5)","7":"NA","8":"knitr, rmarkdown, testthat, vdiffr (>= 1.0.2)","9":"NA","10":"GPL-3 | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ggsignif"},{"1":"ggtext","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.2","4":"NA","5":"R (>= 3.5)","6":"ggplot2 (>= 3.3.0), grid, gridtext, rlang, scales","7":"NA","8":"cowplot, dplyr, glue, knitr, rmarkdown, testthat, vdiffr","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ggtext"},{"1":"GlobalOptions","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.2","4":"NA","5":"R (>= 3.3.0), methods","6":"utils","7":"NA","8":"testthat (>= 1.0.0), knitr, markdown, GetoptLong","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"GlobalOptions"},{"1":"glue","2":"D:/Program Files/R/R-4.4.2/library","3":"1.8.0","4":"NA","5":"R (>= 3.6)","6":"methods","7":"NA","8":"crayon, DBI (>= 1.2.0), dplyr, knitr, magrittr, rlang,\\nrmarkdown, RSQLite, testthat (>= 3.2.0), vctrs (>= 0.3.0),\\nwaldo (>= 0.5.3), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"glue"},{"1":"googledrive","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.1","4":"NA","5":"R (>= 3.6)","6":"cli (>= 3.0.0), gargle (>= 1.5.0), glue (>= 1.4.2), httr,\\njsonlite, lifecycle, magrittr, pillar (>= 1.9.0), purrr (>=\\n1.0.1), rlang (>= 1.0.2), tibble (>= 2.0.0), utils, uuid, vctrs\\n(>= 0.3.0), withr","7":"NA","8":"curl, dplyr (>= 1.0.0), knitr, mockr, rmarkdown, spelling,\\ntestthat (>= 3.1.3)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"googledrive"},{"1":"googlesheets4","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.1","4":"NA","5":"R (>= 3.6)","6":"cellranger, cli (>= 3.0.0), curl, gargle (>= 1.5.0), glue (>=\\n1.3.0), googledrive (>= 2.1.0), httr, ids, lifecycle, magrittr,\\nmethods, purrr, rematch2, rlang (>= 1.0.2), tibble (>= 2.1.1),\\nutils, vctrs (>= 0.2.3), withr","7":"NA","8":"readr, rmarkdown, spelling, testthat (>= 3.1.7)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"googlesheets4"},{"1":"graphics","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"grDevices","7":"NA","8":"NA","9":"vcd","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"graphics"},{"1":"grDevices","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"NA","7":"NA","8":"KernSmooth","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"grDevices"},{"1":"grid","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"grDevices, utils","7":"NA","8":"NA","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"grid"},{"1":"gridExtra","2":"D:/Program Files/R/R-4.4.2/library","3":"2.3","4":"NA","5":"NA","6":"gtable, grid, grDevices, graphics, utils","7":"NA","8":"ggplot2, egg, lattice, knitr, testthat","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"gridExtra"},{"1":"gridtext","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.5","4":"NA","5":"R (>= 3.5)","6":"curl, grid, grDevices, markdown, rlang, Rcpp, png, jpeg,\\nstringr, xml2","7":"Rcpp","8":"covr, knitr, rmarkdown, testthat, vdiffr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"gridtext"},{"1":"gtable","2":"D:/Program Files/R/R-4.4.2/library","3":"0.3.6","4":"NA","5":"R (>= 4.0)","6":"cli, glue, grid, lifecycle, rlang (>= 1.1.0), stats","7":"NA","8":"covr, ggplot2, knitr, profvis, rmarkdown, testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"gtable"},{"1":"haven","2":"D:/Program Files/R/R-4.4.2/library","3":"2.5.4","4":"NA","5":"R (>= 3.6)","6":"cli (>= 3.0.0), forcats (>= 0.2.0), hms, lifecycle, methods,\\nreadr (>= 0.1.0), rlang (>= 0.4.0), tibble, tidyselect, vctrs\\n(>= 0.3.0)","7":"cpp11","8":"covr, crayon, fs, knitr, pillar (>= 1.4.0), rmarkdown,\\ntestthat (>= 3.0.0), utf8","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"haven"},{"1":"hexbin","2":"D:/Program Files/R/R-4.4.2/library","3":"1.28.5","4":"NA","5":"R (>= 2.0.1), methods","6":"lattice, grid, graphics, grDevices, stats, utils","7":"NA","8":"marray, affy, Biobase, limma, knitr","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"hexbin"},{"1":"highr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.11","4":"NA","5":"R (>= 3.3.0)","6":"xfun (>= 0.18)","7":"NA","8":"knitr, markdown, testit","9":"NA","10":"GPL","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"highr"},{"1":"hms","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.3","4":"NA","5":"NA","6":"lifecycle, methods, pkgconfig, rlang (>= 1.0.2), vctrs (>=\\n0.3.8)","7":"NA","8":"crayon, lubridate, pillar (>= 1.1.0), testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"hms"},{"1":"htmltools","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5.8.1","4":"NA","5":"R (>= 2.14.1)","6":"base64enc, digest, fastmap (>= 1.1.0), grDevices, rlang (>=\\n1.0.0), utils","7":"NA","8":"Cairo, markdown, ragg, shiny, testthat, withr","9":"knitr","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"htmltools"},{"1":"htmlwidgets","2":"D:/Program Files/R/R-4.4.2/library","3":"1.6.4","4":"NA","5":"NA","6":"grDevices, htmltools (>= 0.5.7), jsonlite (>= 0.9.16), knitr\\n(>= 1.8), rmarkdown, yaml","7":"NA","8":"testthat","9":"shiny (>= 1.1)","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"htmlwidgets"},{"1":"httpuv","2":"D:/Program Files/R/R-4.4.2/library","3":"1.6.15","4":"NA","5":"R (>= 2.15.1)","6":"later (>= 0.8.0), promises, R6, Rcpp (>= 1.0.7), utils","7":"later, Rcpp","8":"callr, curl, testthat, websocket","9":"NA","10":"GPL (>= 2) | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"httpuv"},{"1":"httr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.4.7","4":"NA","5":"R (>= 3.5)","6":"curl (>= 5.0.2), jsonlite, mime, openssl (>= 0.8), R6","7":"NA","8":"covr, httpuv, jpeg, knitr, png, readr, rmarkdown, testthat\\n(>= 0.8.0), xml2","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"httr"},{"1":"hypergeo","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2-13","4":"NA","5":"R (>= 3.1.0),","6":"elliptic (>= 1.3-5), contfrac (>= 1.1-9), deSolve","7":"NA","8":"NA","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"hypergeo"},{"1":"ids","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.1","4":"NA","5":"NA","6":"openssl, uuid","7":"NA","8":"knitr, rcorpora, rmarkdown, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"ids"},{"1":"insight","2":"D:/Program Files/R/R-4.4.2/library","3":"0.20.5","4":"NA","5":"R (>= 3.6)","6":"methods, stats, utils","7":"NA","8":"AER, afex, aod, BayesFactor, bayestestR, bbmle, bdsmatrix,\\nbetareg, bife, biglm, BH, blavaan (>= 0.5-5), blme, boot, brms,\\nbroom, car, carData, censReg, cgam, clubSandwich, cobalt,\\ncoxme, cplm, crch, curl, datawizard, effectsize, emmeans, epiR,\\nestimatr, feisr, fixest (>= 0.11.2), fungible, fwb, gam,\\ngamlss, gamlss.data, gamm4, gbm, gee, geepack, geoR, ggeffects,\\nGLMMadaptive, glmmTMB (>= 1.1.10), glmtoolbox, gmnl, grDevices,\\ngt, httptest2, httr, httr2, interp, ivreg, JM, knitr, lavaan,\\nlavaSearch2, lfe, lme4, lmerTest, lmtest, logistf, logitr,\\nmarginaleffects, MASS, Matrix, mclogit, mclust, MCMCglmm,\\nmerTools, metaBMA, metadat, metafor, metaplus, mgcv, mice,\\nmlogit, mmrm, modelbased, multgee, MuMIn, nestedLogit, nlme,\\nnnet, nonnest2, ordinal, panelr, parameters, parsnip, pbkrtest,\\nperformance, plm, poorman, PROreg (>= 1.3.0), pscl, psych,\\nquantreg, Rcpp, RcppEigen, rmarkdown, rms, robustbase,\\nrobustlmm, rpart, rstanarm (>= 2.21.1), rstantools (>= 2.1.0),\\nrstudioapi, sandwich, serp, speedglm, splines, statmod, survey,\\nsurvival, svylme, testthat, tinytable (>= 0.1.0), TMB,\\ntruncreg, tweedie, VGAM, WeightIt, withr","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"insight"},{"1":"isoband","2":"D:/Program Files/R/R-4.4.2/library","3":"0.2.7","4":"NA","5":"NA","6":"grid, utils","7":"NA","8":"covr, ggplot2, knitr, magick, microbenchmark, rmarkdown, sf,\\ntestthat, xml2","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"isoband"},{"1":"janitor","2":"D:/Program Files/R/R-4.4.2/library","3":"2.2.0","4":"NA","5":"R (>= 3.1.2)","6":"dplyr (>= 1.0.0), hms, lifecycle, lubridate, magrittr, purrr,\\nrlang, stringi, stringr, snakecase (>= 0.9.2), tidyselect (>=\\n1.0.0), tidyr (>= 0.7.0)","7":"NA","8":"dbplyr, knitr, rmarkdown, RSQLite, sf, testthat (>= 3.0.0),\\ntibble, tidygraph","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"janitor"},{"1":"jpeg","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1-10","4":"NA","5":"R (>= 2.9.0)","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"jpeg"},{"1":"jquerylib","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.4","4":"NA","5":"NA","6":"htmltools","7":"NA","8":"testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"jquerylib"},{"1":"jsonlite","2":"D:/Program Files/R/R-4.4.2/library","3":"1.8.9","4":"NA","5":"methods","6":"NA","7":"NA","8":"httr, vctrs, testthat, knitr, rmarkdown, R.rsp, sf","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"jsonlite"},{"1":"KernSmooth","2":"D:/Program Files/R/R-4.4.2/library","3":"2.23-24","4":"recommended","5":"R (>= 2.5.0), stats","6":"NA","7":"NA","8":"MASS, carData","9":"NA","10":"Unlimited","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"KernSmooth"},{"1":"knitr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.49","4":"NA","5":"R (>= 3.6.0)","6":"evaluate (>= 0.15), highr (>= 0.11), methods, tools, xfun (>=\\n0.48), yaml (>= 2.1.19)","7":"NA","8":"bslib, codetools, DBI (>= 0.4-1), digest, formatR, gifski,\\ngridSVG, htmlwidgets (>= 0.7), jpeg, JuliaCall (>= 0.11.1),\\nmagick, litedown, markdown (>= 1.3), png, ragg, reticulate (>=\\n1.4), rgl (>= 0.95.1201), rlang, rmarkdown, sass, showtext,\\nstyler (>= 1.2.0), targets (>= 0.6.0), testit, tibble,\\ntikzDevice (>= 0.10), tinytex (>= 0.46), webshot, rstudioapi,\\nsvglite","9":"NA","10":"GPL","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"knitr"},{"1":"labeling","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.3","4":"NA","5":"NA","6":"stats, graphics","7":"NA","8":"NA","9":"NA","10":"MIT + file LICENSE | Unlimited","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.0","_rn_":"labeling"},{"1":"later","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.2","4":"NA","5":"NA","6":"Rcpp (>= 0.12.9), rlang","7":"Rcpp","8":"knitr, rmarkdown, testthat (>= 2.1.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"later"},{"1":"lattice","2":"D:/Program Files/R/R-4.4.2/library","3":"0.22-6","4":"recommended","5":"R (>= 4.0.0)","6":"grid, grDevices, graphics, stats, utils","7":"NA","8":"KernSmooth, MASS, latticeExtra, colorspace","9":"chron, zoo","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"lattice"},{"1":"lazyeval","2":"D:/Program Files/R/R-4.4.2/library","3":"0.2.2","4":"NA","5":"R (>= 3.1.0)","6":"NA","7":"NA","8":"knitr, rmarkdown (>= 0.2.65), testthat, covr","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"lazyeval"},{"1":"lifecycle","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.4","4":"NA","5":"R (>= 3.6)","6":"cli (>= 3.4.0), glue, rlang (>= 1.1.0)","7":"NA","8":"covr, crayon, knitr, lintr, rmarkdown, testthat (>= 3.0.1),\\ntibble, tidyverse, tools, vctrs, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"lifecycle"},{"1":"lme4","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1-35.5","4":"NA","5":"R (>= 3.6.0), Matrix, methods, stats","6":"graphics, grid, splines, utils, parallel, MASS, lattice, boot,\\nnlme (>= 3.1-123), minqa (>= 1.1.15), nloptr (>= 1.0.4)","7":"Rcpp (>= 0.10.5), RcppEigen (>= 0.3.3.9.4), Matrix (>=\\n1.2-3)","8":"knitr, rmarkdown, MEMSS, testthat (>= 0.8.1), ggplot2,\\nmlmRev, optimx (>= 2013.8.6), gamm4, pbkrtest, HSAUR3,\\nnumDeriv, car, dfoptim, mgcv, statmod, rr2, semEff, tibble,\\nmerDeriv","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"lme4"},{"1":"lubridate","2":"D:/Program Files/R/R-4.4.2/library","3":"1.9.3","4":"NA","5":"methods, R (>= 3.2)","6":"generics, timechange (>= 0.1.1)","7":"NA","8":"covr, knitr, rmarkdown, testthat (>= 2.1.0), vctrs (>= 0.5.0)","9":"chron, data.table, timeDate, tis, zoo","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"lubridate"},{"1":"magrittr","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0.3","4":"NA","5":"R (>= 3.4.0)","6":"NA","7":"NA","8":"covr, knitr, rlang, rmarkdown, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"magrittr"},{"1":"markdown","2":"D:/Program Files/R/R-4.4.2/library","3":"1.13","4":"NA","5":"R (>= 2.11.1)","6":"utils, commonmark (>= 1.9.0), xfun (>= 0.38)","7":"NA","8":"knitr, rmarkdown (>= 2.18), yaml, RCurl","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"markdown"},{"1":"MASS","2":"D:/Program Files/R/R-4.4.2/library","3":"7.3-61","4":"recommended","5":"R (>= 4.4.0), grDevices, graphics, stats, utils","6":"methods","7":"NA","8":"lattice, nlme, nnet, survival","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"MASS"},{"1":"Matrix","2":"D:/Program Files/R/R-4.4.2/library","3":"1.7-1","4":"recommended","5":"R (>= 4.4.0), methods","6":"grDevices, graphics, grid, lattice, stats, utils","7":"NA","8":"MASS, datasets, sfsmisc, tools","9":"SparseM, graph","10":"GPL (>= 2) | file LICENCE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"Matrix"},{"1":"MatrixModels","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5-3","4":"NA","5":"R (>= 3.6.0)","6":"stats, methods, Matrix (>= 1.6-0)","7":"NA","8":"NA","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"MatrixModels"},{"1":"mcmc","2":"D:/Program Files/R/R-4.4.2/library","3":"0.9-8","4":"NA","5":"R (>= 3.6.0)","6":"stats","7":"NA","8":"xtable, Iso","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"mcmc"},{"1":"MCMCpack","2":"D:/Program Files/R/R-4.4.2/library","3":"1.7-1","4":"NA","5":"R (>= 3.6), coda (>= 0.11-3), MASS, stats","6":"graphics, grDevices, lattice, methods, utils, mcmc, quantreg","7":"NA","8":"NA","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"MCMCpack"},{"1":"memoise","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0.1","4":"NA","5":"NA","6":"rlang (>= 0.4.10), cachem","7":"NA","8":"digest, aws.s3, covr, googleAuthR, googleCloudStorageR, httr,\\ntestthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"memoise"},{"1":"methods","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"utils, stats","7":"NA","8":"codetools","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"methods"},{"1":"mgcv","2":"D:/Program Files/R/R-4.4.2/library","3":"1.9-1","4":"recommended","5":"R (>= 3.6.0), nlme (>= 3.1-64)","6":"methods, stats, graphics, Matrix, splines, utils","7":"NA","8":"parallel, survival, MASS","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"mgcv"},{"1":"microbenchmark","2":"D:/Program Files/R/R-4.4.2/library","3":"1.5.0","4":"NA","5":"R (>= 3.2.0)","6":"graphics, stats","7":"NA","8":"ggplot2, multcomp, RUnit","9":"NA","10":"BSD_2_clause + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"microbenchmark"},{"1":"mime","2":"D:/Program Files/R/R-4.4.2/library","3":"0.12","4":"NA","5":"NA","6":"tools","7":"NA","8":"NA","9":"NA","10":"GPL","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"mime"},{"1":"miniUI","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.1.1","4":"NA","5":"NA","6":"shiny (>= 0.13), htmltools (>= 0.3), utils","7":"NA","8":"NA","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"miniUI"},{"1":"minqa","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.8","4":"NA","5":"NA","6":"Rcpp (>= 0.9.10)","7":"Rcpp","8":"NA","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"minqa"},{"1":"modelr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.11","4":"NA","5":"R (>= 3.2)","6":"broom, magrittr, purrr (>= 0.2.2), rlang (>= 1.0.6), tibble,\\ntidyr (>= 0.8.0), tidyselect, vctrs","7":"NA","8":"compiler, covr, ggplot2, testthat (>= 3.0.0)","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"modelr"},{"1":"munsell","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5.1","4":"NA","5":"NA","6":"colorspace, methods","7":"NA","8":"ggplot2, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"munsell"},{"1":"mvtnorm","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3-2","4":"NA","5":"R(>= 3.5.0)","6":"stats","7":"NA","8":"qrng, numDeriv","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"mvtnorm"},{"1":"nlme","2":"D:/Program Files/R/R-4.4.2/library","3":"3.1-166","4":"recommended","5":"R (>= 3.6.0)","6":"graphics, stats, utils, lattice","7":"NA","8":"MASS, SASmixed","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"nlme"},{"1":"nloptr","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.1","4":"NA","5":"NA","6":"NA","7":"NA","8":"knitr, rmarkdown, covr, tinytest","9":"NA","10":"LGPL (>= 3)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"nloptr"},{"1":"nnet","2":"D:/Program Files/R/R-4.4.2/library","3":"7.3-19","4":"recommended","5":"R (>= 3.0.0), stats, utils","6":"NA","7":"NA","8":"MASS","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"nnet"},{"1":"numDeriv","2":"D:/Program Files/R/R-4.4.2/library","3":"2016.8-1.1","4":"NA","5":"R (>= 2.11.1)","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.0","_rn_":"numDeriv"},{"1":"openssl","2":"D:/Program Files/R/R-4.4.2/library","3":"2.2.2","4":"NA","5":"NA","6":"askpass","7":"NA","8":"curl, testthat (>= 2.1.0), digest, knitr, rmarkdown,\\njsonlite, jose, sodium","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"openssl"},{"1":"openxlsx","2":"D:/Program Files/R/R-4.4.2/library","3":"4.2.7.1","4":"NA","5":"R (>= 3.3.0)","6":"grDevices, methods, Rcpp, stats, stringi, utils, zip","7":"Rcpp","8":"curl, formula.tools, knitr, rmarkdown, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"openxlsx"},{"1":"pacman","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5.1","4":"NA","5":"R (>= 3.5.0)","6":"remotes, methods, stats, utils","7":"NA","8":"BiocManager, knitr, lattice, testthat (>= 0.9.0), XML","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"pacman"},{"1":"parallel","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"tools, compiler","7":"NA","8":"methods","9":"snow, Rmpi","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"parallel"},{"1":"parameters","2":"D:/Program Files/R/R-4.4.2/library","3":"0.23.0","4":"NA","5":"R (>= 3.6)","6":"bayestestR (>= 0.15.0), datawizard (>= 0.13.0), insight (>=\\n0.20.5), graphics, methods, stats, utils","7":"NA","8":"AER, afex, aod, BayesFactor (>= 0.9.12-4.7), BayesFM, bbmle,\\nbetareg, BH, biglm, blme, boot, brglm2, brms, broom,\\nbroom.mixed, cAIC4, car, carData, cgam, ClassDiscovery,\\nclubSandwich, cluster, cobalt, coda, coxme, cplm, dbscan,\\ndistributional, domir (>= 0.2.0), drc, DRR, effectsize (>=\\n0.8.6), EGAnet, emmeans (>= 1.7.0), epiR, estimatr, factoextra,\\nFactoMineR, faraway, fastICA, fixest, fpc, gam, gamlss, gee,\\ngeepack, ggeffects (>= 1.3.2), ggplot2, GLMMadaptive, glmmTMB\\n(>= 1.1.10), glmtoolbox, GPArotation, gt, haven, httr2, Hmisc,\\nivreg, knitr, lavaan, lfe, lm.beta, lme4, lmerTest, lmtest,\\nlogistf, logspline, lqmm, M3C, marginaleffects (>= 0.20.1),\\nMASS, Matrix, mclogit, mclust, MCMCglmm, mediation, merDeriv,\\nmetaBMA, metafor, mfx, mgcv, mice, mmrm, multcomp, MuMIn,\\nNbClust, nFactors, nestedLogit, nlme, nnet, openxlsx, ordinal,\\npanelr, pbkrtest, PCDimension, performance (>= 0.12.0), plm,\\nPMCMRplus, poorman, posterior, PROreg (>= 1.3.0), pscl, psych,\\npvclust, quantreg, randomForest, RcppEigen, rmarkdown, rms,\\nrstan, rstanarm, sandwich, see (>= 0.8.1), serp, sparsepca,\\nsurvey, survival, svylme, testthat (>= 3.2.1), tidyselect,\\ntinytable (>= 0.1.0), TMB, truncreg, vdiffr, VGAM, WeightIt (>=\\n1.2.0), withr, WRS2","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"parameters"},{"1":"pbapply","2":"D:/Program Files/R/R-4.4.2/library","3":"1.7-2","4":"NA","5":"R (>= 3.2.0)","6":"parallel","7":"NA","8":"shiny, future, future.apply","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"pbapply"},{"1":"pbkrtest","2":"D:/Program Files/R/R-4.4.2/library","3":"0.5.3","4":"NA","5":"R (>= 4.2.0), lme4 (>= 1.1.31)","6":"broom, dplyr, MASS, methods, numDeriv, Matrix (>= 1.2.3), doBy","7":"NA","8":"markdown, knitr","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"pbkrtest"},{"1":"performance","2":"D:/Program Files/R/R-4.4.2/library","3":"0.12.4","4":"NA","5":"R (>= 3.6)","6":"bayestestR (>= 0.15.0), insight (>= 0.20.5), datawizard (>=\\n0.13.0), stats, utils","7":"NA","8":"AER, afex, BayesFactor, bayesplot, betareg, bigutilsr,\\nblavaan, boot, brms, car, carData, CompQuadForm, correlation,\\ncplm, dagitty, dbscan, DHARMa, estimatr, fixest, flextable,\\nforecast, ftExtra, gamm4, ggdag, glmmTMB (>= 1.1.10), graphics,\\nHmisc, httr2, ICS, ICSOutlier, ISLR, ivreg, lavaan, lme4,\\nlmtest, loo, MASS, Matrix, mclogit, mclust, metadat, metafor,\\nmgcv, mlogit, multimode, nestedLogit, nlme, nonnest2, ordinal,\\nparallel, parameters (>= 0.21.6), patchwork, pscl, psych,\\nquantreg, qqplotr (>= 0.0.6), randomForest, RcppEigen, rempsyc,\\nrmarkdown, rstanarm, rstantools, sandwich, see (>= 0.9.0),\\nsurvey, survival, testthat (>= 3.2.1), tweedie, VGAM, withr (>=\\n3.0.0)","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"performance"},{"1":"pillar","2":"D:/Program Files/R/R-4.4.2/library","3":"1.9.0","4":"NA","5":"NA","6":"cli (>= 2.3.0), fansi, glue, lifecycle, rlang (>= 1.0.2), utf8\\n(>= 1.1.0), utils, vctrs (>= 0.5.0)","7":"NA","8":"bit64, DBI, debugme, DiagrammeR, dplyr, formattable, ggplot2,\\nknitr, lubridate, nanotime, nycflights13, palmerpenguins,\\nrmarkdown, scales, stringi, survival, testthat (>= 3.1.1),\\ntibble, units (>= 0.7.2), vdiffr, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"pillar"},{"1":"pkgconfig","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0.3","4":"NA","5":"NA","6":"utils","7":"NA","8":"covr, testthat, disposables (>= 1.0.3)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"pkgconfig"},{"1":"plogr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.2.0","4":"NA","5":"NA","6":"NA","7":"NA","8":"Rcpp","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"plogr"},{"1":"png","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1-8","4":"NA","5":"R (>= 2.9.0)","6":"NA","7":"NA","8":"NA","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"png"},{"1":"polyclip","2":"D:/Program Files/R/R-4.4.2/library","3":"1.10-7","4":"NA","5":"R (>= 3.5.0)","6":"NA","7":"NA","8":"NA","9":"NA","10":"BSL","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.1","_rn_":"polyclip"},{"1":"polynom","2":"D:/Program Files/R/R-4.4.2/library","3":"1.4-1","4":"NA","5":"NA","6":"stats, graphics","7":"NA","8":"knitr, rmarkdown","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"polynom"},{"1":"prettyunits","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.0","4":"NA","5":"R(>= 2.10)","6":"NA","7":"NA","8":"codetools, covr, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"prettyunits"},{"1":"processx","2":"D:/Program Files/R/R-4.4.2/library","3":"3.8.4","4":"NA","5":"R (>= 3.4.0)","6":"ps (>= 1.2.0), R6, utils","7":"NA","8":"callr (>= 3.7.3), cli (>= 3.3.0), codetools, covr, curl,\\ndebugme, parallel, rlang (>= 1.0.2), testthat (>= 3.0.0),\\nwebfakes, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"processx"},{"1":"progress","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.3","4":"NA","5":"R (>= 3.6)","6":"crayon, hms, prettyunits, R6","7":"NA","8":"Rcpp, testthat (>= 3.0.0), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"progress"},{"1":"promises","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.0","4":"NA","5":"NA","6":"fastmap (>= 1.1.0), later, magrittr (>= 1.5), R6, Rcpp, rlang,\\nstats","7":"later, Rcpp","8":"future (>= 1.21.0), knitr, purrr, rmarkdown, spelling,\\ntestthat, vembedr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"promises"},{"1":"ps","2":"D:/Program Files/R/R-4.4.2/library","3":"1.8.1","4":"NA","5":"R (>= 3.4)","6":"utils","7":"NA","8":"callr, covr, curl, pillar, pingr, processx (>= 3.1.0), R6,\\nrlang, testthat (>= 3.0.0), webfakes, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"ps"},{"1":"purrr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.2","4":"NA","5":"R (>= 3.5.0)","6":"cli (>= 3.6.1), lifecycle (>= 1.0.3), magrittr (>= 1.5.0),\\nrlang (>= 1.1.1), vctrs (>= 0.6.3)","7":"cli","8":"covr, dplyr (>= 0.7.8), httr, knitr, lubridate, rmarkdown,\\ntestthat (>= 3.0.0), tibble, tidyselect","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"purrr"},{"1":"quantreg","2":"D:/Program Files/R/R-4.4.2/library","3":"5.99.1","4":"NA","5":"R (>= 3.5), stats, SparseM","6":"methods, graphics, Matrix, MatrixModels, survival, MASS","7":"NA","8":"interp, rgl, logspline, nor1mix, Formula, zoo, R.rsp, conquer","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"quantreg"},{"1":"R.methodsS3","2":"D:/Program Files/R/R-4.4.2/library","3":"1.8.2","4":"NA","5":"R (>= 2.13.0)","6":"utils","7":"NA","8":"codetools","9":"NA","10":"LGPL (>= 2.1)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.0","_rn_":"R.methodsS3"},{"1":"R.oo","2":"D:/Program Files/R/R-4.4.2/library","3":"1.27.0","4":"NA","5":"R (>= 2.13.0), R.methodsS3 (>= 1.8.2)","6":"methods, utils","7":"NA","8":"tools","9":"NA","10":"LGPL (>= 2.1)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.1","_rn_":"R.oo"},{"1":"R.utils","2":"D:/Program Files/R/R-4.4.2/library","3":"2.12.3","4":"NA","5":"R (>= 2.14.0), R.oo","6":"methods, utils, tools, R.methodsS3","7":"NA","8":"datasets, digest (>= 0.6.10)","9":"NA","10":"LGPL (>= 2.1)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"R.utils"},{"1":"R6","2":"D:/Program Files/R/R-4.4.2/library","3":"2.5.1","4":"NA","5":"R (>= 3.0)","6":"NA","7":"NA","8":"testthat, pryr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"R6"},{"1":"ragg","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.3","4":"NA","5":"NA","6":"systemfonts (>= 1.0.3), textshaping (>= 0.3.0)","7":"systemfonts, textshaping","8":"covr, graphics, grid, testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"ragg"},{"1":"rappdirs","2":"D:/Program Files/R/R-4.4.2/library","3":"0.3.3","4":"NA","5":"R (>= 3.2)","6":"NA","7":"NA","8":"roxygen2, testthat (>= 3.0.0), covr, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"rappdirs"},{"1":"RColorBrewer","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1-3","4":"NA","5":"R (>= 2.0.0)","6":"NA","7":"NA","8":"NA","9":"NA","10":"Apache License 2.0","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.0","_rn_":"RColorBrewer"},{"1":"Rcpp","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.13-1","4":"NA","5":"NA","6":"methods, utils","7":"NA","8":"tinytest, inline, rbenchmark, pkgKitten (>= 0.1.2)","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"Rcpp"},{"1":"RcppEigen","2":"D:/Program Files/R/R-4.4.2/library","3":"0.3.4.0.2","4":"NA","5":"R (>= 3.6.0)","6":"Rcpp (>= 0.11.0), stats, utils","7":"Rcpp","8":"Matrix, inline, tinytest, pkgKitten, microbenchmark","9":"NA","10":"GPL (>= 2) | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"RcppEigen"},{"1":"readr","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.5","4":"NA","5":"R (>= 3.6)","6":"cli (>= 3.2.0), clipr, crayon, hms (>= 0.4.1), lifecycle (>=\\n0.2.0), methods, R6, rlang, tibble, utils, vroom (>= 1.6.0)","7":"cpp11, tzdb (>= 0.1.1)","8":"covr, curl, datasets, knitr, rmarkdown, spelling, stringi,\\ntestthat (>= 3.2.0), tzdb (>= 0.1.1), waldo, withr, xml2","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"readr"},{"1":"readxl","2":"D:/Program Files/R/R-4.4.2/library","3":"1.4.3","4":"NA","5":"R (>= 3.6)","6":"cellranger, tibble (>= 2.0.1), utils","7":"cpp11 (>= 0.4.0), progress","8":"covr, knitr, rmarkdown, testthat (>= 3.1.6), withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"readxl"},{"1":"rematch","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0.0","4":"NA","5":"NA","6":"NA","7":"NA","8":"covr, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rematch"},{"1":"rematch2","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.2","4":"NA","5":"NA","6":"tibble","7":"NA","8":"covr, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rematch2"},{"1":"remotes","2":"D:/Program Files/R/R-4.4.2/library","3":"2.5.0","4":"NA","5":"R (>= 3.0.0)","6":"methods, stats, tools, utils","7":"NA","8":"brew, callr, codetools, covr, curl, git2r (>= 0.23.0), knitr,\\nmockery, pingr, pkgbuild (>= 1.0.1), rmarkdown, rprojroot,\\ntestthat (>= 3.0.0), webfakes, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"remotes"},{"1":"reprex","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.1","4":"NA","5":"R (>= 3.6)","6":"callr (>= 3.6.0), cli (>= 3.2.0), clipr (>= 0.4.0), fs, glue,\\nknitr (>= 1.23), lifecycle, rlang (>= 1.0.0), rmarkdown,\\nrstudioapi, utils, withr (>= 2.3.0)","7":"NA","8":"covr, fortunes, miniUI, rprojroot, sessioninfo, shiny,\\nspelling, styler (>= 1.2.0), testthat (>= 3.2.1)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"reprex"},{"1":"rio","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.3","4":"NA","5":"R (>= 4.0)","6":"tools, stats, utils, foreign, haven (>= 1.1.2), curl (>= 0.6),\\ndata.table (>= 1.11.2), readxl (>= 0.1.1), tibble, writexl,\\nlifecycle, R.utils, readr","7":"NA","8":"datasets, bit64, testthat, knitr, magrittr, clipr, fst,\\nhexView, jsonlite, pzfx, readODS (>= 2.1.0), rmarkdown, rmatio,\\nxml2 (>= 1.2.0), yaml, qs, arrow (>= 0.17.0), stringi, withr,\\nnanoparquet","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rio"},{"1":"rlang","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.4","4":"NA","5":"R (>= 3.5.0)","6":"utils","7":"NA","8":"cli (>= 3.1.0), covr, crayon, fs, glue, knitr, magrittr,\\nmethods, pillar, rmarkdown, stats, testthat (>= 3.0.0), tibble,\\nusethis, vctrs (>= 0.2.3), withr","9":"winch","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"rlang"},{"1":"rmarkdown","2":"D:/Program Files/R/R-4.4.2/library","3":"2.29","4":"NA","5":"R (>= 3.0)","6":"bslib (>= 0.2.5.1), evaluate (>= 0.13), fontawesome (>=\\n0.5.0), htmltools (>= 0.5.1), jquerylib, jsonlite, knitr (>=\\n1.43), methods, tinytex (>= 0.31), tools, utils, xfun (>=\\n0.36), yaml (>= 2.1.19)","7":"NA","8":"digest, dygraphs, fs, rsconnect, downlit (>= 0.4.0), katex\\n(>= 1.4.0), sass (>= 0.4.0), shiny (>= 1.6.0), testthat (>=\\n3.0.3), tibble, vctrs, cleanrmd, withr (>= 2.4.2), xml2","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rmarkdown"},{"1":"rpart","2":"D:/Program Files/R/R-4.4.2/library","3":"4.1.23","4":"recommended","5":"R (>= 2.15.0), graphics, stats, grDevices","6":"NA","7":"NA","8":"survival","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"rpart"},{"1":"RSQLite","2":"D:/Program Files/R/R-4.4.2/library","3":"2.3.8","4":"NA","5":"R (>= 3.1.0)","6":"bit64, blob (>= 1.2.0), DBI (>= 1.2.0), memoise, methods,\\npkgconfig, rlang","7":"plogr (>= 0.2.0), cpp11 (>= 0.4.0)","8":"callr, cli, DBItest (>= 1.8.0), decor, gert, gh, hms, knitr,\\nmagrittr, rmarkdown, rvest, testthat (>= 3.0.0), withr, xml2","9":"NA","10":"LGPL (>= 2.1)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"RSQLite"},{"1":"rstatix","2":"D:/Program Files/R/R-4.4.2/library","3":"0.7.2","4":"NA","5":"R (>= 3.3.0)","6":"stats, utils, tidyr (>= 1.0.0), purrr, broom (>= 0.7.4), rlang\\n(>= 0.3.1), tibble (>= 2.1.3), dplyr (>= 0.7.1), magrittr,\\ncorrplot, tidyselect (>= 1.2.0), car, generics (>= 0.0.2)","7":"NA","8":"knitr, rmarkdown, ggpubr, graphics, emmeans, coin, boot,\\ntestthat, spelling","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rstatix"},{"1":"rstudioapi","2":"D:/Program Files/R/R-4.4.2/library","3":"0.17.1","4":"NA","5":"NA","6":"NA","7":"NA","8":"testthat, knitr, rmarkdown, clipr, covr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rstudioapi"},{"1":"rvest","2":"D:/Program Files/R/R-4.4.2/library","3":"1.0.4","4":"NA","5":"R (>= 3.6)","6":"cli, glue, httr (>= 0.5), lifecycle (>= 1.0.3), magrittr,\\nrlang (>= 1.1.0), selectr, tibble, xml2 (>= 1.3)","7":"NA","8":"chromote, covr, knitr, R6, readr, repurrrsive, rmarkdown,\\nspelling, stringi (>= 0.3.1), testthat (>= 3.0.2), webfakes","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"rvest"},{"1":"sass","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.9","4":"NA","5":"NA","6":"fs (>= 1.2.4), rlang (>= 0.4.10), htmltools (>= 0.5.1), R6,\\nrappdirs","7":"NA","8":"testthat, knitr, rmarkdown, withr, shiny, curl","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"sass"},{"1":"scales","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.0","4":"NA","5":"R (>= 3.6)","6":"cli, farver (>= 2.0.3), glue, labeling, lifecycle, munsell (>=\\n0.5), R6, RColorBrewer, rlang (>= 1.0.0), viridisLite","7":"NA","8":"bit64, covr, dichromat, ggplot2, hms (>= 0.5.0), stringi,\\ntestthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"scales"},{"1":"selectr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4-2","4":"NA","5":"R (>= 3.0)","6":"methods, stringr, R6","7":"NA","8":"testthat, XML, xml2","9":"NA","10":"BSD_3_clause + file LICENCE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"selectr"},{"1":"shape","2":"D:/Program Files/R/R-4.4.2/library","3":"1.4.6.1","4":"NA","5":"R (>= 2.01)","6":"stats, graphics, grDevices","7":"NA","8":"NA","9":"NA","10":"GPL (>= 3)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.0","_rn_":"shape"},{"1":"shiny","2":"D:/Program Files/R/R-4.4.2/library","3":"1.9.1","4":"NA","5":"R (>= 3.0.2), methods","6":"utils, grDevices, httpuv (>= 1.5.2), mime (>= 0.3), jsonlite\\n(>= 0.9.16), xtable, fontawesome (>= 0.4.0), htmltools (>=\\n0.5.4), R6 (>= 2.0), sourcetools, later (>= 1.0.0), promises\\n(>= 1.1.0), tools, crayon, rlang (>= 0.4.10), fastmap (>=\\n1.1.1), withr, commonmark (>= 1.7), glue (>= 1.3.2), bslib (>=\\n0.6.0), cachem (>= 1.1.0), lifecycle (>= 0.2.0)","7":"NA","8":"datasets, DT, Cairo (>= 1.5-5), testthat (>= 3.0.0), knitr\\n(>= 1.6), markdown, rmarkdown, ggplot2, reactlog (>= 1.0.0),\\nmagrittr, yaml, future, dygraphs, ragg, showtext, sass","9":"NA","10":"GPL-3 | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"shiny"},{"1":"shinydashboard","2":"D:/Program Files/R/R-4.4.2/library","3":"0.7.2","4":"NA","5":"R (>= 3.0)","6":"utils, shiny (>= 1.0.0), htmltools (>= 0.2.6), promises","7":"NA","8":"NA","9":"NA","10":"GPL (>= 2) | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"shinydashboard"},{"1":"shinyjs","2":"D:/Program Files/R/R-4.4.2/library","3":"2.1.0","4":"NA","5":"R (>= 3.1.0)","6":"digest (>= 0.6.8), jsonlite, shiny (>= 1.0.0)","7":"NA","8":"htmltools (>= 0.2.9), knitr (>= 1.7), rmarkdown, shinyAce,\\nshinydisconnect, testthat (>= 0.9.1)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"shinyjs"},{"1":"sjlabelled","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.0","4":"NA","5":"R (>= 3.4)","6":"insight, datawizard, stats, tools, utils","7":"NA","8":"dplyr, haven (>= 1.1.2), magrittr, sjmisc, sjPlot, knitr,\\nrlang, rmarkdown, snakecase, testthat","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"sjlabelled"},{"1":"sjmisc","2":"D:/Program Files/R/R-4.4.2/library","3":"2.8.10","4":"NA","5":"R (>= 3.4)","6":"dplyr, insight, datawizard, magrittr, methods, purrr, rlang,\\nsjlabelled (>= 1.1.1), stats, tidyselect, utils","7":"NA","8":"ggplot2, graphics, haven (>= 2.0.0), mice, nnet, sjPlot,\\nsjstats, knitr, rmarkdown, stringdist, testthat, tidyr","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"sjmisc"},{"1":"sjPlot","2":"D:/Program Files/R/R-4.4.2/library","3":"2.8.16","4":"NA","5":"R (>= 3.6)","6":"graphics, grDevices, stats, utils, bayestestR, datawizard,\\ndplyr, ggeffects, ggplot2 (>= 3.2.0), knitr, insight, MASS,\\nparameters, performance, purrr, rlang, scales, sjlabelled (>=\\n1.1.2), sjmisc (>= 2.8.2), sjstats (>= 0.17.8), tidyr (>=\\n1.0.0)","7":"NA","8":"brms, car, clubSandwich, cluster, cowplot, effects, haven,\\nGPArotation, ggrepel, glmmTMB, gridExtra, ggridges, httr, lme4,\\nnFactors, pscl, psych, rmarkdown, rstanarm, sandwich, splines,\\nsurvey, TMB, testthat","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"sjPlot"},{"1":"sjstats","2":"D:/Program Files/R/R-4.4.2/library","3":"0.19.0","4":"NA","5":"R (>= 3.4), utils","6":"datawizard, effectsize (>= 0.8.8), insight, parameters,\\nperformance, stats","7":"NA","8":"brms, car, coin, ggplot2, lme4, MASS, pscl, pwr, survey,\\ntestthat","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"sjstats"},{"1":"snakecase","2":"D:/Program Files/R/R-4.4.2/library","3":"0.11.1","4":"NA","5":"R (>= 3.2)","6":"stringr, stringi","7":"NA","8":"testthat, covr, tibble, purrrlyr, knitr, rmarkdown, magrittr","9":"NA","10":"GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"snakecase"},{"1":"sourcetools","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.7-1","4":"NA","5":"R (>= 3.0.2)","6":"NA","7":"NA","8":"testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"sourcetools"},{"1":"SparseM","2":"D:/Program Files/R/R-4.4.2/library","3":"1.84-2","4":"NA","5":"R (>= 2.15), methods","6":"graphics, stats, utils","7":"NA","8":"knitr","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"SparseM"},{"1":"spatial","2":"D:/Program Files/R/R-4.4.2/library","3":"7.3-17","4":"recommended","5":"R (>= 3.0.0), graphics, stats, utils","6":"NA","7":"NA","8":"MASS","9":"NA","10":"GPL-2 | GPL-3","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"spatial"},{"1":"splines","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"graphics, stats","7":"NA","8":"Matrix, methods","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"splines"},{"1":"stats","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"utils, grDevices, graphics","7":"NA","8":"MASS, Matrix, SuppDists, methods, stats4","9":"Kendall, coin, multcomp, pcaPP, pspearman, robustbase","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"stats"},{"1":"stats4","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"graphics, methods, stats","7":"NA","8":"NA","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"4.4.2","_rn_":"stats4"},{"1":"stringi","2":"D:/Program Files/R/R-4.4.2/library","3":"1.8.4","4":"NA","5":"R (>= 3.4)","6":"tools, utils, stats","7":"NA","8":"NA","9":"NA","10":"file LICENSE","11":"yes","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.0","_rn_":"stringi"},{"1":"stringr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.5.1","4":"NA","5":"R (>= 3.6)","6":"cli, glue (>= 1.6.1), lifecycle (>= 1.0.3), magrittr, rlang\\n(>= 1.0.0), stringi (>= 1.5.3), vctrs (>= 0.4.0)","7":"NA","8":"covr, dplyr, gt, htmltools, htmlwidgets, knitr, rmarkdown,\\ntestthat (>= 3.0.0), tibble","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"stringr"},{"1":"survival","2":"D:/Program Files/R/R-4.4.2/library","3":"3.7-0","4":"recommended","5":"R (>= 3.5.0)","6":"graphics, Matrix, methods, splines, stats, utils","7":"NA","8":"NA","9":"NA","10":"LGPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"survival"},{"1":"sys","2":"D:/Program Files/R/R-4.4.2/library","3":"3.4.3","4":"NA","5":"NA","6":"NA","7":"NA","8":"unix (>= 1.4), spelling, testthat","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"sys"},{"1":"systemfonts","2":"D:/Program Files/R/R-4.4.2/library","3":"1.1.0","4":"NA","5":"R (>= 3.2.0)","6":"lifecycle","7":"cpp11 (>= 0.2.1)","8":"covr, knitr, rmarkdown, testthat (>= 2.1.0), tools","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"systemfonts"},{"1":"tcltk","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"utils","7":"NA","8":"NA","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tcltk"},{"1":"textshaping","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.0","4":"NA","5":"R (>= 3.2.0)","6":"lifecycle, systemfonts (>= 1.1.0)","7":"cpp11 (>= 0.2.1), systemfonts (>= 1.0.0)","8":"covr, knitr, rmarkdown","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"textshaping"},{"1":"tibble","2":"D:/Program Files/R/R-4.4.2/library","3":"3.2.1","4":"NA","5":"R (>= 3.4.0)","6":"fansi (>= 0.4.0), lifecycle (>= 1.0.0), magrittr, methods,\\npillar (>= 1.8.1), pkgconfig, rlang (>= 1.0.2), utils, vctrs\\n(>= 0.4.2)","7":"NA","8":"bench, bit64, blob, brio, callr, cli, covr, crayon (>=\\n1.3.4), DiagrammeR, dplyr, evaluate, formattable, ggplot2,\\nhere, hms, htmltools, knitr, lubridate, mockr, nycflights13,\\npkgbuild, pkgload, purrr, rmarkdown, stringi, testthat (>=\\n3.0.2), tidyr, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tibble"},{"1":"tidyr","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.1","4":"NA","5":"R (>= 3.6)","6":"cli (>= 3.4.1), dplyr (>= 1.0.10), glue, lifecycle (>= 1.0.3),\\nmagrittr, purrr (>= 1.0.1), rlang (>= 1.1.1), stringr (>=\\n1.5.0), tibble (>= 2.1.1), tidyselect (>= 1.2.0), utils, vctrs\\n(>= 0.5.2)","7":"cpp11 (>= 0.4.0)","8":"covr, data.table, knitr, readr, repurrrsive (>= 1.1.0),\\nrmarkdown, testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tidyr"},{"1":"tidyselect","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.1","4":"NA","5":"R (>= 3.4)","6":"cli (>= 3.3.0), glue (>= 1.3.0), lifecycle (>= 1.0.3), rlang\\n(>= 1.0.4), vctrs (>= 0.5.2), withr","7":"NA","8":"covr, crayon, dplyr, knitr, magrittr, rmarkdown, stringr,\\ntestthat (>= 3.1.1), tibble (>= 2.1.3)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tidyselect"},{"1":"tidyverse","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0.0","4":"NA","5":"R (>= 3.3)","6":"broom (>= 1.0.3), conflicted (>= 1.2.0), cli (>= 3.6.0),\\ndbplyr (>= 2.3.0), dplyr (>= 1.1.0), dtplyr (>= 1.2.2), forcats\\n(>= 1.0.0), ggplot2 (>= 3.4.1), googledrive (>= 2.0.0),\\ngooglesheets4 (>= 1.0.1), haven (>= 2.5.1), hms (>= 1.1.2),\\nhttr (>= 1.4.4), jsonlite (>= 1.8.4), lubridate (>= 1.9.2),\\nmagrittr (>= 2.0.3), modelr (>= 0.1.10), pillar (>= 1.8.1),\\npurrr (>= 1.0.1), ragg (>= 1.2.5), readr (>= 2.1.4), readxl (>=\\n1.4.2), reprex (>= 2.0.2), rlang (>= 1.0.6), rstudioapi (>=\\n0.14), rvest (>= 1.0.3), stringr (>= 1.5.0), tibble (>= 3.1.8),\\ntidyr (>= 1.3.0), xml2 (>= 1.3.3)","7":"NA","8":"covr (>= 3.6.1), feather (>= 0.3.5), glue (>= 1.6.2), mockr\\n(>= 0.2.0), knitr (>= 1.41), rmarkdown (>= 2.20), testthat (>=\\n3.1.6)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"tidyverse"},{"1":"timechange","2":"D:/Program Files/R/R-4.4.2/library","3":"0.3.0","4":"NA","5":"R (>= 3.3)","6":"NA","7":"cpp11 (>= 0.2.7)","8":"testthat (>= 0.7.1.99), knitr","9":"NA","10":"GPL (>= 3)","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"timechange"},{"1":"tinytex","2":"D:/Program Files/R/R-4.4.2/library","3":"0.54","4":"NA","5":"NA","6":"xfun (>= 0.48)","7":"NA","8":"testit, rstudioapi","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"tinytex"},{"1":"tools","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"NA","7":"NA","8":"codetools, methods, xml2, curl, commonmark, knitr, xfun, mathjaxr, V8","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tools"},{"1":"translations","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"NA","5":"NA","6":"NA","7":"NA","8":"NA","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"NA","16":"4.4.2","_rn_":"translations"},{"1":"tweenr","2":"D:/Program Files/R/R-4.4.2/library","3":"2.0.3","4":"NA","5":"R (>= 3.2.0)","6":"farver, magrittr, rlang, vctrs","7":"cpp11 (>= 0.4.2)","8":"testthat, covr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tweenr"},{"1":"tzdb","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.0","4":"NA","5":"R (>= 3.5.0)","6":"NA","7":"cpp11 (>= 0.4.2)","8":"covr, testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"tzdb"},{"1":"utf8","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2.4","4":"NA","5":"R (>= 2.10)","6":"NA","7":"NA","8":"cli, covr, knitr, rlang, rmarkdown, testthat (>= 3.0.0),\\nwithr","9":"NA","10":"Apache License (== 2.0) | file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"utf8"},{"1":"utils","2":"D:/Program Files/R/R-4.4.2/library","3":"4.4.2","4":"base","5":"NA","6":"NA","7":"NA","8":"methods, xml2, commonmark, knitr, jsonlite","9":"NA","10":"Part of R 4.4.2","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"utils"},{"1":"uuid","2":"D:/Program Files/R/R-4.4.2/library","3":"1.2-1","4":"NA","5":"R (>= 2.9.0)","6":"NA","7":"NA","8":"NA","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.1","_rn_":"uuid"},{"1":"vctrs","2":"D:/Program Files/R/R-4.4.2/library","3":"0.6.5","4":"NA","5":"R (>= 3.5.0)","6":"cli (>= 3.4.0), glue, lifecycle (>= 1.0.3), rlang (>= 1.1.0)","7":"NA","8":"bit64, covr, crayon, dplyr (>= 0.8.5), generics, knitr,\\npillar (>= 1.4.4), pkgdown (>= 2.0.1), rmarkdown, testthat (>=\\n3.0.0), tibble (>= 3.1.3), waldo (>= 0.2.0), withr, xml2,\\nzeallot","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"vctrs"},{"1":"viridisLite","2":"D:/Program Files/R/R-4.4.2/library","3":"0.4.2","4":"NA","5":"R (>= 2.10)","6":"NA","7":"NA","8":"hexbin (>= 1.27.0), ggplot2 (>= 1.0.1), testthat, covr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"viridisLite"},{"1":"vroom","2":"D:/Program Files/R/R-4.4.2/library","3":"1.6.5","4":"NA","5":"R (>= 3.6)","6":"bit64, cli (>= 3.2.0), crayon, glue, hms, lifecycle (>=\\n1.0.3), methods, rlang (>= 0.4.2), stats, tibble (>= 2.0.0),\\ntidyselect, tzdb (>= 0.1.1), vctrs (>= 0.2.0), withr","7":"cpp11 (>= 0.2.0), progress (>= 1.2.1), tzdb (>= 0.1.1)","8":"archive, bench (>= 1.1.0), covr, curl, dplyr, forcats, fs,\\nggplot2, knitr, patchwork, prettyunits, purrr, rmarkdown,\\nrstudioapi, scales, spelling, testthat (>= 2.1.0), tidyr,\\nutils, waldo, xml2","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"vroom"},{"1":"withr","2":"D:/Program Files/R/R-4.4.2/library","3":"3.0.2","4":"NA","5":"R (>= 3.6.0)","6":"graphics, grDevices","7":"NA","8":"callr, DBI, knitr, methods, rlang, rmarkdown (>= 2.12),\\nRSQLite, testthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"withr"},{"1":"writexl","2":"D:/Program Files/R/R-4.4.2/library","3":"1.5.1","4":"NA","5":"NA","6":"NA","7":"NA","8":"spelling, readxl, nycflights13, testthat, bit64","9":"NA","10":"BSD_2_clause + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"writexl"},{"1":"xfun","2":"D:/Program Files/R/R-4.4.2/library","3":"0.49","4":"NA","5":"R (>= 3.2.0)","6":"grDevices, stats, tools","7":"NA","8":"testit, parallel, codetools, methods, rstudioapi, tinytex (>=\\n0.30), mime, litedown, commonmark, knitr (>= 1.47), remotes,\\npak, rhub, renv, curl, xml2, jsonlite, magick, yaml, qs,\\nrmarkdown","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"xfun"},{"1":"xml2","2":"D:/Program Files/R/R-4.4.2/library","3":"1.3.6","4":"NA","5":"R (>= 3.6.0)","6":"cli, methods, rlang (>= 1.1.0)","7":"NA","8":"covr, curl, httr, knitr, magrittr, mockery, rmarkdown,\\ntestthat (>= 3.0.0)","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"xml2"},{"1":"xtable","2":"D:/Program Files/R/R-4.4.2/library","3":"1.8-4","4":"NA","5":"R (>= 2.10.0)","6":"stats, utils","7":"NA","8":"knitr, plm, zoo, survival","9":"NA","10":"GPL (>= 2)","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"xtable"},{"1":"yaml","2":"D:/Program Files/R/R-4.4.2/library","3":"2.3.10","4":"NA","5":"NA","6":"NA","7":"NA","8":"RUnit","9":"NA","10":"BSD_3_clause + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.1","_rn_":"yaml"},{"1":"yarrr","2":"D:/Program Files/R/R-4.4.2/library","3":"0.1.5","4":"NA","5":"jpeg,BayesFactor,circlize","6":"NA","7":"NA","8":"knitr, rmarkdown","9":"NA","10":"GPL-2","11":"NA","12":"NA","13":"NA","14":"NA","15":"no","16":"4.4.2","_rn_":"yarrr"},{"1":"zip","2":"D:/Program Files/R/R-4.4.2/library","3":"2.3.1","4":"NA","5":"NA","6":"NA","7":"NA","8":"covr, processx, R6, testthat, withr","9":"NA","10":"MIT + file LICENSE","11":"NA","12":"NA","13":"NA","14":"NA","15":"yes","16":"4.4.2","_rn_":"zip"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<p>这将显示一些关于已安装包的基本信息，如包名、版本等。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "已复制");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "已复制");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../chapter/base/dataframe.html" class="pagination-link" aria-label="数据框">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">数据框</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../chapter/base/function.html" class="pagination-link" aria-label="函数">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">函数</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Copyright 2024, R语言与可视化
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://blog.rlearner.com/">
+      <i class="bi bi-rss" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://shalom-lab.github.io/r-book/">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/base/package.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
