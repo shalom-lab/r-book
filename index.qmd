@@ -30,8 +30,6 @@
 
 -   [hub.rlearner.com](https://hub.rlearner.com) 该网站汇集了众多R学习资源
 
--   [R论坛](https://rlearner.com) R学习交流社区
-
 -   [我的博客](https://blog.rlearner.com/r-index.html)
 
 -   微信公众号：R数据分析与可视化
