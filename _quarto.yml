@@ -1,13 +1,10 @@
 project:
   type: book
   output-dir: docs
-  pre-render: generate_global_yaml.R
-execute:
-  freeze: auto
 book:
   title: R语言入门指南
   author: Shalom
-  date: 2024/11/30
+  date: 2024/12/1
   repo-url: https://github.com/shalom-lab/r-book/
   repo-actions:
   - edit
@@ -62,6 +59,8 @@ book:
       href: chapter/clean/wider_longer.qmd
   - part: 数据可视化
     chapters:
+    - text: 基础包绘图
+      href: chapter/viz/base_plot.qmd
     - text: 柱状图
       href: chapter/viz/bar_plot.qmd
   - part: 统计

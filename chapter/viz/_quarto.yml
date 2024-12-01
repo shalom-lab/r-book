@@ -1,4 +1,6 @@
 part: 数据可视化
 chapters:
+  - text: 基础包绘图
+    href: base_plot.qmd
   - text: 柱状图
     href: bar_plot.qmd

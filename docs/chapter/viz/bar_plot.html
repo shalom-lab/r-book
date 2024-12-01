@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>18&nbsp; 主题 – R语言入门指南</title>
+<title>19&nbsp; 主题 – R语言入门指南</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../chapter/stats/base.html" rel="next">
-<link href="../../chapter/clean/wider_longer.html" rel="prev">
+<link href="../../chapter/viz/base_plot.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/viz/bar_plot.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../../chapter/viz/bar_plot.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">柱状图</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/viz/base_plot.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../../chapter/viz/bar_plot.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">柱状图</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -288,8 +288,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../chapter/viz/base_plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">基础包绘图</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../chapter/viz/bar_plot.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">柱状图</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">柱状图</span></span></a>
   </div>
 </li>
       </ul>
@@ -306,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapter/stats/base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">基础</span></span></a>
   </div>
 </li>
       </ul>
@@ -321,16 +327,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#坐标轴标题-axis.title" id="toc-坐标轴标题-axis.title" class="nav-link active" data-scroll-target="#坐标轴标题-axis.title"><span class="header-section-number">18.0.1</span> 坐标轴标题-axis.title</a></li>
+  <li><a href="#坐标轴标题-axis.title" id="toc-坐标轴标题-axis.title" class="nav-link active" data-scroll-target="#坐标轴标题-axis.title"><span class="header-section-number">19.0.1</span> 坐标轴标题-axis.title</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/viz/bar_plot.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/viz/bar_plot.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../../chapter/viz/bar_plot.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">柱状图</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/viz/base_plot.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../../chapter/viz/bar_plot.html"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">柱状图</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">主题</span></h1>
+<h1 class="title"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">主题</span></h1>
 </div>
 
 
@@ -358,7 +364,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["x"],"name":[1],"type":["chr"],"align":["left"]},{"label":["y"],"name":[2],"type":["chr"],"align":["left"]},{"label":["value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"Female","3":"50"},{"1":"B","2":"Male","3":"38"},{"1":"C","2":"Female","3":"31"},{"1":"A","2":"Male","3":"46"},{"1":"B","2":"Female","3":"35"},{"1":"C","2":"Male","3":"73"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["x"],"name":[1],"type":["chr"],"align":["left"]},{"label":["y"],"name":[2],"type":["chr"],"align":["left"]},{"label":["value"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"A","2":"Female","3":"61"},{"1":"B","2":"Male","3":"69"},{"1":"C","2":"Female","3":"21"},{"1":"A","2":"Male","3":"86"},{"1":"B","2":"Female","3":"41"},{"1":"C","2":"Male","3":"98"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -374,8 +380,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<section id="坐标轴标题-axis.title" class="level3" data-number="18.0.1">
-<h3 data-number="18.0.1" class="anchored" data-anchor-id="坐标轴标题-axis.title"><span class="header-section-number">18.0.1</span> 坐标轴标题-axis.title</h3>
+<section id="坐标轴标题-axis.title" class="level3" data-number="19.0.1">
+<h3 data-number="19.0.1" class="anchored" data-anchor-id="坐标轴标题-axis.title"><span class="header-section-number">19.0.1</span> 坐标轴标题-axis.title</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(cyl,mpg))<span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'hjust=0.2,vjust = -3'</span>,<span class="at">y=</span><span class="st">'hjust=0.8,vjust = 3'</span>)<span class="sc">+</span></span>
@@ -818,13 +824,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapter/clean/wider_longer.html" class="pagination-link" aria-label="长宽数据转换">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">长宽数据转换</span></span>
+      <a href="../../chapter/viz/base_plot.html" class="pagination-link" aria-label="基础包绘图">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">基础包绘图</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../chapter/stats/base.html" class="pagination-link" aria-label="基础">
-        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">基础</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">基础</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

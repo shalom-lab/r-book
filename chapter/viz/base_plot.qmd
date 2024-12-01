@@ -1,0 +1,235 @@
+# 基础的绘图函数
+
+> 虽然ggplot2很流行，有时候基础的R绘图函数更快速便捷，本节了解一下`graphics`包
+
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+plot(1:10)
+```
+
+## 工具函数
+
+```{r}
+# 比较不同绘图参数的作用
+com_par <- function(fun, parname, pars, ...) {
+  npars <- length(pars)
+  mfrow <- case_when(
+    npars < 4 ~ c(1, npars),
+    npars == 4 ~ c(2,2),
+    npars < 7 ~ c(2, 3),
+    npars < 10 ~ c(3, 3),
+    npars < 17 ~ c(4, 4),
+    TRUE ~ c(4, 5)
+  )
+  op <- par(mfrow = mfrow)
+  walk(pars, function(par) {
+    do.call(fun, c(list(...), setNames(list(par), parname),list(main=sprintf('%s=%s',parname,par))))
+  })
+  par(op)
+}
+```
+
+## 点与线
+
+```{r}
+parname='type'
+pars=c('p','l','b','o','c','h','s','n')
+
+com_par(plot,parname,pars[1:4],1:10)
+com_par(plot,parname,pars[5:8],1:10)
+```
+
+```{r}
+com_par(curve,'n',c(10,50,100),expr(sin),from=-pi,to=pi,type='o')
+```
+
+```{r}
+plot(0:25,rep(1,26),pch=0:25)
+text(0:25,rep(1.1,26),labels=0:25)
+mtext('pch=')
+```
+
+```{r}
+plot(0:25,rep(1,26),pch=0:25,col='red',bg='green',fg='blue')
+text(0:25,rep(1.1,26),labels=0:25)
+mtext('col bg')
+plot(0:25,rep(1,26),pch=letters,col='red',bg='green',fg='blue')
+text(0:25,rep(1.1,26),labels=LETTERS)
+mtext('col bg')
+```
+
+```{r}
+plot(16:25,rep(1,10),pch=16:25,col='red',bg='green',fg='blue',cex=seq(2,4,length=10),lwd=3)
+text(16:25,rep(1.1,10),labels=16:25)
+mtext('cex lwd')
+```
+
+## 边框
+
+```{r}
+# border type
+com_par(plot,'bty',c('o','l','7','n',']','c'),1:10,fg='red',xaxt = 'n',yaxt='n')
+```
+
+```{r}
+plot(1,type='n',xlim=1:2,ylim=c(0.5,7.5),xlab='',ylab='',main='lty=')
+for(i in 1:7) {
+  abline(h=i,lty=i,col='red',lwd=2)
+}
+```
+
+## 前景背景
+
+```{r}
+od<-par(bg='skyblue',fg='red')
+plot(1:10)
+par(bg='salmon')
+plot(1:10)
+par(od)
+plot(1:10)
+```
+
+## 边距
+
+```{r}
+od<-par(mar=c(1,2,3,0),bg='skyblue')
+plot(1:10,main='mar=c(1,2,3,0)')
+par(mar=c(1,0,1,0))
+plot(1:10,main='mar=c(1,0,1,0)')
+par(od)
+plot(1:10)
+```
+
+### mtext
+
+```{r}
+plot(1:10)
+for(i in 1:4)mtext(text=paste0('side,col,font=',i),i,col=i,font=i)
+
+plot(1:10)
+for(i in 1:4)mtext(text=paste0('side=',i,',line=',i-3),side=i,line=i-3)
+```
+
+## 基础元素
+
+### circles
+
+```{r}
+symbols(1:3,rep(1,3),circles = 1:3)
+symbols(1:3,rep(1,3),circles = 1:3*10)
+symbols(1:3,rep(1,3),circles = 1:3,inches = T)
+symbols(1:3,rep(1,3),circles = 1:3/100,inches = F)
+```
+
+### squares
+
+```{r}
+symbols(x=runif(10),y=runif(10),squares = rep(.05,10),fg='gray',bg=rainbow(10),inches = F,lwd=5)
+```
+
+### thermometers
+
+```{r}
+symbols(x=1:4,rep(1,4),thermometers = cbind(rep(1,4),1:4,1:4/4),fg='tomato',bg='skyblue',col='green')
+symbols(x=1:4,rep(1,4),thermometers = cbind(1:4,rep(1,4),1:4/4),fg='tomato',bg='skyblue',col='green')
+symbols(x=1:4,rep(1,4),thermometers = cbind(rep(1,4),rep(1,4),rep(.8,4)),fg='tomato',bg='skyblue',col='green')
+```
+
+### rectangles
+
+```{r}
+symbols(x=1:4,y=rep(1,4),rectangles = cbind(1:4,4:1),bg='skyblue')
+symbols(x=1:4,y=rep(1,4),rectangles = cbind(1:4,4:1),bg=1:4)
+```
+
+### stars
+
+```{r}
+symbols(1:5,rep(1,5),stars=matrix(rep(.5,15),nrow=5),inches = F,bg='salmon')
+points(1:5,rep(1,5),pch=3)
+```
+
+```{r}
+symbols(1:5,rep(3,5),stars=matrix(rep(.5,5*3),nrow=5),bg=3,inches = F)
+points(1:5,rep(1,5),pch=3)
+symbols(1:5,rep(4,5),stars=matrix(rep(.5,5*4),nrow=5),bg=4,inches = F)
+points(1:5,rep(1,5),pch=3)
+symbols(1:5,rep(5,5),stars=matrix(rep(.5,5*5),nrow=5),bg=5,inches = F)
+points(1:5,rep(1,5),pch=3)
+symbols(1:5,rep(6,5),stars=matrix(rep(.5,5*6),nrow=5),bg=6,inches = F)
+points(1:5,rep(1,5),pch=3)
+```
+
+### boxplots
+
+```{r}
+symbols(1,1,boxplots=cbind(1,1,1,2,.5),col='gray',fg='salmon',bg='skyblue',lwd=4)
+```
+
+## 颜色
+
+```{r}
+plot(1:20,y=rep(1,20),pch=23,bg=1:20,cex=3)
+text(1:20,y=rep(1.1,20),1:20)
+plot(1:8,y=rep(1,8),pch=23,bg=1:8,cex=3)
+text(1:8,y=rep(1.1,8),1:8)
+
+```
+
+```{r}
+text=unlist(strsplit('R语言与可视化',""))
+plot(seq_along(text),y=rep(1,length(text)),pch=21,bg=seq_along(text),cex=10,xlim=c(0.5,length(text)+.5),bty='o',xaxt='n',yaxt='n',xlab='',ylab='',mar=rep(0,4))
+text(seq_along(text),y=rep(1,length(text)),text,col='white',cex=2)
+
+
+```
+
+```{r}
+plot_text<-function(text,pch=21,cex1=5,cex2=2){
+  text=unlist(strsplit(text,""))
+  plot(seq_along(text),y=rep(1,length(text)),pch=pch,bg=seq_along(text),cex=cex1,srt=-45,xlim=c(0.5,length(text)+.5),bty='n',xaxt='n',yaxt='n',xlab='',ylab='')
+  for(i in seq_along(text)){
+    text(i,y=1,text[i],col='white',cex=cex2,srt=runif(1,-10,10))
+  }
+}
+plot_text('R语言与可视化',21,7,1)
+plot_text('R语言与可视化',22,7,1)
+plot_text('R语言与可视化',23,7,1)
+plot_text('R语言与可视化',24,7,1)
+plot_text('R语言与可视化',25,7,1)
+```
+
+```{r}
+od<-par(mar=c(0,0,0,0))
+length(colors())
+colors<-colors()[1:625]
+symbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')
+colors<-sample(colors(),625)
+symbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')
+par(od)
+```
+
+## 其他
+
+### dotcharts
+
+```{r}
+dotchart(1:12,labels=month.abb,pch=21,bg=1:12,pt.cex=3)
+```
+
+```{r}
+class(VADeaths)
+VADeaths
+rownames(VADeaths)
+colnames(VADeaths)
+dotchart(VADeaths)
+dotchart(t(VADeaths))
+```
+
+### stem
+
+```{r}
+stem(rnorm(100))
+```

@@ -1,4 +1,4 @@
-## 管道符-%\>%
+## 管道符
 
 ### 常见用法
 
@@ -6,21 +6,23 @@
 #| context: setup
 #| warning: false
 library(tidyverse)
+```
 
-sub<-function(x,y){ #自定义求差函数
+```{r}
+my_sub<-function(x,y){
   x-y
 }
 
-sub(1,2)
-sub(2,3)
+my_sub(1,2)
+my_sub(2,3)
 ```
 
 ```{r}
 #借用管道符调用
-1 %>% sub(2)
-2 %>% sub(3)
+1 %>% my_sub(2)
+2 %>% my_sub(3)
 #连续调用
-3 %>% sub(1) %>% sub(2)
+3 %>% my_sub(1) %>% my_sub(2)
 
 
 mean(1:10)
@@ -30,9 +32,9 @@ mean(1:10)
 ### 指定位置
 
 ```{r}
-1 %>% sub(2,.)
-1 %>% sub(.,2)
-1 %>% sub(.,.)
+1 %>% my_sub(2,.)
+1 %>% my_sub(.,2)
+1 %>% my_sub(.,.)
 
 mean(c(1:10,NA))
 mean(c(1:10,NA),na.rm=TRUE)
@@ -52,6 +54,7 @@ mtcars %>%
 ```
 
 等价于
+
 ```{r}
 head(select(mutate(filter(mtcars,cyl==4),mpg2=mpg+100),cyl,mpg,mpg2))
 ```

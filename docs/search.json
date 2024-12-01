@@ -528,7 +528,7 @@
     "href": "chapter/base/common_function.html#统计",
     "title": "8  常用函数",
     "section": "8.3 统计",
-    "text": "8.3 统计\n\n\n#统计\nx=rnorm(1000) #随机数\nhead(x)\n\n[1] -0.6679438 -0.2498337 -0.6660069  1.5324913 -0.4744400  0.9970707\n\nmin(x)\n\n[1] -2.72167\n\nmax(x)\n\n[1] 2.953527\n\nrange(x)\n\n[1] -2.721670  2.953527\n\nmean(x)\n\n[1] -0.01598531\n\nmedian(x)\n\n[1] -0.03132131\n\nsd(x)\n\n[1] 0.9978879\n\nvar(x)\n\n[1] 0.9957803\n\nquantile(x)\n\n         0%         25%         50%         75%        100% \n-2.72166975 -0.68767672 -0.03132131  0.63083194  2.95352666 \n\nfivenum(x)\n\n[1] -2.72166975 -0.68813836 -0.03132131  0.63167832  2.95352666\n\ntable(mtcars$cyl)\n\n\n 4  6  8 \n11  7 14 \n\ntable(mtcars$cyl,mtcars$cyl)\n\n   \n     4  6  8\n  4 11  0  0\n  6  0  7  0\n  8  0  0 14",
+    "text": "8.3 统计\n\n\n#统计\nx=rnorm(1000) #随机数\nhead(x)\n\n[1]  0.1080563  1.4420998  0.3402650  0.2545710 -1.6880186 -2.0407400\n\nmin(x)\n\n[1] -2.995007\n\nmax(x)\n\n[1] 3.019876\n\nrange(x)\n\n[1] -2.995007  3.019876\n\nmean(x)\n\n[1] -0.02878802\n\nmedian(x)\n\n[1] -0.02227233\n\nsd(x)\n\n[1] 0.9830423\n\nvar(x)\n\n[1] 0.9663721\n\nquantile(x)\n\n         0%         25%         50%         75%        100% \n-2.99500686 -0.68466125 -0.02227233  0.63873985  3.01987579 \n\nfivenum(x)\n\n[1] -2.99500686 -0.68478505 -0.02227233  0.63897300  3.01987579\n\ntable(mtcars$cyl)\n\n\n 4  6  8 \n11  7 14 \n\ntable(mtcars$cyl,mtcars$cyl)\n\n   \n     4  6  8\n  4 11  0  0\n  6  0  7  0\n  8  0  0 14",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>常用函数</span>"
@@ -592,9 +592,9 @@
   {
     "objectID": "chapter/clean/pipe.html",
     "href": "chapter/clean/pipe.html",
-    "title": "12  管道符-%>%",
+    "title": "12  管道符",
     "section": "",
-    "text": "12.0.1 常见用法\n\nlibrary(tidyverse)\n\nsub&lt;-function(x,y){ #自定义求差函数\n  x-y\n}\n\nsub(1,2)\n\n[1] -1\n\nsub(2,3)\n\n[1] -1\n\n\n\n#借用管道符调用\n1 %&gt;% sub(2)\n\n[1] -1\n\n2 %&gt;% sub(3)\n\n[1] -1\n\n#连续调用\n3 %&gt;% sub(1) %&gt;% sub(2)\n\n[1] 0\n\nmean(1:10)\n\n[1] 5.5\n\n1:10 %&gt;% mean() %&gt;% class()\n\n[1] \"numeric\"\n\n\n\n\n12.0.2 指定位置\n\n1 %&gt;% sub(2,.)\n\n[1] 1\n\n1 %&gt;% sub(.,2)\n\n[1] -1\n\n1 %&gt;% sub(.,.)\n\n[1] 0\n\nmean(c(1:10,NA))\n\n[1] NA\n\nmean(c(1:10,NA),na.rm=TRUE)\n\n[1] 5.5\n\nTRUE %&gt;% mean(c(1:10,NA),na.rm=.)\n\n[1] 5.5\n\n\n\n\n12.0.3 实战应用\n管道符的优势即是连续调用\n\nmtcars %&gt;%\n  filter(cyl==4) %&gt;%\n  mutate(mpg2=mpg+100) %&gt;%\n  select(cyl,mpg,mpg2) %&gt;%\n  head()\n\n\n  \n\n\n\n等价于\n\nhead(select(mutate(filter(mtcars,cyl==4),mpg2=mpg+100),cyl,mpg,mpg2))",
+    "text": "12.0.1 常见用法\n\nlibrary(tidyverse)\n\n\nmy_sub&lt;-function(x,y){\n  x-y\n}\n\nmy_sub(1,2)\n\n[1] -1\n\nmy_sub(2,3)\n\n[1] -1\n\n\n\n#借用管道符调用\n1 %&gt;% my_sub(2)\n\n[1] -1\n\n2 %&gt;% my_sub(3)\n\n[1] -1\n\n#连续调用\n3 %&gt;% my_sub(1) %&gt;% my_sub(2)\n\n[1] 0\n\nmean(1:10)\n\n[1] 5.5\n\n1:10 %&gt;% mean() %&gt;% class()\n\n[1] \"numeric\"\n\n\n\n\n12.0.2 指定位置\n\n1 %&gt;% my_sub(2,.)\n\n[1] 1\n\n1 %&gt;% my_sub(.,2)\n\n[1] -1\n\n1 %&gt;% my_sub(.,.)\n\n[1] 0\n\nmean(c(1:10,NA))\n\n[1] NA\n\nmean(c(1:10,NA),na.rm=TRUE)\n\n[1] 5.5\n\nTRUE %&gt;% mean(c(1:10,NA),na.rm=.)\n\n[1] 5.5\n\n\n\n\n12.0.3 实战应用\n管道符的优势即是连续调用\n\nmtcars %&gt;%\n  filter(cyl==4) %&gt;%\n  mutate(mpg2=mpg+100) %&gt;%\n  select(cyl,mpg,mpg2) %&gt;%\n  head()\n\n\n  \n\n\n\n等价于\n\nhead(select(mutate(filter(mtcars,cyl==4),mpg2=mpg+100),cyl,mpg,mpg2))",
     "crumbs": [
       "清理篇",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>管道符%>%</span>"
@@ -865,58 +865,146 @@
     ]
   },
   {
-    "objectID": "chapter/viz/bar_plot.html",
-    "href": "chapter/viz/bar_plot.html",
-    "title": "18  主题",
+    "objectID": "chapter/viz/base_plot.html",
+    "href": "chapter/viz/base_plot.html",
+    "title": "18  基础的绘图函数",
     "section": "",
-    "text": "library(tidyverse)\ntheme_set(theme_bw())\n\n\ndata&lt;-data.frame(x=rep(c('A','B','C'),time=2),y=c('Female','Male'),value=round(runif(6,20,100)))\n\ndata\n\n\n  \n\n\n\n\nggplot(data,aes(x,value,fill=y))+\n  geom_col()\n\n\n\n\n\n\n\n\n\n18.0.1 坐标轴标题-axis.title\n\nggplot(mtcars,aes(cyl,mpg))+\n  labs(x='hjust=0.2,vjust = -3',y='hjust=0.8,vjust = 3')+\n  theme(axis.title = element_text(colour = 'red',face='bold'),\n        axis.title.x = element_text(hjust=0.2,vjust = -3),\n        axis.title.y = element_text(hjust=0.8,vjust = 3)\n        )",
+    "text": "18.1 工具函数\n# 比较不同绘图参数的作用\ncom_par &lt;- function(fun, parname, pars, ...) {\n  npars &lt;- length(pars)\n  mfrow &lt;- case_when(\n    npars &lt; 4 ~ c(1, npars),\n    npars == 4 ~ c(2,2),\n    npars &lt; 7 ~ c(2, 3),\n    npars &lt; 10 ~ c(3, 3),\n    npars &lt; 17 ~ c(4, 4),\n    TRUE ~ c(4, 5)\n  )\n  op &lt;- par(mfrow = mfrow)\n  walk(pars, function(par) {\n    do.call(fun, c(list(...), setNames(list(par), parname),list(main=sprintf('%s=%s',parname,par))))\n  })\n  par(op)\n}",
     "crumbs": [
       "数据可视化",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>柱状图</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#点与线",
+    "href": "chapter/viz/base_plot.html#点与线",
+    "title": "18  基础的绘图函数",
+    "section": "18.2 点与线",
+    "text": "18.2 点与线\n\nparname='type'\npars=c('p','l','b','o','c','h','s','n')\n\ncom_par(plot,parname,pars[1:4],1:10)\n\n\n\n\n\n\n\ncom_par(plot,parname,pars[5:8],1:10)\n\n\n\n\n\n\n\n\n\ncom_par(curve,'n',c(10,50,100),expr(sin),from=-pi,to=pi,type='o')\n\n\n\n\n\n\n\n\n\nplot(0:25,rep(1,26),pch=0:25)\ntext(0:25,rep(1.1,26),labels=0:25)\nmtext('pch=')\n\n\n\n\n\n\n\n\n\nplot(0:25,rep(1,26),pch=0:25,col='red',bg='green',fg='blue')\ntext(0:25,rep(1.1,26),labels=0:25)\nmtext('col bg')\n\n\n\n\n\n\n\nplot(0:25,rep(1,26),pch=letters,col='red',bg='green',fg='blue')\ntext(0:25,rep(1.1,26),labels=LETTERS)\nmtext('col bg')\n\n\n\n\n\n\n\n\n\nplot(16:25,rep(1,10),pch=16:25,col='red',bg='green',fg='blue',cex=seq(2,4,length=10),lwd=3)\ntext(16:25,rep(1.1,10),labels=16:25)\nmtext('cex lwd')",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#边框",
+    "href": "chapter/viz/base_plot.html#边框",
+    "title": "18  基础的绘图函数",
+    "section": "18.3 边框",
+    "text": "18.3 边框\n\n# border type\ncom_par(plot,'bty',c('o','l','7','n',']','c'),1:10,fg='red',xaxt = 'n',yaxt='n')\n\n\n\n\n\n\n\n\n\nplot(1,type='n',xlim=1:2,ylim=c(0.5,7.5),xlab='',ylab='',main='lty=')\nfor(i in 1:7) {\n  abline(h=i,lty=i,col='red',lwd=2)\n}",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#前景背景",
+    "href": "chapter/viz/base_plot.html#前景背景",
+    "title": "18  基础的绘图函数",
+    "section": "18.4 前景背景",
+    "text": "18.4 前景背景\n\nod&lt;-par(bg='skyblue',fg='red')\nplot(1:10)\n\n\n\n\n\n\n\npar(bg='salmon')\nplot(1:10)\npar(od)\nplot(1:10)",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#边距",
+    "href": "chapter/viz/base_plot.html#边距",
+    "title": "18  基础的绘图函数",
+    "section": "18.5 边距",
+    "text": "18.5 边距\n\nod&lt;-par(mar=c(1,2,3,0),bg='skyblue')\nplot(1:10,main='mar=c(1,2,3,0)')\n\n\n\n\n\n\n\npar(mar=c(1,0,1,0))\nplot(1:10,main='mar=c(1,0,1,0)')\n\n\n\n\n\n\n\npar(od)\nplot(1:10)\n\n\n\n\n\n\n\n\n\n18.5.1 mtext\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side,col,font=',i),i,col=i,font=i)\n\n\n\n\n\n\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side=',i,',line=',i-3),side=i,line=i-3)",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#基础元素",
+    "href": "chapter/viz/base_plot.html#基础元素",
+    "title": "18  基础的绘图函数",
+    "section": "18.6 基础元素",
+    "text": "18.6 基础元素\n\n18.6.1 circles\n\nsymbols(1:3,rep(1,3),circles = 1:3)\n\n\n\n\n\n\n\nsymbols(1:3,rep(1,3),circles = 1:3*10)\n\n\n\n\n\n\n\nsymbols(1:3,rep(1,3),circles = 1:3,inches = T)\n\n\n\n\n\n\n\nsymbols(1:3,rep(1,3),circles = 1:3/100,inches = F)\n\n\n\n\n\n\n\n\n\n\n18.6.2 squares\n\nsymbols(x=runif(10),y=runif(10),squares = rep(.05,10),fg='gray',bg=rainbow(10),inches = F,lwd=5)\n\n\n\n\n\n\n\n\n\n\n18.6.3 thermometers\n\nsymbols(x=1:4,rep(1,4),thermometers = cbind(rep(1,4),1:4,1:4/4),fg='tomato',bg='skyblue',col='green')\n\n\n\n\n\n\n\nsymbols(x=1:4,rep(1,4),thermometers = cbind(1:4,rep(1,4),1:4/4),fg='tomato',bg='skyblue',col='green')\n\n\n\n\n\n\n\nsymbols(x=1:4,rep(1,4),thermometers = cbind(rep(1,4),rep(1,4),rep(.8,4)),fg='tomato',bg='skyblue',col='green')\n\n\n\n\n\n\n\n\n\n\n18.6.4 rectangles\n\nsymbols(x=1:4,y=rep(1,4),rectangles = cbind(1:4,4:1),bg='skyblue')\n\n\n\n\n\n\n\nsymbols(x=1:4,y=rep(1,4),rectangles = cbind(1:4,4:1),bg=1:4)\n\n\n\n\n\n\n\n\n\n\n18.6.5 stars\n\nsymbols(1:5,rep(1,5),stars=matrix(rep(.5,15),nrow=5),inches = F,bg='salmon')\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\n\n\nsymbols(1:5,rep(3,5),stars=matrix(rep(.5,5*3),nrow=5),bg=3,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\nsymbols(1:5,rep(4,5),stars=matrix(rep(.5,5*4),nrow=5),bg=4,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\nsymbols(1:5,rep(5,5),stars=matrix(rep(.5,5*5),nrow=5),bg=5,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\nsymbols(1:5,rep(6,5),stars=matrix(rep(.5,5*6),nrow=5),bg=6,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\n\n\n\n18.6.6 boxplots\n\nsymbols(1,1,boxplots=cbind(1,1,1,2,.5),col='gray',fg='salmon',bg='skyblue',lwd=4)",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#颜色",
+    "href": "chapter/viz/base_plot.html#颜色",
+    "title": "18  基础的绘图函数",
+    "section": "18.7 颜色",
+    "text": "18.7 颜色\n\nplot(1:20,y=rep(1,20),pch=23,bg=1:20,cex=3)\ntext(1:20,y=rep(1.1,20),1:20)\n\n\n\n\n\n\n\nplot(1:8,y=rep(1,8),pch=23,bg=1:8,cex=3)\ntext(1:8,y=rep(1.1,8),1:8)\n\n\n\n\n\n\n\n\n\ntext=unlist(strsplit('R语言与可视化',\"\"))\nplot(seq_along(text),y=rep(1,length(text)),pch=21,bg=seq_along(text),cex=10,xlim=c(0.5,length(text)+.5),bty='o',xaxt='n',yaxt='n',xlab='',ylab='',mar=rep(0,4))\ntext(seq_along(text),y=rep(1,length(text)),text,col='white',cex=2)\n\n\n\n\n\n\n\n\n\nplot_text&lt;-function(text,pch=21,cex1=5,cex2=2){\n  text=unlist(strsplit(text,\"\"))\n  plot(seq_along(text),y=rep(1,length(text)),pch=pch,bg=seq_along(text),cex=cex1,srt=-45,xlim=c(0.5,length(text)+.5),bty='n',xaxt='n',yaxt='n',xlab='',ylab='')\n  for(i in seq_along(text)){\n    text(i,y=1,text[i],col='white',cex=cex2,srt=runif(1,-10,10))\n  }\n}\nplot_text('R语言与可视化',21,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',22,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',23,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',24,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',25,7,1)\n\n\n\n\n\n\n\n\n\nod&lt;-par(mar=c(0,0,0,0))\nlength(colors())\n\n[1] 657\n\ncolors&lt;-colors()[1:625]\nsymbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')\n\n\n\n\n\n\n\ncolors&lt;-sample(colors(),625)\nsymbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')\n\n\n\n\n\n\n\npar(od)",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/base_plot.html#其他",
+    "href": "chapter/viz/base_plot.html#其他",
+    "title": "18  基础的绘图函数",
+    "section": "18.8 其他",
+    "text": "18.8 其他\n\n18.8.1 dotcharts\n\ndotchart(1:12,labels=month.abb,pch=21,bg=1:12,pt.cex=3)\n\n\n\n\n\n\n\n\n\nclass(VADeaths)\n\n[1] \"matrix\" \"array\" \n\nVADeaths\n\n      Rural Male Rural Female Urban Male Urban Female\n50-54       11.7          8.7       15.4          8.4\n55-59       18.1         11.7       24.3         13.6\n60-64       26.9         20.3       37.0         19.3\n65-69       41.0         30.9       54.6         35.1\n70-74       66.0         54.3       71.1         50.0\n\nrownames(VADeaths)\n\n[1] \"50-54\" \"55-59\" \"60-64\" \"65-69\" \"70-74\"\n\ncolnames(VADeaths)\n\n[1] \"Rural Male\"   \"Rural Female\" \"Urban Male\"   \"Urban Female\"\n\ndotchart(VADeaths)\n\n\n\n\n\n\n\ndotchart(t(VADeaths))\n\n\n\n\n\n\n\n\n\n\n18.8.2 stem\n\nstem(rnorm(100))\n\n\n  The decimal point is at the |\n\n  -2 | 9851\n  -1 | 998777666553321110\n  -0 | 9988777766555555544333221111000\n   0 | 00000112222333344444444578888\n   1 | 000122344555569\n   2 | 369",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/bar_plot.html",
+    "href": "chapter/viz/bar_plot.html",
+    "title": "19  主题",
+    "section": "",
+    "text": "library(tidyverse)\ntheme_set(theme_bw())\n\n\ndata&lt;-data.frame(x=rep(c('A','B','C'),time=2),y=c('Female','Male'),value=round(runif(6,20,100)))\n\ndata\n\n\n  \n\n\n\n\nggplot(data,aes(x,value,fill=y))+\n  geom_col()\n\n\n\n\n\n\n\n\n\n19.0.1 坐标轴标题-axis.title\n\nggplot(mtcars,aes(cyl,mpg))+\n  labs(x='hjust=0.2,vjust = -3',y='hjust=0.8,vjust = 3')+\n  theme(axis.title = element_text(colour = 'red',face='bold'),\n        axis.title.x = element_text(hjust=0.2,vjust = -3),\n        axis.title.y = element_text(hjust=0.8,vjust = 3)\n        )",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>柱状图</span>"
     ]
   },
   {
     "objectID": "chapter/stats/base.html",
     "href": "chapter/stats/base.html",
-    "title": "19  基础知识",
+    "title": "20  基础知识",
     "section": "",
-    "text": "19.1 连续型随机变量\ndf&lt;-data.frame(x=seq(-5,5,by=0.01)) %&gt;%\n  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))\n\ndf",
+    "text": "20.1 连续型随机变量\ndf&lt;-data.frame(x=seq(-5,5,by=0.01)) %&gt;%\n  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))\n\ndf",
     "crumbs": [
       "统计",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>基础</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
     ]
   },
   {
     "objectID": "chapter/stats/base.html#连续型随机变量",
     "href": "chapter/stats/base.html#连续型随机变量",
-    "title": "19  基础知识",
+    "title": "20  基础知识",
     "section": "",
-    "text": "19.1.1 密度函数/分布函数\n\n概率密度函数累计分布函数累计分布函数的反函数\n\n\n\ndf %&gt;%\n  ggplot(aes(x,pdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(x,cdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(cdf,icdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\n\n\n19.1.2 3\\(\\sigma\\)(西格玛)准则\n\nggplot(df,aes(x,pdf))+\n  geom_line()+\n  geom_area(aes(x=ifelse(abs(x)&lt;3,x,NA),fill='0.9974'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;2,x,NA),fill='0.9545'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;1,x,NA),fill='0.6827'),alpha=0.5)+\n  geom_vline(xintercept =c(-3,-2,-1,1,2,3),linetype='dashed')+\n  scale_x_continuous(breaks=c(-5:5))+\n  labs(x='Z',y='概率密度(pdf)')+\n  scale_fill_futurama()+\n  guides(fill=guide_legend(title='曲线下面积',override.aes = list(alpha=0.2)))\n\n\n\n\n\n\n\n\n\npnorm(1:3)-pnorm(-1:-3)\n\n[1] 0.6826895 0.9544997 0.9973002\n\n\n\n(pnorm(1:3)-pnorm(-1:-3)) %&gt;%\n  `/`(2) %&gt;%\n  `-`(0.5,.) %&gt;%\n  qnorm()\n\n[1] -1 -2 -3\n\n\n\n\n19.1.3 Z检验界值和参考值范围\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1))\n\n[1] 2.575829 2.326348 1.959964 1.644854 1.281552\n\n\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1)) %&gt;%\n  pnorm()\n\n[1] 0.995 0.990 0.975 0.950 0.900\n\n\n\n\n19.1.4 频率分布直方图\n\nrunif(10000) %&gt;%\n  qnorm() %&gt;%\n  hist(breaks = 50)",
+    "text": "20.1.1 密度函数/分布函数\n\n概率密度函数累计分布函数累计分布函数的反函数\n\n\n\ndf %&gt;%\n  ggplot(aes(x,pdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(x,cdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(cdf,icdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\n\n\n20.1.2 3\\(\\sigma\\)(西格玛)准则\n\nggplot(df,aes(x,pdf))+\n  geom_line()+\n  geom_area(aes(x=ifelse(abs(x)&lt;3,x,NA),fill='0.9974'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;2,x,NA),fill='0.9545'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;1,x,NA),fill='0.6827'),alpha=0.5)+\n  geom_vline(xintercept =c(-3,-2,-1,1,2,3),linetype='dashed')+\n  scale_x_continuous(breaks=c(-5:5))+\n  labs(x='Z',y='概率密度(pdf)')+\n  scale_fill_futurama()+\n  guides(fill=guide_legend(title='曲线下面积',override.aes = list(alpha=0.2)))\n\n\n\n\n\n\n\n\n\npnorm(1:3)-pnorm(-1:-3)\n\n[1] 0.6826895 0.9544997 0.9973002\n\n\n\n(pnorm(1:3)-pnorm(-1:-3)) %&gt;%\n  `/`(2) %&gt;%\n  `-`(0.5,.) %&gt;%\n  qnorm()\n\n[1] -1 -2 -3\n\n\n\n\n20.1.3 Z检验界值和参考值范围\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1))\n\n[1] 2.575829 2.326348 1.959964 1.644854 1.281552\n\n\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1)) %&gt;%\n  pnorm()\n\n[1] 0.995 0.990 0.975 0.950 0.900\n\n\n\n\n20.1.4 频率分布直方图\n\nrunif(10000) %&gt;%\n  qnorm() %&gt;%\n  hist(breaks = 50)",
     "crumbs": [
       "统计",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>基础</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
     ]
   },
   {
     "objectID": "chapter/stats/base.html#离散型随机变量",
     "href": "chapter/stats/base.html#离散型随机变量",
-    "title": "19  基础知识",
-    "section": "19.2 离散型随机变量",
-    "text": "19.2 离散型随机变量\n\n19.2.1 分布列\n\nrpois(1000,5) %&gt;% \n  table() %&gt;% as.data.frame() %&gt;%\n  setNames(c('k','probality')) %&gt;%\n  adorn_percentages(denominator = 'col') %&gt;%\n  ggplot(aes(k,probality))+\n  geom_col()",
+    "title": "20  基础知识",
+    "section": "20.2 离散型随机变量",
+    "text": "20.2 离散型随机变量\n\n20.2.1 分布列\n\nrpois(1000,5) %&gt;% \n  table() %&gt;% as.data.frame() %&gt;%\n  setNames(c('k','probality')) %&gt;%\n  adorn_percentages(denominator = 'col') %&gt;%\n  ggplot(aes(k,probality))+\n  geom_col()",
     "crumbs": [
       "统计",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>基础</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
     ]
   },
   {
     "objectID": "chapter/stats/base.html#ci的含义",
     "href": "chapter/stats/base.html#ci的含义",
-    "title": "19  基础知识",
-    "section": "19.3 95%CI的含义",
-    "text": "19.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\n\ndf\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.954",
+    "title": "20  基础知识",
+    "section": "20.3 95%CI的含义",
+    "text": "20.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\n\ndf\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.92",
     "crumbs": [
       "统计",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>基础</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
     ]
   }
 ]
