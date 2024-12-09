@@ -1,0 +1,96 @@
+```{r}
+library(tidyverse)
+
+# 假设数据集
+df <- data.frame(
+  gender = rep(c("Male", "Female"), each = 200),
+  blood_pressure = round(runif(400, min = 90, max = 140)),
+  blood_lipid = round(runif(400, min = 1.5, max = 5.0),1),
+  blood_sugar = round(runif(400, min = 3.5, max = 7.5),1)
+)
+
+gen_quantile(df$blood_pressure)
+
+# 定义函数计算四分位数
+gen_quantile <- function(x) {
+  quantiles <- quantile(x, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE)
+  cut(x, breaks = quantiles, include.lowest = TRUE, labels = c("Q1", "Q2", "Q3", "Q4"))
+}
+
+# 按性别分组并计算四分位数
+df %>%
+  group_by(gender) %>%
+  mutate(pre_quartile = gen_quantile(blood_pressure),
+         lip_quartile = gen_quantile(blood_lipid),
+         sug_quartile = gen_quantile(blood_sugar))
+
+# 查看结果
+print(df_quantiled)
+```
+
+```{r}
+library(tidyverse)
+
+df<-data.frame(class=rep(1:6,each=30),
+               Aa=round(runif(180,min=0,max=100)),
+               Total=round(runif(180,min=0,max=100)))
+
+df.list<-split(df,df$class) # 转为列表
+length(df.list)
+df.list[[1]] # 某个班级
+
+gen_quantile<-function(x){
+  # 计算三分位数
+  quantiles <- quantile(x, probs = c(1/3,2/3),na.rm=T)
+  
+  # 查看Q1, Q2, Q3
+  value1 <- quantiles[1]
+  value2 <- quantiles[2]
+  
+  # 将数据划分到Q1, Q2, Q3区间
+  groups <- ifelse(x <= value1, "Q1", 
+                        ifelse(x <= value2, "Q2", "Q3"))
+  groups
+}
+
+gen_quantile(x=1:10)
+gen_quantile(c(1:10,NA,NA,10:1))
+table(gen_quantile(c(1:10,NA,NA,10:1)))
+
+add_quantile_by<-function(df,by='Aa'){
+  df[,paste0('Q_by_',by)]=gen_quantile(df[,by])
+  return(df)
+}
+add_quantile_by(df.list[[1]],'Aa')
+
+add_quantile_by(df.list[[1]],'Aa') %>% add_quantile_by('Total')
+
+# map_dfr函数 按照list中的每个依次放入后面的函数，最后再按行接起来
+new_df<-map_dfr(df.list,~add_quantile_by(.x,'Aa'))
+
+# 改造一下
+add_quantile_by2<-function(df,by_what){
+  for(by in by_what){
+    df[,paste0('Q_by_',by)]=gen_quantile(df[,by]) 
+  }
+  return(df)
+}
+
+add_quantile_by2(df.list[[2]],c('Aa','Total'))
+
+new_df<-map_dfr(df.list,~add_quantile_by2(.x,c('Aa','Total')))
+new_df
+
+?cut
+cut(-1:10,breaks = c(1,3,5),right=T,include.lowest = F,labels = c('A','B'))
+cut(1:10,breaks = c(1,3,5),right=F,include.lowest = F)
+cut(1:10,breaks = c(1,3,5),right=F,include.lowest = T)
+
+cut(1:10,breaks = c(1,3,5),right = T)
+cut(1:10,breaks = c(1,3,5),include.lowest = T)
+cut(1:10,breaks = c(1,3,5),right = F)
+cut(1:10,breaks = c(1,3,5),right = T)
+cut(1:10,breaks = c(1,3,5),right = F,include.lowest = T)
+cut(1:10,breaks = c(1,3,5),right = F,include.lowest = F)
+
+```

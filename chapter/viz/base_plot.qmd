@@ -66,7 +66,7 @@ text(16:25,rep(1.1,10),labels=16:25)
 mtext('cex lwd')
 ```
 
-## 边框
+## 边框border
 
 ```{r}
 # border type
@@ -91,11 +91,24 @@ par(od)
 plot(1:10)
 ```
 
-## 边距
+## 边距margin
 
 ```{r}
-od<-par(mar=c(1,2,3,0),bg='skyblue')
+plot(1:10)
+box(which='plot',col=1,lwd=4)
+plot(1:10)
+box(which='figure',col=2,lwd=4)
+plot(1:10)
+box(which='inner',col=3,lwd=4)
+plot(1:10)
+box(which='outer',col=4,lwd=4)
+
+```
+
+```{r}
+od<-par(mar=c(1,2,3,0),oma=c(1,1,1,1),bg='skyblue',fg='salmon')
 plot(1:10,main='mar=c(1,2,3,0)')
+box(col="forestgreen")
 par(mar=c(1,0,1,0))
 plot(1:10,main='mar=c(1,0,1,0)')
 par(od)
@@ -168,6 +181,73 @@ points(1:5,rep(1,5),pch=3)
 symbols(1,1,boxplots=cbind(1,1,1,2,.5),col='gray',fg='salmon',bg='skyblue',lwd=4)
 ```
 
+## 尺寸
+
+```{r}
+plot(1,typ='n',xlim=c(0,10),ylim=c(0,10))
+symbols(1,2,squares=0.5,bg=1,add=T,inches = T)
+symbols(2,2,squares=1,bg=2,add=T,inches = T)
+symbols(1,8,squares=.5,bg=1,add=T,cex=.5)
+symbols(1,8,squares=.5,bg=2,add=T,cex=.5,inches = F)
+symbols(2,8,squares=.5,bg=3,add=T,cex=1,inches = F)
+symbols(4,8,squares=1/2.54,bg=4,add=T,cex=1,inches = F)
+symbols(5,8,squares=1,bg=5,add=T,cex=1,inches = F)
+grid()
+
+```
+
+## 文本位置
+
+```{r}
+plot(1,type='n',xlim=c(1,5),ylim=c(1,5))
+text(3,3,'default',col=1,cex=1)
+text(2,2,'adj=c(0,0)',col=2,cex=1,adj=c(0,0))
+text(2,4,'adj=c(0,1)',col=3,cex=1,adj=c(0,1))
+text(4,2,'adj=c(1,0)',col=4,cex=1,adj=c(1,0))
+text(4,4,'adj=c(1,1)',col=5,cex=1,adj=c(1,1))
+grid()
+points(c(2,2,4,4),c(2,4,2,4),pch=3,cex=5)
+
+```
+
+## Image
+
+```{r}
+# 创建一个矩阵
+z <- matrix(1:12, nrow = 3, byrow = TRUE)
+
+# 绘制热图
+image(z, col = terrain.colors(12), main = "Simple Matrix Heatmap")
+```
+
+```{r}
+library(mvtnorm)
+
+# 参数设置
+mu <- c(0, 0)  # 均值向量
+sigma <- matrix(c(1, 0.8, 0.8, 1), nrow = 2)  # 协方差矩阵
+
+# 生成数据
+x <- seq(-3, 3, length.out = 100)
+y <- seq(-3, 3, length.out = 100)
+z <- outer(x, y, function(x, y) dmvnorm(cbind(x, y), mean = mu, sigma = sigma))
+image(z,asp=1)
+image(z,col=c('skyblue','white','tomato'))
+contour(x, y, z, main = "Bivariate Normal Distribution Contour",
+        xlab = "X", ylab = "Y",asp=1)
+```
+
+```{r}
+# 矩阵数据
+z <- matrix(runif(100, 0, 1), nrow = 10)
+
+# 自定义颜色
+custom_colors <- colorRampPalette( palette.colors(3,palette = 'Set3'))(20)
+
+# 绘制
+image(z, col = custom_colors, zlim = c(0, 1), main = "Custom Heatmap")
+```
+
 ## 颜色
 
 ```{r}
@@ -209,6 +289,41 @@ symbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inc
 colors<-sample(colors(),625)
 symbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')
 par(od)
+```
+
+## 色板
+
+```{r}
+plot(1:8,pch=15,cex=7,col=palette())
+```
+
+```{r}
+## color swatches for palette.colors()
+palette.swatch <- function(palette = palette.pals(), n = 8, nrow = 8,
+                           border = "black", cex = 1, ...)
+{
+     cols <- sapply(palette, palette.colors, n = n, recycle = TRUE)
+     ncol <- ncol(cols)
+     nswatch <- min(ncol, nrow)
+     op <- par(mar = rep(0.1, 4),
+               mfrow = c(1, min(5, ceiling(ncol/nrow))),
+               cex = cex, ...)
+     on.exit(par(op))
+     while (length(palette)) {
+        subset <- seq_len(min(nrow, ncol(cols)))
+        plot.new()
+        plot.window(c(0, n), c(0.25, nrow + 0.25))
+        y <- rev(subset)
+        text(0, y + 0.1, palette[subset], adj = c(0, 0))
+        y <- rep(y, each = n)
+        rect(rep(0:(n-1), n), y, rep(1:n, n), y - 0.5,
+             col = cols[, subset], border = border)
+        palette <- palette[-subset]
+        cols    <- cols [, -subset, drop = FALSE]
+     }
+}
+
+palette.swatch()
 ```
 
 ## 其他

@@ -1,0 +1,55 @@
+# ggplot2绘图
+
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+```
+
+```{r}
+library(maps)
+map('world')
+map('usa')
+```
+
+```{r}
+library(mapdata)
+
+map('china',col = 'salmon')
+map('japan')
+```
+
+```{r}
+world_map<-map_data('world') # from ggplot2 package
+head(world_map)
+df<-data.frame(region=unique(world_map$region),
+               value=sample(LETTERS[1:3]),length(unique(world_map$region)))
+dim(df)
+world_map2<-left_join(world_map,df,by='region')
+head(world_map2)
+ggplot() +
+  geom_map(
+    data = world_map2, map = world_map2,
+    aes(x=long, y=lat, map_id = region,fill=value),
+    color = "black",  linewidth = 0.1,alpha=0.7) +
+  scale_fill_manual(values = c("#0392cf","#ffad60","#fdf498","#7bc043"),na.value = "#EEEEEE",na.translate=FALSE)+
+  #geom_point(data = LocationInfo,aes(x=long, y=lat),color="red",alpha = 0.7,size=3)+
+  geom_hline(yintercept = c(23.5,-23.5), lty = 3, color = "darkgrey") +
+  geom_hline(yintercept = c(35,-35), lty = 2, color = "darkgrey") +
+  geom_hline(yintercept = 0, lty = 1, color = "darkgrey") +
+  geom_text(aes(y = c(35,23.5,0,-23.5,-35), label =c("35°","23.5°","0°","-23.5°","-35°")), 
+            x = -Inf, hjust = -0.1, vjust = -1, size = 4,color = "darkgrey") +
+  theme_void() +
+  theme(legend.position = "bottom")
+```
+
+### 地图数据
+
+```{r}
+map_data('china')
+ggplot()+
+  geom_map(
+    data=map_data('china'),map=map_data('china'),
+    aes(x=long, y=lat, map_id = region)
+  )
+```
