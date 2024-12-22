@@ -215,9 +215,10 @@ points(c(2,2,4,4),c(2,4,2,4),pch=3,cex=5)
 ```{r}
 # 创建一个矩阵
 z <- matrix(1:12, nrow = 3, byrow = TRUE)
-
+z
 # 绘制热图
-image(z, col = terrain.colors(12), main = "Simple Matrix Heatmap")
+image(z, main = "Simple Matrix Heatmap")
+image(t(z[3:1,]), main = "Simple Matrix Heatmap")
 ```
 
 ```{r}

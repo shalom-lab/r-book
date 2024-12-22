@@ -53,3 +53,16 @@ ggplot()+
     aes(x=long, y=lat, map_id = region)
   )
 ```
+
+```{r}
+library(tidyverse)
+count(mtcars,cyl,am) %>%
+  ggplot(aes(cyl, n, fill = factor(am))) +
+  geom_col(position = position_dodge(),width=.5,colour = "black")+
+  geom_errorbar(aes(ymin = n - 1, ymax = n + 1), width=.1,position = position_dodge(width = .5))
+
+count(mtcars,cyl,am) %>%
+  ggplot(aes(cyl, n, fill = factor(am))) +
+  geom_col(position = position_dodge2(),width=.8,colour = "black")+
+  geom_errorbar(aes(ymin = n - 1, ymax = n + 1), width=.8,position = position_dodge2(padding = .5))
+```

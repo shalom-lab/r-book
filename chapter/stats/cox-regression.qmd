@@ -1,0 +1,178 @@
+**Cox 回归**（Cox Proportional Hazards Model）是一种广泛应用于生存分析的回归模型，特别适用于探索多个变量与事件发生时间之间的关系。其主要应用是分析生存数据、疾病发生时间或其他事件时间（例如死亡、复发等）与多个影响因素之间的关联。
+
+## Cox 回归的原理
+
+Cox 回归模型是基于**比例风险假设**（Proportional Hazards Assumption）的。其核心思想是：不同组之间的风险比（Hazard Ratio，HR）是恒定的，但每个个体的风险随时间变化的速率可能不同。该模型的目的是估计一个或多个协变量对生存时间的影响，假定协变量对风险的影响是恒定的，不随时间变化。
+
+Cox 模型的基本形式为： $$h(t | X) = h_0(t) \exp(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p)$$ 其中： - $h(t|X)$ 是给定协变量 𝑋 的条件风险函数， - $h_0(t)$ 是基准风险函数， - $\beta_1, \beta_2, ..., \beta_p$ 是协变量系数。
+
+## 风险函数（Hazard Function）
+
+风险函数 h(t)h(t)h(t) 是指在某一时刻 ttt，个体还存活的条件下发生事件的即时速率。对于 Cox 模型，风险函数由两个部分组成：
+
+1.  **基准风险函数** $h_0(t)$：表示没有任何协变量影响时的风险。它是时间的函数，但与协变量无关。
+2.  **协变量的指数部分**：表示协变量对风险的影响。它通过协变量的线性组合加权，通常被表示为 $\exp(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p$
+
+Cox 模型的比例风险假设认为，所有个体的风险比（Hazard Ratio，HR）是恒定的，即：协变量的效应是比例性的，并且对所有个体在不同时间点上影响相同。
+
+## 风险比（Hazard Ratio，HR）
+
+在 Cox 回归模型中，**风险比**（HR）是一个非常重要的概念，表示一个单位的协变量变化对风险函数的相对影响。其定义为：
+
+$HR= exp(\beta)$
+
+其中 $\beta$ 是回归系数。风险比的解释：
+
+-   **HR = 1**：协变量对风险没有影响。
+-   **HR \> 1**：协变量的增加会增加事件发生的风险。
+-   **HR \< 1**：协变量的增加会降低事件发生的风险。
+
+例如，假设某个回归系数 $β$=0.5，那么风险比 $HR=exp(0.5)=1.65$。这意味着协变量增加一个单位时，事件发生的风险会增加 65%。
+
+## 基准风险函数（Baseline Hazard Function）
+
+基准风险函数$h_0(t)$是 Cox 模型的一个重要组成部分。它表示当所有协变量 $X=0$（即没有任何协变量影响）时的风险。基准风险函数通常是无法通过数据直接估计的，因为它受到时间的影响，并且在 Cox 模型中被处理为一个无关参数，最终的模型不会直接给出基准风险函数的具体形式。
+
+通常，Cox 模型的目标是估计协变量对风险的相对影响，而不是估计基准风险本身。基准风险函数在估计协变量效应时是被消除的，因此 Cox 模型是**半参数模型**。
+
+## Cox 回归模型的估计与假设
+
+Cox 回归模型的估计是通过最大似然估计（MLE）进行的。由于 Cox 模型不需要明确指定基准风险函数，它属于半参数模型。模型的估计基于部分似然函数（partial likelihood），它主要依赖于数据中时间顺序和事件发生的情况。
+
+**比例风险假设**是 Cox 模型的关键假设之一，假设不同组之间的风险比是恒定的，也就是说，不同个体的风险函数的比例关系随时间不变。
+
+## 模型诊断
+
+-   **比例风险假设检验**：通过 Schoenfeld 残差或时间交互项来检验比例风险假设是否成立。如果比例风险假设不成立，可能需要对模型进行修正，例如使用时间交互项或选择其他方法。
+-   **残差分析**：可以通过残差分析（如 Cox-Snell 残差）来评估模型拟合的好坏。
+
+## 风险函数与生存函数的关系
+
+生存函数表示个体活过t时间的概率： $$S(t) = P(T > t)$$
+
+生存函数与风险函数的关系为：
+
+$$S(t) = \exp\left( - \int_0^t h(u) \, du \right)$$ $$h(t) = -\frac{d}{dt} \log(S(t))$$ Cox回归生存概率的计算
+
+$$S(t | X) = \exp\left( - \int_0^t h(t|X) \, du \right)$$
+
+$$S(t | X) = \exp\left( - \exp(\beta_1 X_1 + \dots + \beta_p X_p) \int_0^t h_0(u) \, du \right)$$ $$S_0(t) = \exp\left( - \int_0^t h_0(u) \, du \right)$$
+
+$$S(t | X) = S_0(t)^{\exp(\beta_1 X_1 + \dots + \beta_p X_p)}$$
+
+因此利用Cox回归预测个体的生存概率，需要先计算$S_0(t)$,还有线性项$\exp(\beta_1 X_1 + \beta_2 X_2 + \dots + \beta_p X_p$
+
+## 累计风险函数
+
+累计风险函数的定义：
+
+$$
+H(t)=\int_0^th(u)du
+$$
+
+**Nelson-Aalen估计量** 是一种非参数方法，用于估计累积风险函数（Cumulative Hazard Function, $H(t)$，主要应用于生存分析中。它是一种基于事件发生时间的**逐步累积**的估计方法。
+
+$$
+\hat{H}(t) = \sum_{t_i \leq t} \frac{d_i}{Y_i}
+$$
+
+```{r}
+library(tidyverse)
+library(survival)
+
+head(lung)
+```
+
+```{r}
+lung %>%
+  drop_na() %>%
+  summarise(death=sum(status==2),death_censor=n(),.by=time) %>%
+  arrange(time) %>%
+  mutate(total=sum(death_censor),
+         at_risk=total-cumsum(lag(death,default=0)),
+         nelson_h=cumsum(death/at_risk))
+
+fit_cox <- coxph(Surv(time, status) ~ 1 , data=na.omit(lung), method = "breslow")
+basehaz(fit_cox)
+```
+
+```{r}
+bind_cols(
+  basehaz(coxph(Surv(time, status) ~ 1 , data=na.omit(lung), method = "breslow")),
+  basehaz(coxph(Surv(time, status) ~ 1 , data=na.omit(lung)))[1],
+  basehaz(coxph(Surv(time, status) ~ sex , data=na.omit(lung),method = "breslow"))[1]
+)
+```
+
+```{r}
+df<-na.omit(lung)
+fit_cox <- coxph(Surv(time, status) ~ age +sex, data=df, x=T,method = "breslow")
+summary(fit_cox)
+coef(fit_cox)
+
+breslow_est <- function(time, status, X, B){
+  data <- data.frame(time, status, X)
+  data <- data[order(data$time), ]
+  t <-  unique(data$time)
+  k <- length(t)
+  h <- rep(0,k)
+  
+  for(i in 1:k) {
+    lp <- (data.matrix(data[,-c(1:2)]) %*% B)[data$time>=t[i]]
+    risk <- exp(lp)
+    h[i] <- sum(filter(data,status==2,time==t[i]) %>% 
+                  nrow()) / sum(risk)
+  }
+  
+  res <- cumsum(h)
+  return(res)
+}
+bind_cols(
+  basehaz(fit_cox,centered = F),
+  breslow_h=breslow_est(df$time,df$status,fit_cox$x,coef(fit_cox))
+)
+
+```
+
+```{r}
+df<-na.omit(lung)
+fit_cox <- coxph(Surv(time, status) ~ age +sex, data=df, x=T,method = "breslow")
+summary(fit_cox)
+coef(fit_cox)
+
+breslow_est <- function(time, status, X, B){
+  data <- data.frame(time, status, X)
+  data <- data[order(data$time), ]
+  t <-  unique(data$time)
+  k <- length(t)
+  h <- rep(0,k)
+  
+  for(i in 1:k) {
+    lp_sample <- sum(fit_cox$means * coef(fit_cox))
+    lp_individual <-(data.matrix(data[,-c(1:2)]) %*% B)
+    lp_centered=lp_individual-lp_sample
+    lp <- lp_centered[data$time>=t[i]]
+    risk <- exp(lp)
+    h[i] <- sum(filter(data,status==2,time==t[i]) %>% 
+                  nrow()) / sum(risk)
+  }
+  
+  res <- cumsum(h)
+  return(res)
+}
+bind_cols(
+  basehaz(fit_cox,centered = T),
+  breslow_h=breslow_est(df$time,df$status,fit_cox$x,coef(fit_cox))
+)
+```
+
+```{r}
+fit_cox <- 
+  coxph(Surv(time, status) ~ age + sex, x=TRUE, data=df, method = "breslow")
+
+X_centered <- sweep(fit_cox$x, 2, fit_cox$means, "-")
+bind_cols(
+  basehaz(fit_cox,centered = F),
+  breslow_h=breslow_est(df$time,df$status,fit_cox$x,coef(fit_cox))
+)
+```

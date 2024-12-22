@@ -2,3 +2,5 @@ part: 统计
 chapters:
   - text: 基础
     href: base.qmd
+  - text: 分布
+    href: distribution.qmd

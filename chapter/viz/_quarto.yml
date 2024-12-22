@@ -4,6 +4,8 @@ chapters:
     href: base_plot.qmd
   - text: 柱状图
     href: bar_plot.qmd
+  - text: ggplot
+    href: ggplot.qmd
 editor: visual
 
 
