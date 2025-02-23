@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,10 +71,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -298,6 +298,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">柱状图</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/viz/ggplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">ggplot</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -312,7 +318,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapter/stats/base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">基础</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/stats/distribution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">分布</span></span></a>
   </div>
 </li>
       </ul>
@@ -496,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["."],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"2024","_rn_":"%Y"},{"1":"24","_rn_":"%y"},{"1":"12","_rn_":"%m"},{"1":"十二月","_rn_":"%B"},{"1":"12月","_rn_":"%b"},{"1":"01","_rn_":"%d"},{"1":"星期日","_rn_":"%A"},{"1":"周日","_rn_":"%a"},{"1":"23","_rn_":"%H"},{"1":"11","_rn_":"%I"},{"1":"09","_rn_":"%M"},{"1":"31","_rn_":"%S"},{"1":"下午","_rn_":"%p"},{"1":"+0800","_rn_":"%z"},{"1":"+08","_rn_":"%Z"},{"1":"336","_rn_":"%j"},{"1":"48","_rn_":"%U"},{"1":"48","_rn_":"%W"},{"1":"周日 12月  1 23:09:31 2024","_rn_":"%c"},{"1":"2024/12/1","_rn_":"%x"},{"1":"23:09:31","_rn_":"%X"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["."],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"2025","_rn_":"%Y"},{"1":"25","_rn_":"%y"},{"1":"02","_rn_":"%m"},{"1":"二月","_rn_":"%B"},{"1":"2月","_rn_":"%b"},{"1":"23","_rn_":"%d"},{"1":"星期日","_rn_":"%A"},{"1":"周日","_rn_":"%a"},{"1":"20","_rn_":"%H"},{"1":"08","_rn_":"%I"},{"1":"14","_rn_":"%M"},{"1":"50","_rn_":"%S"},{"1":"下午","_rn_":"%p"},{"1":"+0800","_rn_":"%z"},{"1":"+08","_rn_":"%Z"},{"1":"054","_rn_":"%j"},{"1":"08","_rn_":"%U"},{"1":"07","_rn_":"%W"},{"1":"周日 2月 23 20:14:50 2025","_rn_":"%c"},{"1":"2025/2/23","_rn_":"%x"},{"1":"20:14:50","_rn_":"%X"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -588,8 +600,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -700,7 +710,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

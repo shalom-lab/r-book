@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,10 +70,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -602,12 +602,12 @@ B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^k \Gamma(\alpha_i)}{\Gamma\left(\sum_
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           [,1]       [,2]      [,3]      [,4]
-[1,] 0.04149541 0.10960605 0.4228387 0.4260599
-[2,] 0.03062225 0.14512081 0.3397452 0.4845118
-[3,] 0.32364962 0.07588873 0.1741911 0.4262705
-[4,] 0.17873409 0.18763369 0.1884827 0.4451495
-[5,] 0.07700831 0.17527859 0.2709918 0.4767213
-[6,] 0.06682157 0.06536093 0.4216075 0.4462100</code></pre>
+[1,] 0.05956209 0.29091085 0.4414088 0.2081183
+[2,] 0.09268379 0.24957010 0.3640361 0.2937100
+[3,] 0.12315445 0.14479721 0.5197378 0.2123105
+[4,] 0.01229675 0.12830190 0.3568086 0.5025927
+[5,] 0.13318171 0.16340773 0.2575162 0.4458943
+[6,] 0.36167835 0.05144658 0.1147832 0.4720919</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowSums</span>(df))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -615,13 +615,13 @@ B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^k \Gamma(\alpha_i)}{\Gamma\left(\sum_
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df,<span class="dv">2</span>,summary)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                [,1]        [,2]        [,3]      [,4]
-Min.    6.334401e-06 0.001119003 0.007616687 0.0266439
-1st Qu. 3.145405e-02 0.107989297 0.191045220 0.2901089
-Median  7.423433e-02 0.179926115 0.284194840 0.3964178
-Mean    1.009026e-01 0.199450075 0.297827072 0.4018202
-3rd Qu. 1.439634e-01 0.271128453 0.389624818 0.5056341
-Max.    7.007667e-01 0.767930288 0.829928731 0.8956960</code></pre>
+<pre><code>                [,1]        [,2]       [,3]       [,4]
+Min.    3.005776e-05 0.001218488 0.01414754 0.04156674
+1st Qu. 3.179941e-02 0.106316123 0.19279910 0.28985137
+Median  7.344926e-02 0.177851008 0.28509858 0.39386323
+Mean    9.996165e-02 0.199943996 0.29889084 0.40120352
+3rd Qu. 1.420657e-01 0.271892313 0.39124324 0.50297442
+Max.    6.986511e-01 0.781400368 0.87124616 0.87243476</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">paste0</span>(<span class="st">'x'</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
@@ -1312,8 +1312,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1424,7 +1422,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {

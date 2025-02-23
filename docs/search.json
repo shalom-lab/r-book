@@ -44,7 +44,7 @@
     "href": "chapter/base/install.html",
     "title": "1  安装",
     "section": "",
-    "text": "1.1 安装R",
+    "text": "1.1 安装R\n安装R和RStudio是进行数据分析和统计建模的重要步骤。以下是在Windows操作系统上安装R和RStudio的简要步骤说明：",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>安装</span>"
@@ -88,7 +88,7 @@
     "href": "chapter/base/rstudio.html",
     "title": "2  Rstudio与R的区别与联系",
     "section": "",
-    "text": "2.1 Rstudio的常用快捷键有哪些？",
+    "text": "2.1 Rstudio的常用快捷键有哪些？\nRStudio是一款用于编写和执行R代码的集成开发环境（IDE）。它可以帮助您管理工作空间、查看数据集和图形、执行代码并可视化结果等。 ## 安装与使用 下面是安装和使用RStudio的步骤：\nRStudio是一款用于编写和执行R代码的集成开发环境（IDE），它可以帮助您管理工作空间、查看数据集和图形、执行代码并可视化结果等。R是一种编程语言，用于数据分析和统计计算。\nRStudio与R之间的关系可以理解为电脑和操作系统之间的关系，即RStudio是为R语言提供一个更友好的操作界面的工具。您可以使用RStudio进行R代码的编写和执行，也可以直接使用R语言进行编程。\n总而言之，RStudio是R语言的一个友好的用户界面，通过它可以更轻松地使用R语言进行数据分析和统计计算。但RStudio本身并不是R语言，它仅仅是一个工具，需要依赖R语言",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rstudio</span>"
@@ -308,7 +308,7 @@
     "href": "chapter/base/dataframe.html",
     "title": "5  数据框(data.frame)",
     "section": "",
-    "text": "5.1 代码示例\n# 创建一个数据框\nmy_data_frame &lt;- data.frame(\n  id = c(1, 2, 3),\n  name = c(\"Alice\", \"Bob\", \"Charlie\"),\n  age = c(20, 25, 30),\n  gender = c(\"F\", \"M\", \"M\")\n)\n\n# 查看数据框的前几行\nhead(my_data_frame)\n\n\n  \n\n\n# 查看数据框的后几行\ntail(my_data_frame)\n\n\n  \n\n\n# 查看数据框的数据类型和结构\nstr(my_data_frame)\n\n'data.frame':   3 obs. of  4 variables:\n $ id    : num  1 2 3\n $ name  : chr  \"Alice\" \"Bob\" \"Charlie\"\n $ age   : num  20 25 30\n $ gender: chr  \"F\" \"M\" \"M\"\n\n# 选择数据框中的某一列\nmy_data_frame$name\n\n[1] \"Alice\"   \"Bob\"     \"Charlie\"\n\n# 选择数据框中的某一行\nmy_data_frame[2, ]\n\n\n  \n\n\n# 选择数据框中的某一个值\nmy_data_frame[2, \"name\"]\n\n[1] \"Bob\"\n\n# 添加数据框列\nmy_data_frame$score &lt;- c(90, 85, 80)\n\n# 添加数据框行\nnew_row &lt;- data.frame(id = 4, name = \"David\", age = 32, gender = \"M\", score = 75)\nrbind(my_data_frame, new_row)\n\n\n  \n\n\n# 删除数据框列\nmy_data_frame$score &lt;- NULL\nmy_data_frame\n\n\n  \n\n\n# 删除数据框行\nmy_data_frame &lt;- my_data_frame[-2, ]\nmy_data_frame\n\n\n  \n\n\n# 排序数据框\nmy_data_frame &lt;- my_data_frame[order(my_data_frame$age), ]\nmy_data_frame\n\n\n  \n\n\n# 过滤数据框\nmy_data_frame[my_data_frame$age &gt;= 25, ]",
+    "text": "5.1 代码示例\n数据框是 R 语言中一种常用的数据结构，它是一个二维数据表，用于存储一组不同类型的数据，每列数据都有一个对应的列名。类似EXCEL中的Sheet表格。\n一些常见的数据框操作包括:\n# 创建一个数据框\nmy_data_frame &lt;- data.frame(\n  id = c(1, 2, 3),\n  name = c(\"Alice\", \"Bob\", \"Charlie\"),\n  age = c(20, 25, 30),\n  gender = c(\"F\", \"M\", \"M\")\n)\n\n# 查看数据框的前几行\nhead(my_data_frame)\n\n\n  \n\n\n# 查看数据框的后几行\ntail(my_data_frame)\n\n\n  \n\n\n# 查看数据框的数据类型和结构\nstr(my_data_frame)\n\n'data.frame':   3 obs. of  4 variables:\n $ id    : num  1 2 3\n $ name  : chr  \"Alice\" \"Bob\" \"Charlie\"\n $ age   : num  20 25 30\n $ gender: chr  \"F\" \"M\" \"M\"\n\n# 选择数据框中的某一列\nmy_data_frame$name\n\n[1] \"Alice\"   \"Bob\"     \"Charlie\"\n\n# 选择数据框中的某一行\nmy_data_frame[2, ]\n\n\n  \n\n\n# 选择数据框中的某一个值\nmy_data_frame[2, \"name\"]\n\n[1] \"Bob\"\n\n# 添加数据框列\nmy_data_frame$score &lt;- c(90, 85, 80)\n\n# 添加数据框行\nnew_row &lt;- data.frame(id = 4, name = \"David\", age = 32, gender = \"M\", score = 75)\nrbind(my_data_frame, new_row)\n\n\n  \n\n\n# 删除数据框列\nmy_data_frame$score &lt;- NULL\nmy_data_frame\n\n\n  \n\n\n# 删除数据框行\nmy_data_frame &lt;- my_data_frame[-2, ]\nmy_data_frame\n\n\n  \n\n\n# 排序数据框\nmy_data_frame &lt;- my_data_frame[order(my_data_frame$age), ]\nmy_data_frame\n\n\n  \n\n\n# 过滤数据框\nmy_data_frame[my_data_frame$age &gt;= 25, ]",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>数据框</span>"
@@ -374,7 +374,7 @@
     "href": "chapter/base/package.html",
     "title": "6  安装包",
     "section": "",
-    "text": "6.1 加载包\n安装包后，你需要使用library()函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载ggplot2包，可以执行以下命令：\nlibrary(ggplot2)",
+    "text": "6.1 加载包\n在R语言中，包（packages）是一种非常重要的概念，它们包含了一组函数、数据集和文档，用于解决特定的问题或执行特定的任务。R语言本身提供了一些基本的函数和数据结构，但通过安装和加载不同的包，你可以扩展R的功能，以便更好地满足你的需求。本文将围绕R语言中的包进行入门介绍，以及如何使用这些包中的函数。\n在R中，你可以使用install.packages()函数来安装新的包。例如，要安装一个名为ggplot2的包，你可以执行以下命令：\n安装包后，你需要使用library()函数来加载它们，以便在你的R会话中使用包中的函数。例如，要加载ggplot2包，可以执行以下命令：\nlibrary(ggplot2)",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>R包</span>"
@@ -429,7 +429,7 @@
     "href": "chapter/base/function.html",
     "title": "7  什么是函数",
     "section": "",
-    "text": "7.1 函数的构成要素\n一个函数通常由以下几个要素构成：\n这些要素构成了一个完整的函数，它们各自扮演着不同的角色，协同工作以完成函数的目标。\n例如，如果你要定义一个函数来计算数据集的平均值，那么可以这样写：\nmean &lt;- function(x) {\n  sum = sum(x)\n  n = length(x)\n  return(sum / n)\n}\n这个函数的名称是mean，它有一个参数x，函数体中包含了计算平均值的代码，最后会返回计算结果。",
+    "text": "7.1 函数的构成要素\nR语言的函数是一种特殊的程序，它可以接收参数，并返回一个结果。函数的返回值是函数运行完成后返回给调用者的结果。\n假设你有一个名为add()的函数，它可以接收两个数字，打印它们的差，并返回它们的和。你可以用以下代码定义这个函数：\n这个函数定义中，我们用function()关键字来定义函数，然后在括号内指定函数的参数，在花括号内指定函数的运算过程。最后，我们使用return()函数来指定函数的返回值。\n在这个例子中，函数add()的两个参数分别是x和y，返回值是它们的和。你可以用以下代码来调用这个函数：\n在这里，我们将3和5作为参数传递给函数add()，然后将它们相加，并将结果保存到变量result中。\n一个函数通常由以下几个要素构成：\n这些要素构成了一个完整的函数，它们各自扮演着不同的角色，协同工作以完成函数的目标。\n例如，如果你要定义一个函数来计算数据集的平均值，那么可以这样写：\nmean &lt;- function(x) {\n  sum = sum(x)\n  n = length(x)\n  return(sum / n)\n}\n这个函数的名称是mean，它有一个参数x，函数体中包含了计算平均值的代码，最后会返回计算结果。",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>函数</span>"
@@ -528,7 +528,7 @@
     "href": "chapter/base/common_function.html#统计",
     "title": "8  常用函数",
     "section": "8.3 统计",
-    "text": "8.3 统计\n\n\n#统计\nx=rnorm(1000) #随机数\nhead(x)\n\n[1]  0.1080563  1.4420998  0.3402650  0.2545710 -1.6880186 -2.0407400\n\nmin(x)\n\n[1] -2.995007\n\nmax(x)\n\n[1] 3.019876\n\nrange(x)\n\n[1] -2.995007  3.019876\n\nmean(x)\n\n[1] -0.02878802\n\nmedian(x)\n\n[1] -0.02227233\n\nsd(x)\n\n[1] 0.9830423\n\nvar(x)\n\n[1] 0.9663721\n\nquantile(x)\n\n         0%         25%         50%         75%        100% \n-2.99500686 -0.68466125 -0.02227233  0.63873985  3.01987579 \n\nfivenum(x)\n\n[1] -2.99500686 -0.68478505 -0.02227233  0.63897300  3.01987579\n\ntable(mtcars$cyl)\n\n\n 4  6  8 \n11  7 14 \n\ntable(mtcars$cyl,mtcars$cyl)\n\n   \n     4  6  8\n  4 11  0  0\n  6  0  7  0\n  8  0  0 14",
+    "text": "8.3 统计\n\n\n#统计\nx=rnorm(1000) #随机数\nhead(x)\n\n[1] -0.78783459  0.95188229 -0.40534472  0.51883266 -0.82794693  0.04895268\n\nmin(x)\n\n[1] -3.05228\n\nmax(x)\n\n[1] 3.217379\n\nrange(x)\n\n[1] -3.052280  3.217379\n\nmean(x)\n\n[1] -0.003361003\n\nmedian(x)\n\n[1] -0.02157809\n\nsd(x)\n\n[1] 0.9542\n\nvar(x)\n\n[1] 0.9104976\n\nquantile(x)\n\n         0%         25%         50%         75%        100% \n-3.05227966 -0.61719900 -0.02157809  0.64629948  3.21737918 \n\nfivenum(x)\n\n[1] -3.05227966 -0.61723171 -0.02157809  0.64671667  3.21737918\n\ntable(mtcars$cyl)\n\n\n 4  6  8 \n11  7 14 \n\ntable(mtcars$cyl,mtcars$cyl)\n\n   \n     4  6  8\n  4 11  0  0\n  6  0  7  0\n  8  0  0 14",
     "crumbs": [
       "基础篇",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>常用函数</span>"
@@ -605,7 +605,7 @@
     "href": "chapter/clean/dplyr.html",
     "title": "13  介绍",
     "section": "",
-    "text": "13.1 示例数据\nlibrary(dplyr)\ndata&lt;-data.frame(x=-2:3,y=1:6,a=rep(c('A','B'),each=3))\ndata",
+    "text": "13.1 示例数据\ndplyr是一个R语言包，它提供了一组用于进行数据操作和转换的函数。下面是一些dplyr包中常用的函数及其作用：\nlibrary(dplyr)\ndata&lt;-data.frame(x=-2:3,y=1:6,a=rep(c('A','B'),each=3))\ndata",
     "crumbs": [
       "清理篇",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>必会操作</span>"
@@ -693,7 +693,7 @@
     "href": "chapter/clean/date.html",
     "title": "14  最佳推荐-lubridate包",
     "section": "",
-    "text": "14.1 基本用法",
+    "text": "14.1 基本用法\n该包属于tidyverse组成之一,用于日期和时间处理",
     "crumbs": [
       "清理篇",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>日期处理</span>"
@@ -737,7 +737,7 @@
     "href": "chapter/clean/string.html",
     "title": "15  介绍",
     "section": "",
-    "text": "15.1 str_length()\nstr_length() 函数是 stringr 包中的一个函数，用于计算字符串的长度（即字符串中字符的数量）。例如，下面的代码使用 str_length() 函数来计算字符串的长度：\n# 加载 stringr 包\nlibrary(stringr)\n# 定义一个字符串\nmy_string &lt;- \"Hello, world!\"\n\n# 使用 str_length() 函数来计算字符串的长度\nmy_string_length &lt;- str_length(my_string)\n\n# 输出结果\nprint(my_string_length)\n\n[1] 13\n这表明，字符串 “Hello, world!” 的长度为 13（包含 13 个字符）。",
+    "text": "15.1 str_length()\nstringr 包包含了许多实用的函数，这些函数可以用来处理字符串。下面是 stringr 包中一些常用的函数及其作用：\nstr_length() 函数是 stringr 包中的一个函数，用于计算字符串的长度（即字符串中字符的数量）。例如，下面的代码使用 str_length() 函数来计算字符串的长度：\n# 加载 stringr 包\nlibrary(stringr)\n# 定义一个字符串\nmy_string &lt;- \"Hello, world!\"\n\n# 使用 str_length() 函数来计算字符串的长度\nmy_string_length &lt;- str_length(my_string)\n\n# 输出结果\nprint(my_string_length)\n\n[1] 13\n这表明，字符串 “Hello, world!” 的长度为 13（包含 13 个字符）。",
     "crumbs": [
       "清理篇",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>字符串处理</span>"
@@ -887,11 +887,11 @@
     ]
   },
   {
-    "objectID": "chapter/viz/base_plot.html#边框",
-    "href": "chapter/viz/base_plot.html#边框",
+    "objectID": "chapter/viz/base_plot.html#边框border",
+    "href": "chapter/viz/base_plot.html#边框border",
     "title": "18  基础的绘图函数",
-    "section": "18.3 边框",
-    "text": "18.3 边框\n\n# border type\ncom_par(plot,'bty',c('o','l','7','n',']','c'),1:10,fg='red',xaxt = 'n',yaxt='n')\n\n\n\n\n\n\n\n\n\nplot(1,type='n',xlim=1:2,ylim=c(0.5,7.5),xlab='',ylab='',main='lty=')\nfor(i in 1:7) {\n  abline(h=i,lty=i,col='red',lwd=2)\n}",
+    "section": "18.3 边框border",
+    "text": "18.3 边框border\n\n# border type\ncom_par(plot,'bty',c('o','l','7','n',']','c'),1:10,fg='red',xaxt = 'n',yaxt='n')\n\n\n\n\n\n\n\n\n\nplot(1,type='n',xlim=1:2,ylim=c(0.5,7.5),xlab='',ylab='',main='lty=')\nfor(i in 1:7) {\n  abline(h=i,lty=i,col='red',lwd=2)\n}",
     "crumbs": [
       "数据可视化",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
@@ -909,11 +909,11 @@
     ]
   },
   {
-    "objectID": "chapter/viz/base_plot.html#边距",
-    "href": "chapter/viz/base_plot.html#边距",
+    "objectID": "chapter/viz/base_plot.html#边距margin",
+    "href": "chapter/viz/base_plot.html#边距margin",
     "title": "18  基础的绘图函数",
-    "section": "18.5 边距",
-    "text": "18.5 边距\n\nod&lt;-par(mar=c(1,2,3,0),bg='skyblue')\nplot(1:10,main='mar=c(1,2,3,0)')\n\n\n\n\n\n\n\npar(mar=c(1,0,1,0))\nplot(1:10,main='mar=c(1,0,1,0)')\n\n\n\n\n\n\n\npar(od)\nplot(1:10)\n\n\n\n\n\n\n\n\n\n18.5.1 mtext\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side,col,font=',i),i,col=i,font=i)\n\n\n\n\n\n\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side=',i,',line=',i-3),side=i,line=i-3)",
+    "section": "18.5 边距margin",
+    "text": "18.5 边距margin\n\nplot(1:10)\nbox(which='plot',col=1,lwd=4)\n\n\n\n\n\n\n\nplot(1:10)\nbox(which='figure',col=2,lwd=4)\n\n\n\n\n\n\n\nplot(1:10)\nbox(which='inner',col=3,lwd=4)\n\n\n\n\n\n\n\nplot(1:10)\nbox(which='outer',col=4,lwd=4)\n\n\n\n\n\n\n\n\n\nod&lt;-par(mar=c(1,2,3,0),oma=c(1,1,1,1),bg='skyblue',fg='salmon')\nplot(1:10,main='mar=c(1,2,3,0)')\nbox(col=\"forestgreen\")\n\n\n\n\n\n\n\npar(mar=c(1,0,1,0))\nplot(1:10,main='mar=c(1,0,1,0)')\n\n\n\n\n\n\n\npar(od)\nplot(1:10)\n\n\n\n\n\n\n\n\n\n18.5.1 mtext\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side,col,font=',i),i,col=i,font=i)\n\n\n\n\n\n\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side=',i,',line=',i-3),side=i,line=i-3)",
     "crumbs": [
       "数据可视化",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
@@ -925,105 +925,6 @@
     "title": "18  基础的绘图函数",
     "section": "18.6 基础元素",
     "text": "18.6 基础元素\n\n18.6.1 circles\n\nsymbols(1:3,rep(1,3),circles = 1:3)\n\n\n\n\n\n\n\nsymbols(1:3,rep(1,3),circles = 1:3*10)\n\n\n\n\n\n\n\nsymbols(1:3,rep(1,3),circles = 1:3,inches = T)\n\n\n\n\n\n\n\nsymbols(1:3,rep(1,3),circles = 1:3/100,inches = F)\n\n\n\n\n\n\n\n\n\n\n18.6.2 squares\n\nsymbols(x=runif(10),y=runif(10),squares = rep(.05,10),fg='gray',bg=rainbow(10),inches = F,lwd=5)\n\n\n\n\n\n\n\n\n\n\n18.6.3 thermometers\n\nsymbols(x=1:4,rep(1,4),thermometers = cbind(rep(1,4),1:4,1:4/4),fg='tomato',bg='skyblue',col='green')\n\n\n\n\n\n\n\nsymbols(x=1:4,rep(1,4),thermometers = cbind(1:4,rep(1,4),1:4/4),fg='tomato',bg='skyblue',col='green')\n\n\n\n\n\n\n\nsymbols(x=1:4,rep(1,4),thermometers = cbind(rep(1,4),rep(1,4),rep(.8,4)),fg='tomato',bg='skyblue',col='green')\n\n\n\n\n\n\n\n\n\n\n18.6.4 rectangles\n\nsymbols(x=1:4,y=rep(1,4),rectangles = cbind(1:4,4:1),bg='skyblue')\n\n\n\n\n\n\n\nsymbols(x=1:4,y=rep(1,4),rectangles = cbind(1:4,4:1),bg=1:4)\n\n\n\n\n\n\n\n\n\n\n18.6.5 stars\n\nsymbols(1:5,rep(1,5),stars=matrix(rep(.5,15),nrow=5),inches = F,bg='salmon')\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\n\n\nsymbols(1:5,rep(3,5),stars=matrix(rep(.5,5*3),nrow=5),bg=3,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\nsymbols(1:5,rep(4,5),stars=matrix(rep(.5,5*4),nrow=5),bg=4,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\nsymbols(1:5,rep(5,5),stars=matrix(rep(.5,5*5),nrow=5),bg=5,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\nsymbols(1:5,rep(6,5),stars=matrix(rep(.5,5*6),nrow=5),bg=6,inches = F)\npoints(1:5,rep(1,5),pch=3)\n\n\n\n\n\n\n\n\n\n\n18.6.6 boxplots\n\nsymbols(1,1,boxplots=cbind(1,1,1,2,.5),col='gray',fg='salmon',bg='skyblue',lwd=4)",
-    "crumbs": [
-      "数据可视化",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/viz/base_plot.html#颜色",
-    "href": "chapter/viz/base_plot.html#颜色",
-    "title": "18  基础的绘图函数",
-    "section": "18.10 颜色",
-    "text": "18.10 颜色\n\nplot(1:20,y=rep(1,20),pch=23,bg=1:20,cex=3)\ntext(1:20,y=rep(1.1,20),1:20)\n\n\n\n\n\n\n\nplot(1:8,y=rep(1,8),pch=23,bg=1:8,cex=3)\ntext(1:8,y=rep(1.1,8),1:8)\n\n\n\n\n\n\n\n\n\ntext=unlist(strsplit('R语言与可视化',\"\"))\nplot(seq_along(text),y=rep(1,length(text)),pch=21,bg=seq_along(text),cex=10,xlim=c(0.5,length(text)+.5),bty='o',xaxt='n',yaxt='n',xlab='',ylab='',mar=rep(0,4))\ntext(seq_along(text),y=rep(1,length(text)),text,col='white',cex=2)\n\n\n\n\n\n\n\n\n\nplot_text&lt;-function(text,pch=21,cex1=5,cex2=2){\n  text=unlist(strsplit(text,\"\"))\n  plot(seq_along(text),y=rep(1,length(text)),pch=pch,bg=seq_along(text),cex=cex1,srt=-45,xlim=c(0.5,length(text)+.5),bty='n',xaxt='n',yaxt='n',xlab='',ylab='')\n  for(i in seq_along(text)){\n    text(i,y=1,text[i],col='white',cex=cex2,srt=runif(1,-10,10))\n  }\n}\nplot_text('R语言与可视化',21,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',22,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',23,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',24,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',25,7,1)\n\n\n\n\n\n\n\n\n\nod&lt;-par(mar=c(0,0,0,0))\nlength(colors())\n\n[1] 657\n\ncolors&lt;-colors()[1:625]\nsymbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')\n\n\n\n\n\n\n\ncolors&lt;-sample(colors(),625)\nsymbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')\n\n\n\n\n\n\n\npar(od)",
-    "crumbs": [
-      "数据可视化",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/viz/base_plot.html#其他",
-    "href": "chapter/viz/base_plot.html#其他",
-    "title": "18  基础的绘图函数",
-    "section": "18.12 其他",
-    "text": "18.12 其他\n\n18.12.1 dotcharts\n\ndotchart(1:12,labels=month.abb,pch=21,bg=1:12,pt.cex=3)\n\n\n\n\n\n\n\n\n\nclass(VADeaths)\n\n[1] \"matrix\" \"array\" \n\nVADeaths\n\n      Rural Male Rural Female Urban Male Urban Female\n50-54       11.7          8.7       15.4          8.4\n55-59       18.1         11.7       24.3         13.6\n60-64       26.9         20.3       37.0         19.3\n65-69       41.0         30.9       54.6         35.1\n70-74       66.0         54.3       71.1         50.0\n\nrownames(VADeaths)\n\n[1] \"50-54\" \"55-59\" \"60-64\" \"65-69\" \"70-74\"\n\ncolnames(VADeaths)\n\n[1] \"Rural Male\"   \"Rural Female\" \"Urban Male\"   \"Urban Female\"\n\ndotchart(VADeaths)\n\n\n\n\n\n\n\ndotchart(t(VADeaths))\n\n\n\n\n\n\n\n\n\n\n18.12.2 stem\n\nstem(rnorm(100))\n\n\n  The decimal point is at the |\n\n  -2 | 87\n  -1 | 9655322211000\n  -0 | 98888777766666555554444333322211111000\n   0 | 000111233334444445566677788888889\n   1 | 0012445788\n   2 | 0136",
-    "crumbs": [
-      "数据可视化",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/viz/bar_plot.html",
-    "href": "chapter/viz/bar_plot.html",
-    "title": "19  主题",
-    "section": "",
-    "text": "library(tidyverse)\ntheme_set(theme_bw())\n\n\ndata&lt;-data.frame(x=rep(c('A','B','C'),time=2),y=c('Female','Male'),value=round(runif(6,20,100)))\n\ndata\n\n\n  \n\n\n\n\nggplot(data,aes(x,value,fill=y))+\n  geom_col()\n\n\n\n\n\n\n\n\n\n19.0.1 坐标轴标题-axis.title\n\nggplot(mtcars,aes(cyl,mpg))+\n  labs(x='hjust=0.2,vjust = -3',y='hjust=0.8,vjust = 3')+\n  theme(axis.title = element_text(colour = 'red',face='bold'),\n        axis.title.x = element_text(hjust=0.2,vjust = -3),\n        axis.title.y = element_text(hjust=0.8,vjust = 3)\n        )",
-    "crumbs": [
-      "数据可视化",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>柱状图</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/stats/base.html",
-    "href": "chapter/stats/base.html",
-    "title": "20  基础知识",
-    "section": "",
-    "text": "20.1 连续型随机变量\ndf&lt;-data.frame(x=seq(-5,5,by=0.01)) %&gt;%\n  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))\n\ndf",
-    "crumbs": [
-      "统计",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/stats/base.html#连续型随机变量",
-    "href": "chapter/stats/base.html#连续型随机变量",
-    "title": "20  基础知识",
-    "section": "",
-    "text": "20.1.1 密度函数/分布函数\n\n概率密度函数(PDF)累计分布函数累计分布函数的反函数\n\n\n\ndf %&gt;%\n  ggplot(aes(x,pdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(x,cdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(cdf,icdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\n\n\n20.1.2 3\\(\\sigma\\)(西格玛)准则\n\nggplot(df,aes(x,pdf))+\n  geom_line()+\n  geom_area(aes(x=ifelse(abs(x)&lt;3,x,NA),fill='0.9974'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;2,x,NA),fill='0.9545'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;1,x,NA),fill='0.6827'),alpha=0.5)+\n  geom_vline(xintercept =c(-3,-2,-1,1,2,3),linetype='dashed')+\n  scale_x_continuous(breaks=c(-5:5))+\n  labs(x='Z',y='概率密度(pdf)')+\n  scale_fill_futurama()+\n  guides(fill=guide_legend(title='曲线下面积',override.aes = list(alpha=0.2)))\n\n\n\n\n\n\n\n\n\npnorm(1:3)-pnorm(-1:-3)\n\n[1] 0.6826895 0.9544997 0.9973002\n\n\n\n(pnorm(1:3)-pnorm(-1:-3)) %&gt;%\n  `/`(2) %&gt;%\n  `-`(0.5,.) %&gt;%\n  qnorm()\n\n[1] -1 -2 -3\n\n\n\n\n20.1.3 Z检验界值和参考值范围\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1))\n\n[1] 2.575829 2.326348 1.959964 1.644854 1.281552\n\n\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1)) %&gt;%\n  pnorm()\n\n[1] 0.995 0.990 0.975 0.950 0.900\n\n\n\n\n20.1.4 频率分布直方图\n\nrunif(10000) %&gt;%\n  qnorm() %&gt;%\n  hist(breaks = 50)",
-    "crumbs": [
-      "统计",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/stats/base.html#离散型随机变量",
-    "href": "chapter/stats/base.html#离散型随机变量",
-    "title": "20  基础知识",
-    "section": "20.2 离散型随机变量",
-    "text": "20.2 离散型随机变量\n\n20.2.1 分布列/概率质量函数(PMF)\n\nrpois(1000,5) %&gt;% \n  table() %&gt;% as.data.frame() %&gt;%\n  setNames(c('k','probality')) %&gt;%\n  adorn_percentages(denominator = 'col') %&gt;%\n  ggplot(aes(k,probality))+\n  geom_col()",
-    "crumbs": [
-      "统计",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/stats/base.html#ci的含义",
-    "href": "chapter/stats/base.html#ci的含义",
-    "title": "20  基础知识",
-    "section": "20.3 95%CI的含义",
-    "text": "20.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\n\ndf\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.956",
-    "crumbs": [
-      "统计",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>基础</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/viz/base_plot.html#边框border",
-    "href": "chapter/viz/base_plot.html#边框border",
-    "title": "18  基础的绘图函数",
-    "section": "18.3 边框border",
-    "text": "18.3 边框border\n\n# border type\ncom_par(plot,'bty',c('o','l','7','n',']','c'),1:10,fg='red',xaxt = 'n',yaxt='n')\n\n\n\n\n\n\n\n\n\nplot(1,type='n',xlim=1:2,ylim=c(0.5,7.5),xlab='',ylab='',main='lty=')\nfor(i in 1:7) {\n  abline(h=i,lty=i,col='red',lwd=2)\n}",
-    "crumbs": [
-      "数据可视化",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/viz/base_plot.html#边距margin",
-    "href": "chapter/viz/base_plot.html#边距margin",
-    "title": "18  基础的绘图函数",
-    "section": "18.5 边距margin",
-    "text": "18.5 边距margin\n\nplot(1:10)\nbox(which='plot',col=1,lwd=4)\n\n\n\n\n\n\n\nplot(1:10)\nbox(which='figure',col=2,lwd=4)\n\n\n\n\n\n\n\nplot(1:10)\nbox(which='inner',col=3,lwd=4)\n\n\n\n\n\n\n\nplot(1:10)\nbox(which='outer',col=4,lwd=4)\n\n\n\n\n\n\n\n\n\nod&lt;-par(mar=c(1,2,3,0),oma=c(1,1,1,1),bg='skyblue',fg='salmon')\nplot(1:10,main='mar=c(1,2,3,0)')\nbox(col=\"forestgreen\")\n\n\n\n\n\n\n\npar(mar=c(1,0,1,0))\nplot(1:10,main='mar=c(1,0,1,0)')\n\n\n\n\n\n\n\npar(od)\nplot(1:10)\n\n\n\n\n\n\n\n\n\n18.5.1 mtext\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side,col,font=',i),i,col=i,font=i)\n\n\n\n\n\n\n\nplot(1:10)\nfor(i in 1:4)mtext(text=paste0('side=',i,',line=',i-3),side=i,line=i-3)",
     "crumbs": [
       "数据可视化",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
@@ -1063,6 +964,17 @@
     ]
   },
   {
+    "objectID": "chapter/viz/base_plot.html#颜色",
+    "href": "chapter/viz/base_plot.html#颜色",
+    "title": "18  基础的绘图函数",
+    "section": "18.10 颜色",
+    "text": "18.10 颜色\n\nplot(1:20,y=rep(1,20),pch=23,bg=1:20,cex=3)\ntext(1:20,y=rep(1.1,20),1:20)\n\n\n\n\n\n\n\nplot(1:8,y=rep(1,8),pch=23,bg=1:8,cex=3)\ntext(1:8,y=rep(1.1,8),1:8)\n\n\n\n\n\n\n\n\n\ntext=unlist(strsplit('R语言与可视化',\"\"))\nplot(seq_along(text),y=rep(1,length(text)),pch=21,bg=seq_along(text),cex=10,xlim=c(0.5,length(text)+.5),bty='o',xaxt='n',yaxt='n',xlab='',ylab='',mar=rep(0,4))\ntext(seq_along(text),y=rep(1,length(text)),text,col='white',cex=2)\n\n\n\n\n\n\n\n\n\nplot_text&lt;-function(text,pch=21,cex1=5,cex2=2){\n  text=unlist(strsplit(text,\"\"))\n  plot(seq_along(text),y=rep(1,length(text)),pch=pch,bg=seq_along(text),cex=cex1,srt=-45,xlim=c(0.5,length(text)+.5),bty='n',xaxt='n',yaxt='n',xlab='',ylab='')\n  for(i in seq_along(text)){\n    text(i,y=1,text[i],col='white',cex=cex2,srt=runif(1,-10,10))\n  }\n}\nplot_text('R语言与可视化',21,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',22,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',23,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',24,7,1)\n\n\n\n\n\n\n\nplot_text('R语言与可视化',25,7,1)\n\n\n\n\n\n\n\n\n\nod&lt;-par(mar=c(0,0,0,0))\nlength(colors())\n\n[1] 657\n\ncolors&lt;-colors()[1:625]\nsymbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')\n\n\n\n\n\n\n\ncolors&lt;-sample(colors(),625)\nsymbols(x=rep(1:25,each=25),y=rep(1:25,25),squares = rep(.5,25*25),bg=colors,inches = F,xlab='',ylab='',xaxt='n',yaxt='n',bty='n')\n\n\n\n\n\n\n\npar(od)",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
     "objectID": "chapter/viz/base_plot.html#色板",
     "href": "chapter/viz/base_plot.html#色板",
     "title": "18  基础的绘图函数",
@@ -1074,11 +986,88 @@
     ]
   },
   {
+    "objectID": "chapter/viz/base_plot.html#其他",
+    "href": "chapter/viz/base_plot.html#其他",
+    "title": "18  基础的绘图函数",
+    "section": "18.12 其他",
+    "text": "18.12 其他\n\n18.12.1 dotcharts\n\ndotchart(1:12,labels=month.abb,pch=21,bg=1:12,pt.cex=3)\n\n\n\n\n\n\n\n\n\nclass(VADeaths)\n\n[1] \"matrix\" \"array\" \n\nVADeaths\n\n      Rural Male Rural Female Urban Male Urban Female\n50-54       11.7          8.7       15.4          8.4\n55-59       18.1         11.7       24.3         13.6\n60-64       26.9         20.3       37.0         19.3\n65-69       41.0         30.9       54.6         35.1\n70-74       66.0         54.3       71.1         50.0\n\nrownames(VADeaths)\n\n[1] \"50-54\" \"55-59\" \"60-64\" \"65-69\" \"70-74\"\n\ncolnames(VADeaths)\n\n[1] \"Rural Male\"   \"Rural Female\" \"Urban Male\"   \"Urban Female\"\n\ndotchart(VADeaths)\n\n\n\n\n\n\n\ndotchart(t(VADeaths))\n\n\n\n\n\n\n\n\n\n\n18.12.2 stem\n\nstem(rnorm(100))\n\n\n  The decimal point is at the |\n\n  -1 | 9977655\n  -1 | 443100\n  -0 | 9999988776666555\n  -0 | 44333332222211100000\n   0 | 00000013333344444444\n   0 | 555666777889\n   1 | 011111234444\n   1 | 77\n   2 | 123\n   2 | 8\n   3 | 0",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>基础包绘图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/bar_plot.html",
+    "href": "chapter/viz/bar_plot.html",
+    "title": "19  主题",
+    "section": "",
+    "text": "library(tidyverse)\ntheme_set(theme_bw())\n\n\ndata&lt;-data.frame(x=rep(c('A','B','C'),time=2),y=c('Female','Male'),value=round(runif(6,20,100)))\n\ndata\n\n\n  \n\n\n\n\nggplot(data,aes(x,value,fill=y))+\n  geom_col()\n\n\n\n\n\n\n\n\n\n19.0.1 坐标轴标题-axis.title\n\nggplot(mtcars,aes(cyl,mpg))+\n  labs(x='hjust=0.2,vjust = -3',y='hjust=0.8,vjust = 3')+\n  theme(axis.title = element_text(colour = 'red',face='bold'),\n        axis.title.x = element_text(hjust=0.2,vjust = -3),\n        axis.title.y = element_text(hjust=0.8,vjust = 3)\n        )",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>柱状图</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/ggplot.html",
+    "href": "chapter/viz/ggplot.html",
+    "title": "20  ggplot2绘图",
+    "section": "",
+    "text": "library(tidyverse)\n\n\nlibrary(maps)\n\n\nAttaching package: 'maps'\n\n\nThe following object is masked from 'package:purrr':\n\n    map\n\nmap('world')\n\n\n\n\n\n\n\nmap('usa')\n\n\n\n\n\n\n\n\n\nlibrary(mapdata)\n\nmap('china',col = 'salmon')\n\n\n\n\n\n\n\nmap('japan')\n\n\n\n\n\n\n\n\n\nworld_map&lt;-map_data('world') # from ggplot2 package\nhead(world_map)\n\n\n  \n\n\ndf&lt;-data.frame(region=unique(world_map$region),\n               value=sample(LETTERS[1:3]),length(unique(world_map$region)))\ndim(df)\n\n[1] 252   3\n\nworld_map2&lt;-left_join(world_map,df,by='region')\nhead(world_map2)\n\n\n  \n\n\nggplot() +\n  geom_map(\n    data = world_map2, map = world_map2,\n    aes(x=long, y=lat, map_id = region,fill=value),\n    color = \"black\",  linewidth = 0.1,alpha=0.7) +\n  scale_fill_manual(values = c(\"#0392cf\",\"#ffad60\",\"#fdf498\",\"#7bc043\"),na.value = \"#EEEEEE\",na.translate=FALSE)+\n  #geom_point(data = LocationInfo,aes(x=long, y=lat),color=\"red\",alpha = 0.7,size=3)+\n  geom_hline(yintercept = c(23.5,-23.5), lty = 3, color = \"darkgrey\") +\n  geom_hline(yintercept = c(35,-35), lty = 2, color = \"darkgrey\") +\n  geom_hline(yintercept = 0, lty = 1, color = \"darkgrey\") +\n  geom_text(aes(y = c(35,23.5,0,-23.5,-35), label =c(\"35°\",\"23.5°\",\"0°\",\"-23.5°\",\"-35°\")), \n            x = -Inf, hjust = -0.1, vjust = -1, size = 4,color = \"darkgrey\") +\n  theme_void() +\n  theme(legend.position = \"bottom\")\n\nWarning in geom_map(data = world_map2, map = world_map2, aes(x = long, y = lat,\n: Ignoring unknown aesthetics: x and y\n\n\n\n\n\n\n\n\n\n\n20.0.1 地图数据\n\nmap_data('china')\n\n\n  \n\n\nggplot()+\n  geom_map(\n    data=map_data('china'),map=map_data('china'),\n    aes(x=long, y=lat, map_id = region)\n  )\n\nWarning in geom_map(data = map_data(\"china\"), map = map_data(\"china\"), aes(x =\nlong, : Ignoring unknown aesthetics: x and y\n\n\n\n\n\n\n\n\n\n\nlibrary(tidyverse)\ncount(mtcars,cyl,am) %&gt;%\n  ggplot(aes(cyl, n, fill = factor(am))) +\n  geom_col(position = position_dodge(),width=.5,colour = \"black\")+\n  geom_errorbar(aes(ymin = n - 1, ymax = n + 1), width=.1,position = position_dodge(width = .5))\n\n\n\n\n\n\n\ncount(mtcars,cyl,am) %&gt;%\n  ggplot(aes(cyl, n, fill = factor(am))) +\n  geom_col(position = position_dodge2(),width=.8,colour = \"black\")+\n  geom_errorbar(aes(ymin = n - 1, ymax = n + 1), width=.8,position = position_dodge2(padding = .5))",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>ggplot</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/stats/base.html",
+    "href": "chapter/stats/base.html",
+    "title": "21  基础知识",
+    "section": "",
+    "text": "21.1 连续型随机变量\ndf&lt;-data.frame(x=seq(-5,5,by=0.01)) %&gt;%\n  mutate(pdf=dnorm(x),cdf=pnorm(x),icdf=qnorm(cdf))\n\ndf",
+    "crumbs": [
+      "统计",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>基础</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/stats/base.html#连续型随机变量",
+    "href": "chapter/stats/base.html#连续型随机变量",
+    "title": "21  基础知识",
+    "section": "",
+    "text": "21.1.1 密度函数/分布函数\n\n概率密度函数(PDF)累计分布函数累计分布函数的反函数\n\n\n\ndf %&gt;%\n  ggplot(aes(x,pdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(x,cdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\ndf %&gt;%\n  ggplot(aes(cdf,icdf))+\n  geom_line()\n\n\n\n\n\n\n\n\n\n\n\n\n\n21.1.2 3\\(\\sigma\\)(西格玛)准则\n\nggplot(df,aes(x,pdf))+\n  geom_line()+\n  geom_area(aes(x=ifelse(abs(x)&lt;3,x,NA),fill='0.9974'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;2,x,NA),fill='0.9545'),alpha=0.5)+\n  geom_area(aes(x=ifelse(abs(x)&lt;1,x,NA),fill='0.6827'),alpha=0.5)+\n  geom_vline(xintercept =c(-3,-2,-1,1,2,3),linetype='dashed')+\n  scale_x_continuous(breaks=c(-5:5))+\n  labs(x='Z',y='概率密度(pdf)')+\n  scale_fill_futurama()+\n  guides(fill=guide_legend(title='曲线下面积',override.aes = list(alpha=0.2)))\n\n\n\n\n\n\n\n\n\npnorm(1:3)-pnorm(-1:-3)\n\n[1] 0.6826895 0.9544997 0.9973002\n\n\n\n(pnorm(1:3)-pnorm(-1:-3)) %&gt;%\n  `/`(2) %&gt;%\n  `-`(0.5,.) %&gt;%\n  qnorm()\n\n[1] -1 -2 -3\n\n\n\n\n21.1.3 Z检验界值和参考值范围\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1))\n\n[1] 2.575829 2.326348 1.959964 1.644854 1.281552\n\n\n\n-qnorm(c(0.005,0.01,0.025,0.05,0.1)) %&gt;%\n  pnorm()\n\n[1] 0.995 0.990 0.975 0.950 0.900\n\n\n\n\n21.1.4 频率分布直方图\n\nrunif(10000) %&gt;%\n  qnorm() %&gt;%\n  hist(breaks = 50)",
+    "crumbs": [
+      "统计",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>基础</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/stats/base.html#离散型随机变量",
+    "href": "chapter/stats/base.html#离散型随机变量",
+    "title": "21  基础知识",
+    "section": "21.2 离散型随机变量",
+    "text": "21.2 离散型随机变量\n\n21.2.1 分布列/概率质量函数(PMF)\n\nrpois(1000,5) %&gt;% \n  table() %&gt;% as.data.frame() %&gt;%\n  setNames(c('k','probality')) %&gt;%\n  adorn_percentages(denominator = 'col') %&gt;%\n  ggplot(aes(k,probality))+\n  geom_col()",
+    "crumbs": [
+      "统计",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>基础</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/stats/base.html#ci的含义",
+    "href": "chapter/stats/base.html#ci的含义",
+    "title": "21  基础知识",
+    "section": "21.3 95%CI的含义",
+    "text": "21.3 95%CI的含义\n\ndf&lt;-data.frame(miu=runif(1000,min=1,max=100),sigma=runif(1000,min=1,max=20)) %&gt;%\n  rowwise() %&gt;%\n  mutate(sample=list(rnorm(25,miu,sigma)),\n         x_bar=mean(sample),\n         sd=sd(sample),\n         ci_lower=x_bar-1.96*sd/5,\n         ci_upper=x_bar+1.96*sd/5,\n         within_ci=ifelse(miu&gt;=ci_lower & miu &lt;=ci_upper,T,F)) %&gt;%\n  mutate(across(where(is.numeric),~round(.x,2)))\n\ndf\n\n\n  \n\n\nmean(df$within_ci)\n\n[1] 0.922",
+    "crumbs": [
+      "统计",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>基础</span>"
+    ]
+  },
+  {
     "objectID": "chapter/stats/distribution.html",
     "href": "chapter/stats/distribution.html",
     "title": "22  二项分布",
     "section": "",
-    "text": "22.1 多项分布\n多项分布（Multinomial Distribution）是多次独立实验中，每次实验有多个可能结果的一种概率分布。它是二项分布的推广，适用于每次试验有超过两个可能结果的情况。\n假设进行 \\(n\\) 次独立试验，每次试验有 \\(k\\) 个可能的结果（例如，分类问题中的多个类别）。令每个试验的结果分别属于类别 \\(1, 2, \\dots, k\\)，且每个类别的概率分别为 \\(p_1, p_2, \\dots, p_k\\)（其中 \\(p_1 + p_2 + \\dots + p_k = 1\\)）。\n在这种情况下，记\\(n\\)次实验后的结果用向量\\(X = (X_1, X_2, ..., X_k)\\) 表示。多项分布描述的是X的分布，在 \\(n\\) 次试验中，各类别 \\(i\\) 分别被选中的次数为 \\(x_i\\) 同时出现的概率，其中 \\(i = 1, 2, \\dots, k\\)，且 \\(x_1 + x_2 + \\dots + x_k = n\\)。",
+    "text": "22.1 多项分布\n若记随机变量\\(X\\)表示: \\(n\\)次伯努利实验中实验成功的次数,则\\(X \\sim B(n,p)\\)\n随机变量的取值：\\(0,1,...,n\\)\n参数： - \\(n\\): 试验次数 - \\(p\\): 伯努利实验的成功概率\n概率质量函数(PMF)：\n多项分布（Multinomial Distribution）是多次独立实验中，每次实验有多个可能结果的一种概率分布。它是二项分布的推广，适用于每次试验有超过两个可能结果的情况。\n假设进行 \\(n\\) 次独立试验，每次试验有 \\(k\\) 个可能的结果（例如，分类问题中的多个类别）。令每个试验的结果分别属于类别 \\(1, 2, \\dots, k\\)，且每个类别的概率分别为 \\(p_1, p_2, \\dots, p_k\\)（其中 \\(p_1 + p_2 + \\dots + p_k = 1\\)）。\n在这种情况下，记\\(n\\)次实验后的结果用向量\\(X = (X_1, X_2, ..., X_k)\\) 表示。多项分布描述的是X的分布，在 \\(n\\) 次试验中，各类别 \\(i\\) 分别被选中的次数为 \\(x_i\\) 同时出现的概率，其中 \\(i = 1, 2, \\dots, k\\)，且 \\(x_1 + x_2 + \\dots + x_k = n\\)。",
     "crumbs": [
       "统计",
       "<span class='chapter-number'>22</span>  <span class='chapter-title'>分布</span>"
@@ -1100,7 +1089,7 @@
     "href": "chapter/stats/distribution.html#狄利克雷分布",
     "title": "22  二项分布",
     "section": "22.2 狄利克雷分布",
-    "text": "22.2 狄利克雷分布\n狄利克雷分布是多维概率分布的常用先验分布，广泛用于描述离散分布的参数不确定性。其概率密度函数定义如下：\n\\[\n\\text{Dir}(\\mathbf{x}; \\boldsymbol{\\alpha}) = \\frac{1}{B(\\boldsymbol{\\alpha})} \\prod_{i=1}^k x_i^{\\alpha_i - 1}\n\\]\n其中：\n\n\\(\\mathbf{x} = (x_1, x_2, \\dots, x_k)\\)：满足 \\(x_i \\geq 0\\) 且 \\(\\sum_{i=1}^k x_i = 1\\) 的概率向量。\n\\(\\boldsymbol{\\alpha} = (\\alpha_1, \\alpha_2, \\dots, \\alpha_k)\\)：参数向量，\\(\\alpha_i &gt; 0\\)。\n\\(B(\\boldsymbol{\\alpha})\\)：Beta 函数的高维推广，定义为：\n\n\\[\nB(\\boldsymbol{\\alpha}) = \\frac{\\prod_{i=1}^k \\Gamma(\\alpha_i)}{\\Gamma\\left(\\sum_{i=1}^k \\alpha_i\\right)}\n\\]\n\n22.2.1 性质\n\n参数意义：\n\n参数 \\(\\alpha_i\\) 越大，类别 \\(i\\) 的概率越集中。\n当所有 \\(\\alpha_i = 1\\) 时，狄利克雷分布退化为均匀分布。\n\n期望： \\(\\mathbb{E}[X_i] = \\frac{\\alpha_i}{\\sum_{j=1}^k \\alpha_j}\\)\n共轭性：\n\n狄利克雷分布是多项分布的共轭先验。\n\n\n\n\n22.2.2 与 Beta 分布的关系\nBeta 分布是狄利克雷分布在二维（\\(k=2\\)）情况下的特例： \\(\\text{Beta}(x; \\alpha, \\beta) = \\text{Dir}(x, 1-x; \\alpha, \\beta)\\)\n在 Beta 分布中，\\(\\alpha\\) 和 \\(\\beta\\) 控制单一维度概率的分布形态。\n\n\n22.2.3 抽样模拟\n\ndf&lt;-rdirichlet(10000,alpha=c(1,2,3,4))\nhead(df)\n\n           [,1]       [,2]      [,3]      [,4]\n[1,] 0.04149541 0.10960605 0.4228387 0.4260599\n[2,] 0.03062225 0.14512081 0.3397452 0.4845118\n[3,] 0.32364962 0.07588873 0.1741911 0.4262705\n[4,] 0.17873409 0.18763369 0.1884827 0.4451495\n[5,] 0.07700831 0.17527859 0.2709918 0.4767213\n[6,] 0.06682157 0.06536093 0.4216075 0.4462100\n\nhead(rowSums(df))\n\n[1] 1 1 1 1 1 1\n\napply(df,2,summary)\n\n                [,1]        [,2]        [,3]      [,4]\nMin.    6.334401e-06 0.001119003 0.007616687 0.0266439\n1st Qu. 3.145405e-02 0.107989297 0.191045220 0.2901089\nMedian  7.423433e-02 0.179926115 0.284194840 0.3964178\nMean    1.009026e-01 0.199450075 0.297827072 0.4018202\n3rd Qu. 1.439634e-01 0.271128453 0.389624818 0.5056341\nMax.    7.007667e-01 0.767930288 0.829928731 0.8956960\n\ndf %&gt;% as.data.frame() %&gt;%\n  setNames(paste0('x',1:4)) %&gt;%\n  pivot_longer(cols=x1:x4,names_to = 'dimension',values_to = 'value') %&gt;%\n  ggplot(aes(value,fill=dimension))+\n  geom_density()+\n  scale_fill_lancet(alpha = .5)+\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n# 贝塔分布与狄利克雷分布\ndf&lt;-data.frame(x=seq(0,1,length.out=1000)) %&gt;%\n  mutate(pd_beta=dbeta(x,shape1 = 1.5,shape2=2)) %&gt;%\n  rowwise() %&gt;%\n  mutate(pd_diri=ddirichlet(c(x,1-x),alpha = c(1.5,2)))\n\nhead(df)\n\n\n  \n\n\n#PDF\nggplot(df,aes(x))+\n  geom_line(aes(y=pd_beta,linetype='beta',col='beta'),linewidth = 1)+\n  geom_line(aes(y=pd_diri,linetype='dirichlet',col='dirichlet'),linewidth = 1)+\n  theme_bw()+\n  labs(linetype='',col='',y='probability density',title='PDF')\n\n\n\n\n\n\n\n\n\nrdirichlet(100000,alpha=c(1.5,2)) %&gt;% \n  as.data.frame() %&gt;%\n  setNames(paste0('x',1:2)) %&gt;%\n  pivot_longer(cols=x1:x2,names_to = 'dimension',values_to = 'value') %&gt;%\n  ggplot(aes(value,fill=dimension))+\n  geom_density()+\n  scale_fill_lancet(alpha = .5)+\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nrdirichlet(500,alpha=c(1.5,2)) %&gt;% \n  as.data.frame() %&gt;%\n  setNames(paste0('x',1:2)) %&gt;%\n  ggplot(aes(x1,x2))+\n  geom_point(alpha=.1)+\n  theme_bw()",
+    "text": "22.2 狄利克雷分布\n狄利克雷分布是多维概率分布的常用先验分布，广泛用于描述离散分布的参数不确定性。其概率密度函数定义如下：\n\\[\n\\text{Dir}(\\mathbf{x}; \\boldsymbol{\\alpha}) = \\frac{1}{B(\\boldsymbol{\\alpha})} \\prod_{i=1}^k x_i^{\\alpha_i - 1}\n\\]\n其中：\n\n\\(\\mathbf{x} = (x_1, x_2, \\dots, x_k)\\)：满足 \\(x_i \\geq 0\\) 且 \\(\\sum_{i=1}^k x_i = 1\\) 的概率向量。\n\\(\\boldsymbol{\\alpha} = (\\alpha_1, \\alpha_2, \\dots, \\alpha_k)\\)：参数向量，\\(\\alpha_i &gt; 0\\)。\n\\(B(\\boldsymbol{\\alpha})\\)：Beta 函数的高维推广，定义为：\n\n\\[\nB(\\boldsymbol{\\alpha}) = \\frac{\\prod_{i=1}^k \\Gamma(\\alpha_i)}{\\Gamma\\left(\\sum_{i=1}^k \\alpha_i\\right)}\n\\]\n\n22.2.1 性质\n\n参数意义：\n\n参数 \\(\\alpha_i\\) 越大，类别 \\(i\\) 的概率越集中。\n当所有 \\(\\alpha_i = 1\\) 时，狄利克雷分布退化为均匀分布。\n\n期望： \\(\\mathbb{E}[X_i] = \\frac{\\alpha_i}{\\sum_{j=1}^k \\alpha_j}\\)\n共轭性：\n\n狄利克雷分布是多项分布的共轭先验。\n\n\n\n\n22.2.2 与 Beta 分布的关系\nBeta 分布是狄利克雷分布在二维（\\(k=2\\)）情况下的特例： \\(\\text{Beta}(x; \\alpha, \\beta) = \\text{Dir}(x, 1-x; \\alpha, \\beta)\\)\n在 Beta 分布中，\\(\\alpha\\) 和 \\(\\beta\\) 控制单一维度概率的分布形态。\n\n\n22.2.3 抽样模拟\n\ndf&lt;-rdirichlet(10000,alpha=c(1,2,3,4))\nhead(df)\n\n           [,1]       [,2]      [,3]      [,4]\n[1,] 0.05956209 0.29091085 0.4414088 0.2081183\n[2,] 0.09268379 0.24957010 0.3640361 0.2937100\n[3,] 0.12315445 0.14479721 0.5197378 0.2123105\n[4,] 0.01229675 0.12830190 0.3568086 0.5025927\n[5,] 0.13318171 0.16340773 0.2575162 0.4458943\n[6,] 0.36167835 0.05144658 0.1147832 0.4720919\n\nhead(rowSums(df))\n\n[1] 1 1 1 1 1 1\n\napply(df,2,summary)\n\n                [,1]        [,2]       [,3]       [,4]\nMin.    3.005776e-05 0.001218488 0.01414754 0.04156674\n1st Qu. 3.179941e-02 0.106316123 0.19279910 0.28985137\nMedian  7.344926e-02 0.177851008 0.28509858 0.39386323\nMean    9.996165e-02 0.199943996 0.29889084 0.40120352\n3rd Qu. 1.420657e-01 0.271892313 0.39124324 0.50297442\nMax.    6.986511e-01 0.781400368 0.87124616 0.87243476\n\ndf %&gt;% as.data.frame() %&gt;%\n  setNames(paste0('x',1:4)) %&gt;%\n  pivot_longer(cols=x1:x4,names_to = 'dimension',values_to = 'value') %&gt;%\n  ggplot(aes(value,fill=dimension))+\n  geom_density()+\n  scale_fill_lancet(alpha = .5)+\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n# 贝塔分布与狄利克雷分布\ndf&lt;-data.frame(x=seq(0,1,length.out=1000)) %&gt;%\n  mutate(pd_beta=dbeta(x,shape1 = 1.5,shape2=2)) %&gt;%\n  rowwise() %&gt;%\n  mutate(pd_diri=ddirichlet(c(x,1-x),alpha = c(1.5,2)))\n\nhead(df)\n\n\n  \n\n\n#PDF\nggplot(df,aes(x))+\n  geom_line(aes(y=pd_beta,linetype='beta',col='beta'),linewidth = 1)+\n  geom_line(aes(y=pd_diri,linetype='dirichlet',col='dirichlet'),linewidth = 1)+\n  theme_bw()+\n  labs(linetype='',col='',y='probability density',title='PDF')\n\n\n\n\n\n\n\n\n\nrdirichlet(100000,alpha=c(1.5,2)) %&gt;% \n  as.data.frame() %&gt;%\n  setNames(paste0('x',1:2)) %&gt;%\n  pivot_longer(cols=x1:x2,names_to = 'dimension',values_to = 'value') %&gt;%\n  ggplot(aes(value,fill=dimension))+\n  geom_density()+\n  scale_fill_lancet(alpha = .5)+\n  theme_minimal()\n\n\n\n\n\n\n\n\n\nrdirichlet(500,alpha=c(1.5,2)) %&gt;% \n  as.data.frame() %&gt;%\n  setNames(paste0('x',1:2)) %&gt;%\n  ggplot(aes(x1,x2))+\n  geom_point(alpha=.1)+\n  theme_bw()",
     "crumbs": [
       "统计",
       "<span class='chapter-number'>22</span>  <span class='chapter-title'>分布</span>"
@@ -1126,17 +1115,6 @@
     "crumbs": [
       "统计",
       "<span class='chapter-number'>22</span>  <span class='chapter-title'>分布</span>"
-    ]
-  },
-  {
-    "objectID": "chapter/viz/ggplot.html",
-    "href": "chapter/viz/ggplot.html",
-    "title": "20  ggplot2绘图",
-    "section": "",
-    "text": "library(tidyverse)\n\n\nlibrary(maps)\n\n\nAttaching package: 'maps'\n\n\nThe following object is masked from 'package:purrr':\n\n    map\n\nmap('world')\n\n\n\n\n\n\n\nmap('usa')\n\n\n\n\n\n\n\n\n\nlibrary(mapdata)\n\nmap('china',col = 'salmon')\n\n\n\n\n\n\n\nmap('japan')\n\n\n\n\n\n\n\n\n\nworld_map&lt;-map_data('world') # from ggplot2 package\nhead(world_map)\n\n\n  \n\n\ndf&lt;-data.frame(region=unique(world_map$region),\n               value=sample(LETTERS[1:3]),length(unique(world_map$region)))\ndim(df)\n\n[1] 252   3\n\nworld_map2&lt;-left_join(world_map,df,by='region')\nhead(world_map2)\n\n\n  \n\n\nggplot() +\n  geom_map(\n    data = world_map2, map = world_map2,\n    aes(x=long, y=lat, map_id = region,fill=value),\n    color = \"black\",  linewidth = 0.1,alpha=0.7) +\n  scale_fill_manual(values = c(\"#0392cf\",\"#ffad60\",\"#fdf498\",\"#7bc043\"),na.value = \"#EEEEEE\",na.translate=FALSE)+\n  #geom_point(data = LocationInfo,aes(x=long, y=lat),color=\"red\",alpha = 0.7,size=3)+\n  geom_hline(yintercept = c(23.5,-23.5), lty = 3, color = \"darkgrey\") +\n  geom_hline(yintercept = c(35,-35), lty = 2, color = \"darkgrey\") +\n  geom_hline(yintercept = 0, lty = 1, color = \"darkgrey\") +\n  geom_text(aes(y = c(35,23.5,0,-23.5,-35), label =c(\"35°\",\"23.5°\",\"0°\",\"-23.5°\",\"-35°\")), \n            x = -Inf, hjust = -0.1, vjust = -1, size = 4,color = \"darkgrey\") +\n  theme_void() +\n  theme(legend.position = \"bottom\")\n\nWarning in geom_map(data = world_map2, map = world_map2, aes(x = long, y = lat,\n: Ignoring unknown aesthetics: x and y\n\n\n\n\n\n\n\n\n\n\n20.0.1 地图数据\n\nmap_data('china')\n\n\n  \n\n\nggplot()+\n  geom_map(\n    data=map_data('china'),map=map_data('china'),\n    aes(x=long, y=lat, map_id = region)\n  )\n\nWarning in geom_map(data = map_data(\"china\"), map = map_data(\"china\"), aes(x =\nlong, : Ignoring unknown aesthetics: x and y\n\n\n\n\n\n\n\n\n\n\nlibrary(tidyverse)\ncount(mtcars,cyl,am) %&gt;%\n  ggplot(aes(cyl, n, fill = factor(am))) +\n  geom_col(position = position_dodge(),width=.5,colour = \"black\")+\n  geom_errorbar(aes(ymin = n - 1, ymax = n + 1), width=.1,position = position_dodge(width = .5))\n\n\n\n\n\n\n\ncount(mtcars,cyl,am) %&gt;%\n  ggplot(aes(cyl, n, fill = factor(am))) +\n  geom_col(position = position_dodge2(),width=.8,colour = \"black\")+\n  geom_errorbar(aes(ymin = n - 1, ymax = n + 1), width=.8,position = position_dodge2(padding = .5))",
-    "crumbs": [
-      "数据可视化",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>ggplot</span>"
     ]
   }
 ]
