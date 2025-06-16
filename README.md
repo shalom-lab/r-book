@@ -5,9 +5,13 @@
 
 ## 📖 在线阅读
 
-点击封面即可开始阅读 👉 [**立即阅读**](https://shalom-lab.github.io/r-book/)  
+点击封面即可开始阅读 👉 [**立即阅读**](https://book.rlearner.com)  
 
-[![封面](images/cover.png)](https://shalom-lab.github.io/r-book/)  
+[腾讯云](https://book.rlearner.com)
+[Github Page](https://shalom-lab.github.io/r-book/)
+
+
+[![封面](images/cover.png)](https://book.rlearner.com)  
 
 ---
 
