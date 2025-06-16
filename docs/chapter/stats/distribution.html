@@ -395,6 +395,13 @@ window.Quarto = {
   <li><a href="#pdf-3" id="toc-pdf-3" class="nav-link" data-scroll-target="#pdf-3"><span class="header-section-number">22.4.5</span> PDF</a></li>
   <li><a href="#特例" id="toc-特例" class="nav-link" data-scroll-target="#特例"><span class="header-section-number">22.4.6</span> 特例</a></li>
   </ul></li>
+  <li><a href="#威布尔分布" id="toc-威布尔分布" class="nav-link" data-scroll-target="#威布尔分布"><span class="header-section-number">22.5</span> 威布尔分布</a>
+  <ul class="collapse">
+  <li><a href="#pdf-4" id="toc-pdf-4" class="nav-link" data-scroll-target="#pdf-4"><span class="header-section-number">22.5.1</span> PDF</a></li>
+  <li><a href="#参数解释-2" id="toc-参数解释-2" class="nav-link" data-scroll-target="#参数解释-2"><span class="header-section-number">22.5.2</span> 参数解释</a></li>
+  <li><a href="#期望和方差-2" id="toc-期望和方差-2" class="nav-link" data-scroll-target="#期望和方差-2"><span class="header-section-number">22.5.3</span> 期望和方差</a></li>
+  <li><a href="#应用场景" id="toc-应用场景" class="nav-link" data-scroll-target="#应用场景"><span class="header-section-number">22.5.4</span> 应用场景</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/stats/distribution.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
@@ -602,12 +609,12 @@ B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^k \Gamma(\alpha_i)}{\Gamma\left(\sum_
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           [,1]       [,2]      [,3]      [,4]
-[1,] 0.05956209 0.29091085 0.4414088 0.2081183
-[2,] 0.09268379 0.24957010 0.3640361 0.2937100
-[3,] 0.12315445 0.14479721 0.5197378 0.2123105
-[4,] 0.01229675 0.12830190 0.3568086 0.5025927
-[5,] 0.13318171 0.16340773 0.2575162 0.4458943
-[6,] 0.36167835 0.05144658 0.1147832 0.4720919</code></pre>
+[1,] 0.16052996 0.27455557 0.2732274 0.2916871
+[2,] 0.01632666 0.20882749 0.3105925 0.4642533
+[3,] 0.04464073 0.06807363 0.6141050 0.2731806
+[4,] 0.07771359 0.29254792 0.1941767 0.4355618
+[5,] 0.10104089 0.13584894 0.3950356 0.3680746
+[6,] 0.04126297 0.43935468 0.2156657 0.3037167</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">rowSums</span>(df))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -615,13 +622,13 @@ B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^k \Gamma(\alpha_i)}{\Gamma\left(\sum_
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(df,<span class="dv">2</span>,summary)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                [,1]        [,2]       [,3]       [,4]
-Min.    3.005776e-05 0.001218488 0.01414754 0.04156674
-1st Qu. 3.179941e-02 0.106316123 0.19279910 0.28985137
-Median  7.344926e-02 0.177851008 0.28509858 0.39386323
-Mean    9.996165e-02 0.199943996 0.29889084 0.40120352
-3rd Qu. 1.420657e-01 0.271892313 0.39124324 0.50297442
-Max.    6.986511e-01 0.781400368 0.87124616 0.87243476</code></pre>
+<pre><code>                [,1]         [,2]       [,3]       [,4]
+Min.    1.138619e-05 0.0005761693 0.00791632 0.03623695
+1st Qu. 3.183812e-02 0.1063868593 0.19461959 0.29030040
+Median  7.429689e-02 0.1791412533 0.28574888 0.39336567
+Mean    9.987520e-02 0.1994147980 0.30076781 0.39994219
+3rd Qu. 1.411570e-01 0.2708603031 0.39048415 0.50263571
+Max.    6.435791e-01 0.7533339857 0.87900481 0.89900701</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">paste0</span>(<span class="st">'x'</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
@@ -1220,6 +1227,132 @@ f(x; \alpha, \beta) = \frac{x^{\alpha-1} e^{-x/\beta}}{\beta^\alpha \Gamma(\alph
 <div>
 <figure class="figure">
 <p><img src="distribution_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="威布尔分布" class="level2" data-number="22.5">
+<h2 data-number="22.5" class="anchored" data-anchor-id="威布尔分布"><span class="header-section-number">22.5</span> 威布尔分布</h2>
+<p><strong>Weibull分布</strong>是一种常见的概率分布，常用于建模产品寿命、可靠性分析、极端事件等。</p>
+<section id="pdf-4" class="level3" data-number="22.5.1">
+<h3 data-number="22.5.1" class="anchored" data-anchor-id="pdf-4"><span class="header-section-number">22.5.1</span> PDF</h3>
+<p>其概率密度函数（PDF）为：</p>
+<p><span class="math display">\[
+f(x; k, \lambda) =
+\begin{cases}
+\frac{k}{\lambda} \left( \frac{x}{\lambda} \right)^{k-1} e^{-(x/\lambda)^k}, &amp; x \ge 0 \\
+0, &amp; x &lt; 0
+\end{cases}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(k &gt; 0\)</span>：<strong>形状参数</strong>（shape parameter）
+<ul>
+<li>控制分布的形状。<br>
+</li>
+<li><span class="math inline">\(k &lt; 1\)</span> 为下降密度，<span class="math inline">\(k = 1\)</span> 为指数分布，<span class="math inline">\(k &gt; 1\)</span> 呈钟形。</li>
+</ul></li>
+<li><span class="math inline">\(\lambda &gt; 0\)</span>：<strong>尺度参数</strong>（scale parameter）
+<ul>
+<li>控制分布的“拉伸”程度。</li>
+</ul></li>
+</ul>
+</section>
+<section id="参数解释-2" class="level3" data-number="22.5.2">
+<h3 data-number="22.5.2" class="anchored" data-anchor-id="参数解释-2"><span class="header-section-number">22.5.2</span> 参数解释</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(k\)</span></td>
+<td>形状（Shape）控制形状弯曲度</td>
+</tr>
+<tr class="even">
+<td>$ $</td>
+<td>尺度（Scale）控制水平拉伸</td>
+</tr>
+</tbody>
+</table>
+<p>当 $ k = 1 $ 时，Weibull 分布等价于<strong>指数分布</strong>。</p>
+</section>
+<section id="期望和方差-2" class="level3" data-number="22.5.3">
+<h3 data-number="22.5.3" class="anchored" data-anchor-id="期望和方差-2"><span class="header-section-number">22.5.3</span> 期望和方差</h3>
+<ul>
+<li><p><strong>期望值（Mean）</strong>：</p>
+<p><span class="math display">\[
+\mathbb{E}[X] = \lambda \cdot \Gamma\left(1 + \frac{1}{k}\right)
+\]</span></p></li>
+<li><p><strong>方差（Variance）</strong>：</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) = \lambda^2 \left[ \Gamma\left(1 + \frac{2}{k} \right) - \left( \Gamma\left(1 + \frac{1}{k} \right) \right)^2 \right]
+\]</span></p></li>
+</ul>
+<p>其中 <span class="math inline">\(\Gamma(\cdot)\)</span> 是伽马函数，满足 <span class="math inline">\(\Gamma(n) = (n - 1)!\)</span> 当 <span class="math inline">\(n\)</span> 为整数时。</p>
+<hr>
+</section>
+<section id="应用场景" class="level3" data-number="22.5.4">
+<h3 data-number="22.5.4" class="anchored" data-anchor-id="应用场景"><span class="header-section-number">22.5.4</span> 应用场景</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 80%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>场景</th>
+<th>Weibull 分布作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>可靠性工程</strong></td>
+<td>建模元件寿命或故障时间（<span class="math inline">\(k &gt; 1\)</span> 表示老化，<span class="math inline">\(k &lt; 1\)</span> 表示磨损）</td>
+</tr>
+<tr class="even">
+<td><strong>气象学</strong></td>
+<td>建模风速（尺度控制平均风速，形状控制极端风）</td>
+</tr>
+<tr class="odd">
+<td><strong>生存分析</strong></td>
+<td>替代指数分布，更灵活建模寿命数据</td>
+</tr>
+<tr class="even">
+<td><strong>金融建模</strong></td>
+<td>分析某些极端值出现的可能性，如罕见损失</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 生成参数组合并计算威布尔分布密度数据</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">k =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">3</span>),           <span class="co"># 形状参数 k</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="dv">3</span>)       <span class="co"># 尺度参数 λ</span></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data =</span> <span class="fu">pmap</span>(<span class="fu">list</span>(k, lambda), <span class="sc">~</span> {</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">5</span>, <span class="at">length.out =</span> <span class="dv">1000</span>)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> <span class="fu">dweibull</span>(x, <span class="at">shape =</span> ..<span class="dv">1</span>, <span class="at">scale =</span> ..<span class="dv">2</span>))</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 绘图</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>plot_data <span class="sc">%&gt;%</span></span>
+<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(data) <span class="sc">%&gt;%</span></span>
+<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">params =</span> <span class="fu">sprintf</span>(<span class="st">"k=%s, λ=%s"</span>, k, lambda)) <span class="sc">%&gt;%</span></span>
+<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
+<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">factor</span>(lambda), <span class="at">group =</span> params)) <span class="sc">+</span></span>
+<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> k, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="cf">function</span>(x) <span class="fu">paste0</span>(<span class="st">"k="</span>, x))) <span class="sc">+</span></span>
+<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"λ"</span>, <span class="at">title =</span> <span class="st">"威布尔分布密度曲线"</span>) <span class="sc">+</span></span>
+<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="distribution_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

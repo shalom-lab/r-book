@@ -6,7 +6,7 @@
 library(tidyverse)
 library(janitor)
 library(ggsci)
-theme_set(theme_bw()+theme(text=element_text(size=30)))
+theme_set(theme_bw()+theme(text=element_text()))
 ```
 
 ## 连续型随机变量

@@ -577,3 +577,85 @@ plot_data %>%
   facet_grid(alpha~beta)+
   xlim(c(-.1,.1))
 ```
+
+## 威布尔分布
+
+**Weibull分布**是一种常见的概率分布，常用于建模产品寿命、可靠性分析、极端事件等。
+
+### PDF
+其概率密度函数（PDF）为：
+
+$$
+f(x; k, \lambda) = 
+\begin{cases}
+\frac{k}{\lambda} \left( \frac{x}{\lambda} \right)^{k-1} e^{-(x/\lambda)^k}, & x \ge 0 \\
+0, & x < 0
+\end{cases}
+$$
+
+- $k > 0$：**形状参数**（shape parameter）  
+  - 控制分布的形状。  
+  - $k < 1$ 为下降密度，$k = 1$ 为指数分布，$k > 1$ 呈钟形。
+- $\lambda > 0$：**尺度参数**（scale parameter）  
+  - 控制分布的“拉伸”程度。
+
+
+### 参数解释
+
+| 参数          | 含义                        |
+|---------------|-----------------------------|
+| $k$       | 形状（Shape）控制形状弯曲度 |
+| $ \lambda $ | 尺度（Scale）控制水平拉伸   |
+
+当 $ k = 1 $ 时，Weibull 分布等价于**指数分布**。
+
+### 期望和方差
+
+- **期望值（Mean）**：
+  
+  $$
+  \mathbb{E}[X] = \lambda \cdot \Gamma\left(1 + \frac{1}{k}\right)
+  $$
+
+- **方差（Variance）**：
+
+  $$
+  \mathrm{Var}(X) = \lambda^2 \left[ \Gamma\left(1 + \frac{2}{k} \right) - \left( \Gamma\left(1 + \frac{1}{k} \right) \right)^2 \right]
+  $$
+
+其中 $\Gamma(\cdot)$ 是伽马函数，满足 $\Gamma(n) = (n - 1)!$ 当 $n$ 为整数时。
+
+---
+
+### 应用场景
+
+| 场景           | Weibull 分布作用                                               |
+|----------------|----------------------------------------------------------------|
+| **可靠性工程** | 建模元件寿命或故障时间（$k > 1$ 表示老化，$k < 1$ 表示磨损）   |
+| **气象学**     | 建模风速（尺度控制平均风速，形状控制极端风）                   |
+| **生存分析**   | 替代指数分布，更灵活建模寿命数据                               |
+| **金融建模**   | 分析某些极端值出现的可能性，如罕见损失                         |
+
+```{r}
+# 生成参数组合并计算威布尔分布密度数据
+plot_data <- expand.grid(
+  k = c(0.5, 1, 1.5, 2, 3),           # 形状参数 k
+  lambda = c(0.5, 1, 1.5, 2, 3)       # 尺度参数 λ
+) %>%
+  mutate(data = pmap(list(k, lambda), ~ {
+    x <- seq(0, 5, length.out = 1000)
+    data.frame(x = x, y = dweibull(x, shape = ..1, scale = ..2))
+  }))
+
+# 绘图
+plot_data %>%
+  unnest(data) %>%
+  mutate(params = sprintf("k=%s, λ=%s", k, lambda)) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_line(aes(color = factor(lambda), group = params)) +
+  facet_wrap(~ k, nrow = 1, labeller = as_labeller(function(x) paste0("k=", x))) +
+  labs(color = "λ", title = "威布尔分布密度曲线") +
+  theme_bw() +
+  coord_cartesian(ylim = c(0, 2))
+
+```
