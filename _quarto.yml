@@ -4,7 +4,7 @@ project:
 book:
   title: R语言入门指南
   author: Shalom
-  date: 2024/12/22
+  date: 2026/5/11
   repo-url: https://github.com/shalom-lab/r-book/
   repo-actions:
   - edit
@@ -65,12 +65,16 @@ book:
       href: chapter/viz/bar_plot.qmd
     - text: ggplot
       href: chapter/viz/ggplot.qmd
+    - text: 分面
+      href: chapter/viz/ggplot_facet.qmd
   - part: 统计
     chapters:
     - text: 基础
       href: chapter/stats/base.qmd
     - text: 分布
       href: chapter/stats/distribution.qmd
+execute:
+  freeze: auto
 format:
   html:
     theme: cosmo

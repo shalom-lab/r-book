@@ -1,0 +1,142 @@
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+library(ggh4x)
+library(patchwork)
+```
+
+```{r}
+set.seed(123)
+
+make_block <- function(age, n, inc_range, mort_range){
+
+  tibble(
+    AGEGR = age,
+    Metric = rep(c("Incidence", "Mortality"), each = n),
+    Country = rep(paste0("C", 1:n), times = 2),
+    est = c(
+      runif(n, inc_range[1], inc_range[2]),
+      runif(n, mort_range[1], mort_range[2])
+    )
+  )
+}
+
+df <- bind_rows(
+  make_block("0-<6m",   3,  c(60,120), c(5,15)),
+  make_block("6-<12m",  7,  c(30,80),  c(3,10)),
+  make_block("12-<24m", 12, c(10,40),  c(1,5))
+) %>%
+  group_by(AGEGR, Metric) %>%
+  mutate(
+    lci = est * runif(n(), 0.8, 0.9),
+    uci = est * runif(n(), 1.1, 1.2)
+  ) %>%
+  ungroup()
+
+df
+```
+
+```{r}
+base_plot <- ggplot(df, aes(Country, est)) +
+  geom_pointrange(aes(ymin = lci, ymax = uci)) +
+  theme_bw() +
+  labs(x = NULL, y = "Estimate") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p_wrap <- base_plot +
+  facet_wrap(~ AGEGR + Metric, scales = "free_y", ncol = 2) +
+  ggtitle("facet_wrap: flattened display")
+
+p_grid <- base_plot +
+  facet_grid(Metric ~ AGEGR, scales = "free_x", space = "free") +
+  ggtitle("facet_grid: structured layout")
+
+p_grid2 <- base_plot +
+  facet_grid2(
+    Metric ~ AGEGR,
+    scales = "free",
+    independent = "y"
+  ) +
+  ggtitle("facet_grid2: flexible axes per panel")
+```
+
+```{r}
+p_wrap
+p_grid
+p_grid2
+```
+
+```{r}
+params <- crossing(
+  scales = c("fixed", "free_x", "free_y", "free"),
+  space  = c("fixed", "free")
+)
+
+pwalk(params, \(scales, space){
+
+  print(
+    base_plot +
+      facet_grid(Metric ~ AGEGR,
+                 scales = scales,
+                 space = space) +
+      ggtitle(paste0("scales=", scales, " | space=", space))
+  )
+
+})
+```
+
+```{r}
+params_wrap <- crossing(
+  scales = c("fixed", "free_x", "free_y", "free"),
+  ncol   = c(2, 3)
+)
+
+pwalk(params_wrap, \(scales, ncol){
+
+  print(
+    base_plot +
+      facet_wrap(~ Metric + AGEGR,
+                 scales = scales,
+                 ncol = ncol) +
+      ggtitle(paste0("[wrap] scales=", scales, " | ncol=", ncol))
+  )
+
+})
+```
+
+```{r}
+params_grid2 <- bind_rows(
+  # 1. 基础组合：scales 为 free 时，independent 可以匹配
+  tibble(scales = "free_x", space = "fixed", independent = "x"),
+  tibble(scales = "free_y", space = "fixed", independent = "y"),
+  
+  # 2. 只有 space = "fixed" 时，independent 才能设为 "all"
+  tibble(scales = "free", space = "fixed", independent = "all"),
+  
+  # 3. 只有 independent = "none" 时，space 才能设为 "free"
+  # 注意：space 必须对应 scales 的 free 维度
+  tibble(scales = "free_x", space = "free_x", independent = "none"),
+  tibble(scales = "free_y", space = "free_y", independent = "none"),
+  tibble(scales = "free",   space = "free",   independent = "none")
+)
+
+# 执行循环
+pwalk(params_grid2, \(scales, space, independent){
+  
+  p <- base_plot +
+    facet_grid2(
+      Metric ~ AGEGR,
+      scales = scales,
+      space = space,
+      independent = independent
+    ) +
+    ggtitle(paste0(
+      "grid2 | s=", scales,
+      " | sp=", space, 
+      " | ind=", independent
+    ))
+  
+  print(p)
+})
+```

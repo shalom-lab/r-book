@@ -1,0 +1,19 @@
+{
+  "hash": "1def4a4dbd6922d4f890fbb64f898022",
+  "result": {
+    "engine": "knitr",
+    "markdown": "\n::: {.cell context='setup'}\n\n```{.r .cell-code}\nlibrary(tidyverse)\ntheme_set(theme_bw())\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndata<-data.frame(x=rep(c('A','B','C'),time=2),y=c('Female','Male'),value=round(runif(6,20,100)))\n\ndata\n```\n\n::: {.cell-output-display}\n`````{=html}\n<div data-pagedtable=\"false\">\n  <script data-pagedtable-source type=\"application/json\">\n{\"columns\":[{\"label\":[\"x\"],\"name\":[1],\"type\":[\"chr\"],\"align\":[\"left\"]},{\"label\":[\"y\"],\"name\":[2],\"type\":[\"chr\"],\"align\":[\"left\"]},{\"label\":[\"value\"],\"name\":[3],\"type\":[\"dbl\"],\"align\":[\"right\"]}],\"data\":[{\"1\":\"A\",\"2\":\"Female\",\"3\":\"72\"},{\"1\":\"B\",\"2\":\"Male\",\"3\":\"62\"},{\"1\":\"C\",\"2\":\"Female\",\"3\":\"93\"},{\"1\":\"A\",\"2\":\"Male\",\"3\":\"93\"},{\"1\":\"B\",\"2\":\"Female\",\"3\":\"22\"},{\"1\":\"C\",\"2\":\"Male\",\"3\":\"79\"}],\"options\":{\"columns\":{\"min\":{},\"max\":[10]},\"rows\":{\"min\":[10],\"max\":[10]},\"pages\":{}}}\n  </script>\n</div>\n`````\n:::\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(data,aes(x,value,fill=y))+\n  geom_col()\n```\n\n::: {.cell-output-display}\n![](bar_plot_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n\n## 主题\n\n### 坐标轴标题-axis.title\n\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot(mtcars,aes(cyl,mpg))+\n  labs(x='hjust=0.2,vjust = -3',y='hjust=0.8,vjust = 3')+\n  theme(axis.title = element_text(colour = 'red',face='bold'),\n        axis.title.x = element_text(hjust=0.2,vjust = -3),\n        axis.title.y = element_text(hjust=0.8,vjust = 3)\n        )\n```\n\n::: {.cell-output-display}\n![](bar_plot_files/figure-html/unnamed-chunk-4-1.png){width=672}\n:::\n:::\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

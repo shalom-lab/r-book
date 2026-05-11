@@ -6,6 +6,8 @@ chapters:
     href: bar_plot.qmd
   - text: ggplot
     href: ggplot.qmd
+  - text: 分面
+    href: ggplot_facet.qmd
 editor: visual
 
 
