@@ -4,7 +4,7 @@ project:
 book:
   title: R语言入门指南
   author: Shalom
-  date: 2026/5/11
+  date: "2026/05/11"
   repo-url: https://github.com/shalom-lab/r-book/
   repo-actions:
   - edit
@@ -12,7 +12,7 @@ book:
   cover-image: images/cover.png
   page-footer:
     center:
-    - "Copyright 2024, R语言与可视化"
+    - text: "Copyright 2024, R语言与可视化"
     - icon: rss
       href: https://blog.rlearner.com/
     - icon: github
