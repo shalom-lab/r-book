@@ -35,6 +35,8 @@ df <- bind_rows(
 df
 ```
 
+## 基础
+
 ```{r}
 base_plot <- ggplot(df, aes(Country, est)) +
   geom_pointrange(aes(ymin = lci, ymax = uci)) +
@@ -65,6 +67,8 @@ p_grid
 p_grid2
 ```
 
+## `facet_grid`
+
 ```{r}
 params <- crossing(
   scales = c("fixed", "free_x", "free_y", "free"),
@@ -84,6 +88,8 @@ pwalk(params, \(scales, space){
 })
 ```
 
+## `facet_wrap`
+
 ```{r}
 params_wrap <- crossing(
   scales = c("fixed", "free_x", "free_y", "free"),
@@ -102,6 +108,8 @@ pwalk(params_wrap, \(scales, ncol){
 
 })
 ```
+
+## `facet_grid2`
 
 ```{r}
 params_grid2 <- bind_rows(

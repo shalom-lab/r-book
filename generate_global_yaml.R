@@ -36,7 +36,7 @@ lines <- readLines("_quarto.yml", encoding = "UTF-8")
 
 # 修正后的正则：
 # 匹配 date: 开头，后面跟着非引号的内容，把它包起来
-lines <- gsub("^date: ([^\".]*)", "date: \"\\1\"", lines)
+lines <- gsub("^(\\s*date:)\\s*(.*)$", "\\1 \"\\2\"", lines)
 
 # 匹配 text: Copyright 开头的内容，把它包起来
 lines <- gsub("text: (Copyright[^\"]*)", "text: \"\\1\"", lines)
