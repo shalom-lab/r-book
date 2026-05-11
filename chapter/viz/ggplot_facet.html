@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>21&nbsp; 执行循环 – R语言入门指南</title>
+<title>21&nbsp; 基础 – R语言入门指南</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -343,15 +343,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">目录</h2>
+   
+  <ul>
+  <li><a href="#facet_grid" id="toc-facet_grid" class="nav-link active" data-scroll-target="#facet_grid"><span class="header-section-number">21.1</span> <code>facet_grid</code></a></li>
+  <li><a href="#facet_wrap" id="toc-facet_wrap" class="nav-link" data-scroll-target="#facet_wrap"><span class="header-section-number">21.2</span> <code>facet_wrap</code></a></li>
+  <li><a href="#facet_grid2" id="toc-facet_grid2" class="nav-link" data-scroll-target="#facet_grid2"><span class="header-section-number">21.3</span> <code>facet_grid2</code></a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/viz/ggplot_facet.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/viz/base_plot.html">数据可视化</a></li><li class="breadcrumb-item"><a href="../../chapter/viz/ggplot_facet.html"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">分面</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">执行循环</span></h1>
+<h1 class="title"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">基础</span></h1>
 </div>
 
 
@@ -403,7 +411,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div data-pagedtable="false">
   <script data-pagedtable-source="" type="application/json">
-{"columns":[{"label":["AGEGR"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Metric"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Country"],"name":[3],"type":["chr"],"align":["left"]},{"label":["est"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lci"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["uci"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"0-<6m","2":"Incidence","3":"C1","4":"112.967798","5":"101.2453080","6":"128.074861"},{"1":"0-<6m","2":"Incidence","3":"C2","4":"102.632049","5":"90.8334979","6":"121.918501"},{"1":"0-<6m","2":"Incidence","3":"C3","4":"85.170661","5":"68.6261947","6":"94.499649"},{"1":"0-<6m","2":"Mortality","3":"C1","4":"10.850098","5":"8.6953761","6":"12.509333"},{"1":"0-<6m","2":"Mortality","3":"C2","4":"12.065877","5":"10.4475854","6":"13.674858"},{"1":"0-<6m","2":"Mortality","3":"C3","4":"8.205526","5":"7.1738221","6":"9.550838"},{"1":"6-<12m","2":"Incidence","3":"C1","4":"65.601390","5":"53.7341750","6":"72.919479"},{"1":"6-<12m","2":"Incidence","3":"C2","4":"75.637696","5":"61.9787395","6":"88.659877"},{"1":"6-<12m","2":"Incidence","3":"C3","4":"30.276647","5":"24.8694536","6":"33.568832"},{"1":"6-<12m","2":"Incidence","3":"C4","4":"71.537036","5":"58.1485242","6":"82.743054"},{"1":"6-<12m","2":"Incidence","3":"C5","4":"46.036714","5":"38.8015318","6":"53.730281"},{"1":"6-<12m","2":"Incidence","3":"C6","4":"55.679382","5":"47.5981158","6":"65.479737"},{"1":"6-<12m","2":"Incidence","3":"C7","4":"43.373105","5":"37.2489611","6":"49.295847"},{"1":"6-<12m","2":"Mortality","3":"C1","4":"5.553832","5":"4.6654473","6":"6.268051"},{"1":"6-<12m","2":"Mortality","3":"C2","4":"8.919716","5":"7.3561905","6":"10.080514"},{"1":"6-<12m","2":"Mortality","3":"C3","4":"3.437702","5":"2.8388855","6":"3.985108"},{"1":"6-<12m","2":"Mortality","3":"C4","4":"9.580809","5":"7.9488968","6":"11.364917"},{"1":"6-<12m","2":"Mortality","3":"C5","4":"8.192290","5":"7.0492459","6":"9.637560"},{"1":"6-<12m","2":"Mortality","3":"C6","4":"8.132238","5":"6.5862437","6":"9.603239"},{"1":"6-<12m","2":"Mortality","3":"C7","4":"9.084449","5":"8.1454835","6":"10.260529"},{"1":"12-<24m","2":"Incidence","3":"C1","4":"12.695705","5":"10.6279169","6":"14.023691"},{"1":"12-<24m","2":"Incidence","3":"C2","4":"19.191194","5":"16.1070072","6":"22.269852"},{"1":"12-<24m","2":"Incidence","3":"C3","4":"28.484255","5":"24.0272777","6":"32.895396"},{"1":"12-<24m","2":"Incidence","3":"C4","4":"31.144026","5":"25.0443350","6":"34.312038"},{"1":"12-<24m","2":"Incidence","3":"C5","4":"24.385709","5":"20.7874247","6":"29.239339"},{"1":"12-<24m","2":"Incidence","3":"C6","4":"27.260880","5":"22.9769474","6":"30.843390"},{"1":"12-<24m","2":"Incidence","3":"C7","4":"38.180234","5":"32.2539671","6":"44.554071"},{"1":"12-<24m","2":"Incidence","3":"C8","4":"29.912496","5":"24.3218927","6":"35.445431"},{"1":"12-<24m","2":"Incidence","3":"C9","4":"21.396959","5":"17.4754904","6":"24.198085"},{"1":"12-<24m","2":"Incidence","3":"C10","4":"35.771388","5":"31.8294882","6":"41.071196"},{"1":"12-<24m","2":"Incidence","3":"C11","4":"12.854087","5":"10.7104137","6":"14.366695"},{"1":"12-<24m","2":"Incidence","3":"C12","4":"24.586652","5":"21.4177479","6":"28.436590"},{"1":"12-<24m","2":"Mortality","3":"C1","4":"1.784320","5":"1.5412225","6":"2.023718"},{"1":"12-<24m","2":"Mortality","3":"C2","4":"2.296014","5":"2.0296647","6":"2.653428"},{"1":"12-<24m","2":"Mortality","3":"C3","4":"4.668702","5":"4.0667452","6":"5.549655"},{"1":"12-<24m","2":"Mortality","3":"C4","4":"3.211289","5":"2.7115619","6":"3.803753"},{"1":"12-<24m","2":"Mortality","3":"C5","4":"2.438343","5":"1.9708024","6":"2.843944"},{"1":"12-<24m","2":"Mortality","3":"C6","4":"4.026375","5":"3.4149360","6":"4.571347"},{"1":"12-<24m","2":"Mortality","3":"C7","4":"4.266844","5":"3.5853917","6":"4.815467"},{"1":"12-<24m","2":"Mortality","3":"C8","4":"3.404645","5":"2.9816691","6":"3.996865"},{"1":"12-<24m","2":"Mortality","3":"C9","4":"1.325682","5":"1.0845120","6":"1.458686"},{"1":"12-<24m","2":"Mortality","3":"C10","4":"4.263922","5":"3.7343621","6":"4.899455"},{"1":"12-<24m","2":"Mortality","3":"C11","4":"2.757132","5":"2.2275465","6":"3.272685"},{"1":"12-<24m","2":"Mortality","3":"C12","4":"1.127354","5":"0.9482947","6":"1.333617"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["AGEGR"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Metric"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Country"],"name":[3],"type":["chr"],"align":["left"]},{"label":["est"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["lci"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["uci"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"0-<6m","2":"Incidence","3":"C1","4":"110.672282","5":"98.756321","6":"127.054805"},{"1":"0-<6m","2":"Incidence","3":"C2","4":"82.093529","5":"67.299470","6":"90.624125"},{"1":"0-<6m","2":"Incidence","3":"C3","4":"71.242655","5":"60.630034","6":"82.361227"},{"1":"0-<6m","2":"Mortality","3":"C1","4":"6.537709","5":"5.286362","6":"7.250681"},{"1":"0-<6m","2":"Mortality","3":"C2","4":"7.975255","5":"6.495221","6":"9.290650"},{"1":"0-<6m","2":"Mortality","3":"C3","4":"14.979923","5":"12.201642","6":"17.712381"},{"1":"6-<12m","2":"Incidence","3":"C1","4":"41.792216","5":"36.353390","6":"49.277171"},{"1":"6-<12m","2":"Incidence","3":"C2","4":"44.928694","5":"37.495586","6":"51.644246"},{"1":"6-<12m","2":"Incidence","3":"C3","4":"34.077110","5":"30.081271","6":"38.655443"},{"1":"6-<12m","2":"Incidence","3":"C4","4":"74.049983","5":"60.287348","6":"88.080919"},{"1":"6-<12m","2":"Incidence","3":"C5","4":"68.480847","5":"58.394493","6":"81.183929"},{"1":"6-<12m","2":"Incidence","3":"C6","4":"66.290218","5":"53.756506","6":"76.259044"},{"1":"6-<12m","2":"Incidence","3":"C7","4":"70.638296","5":"59.501672","6":"83.361358"},{"1":"6-<12m","2":"Mortality","3":"C1","4":"8.422757","5":"7.306514","6":"9.388750"},{"1":"6-<12m","2":"Mortality","3":"C2","4":"6.089047","5":"5.029858","6":"6.786453"},{"1":"6-<12m","2":"Mortality","3":"C3","4":"5.065343","5":"4.395881","6":"5.775690"},{"1":"6-<12m","2":"Mortality","3":"C4","4":"4.355077","5":"3.901184","6":"5.165142"},{"1":"6-<12m","2":"Mortality","3":"C5","4":"8.302109","5":"7.425864","6":"9.934280"},{"1":"6-<12m","2":"Mortality","3":"C6","4":"3.732598","5":"3.059686","6":"4.155028"},{"1":"6-<12m","2":"Mortality","3":"C7","4":"6.183052","5":"5.110332","6":"7.058999"},{"1":"12-<24m","2":"Incidence","3":"C1","4":"25.157135","5":"21.490104","6":"28.365581"},{"1":"12-<24m","2":"Incidence","3":"C2","4":"15.910311","5":"13.401656","6":"19.088340"},{"1":"12-<24m","2":"Incidence","3":"C3","4":"11.755868","5":"10.200194","6":"13.242194"},{"1":"12-<24m","2":"Incidence","3":"C4","4":"11.293047","5":"9.402426","6":"12.802276"},{"1":"12-<24m","2":"Incidence","3":"C5","4":"29.278972","5":"24.792532","6":"34.329811"},{"1":"12-<24m","2":"Incidence","3":"C6","4":"24.985053","5":"20.530576","6":"28.564232"},{"1":"12-<24m","2":"Incidence","3":"C7","4":"22.087060","5":"18.628647","6":"25.992458"},{"1":"12-<24m","2":"Incidence","3":"C8","4":"29.164567","5":"24.066002","6":"33.541957"},{"1":"12-<24m","2":"Incidence","3":"C9","4":"38.274967","5":"31.356874","6":"44.783335"},{"1":"12-<24m","2":"Incidence","3":"C10","4":"22.113603","5":"19.117788","6":"26.513657"},{"1":"12-<24m","2":"Incidence","3":"C11","4":"20.335558","5":"17.608964","6":"23.428768"},{"1":"12-<24m","2":"Incidence","3":"C12","4":"38.230063","5":"30.859195","6":"44.150448"},{"1":"12-<24m","2":"Mortality","3":"C1","4":"2.323398","5":"1.992333","6":"2.575673"},{"1":"12-<24m","2":"Mortality","3":"C2","4":"1.983569","5":"1.750829","6":"2.379149"},{"1":"12-<24m","2":"Mortality","3":"C3","4":"2.999879","5":"2.588289","6":"3.539137"},{"1":"12-<24m","2":"Mortality","3":"C4","4":"1.612949","5":"1.369877","6":"1.906609"},{"1":"12-<24m","2":"Mortality","3":"C5","4":"4.094239","5":"3.380588","6":"4.856256"},{"1":"12-<24m","2":"Mortality","3":"C6","4":"4.327275","5":"3.648611","6":"4.801615"},{"1":"12-<24m","2":"Mortality","3":"C7","4":"3.967076","5":"3.207843","6":"4.525321"},{"1":"12-<24m","2":"Mortality","3":"C8","4":"1.956196","5":"1.679932","6":"2.219631"},{"1":"12-<24m","2":"Mortality","3":"C9","4":"3.647586","5":"3.002563","6":"4.066873"},{"1":"12-<24m","2":"Mortality","3":"C10","4":"2.092479","5":"1.734305","6":"2.365174"},{"1":"12-<24m","2":"Mortality","3":"C11","4":"1.719696","5":"1.411101","6":"2.032157"},{"1":"12-<24m","2":"Mortality","3":"C12","4":"4.783302","5":"4.058388","6":"5.699255"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -457,6 +465,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<section id="facet_grid" class="level2" data-number="21.1">
+<h2 data-number="21.1" class="anchored" data-anchor-id="facet_grid"><span class="header-section-number">21.1</span> <code>facet_grid</code></h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>params <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">scales =</span> <span class="fu">c</span>(<span class="st">"fixed"</span>, <span class="st">"free_x"</span>, <span class="st">"free_y"</span>, <span class="st">"free"</span>),</span>
@@ -531,6 +541,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="facet_wrap" class="level2" data-number="21.2">
+<h2 data-number="21.2" class="anchored" data-anchor-id="facet_wrap"><span class="header-section-number">21.2</span> <code>facet_wrap</code></h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>params_wrap <span class="ot">&lt;-</span> <span class="fu">crossing</span>(</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">scales =</span> <span class="fu">c</span>(<span class="st">"fixed"</span>, <span class="st">"free_x"</span>, <span class="st">"free_y"</span>, <span class="st">"free"</span>),</span>
@@ -605,6 +618,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+</section>
+<section id="facet_grid2" class="level2" data-number="21.3">
+<h2 data-number="21.3" class="anchored" data-anchor-id="facet_grid2"><span class="header-section-number">21.3</span> <code>facet_grid2</code></h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>params_grid2 <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1. 基础组合：scales 为 free 时，independent 可以匹配</span></span>
@@ -621,23 +637,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(<span class="at">scales =</span> <span class="st">"free"</span>,   <span class="at">space =</span> <span class="st">"free"</span>,   <span class="at">independent =</span> <span class="st">"none"</span>)</span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">pwalk</span>(params_grid2, \(scales, space, independent){</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> base_plot <span class="sc">+</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid2</span>(</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>      Metric <span class="sc">~</span> AGEGR,</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">scales =</span> scales,</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">space =</span> space,</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">independent =</span> independent</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>      <span class="st">"grid2 | s="</span>, scales,</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>      <span class="st">" | sp="</span>, space, </span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>      <span class="st">" | ind="</span>, independent</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    ))</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(p)</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 执行循环</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">pwalk</span>(params_grid2, \(scales, space, independent){</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> base_plot <span class="sc">+</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid2</span>(</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>      Metric <span class="sc">~</span> AGEGR,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">scales =</span> scales,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">space =</span> space,</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">independent =</span> independent</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggtitle</span>(<span class="fu">paste0</span>(</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>      <span class="st">"grid2 | s="</span>, scales,</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>      <span class="st">" | sp="</span>, space, </span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>      <span class="st">" | ind="</span>, independent</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(p)</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -683,6 +700,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1121,7 +1139,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
   </li>  
 </ul>
-    <div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/viz/ggplot_facet.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/viz/ggplot_facet.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

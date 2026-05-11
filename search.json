@@ -1021,9 +1021,31 @@
   {
     "objectID": "chapter/viz/ggplot_facet.html",
     "href": "chapter/viz/ggplot_facet.html",
-    "title": "21  执行循环",
+    "title": "21  基础",
     "section": "",
-    "text": "library(tidyverse)\nlibrary(ggh4x)\nlibrary(patchwork)\n\n\nmake_block &lt;- function(age, n, inc_range, mort_range){\n\n  tibble(\n    AGEGR = age,\n    Metric = rep(c(\"Incidence\", \"Mortality\"), each = n),\n    Country = rep(paste0(\"C\", 1:n), times = 2),\n    est = c(\n      runif(n, inc_range[1], inc_range[2]),\n      runif(n, mort_range[1], mort_range[2])\n    )\n  )\n}\n\ndf &lt;- bind_rows(\n  make_block(\"0-&lt;6m\",   3,  c(60,120), c(5,15)),\n  make_block(\"6-&lt;12m\",  7,  c(30,80),  c(3,10)),\n  make_block(\"12-&lt;24m\", 12, c(10,40),  c(1,5))\n) %&gt;%\n  group_by(AGEGR, Metric) %&gt;%\n  mutate(\n    lci = est * runif(n(), 0.8, 0.9),\n    uci = est * runif(n(), 1.1, 1.2)\n  ) %&gt;%\n  ungroup()\n\ndf\n\n\n  \n\n\n\n\nbase_plot &lt;- ggplot(df, aes(Country, est)) +\n  geom_pointrange(aes(ymin = lci, ymax = uci)) +\n  theme_bw() +\n  labs(x = NULL, y = \"Estimate\") +\n  theme(axis.text.x = element_text(angle = 45, hjust = 1))\n\np_wrap &lt;- base_plot +\n  facet_wrap(~ AGEGR + Metric, scales = \"free_y\", ncol = 2) +\n  ggtitle(\"facet_wrap: flattened display\")\n\np_grid &lt;- base_plot +\n  facet_grid(Metric ~ AGEGR, scales = \"free_x\", space = \"free\") +\n  ggtitle(\"facet_grid: structured layout\")\n\np_grid2 &lt;- base_plot +\n  facet_grid2(\n    Metric ~ AGEGR,\n    scales = \"free\",\n    independent = \"y\"\n  ) +\n  ggtitle(\"facet_grid2: flexible axes per panel\")\n\n\np_wrap\n\n\n\n\n\n\n\np_grid\n\n\n\n\n\n\n\np_grid2\n\n\n\n\n\n\n\n\n\nparams &lt;- crossing(\n  scales = c(\"fixed\", \"free_x\", \"free_y\", \"free\"),\n  space  = c(\"fixed\", \"free\")\n)\n\npwalk(params, \\(scales, space){\n\n  print(\n    base_plot +\n      facet_grid(Metric ~ AGEGR,\n                 scales = scales,\n                 space = space) +\n      ggtitle(paste0(\"scales=\", scales, \" | space=\", space))\n  )\n\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nparams_wrap &lt;- crossing(\n  scales = c(\"fixed\", \"free_x\", \"free_y\", \"free\"),\n  ncol   = c(2, 3)\n)\n\npwalk(params_wrap, \\(scales, ncol){\n\n  print(\n    base_plot +\n      facet_wrap(~ Metric + AGEGR,\n                 scales = scales,\n                 ncol = ncol) +\n      ggtitle(paste0(\"[wrap] scales=\", scales, \" | ncol=\", ncol))\n  )\n\n})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nparams_grid2 &lt;- bind_rows(\n  # 1. 基础组合：scales 为 free 时，independent 可以匹配\n  tibble(scales = \"free_x\", space = \"fixed\", independent = \"x\"),\n  tibble(scales = \"free_y\", space = \"fixed\", independent = \"y\"),\n  \n  # 2. 只有 space = \"fixed\" 时，independent 才能设为 \"all\"\n  tibble(scales = \"free\", space = \"fixed\", independent = \"all\"),\n  \n  # 3. 只有 independent = \"none\" 时，space 才能设为 \"free\"\n  # 注意：space 必须对应 scales 的 free 维度\n  tibble(scales = \"free_x\", space = \"free_x\", independent = \"none\"),\n  tibble(scales = \"free_y\", space = \"free_y\", independent = \"none\"),\n  tibble(scales = \"free\",   space = \"free\",   independent = \"none\")\n)\n\npwalk(params_grid2, \\(scales, space, independent){\n  \n  p &lt;- base_plot +\n    facet_grid2(\n      Metric ~ AGEGR,\n      scales = scales,\n      space = space,\n      independent = independent\n    ) +\n    ggtitle(paste0(\n      \"grid2 | s=\", scales,\n      \" | sp=\", space, \n      \" | ind=\", independent\n    ))\n  \n  print(p)\n})",
+    "text": "21.1 facet_grid\nparams &lt;- crossing(\n  scales = c(\"fixed\", \"free_x\", \"free_y\", \"free\"),\n  space  = c(\"fixed\", \"free\")\n)\n\npwalk(params, \\(scales, space){\n\n  print(\n    base_plot +\n      facet_grid(Metric ~ AGEGR,\n                 scales = scales,\n                 space = space) +\n      ggtitle(paste0(\"scales=\", scales, \" | space=\", space))\n  )\n\n})",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>分面</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/ggplot_facet.html#facet_wrap",
+    "href": "chapter/viz/ggplot_facet.html#facet_wrap",
+    "title": "21  基础",
+    "section": "21.2 facet_wrap",
+    "text": "21.2 facet_wrap\n\nparams_wrap &lt;- crossing(\n  scales = c(\"fixed\", \"free_x\", \"free_y\", \"free\"),\n  ncol   = c(2, 3)\n)\n\npwalk(params_wrap, \\(scales, ncol){\n\n  print(\n    base_plot +\n      facet_wrap(~ Metric + AGEGR,\n                 scales = scales,\n                 ncol = ncol) +\n      ggtitle(paste0(\"[wrap] scales=\", scales, \" | ncol=\", ncol))\n  )\n\n})",
+    "crumbs": [
+      "数据可视化",
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>分面</span>"
+    ]
+  },
+  {
+    "objectID": "chapter/viz/ggplot_facet.html#facet_grid2",
+    "href": "chapter/viz/ggplot_facet.html#facet_grid2",
+    "title": "21  基础",
+    "section": "21.3 facet_grid2",
+    "text": "21.3 facet_grid2\n\nparams_grid2 &lt;- bind_rows(\n  # 1. 基础组合：scales 为 free 时，independent 可以匹配\n  tibble(scales = \"free_x\", space = \"fixed\", independent = \"x\"),\n  tibble(scales = \"free_y\", space = \"fixed\", independent = \"y\"),\n  \n  # 2. 只有 space = \"fixed\" 时，independent 才能设为 \"all\"\n  tibble(scales = \"free\", space = \"fixed\", independent = \"all\"),\n  \n  # 3. 只有 independent = \"none\" 时，space 才能设为 \"free\"\n  # 注意：space 必须对应 scales 的 free 维度\n  tibble(scales = \"free_x\", space = \"free_x\", independent = \"none\"),\n  tibble(scales = \"free_y\", space = \"free_y\", independent = \"none\"),\n  tibble(scales = \"free\",   space = \"free\",   independent = \"none\")\n)\n\n# 执行循环\npwalk(params_grid2, \\(scales, space, independent){\n  \n  p &lt;- base_plot +\n    facet_grid2(\n      Metric ~ AGEGR,\n      scales = scales,\n      space = space,\n      independent = independent\n    ) +\n    ggtitle(paste0(\n      \"grid2 | s=\", scales,\n      \" | sp=\", space, \n      \" | ind=\", independent\n    ))\n  \n  print(p)\n})",
     "crumbs": [
       "数据可视化",
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>分面</span>"
