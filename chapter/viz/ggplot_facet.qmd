@@ -7,8 +7,6 @@ library(patchwork)
 ```
 
 ```{r}
-set.seed(123)
-
 make_block <- function(age, n, inc_range, mort_range){
 
   tibble(
