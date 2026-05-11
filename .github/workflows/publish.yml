@@ -17,8 +17,6 @@ jobs:
 
       - name: 设置 Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: latest
 
       # 这里不需要 setup-r，因为我们利用 _freeze 结果
       - name: 渲染全书
