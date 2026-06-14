@@ -44,3 +44,5 @@ lines <- gsub("text: (Copyright[^\"]*)", "text: \"\\1\"", lines)
 # 4. 写回
 writeLines(lines, "_quarto.yml", useBytes = TRUE)
 
+system("quarto render")
+

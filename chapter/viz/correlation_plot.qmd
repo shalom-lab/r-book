@@ -6,6 +6,7 @@
 library(tidyverse)
 library(corrplot)
 library(Hmisc)
+library(ggcorrplot)
 ```
 
 ```{r}
@@ -37,4 +38,15 @@ corrplot(
   addgrid.col = "gray95",    # 超淡色网格线规整视效
   cl.pos = "r"               # 颜色图例(Color Legend)靠右放置
 )
+```
+
+```{r}
+cor_mat <- cor(mtcars, use = "complete.obs")
+
+ggcorrplot(cor_mat, 
+           method = "circle", 
+           type = "lower",
+           lab = TRUE, lab_size = 3,
+           colors = c("blue", "white", "red"),
+           title = "Correlation matrix heatmap")
 ```
