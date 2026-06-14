@@ -1,0 +1,40 @@
+# 相关矩阵
+
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+library(corrplot)
+library(Hmisc)
+```
+
+```{r}
+# 计算默认相关系数矩阵
+cor_matrix_raw <- cor(mtcars)
+
+# 默认可视化：圆形大小和颜色深浅双重编码
+corrplot(cor_matrix_raw)
+```
+
+```{r}
+# 计算相关系数 r 和 显著性 p 值矩阵
+cor_res <- rcorr(as.matrix(mtcars))
+r_matrix <- cor_res$r
+p_matrix <- cor_res$P
+
+# 动态过滤：将 p 值大于 0.05 的单元格相关系数置为 NA
+cor_significant <- r_matrix
+cor_significant[p_matrix > 0.05] <- NA
+
+# 绘制高级改进图
+corrplot(
+  cor_significant,
+  method = "ellipse",        # 使用高级椭圆编码
+  na.label = " ",            # 将不显著的 NA 单元格留白
+  tl.pos = "d",              # 标签(Text Label)位置摆放在对角线(Diagonal)
+  tl.col = "black",          # 标签文本颜色设为黑色
+  tl.srt = 0,                # 标签旋转角度
+  addgrid.col = "gray95",    # 超淡色网格线规整视效
+  cl.pos = "r"               # 颜色图例(Color Legend)靠右放置
+)
+```

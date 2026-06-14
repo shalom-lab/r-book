@@ -4,7 +4,7 @@ project:
 book:
   title: R语言入门指南
   author: Shalom
-  date: "2026/05/11"
+  date: "2026/06/14"
   repo-url: https://github.com/shalom-lab/r-book/
   repo-actions:
   - edit
@@ -67,6 +67,8 @@ book:
       href: chapter/viz/ggplot.qmd
     - text: 分面
       href: chapter/viz/ggplot_facet.qmd
+    - text: 相关矩阵
+      href: chapter/viz/correlation_plot.qmd
   - part: 统计
     chapters:
     - text: 基础

@@ -8,6 +8,8 @@ chapters:
     href: ggplot.qmd
   - text: 分面
     href: ggplot_facet.qmd
+  - text: 相关矩阵
+    href: correlation_plot.qmd
 editor: visual
 
 

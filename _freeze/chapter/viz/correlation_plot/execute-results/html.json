@@ -1,0 +1,21 @@
+{
+  "hash": "435cae0117cd81675099ac455265efbb",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# 相关矩阵\n\n\n::: {.cell context='setup'}\n\n```{.r .cell-code}\nlibrary(tidyverse)\nlibrary(corrplot)\nlibrary(Hmisc)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# 计算默认相关系数矩阵\ncor_matrix_raw <- cor(mtcars)\n\n# 默认可视化：圆形大小和颜色深浅双重编码\ncorrplot(cor_matrix_raw)\n```\n\n::: {.cell-output-display}\n![](correlation_plot_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# 计算相关系数 r 和 显著性 p 值矩阵\ncor_res <- rcorr(as.matrix(mtcars))\nr_matrix <- cor_res$r\np_matrix <- cor_res$P\n\n# 动态过滤：将 p 值大于 0.05 的单元格相关系数置为 NA\ncor_significant <- r_matrix\ncor_significant[p_matrix > 0.05] <- NA\n\n# 绘制高级改进图\ncorrplot(\n  cor_significant,\n  method = \"ellipse\",        # 使用高级椭圆编码\n  na.label = \" \",            # 将不显著的 NA 单元格留白\n  tl.pos = \"d\",              # 标签(Text Label)位置摆放在对角线(Diagonal)\n  tl.col = \"black\",          # 标签文本颜色设为黑色\n  tl.srt = 0,                # 标签旋转角度\n  addgrid.col = \"gray95\",    # 超淡色网格线规整视效\n  cl.pos = \"r\"               # 颜色图例(Color Legend)靠右放置\n)\n```\n\n::: {.cell-output-display}\n![](correlation_plot_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n\n",
+    "supporting": [
+      "correlation_plot_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
