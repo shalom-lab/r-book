@@ -1,0 +1,24 @@
+# 散点图
+
+```{r}
+#| context: setup
+#| warning: false
+library(tidyverse)
+library(ggpubr)
+library(ggstatsplot)
+```
+
+```{r}
+grouped_ggscatterstats(
+  data = mtcars,
+  grouping.var = vs,
+  x = mpg,
+  y = disp,
+  type = "non-parametric",        # 使用Pearson相关系数
+  marginal = TRUE,            # 显示边缘分布
+  digits = 1,
+  bf.message=FALSE,
+  xsidehistogram.args = list(fill = "#009E73",color='black',linewidth=.5),
+  ysidehistogram.args = list(fill = "#D55E00",color='black')
+) & theme(ggside.panel.scale = .3)
+```

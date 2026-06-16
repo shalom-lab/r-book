@@ -10,6 +10,10 @@ chapters:
     href: ggplot_facet.qmd
   - text: 相关矩阵
     href: correlation_plot.qmd
+  - text: upset Plot
+    href: upset_plot.qmd
+  - text: 散点图
+    href: scatter_plot.qmd
 editor: visual
 
 

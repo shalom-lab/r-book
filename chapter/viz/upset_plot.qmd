@@ -1,0 +1,82 @@
+# Upset Plot
+
+```{r}
+#| context: setup
+#| warning: false
+library(ggplot2)
+library(tidyr)
+library(patchwork)
+library(scales)
+library(dplyr)
+```
+
+```{r}
+
+
+# 1. 模拟数据准备
+df_models <- data.frame(
+  var1 = c(TRUE,  FALSE, FALSE, TRUE,  TRUE,  FALSE, TRUE),
+  var2 = c(FALSE, TRUE,  FALSE, TRUE,  FALSE, TRUE,  TRUE),
+  var3 = c(FALSE, FALSE, TRUE,  FALSE, TRUE,  TRUE,  TRUE),
+  Metric = c(0.125, 0.182, 0.085, 0.254, 0.312, 0.221, 0.458) # 小数格式的指标
+)
+
+# 按指标从大到小排序，并创建用于对齐的 model_id
+df_models <- df_models %>% 
+  arrange(desc(Metric)) %>% 
+  mutate(model_id = factor(row_number(), levels = row_number()))
+
+# 转换成长数据供底部点阵图使用
+df_long <- df_models %>% 
+  pivot_longer(cols = c(var1, var2, var3), names_to = "Variable", values_to = "Selected") %>% 
+  mutate(Variable = factor(Variable, levels = c("var3", "var2", "var1"))) # 控制Y轴变量顺序
+
+# ==========================================
+# 📊 组件一：顶部 Metric 柱状图（geom_col + 百分比）
+# ==========================================
+p_top <- ggplot(df_models, aes(x = model_id, y = Metric)) +
+  geom_col(fill = "#2b5c8f", width = 0.55, alpha = 0.9) +
+  # 柱子上方显示精确的百分比标签
+  geom_text(aes(label = percent(Metric, accuracy = 0.1)), vjust = -0.5, size = 3.8, fontface = "bold") +
+  # Y轴使用百分比格式化
+  scale_y_continuous(labels = percent_format(accuracy = 1), expand = expansion(mult = c(0, 0.15))) +
+  labs(title = "不同变量组合模型的性能评估", x = "", y = "性能提升 (%)") +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_blank(),       # 隐藏横轴文字，交给底部点阵图
+    axis.ticks.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.title = element_text(face = "bold", hjust = 0.5, size = 14)
+  )
+
+# ==========================================
+# 🔴 组件二：底部交集点阵图（标准 UpSet 样式）
+# ==========================================
+p_bottom <- ggplot(df_long, aes(x = model_id, y = Variable)) +
+  # 背景灰色横向轨道线
+  geom_line(aes(group = Variable), color = "#f2f2f2", linewidth = 3) +
+  # 未选中的浅灰色点
+  geom_point(data = filter(df_long, !Selected), color = "#e0e0e0", size = 4.5) +
+  # 连线：把同一个模型中选中的变量连起来
+  geom_line(data = filter(df_long, Selected), aes(group = model_id), color = "#2c3e50", linewidth = 1.2) +
+  # 已选中的深色点
+  geom_point(data = filter(df_long, Selected), color = "#2c3e50", size = 5.5) +
+  labs(x = "模型组合 (已按性能从高到低排序)", y = "输入变量") +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.x = element_text(face = "bold"), # 显示模型组合的序号
+    axis.text.y = element_text(face = "bold", size = 12)
+  )
+
+# ==========================================
+# 📐 完美上下垂直拼接并对齐
+# ==========================================
+# 使用 patchwork 的 / 运算符直接上下拼接，指定高度比例为 6:4
+p_final <- p_top / p_bottom + plot_layout(heights = c(1.5, 1))
+
+# 渲染图片
+print(p_final)
+```

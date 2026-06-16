@@ -1,0 +1,21 @@
+{
+  "hash": "518a5dabd68ef39fa66e16c6e555b02c",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Upset Plot\n\n\n::: {.cell context='setup'}\n\n```{.r .cell-code}\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(patchwork)\nlibrary(scales)\nlibrary(dplyr)\n```\n:::\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# 1. 模拟数据准备\ndf_models <- data.frame(\n  var1 = c(TRUE,  FALSE, FALSE, TRUE,  TRUE,  FALSE, TRUE),\n  var2 = c(FALSE, TRUE,  FALSE, TRUE,  FALSE, TRUE,  TRUE),\n  var3 = c(FALSE, FALSE, TRUE,  FALSE, TRUE,  TRUE,  TRUE),\n  Metric = c(0.125, 0.182, 0.085, 0.254, 0.312, 0.221, 0.458) # 小数格式的指标\n)\n\n# 按指标从大到小排序，并创建用于对齐的 model_id\ndf_models <- df_models %>% \n  arrange(desc(Metric)) %>% \n  mutate(model_id = factor(row_number(), levels = row_number()))\n\n# 转换成长数据供底部点阵图使用\ndf_long <- df_models %>% \n  pivot_longer(cols = c(var1, var2, var3), names_to = \"Variable\", values_to = \"Selected\") %>% \n  mutate(Variable = factor(Variable, levels = c(\"var3\", \"var2\", \"var1\"))) # 控制Y轴变量顺序\n\n# ==========================================\n# 📊 组件一：顶部 Metric 柱状图（geom_col + 百分比）\n# ==========================================\np_top <- ggplot(df_models, aes(x = model_id, y = Metric)) +\n  geom_col(fill = \"#2b5c8f\", width = 0.55, alpha = 0.9) +\n  # 柱子上方显示精确的百分比标签\n  geom_text(aes(label = percent(Metric, accuracy = 0.1)), vjust = -0.5, size = 3.8, fontface = \"bold\") +\n  # Y轴使用百分比格式化\n  scale_y_continuous(labels = percent_format(accuracy = 1), expand = expansion(mult = c(0, 0.15))) +\n  labs(title = \"不同变量组合模型的性能评估\", x = \"\", y = \"性能提升 (%)\") +\n  theme_minimal(base_size = 12) +\n  theme(\n    axis.text.x = element_blank(),       # 隐藏横轴文字，交给底部点阵图\n    axis.ticks.x = element_blank(),\n    panel.grid.major.x = element_blank(),\n    panel.grid.minor = element_blank(),\n    plot.title = element_text(face = \"bold\", hjust = 0.5, size = 14)\n  )\n\n# ==========================================\n# 🔴 组件二：底部交集点阵图（标准 UpSet 样式）\n# ==========================================\np_bottom <- ggplot(df_long, aes(x = model_id, y = Variable)) +\n  # 背景灰色横向轨道线\n  geom_line(aes(group = Variable), color = \"#f2f2f2\", linewidth = 3) +\n  # 未选中的浅灰色点\n  geom_point(data = filter(df_long, !Selected), color = \"#e0e0e0\", size = 4.5) +\n  # 连线：把同一个模型中选中的变量连起来\n  geom_line(data = filter(df_long, Selected), aes(group = model_id), color = \"#2c3e50\", linewidth = 1.2) +\n  # 已选中的深色点\n  geom_point(data = filter(df_long, Selected), color = \"#2c3e50\", size = 5.5) +\n  labs(x = \"模型组合 (已按性能从高到低排序)\", y = \"输入变量\") +\n  theme_minimal(base_size = 12) +\n  theme(\n    panel.grid.major = element_blank(),\n    panel.grid.minor = element_blank(),\n    axis.text.x = element_text(face = \"bold\"), # 显示模型组合的序号\n    axis.text.y = element_text(face = \"bold\", size = 12)\n  )\n\n# ==========================================\n# 📐 完美上下垂直拼接并对齐\n# ==========================================\n# 使用 patchwork 的 / 运算符直接上下拼接，指定高度比例为 6:4\np_final <- p_top / p_bottom + plot_layout(heights = c(1.5, 1))\n\n# 渲染图片\nprint(p_final)\n```\n\n::: {.cell-output-display}\n![](upset_plot_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n",
+    "supporting": [
+      "upset_plot_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
