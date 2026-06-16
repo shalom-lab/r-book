@@ -6,6 +6,7 @@
 library(tidyverse)
 library(ggpubr)
 library(ggstatsplot)
+library(ggExtra)
 ```
 
 ```{r}
@@ -21,4 +22,17 @@ grouped_ggscatterstats(
   xsidehistogram.args = list(fill = "#009E73",color='black',linewidth=.5),
   ysidehistogram.args = list(fill = "#D55E00",color='black')
 ) & theme(ggside.panel.scale = .3)
+```
+
+```{r}
+p <- ggplot(mtcars, aes(x = mpg, y = disp)) +
+  geom_point(alpha = 0.5, size = 2) +
+  geom_smooth(method = "lm", se = TRUE, color = "blue") +
+  stat_cor(method = "pearson",  # 自动添加相关系数
+           label.x.npc = "left", 
+           label.y.npc = "top") +
+  theme_minimal()
+
+# 添加边缘直方图
+ggMarginal(p, type = "histogram", fill = "salmon", bins = 30)
 ```

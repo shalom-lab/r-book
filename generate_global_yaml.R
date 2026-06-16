@@ -46,6 +46,5 @@ writeLines(lines, "_quarto.yml", useBytes = TRUE)
 
 system("quarto render")
 system("git add .")
-system("git commit -m 'update'")
-system("git push")
+
 
