@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>23&nbsp; 基础知识 – R语言入门指南</title>
+<title>25&nbsp; 基础知识 – R语言入门指南</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -69,7 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../chapter/stats/distribution.html" rel="next">
-<link href="../../chapter/viz/correlation_plot.html" rel="prev">
+<link href="../../chapter/viz/scatter_plot.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/base.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">基础</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/base.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">基础</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -348,6 +348,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">相关矩阵</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/viz/upset_plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">upset Plot</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/viz/scatter_plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">散点图</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -362,13 +374,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapter/stats/base.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapter/stats/distribution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">分布</span></span></a>
   </div>
 </li>
       </ul>
@@ -383,27 +395,27 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#连续型随机变量" id="toc-连续型随机变量" class="nav-link active" data-scroll-target="#连续型随机变量"><span class="header-section-number">23.1</span> 连续型随机变量</a>
+  <li><a href="#连续型随机变量" id="toc-连续型随机变量" class="nav-link active" data-scroll-target="#连续型随机变量"><span class="header-section-number">25.1</span> 连续型随机变量</a>
   <ul class="collapse">
-  <li><a href="#密度函数分布函数" id="toc-密度函数分布函数" class="nav-link" data-scroll-target="#密度函数分布函数"><span class="header-section-number">23.1.1</span> 密度函数/分布函数</a></li>
-  <li><a href="#sigma西格玛准则" id="toc-sigma西格玛准则" class="nav-link" data-scroll-target="#sigma西格玛准则"><span class="header-section-number">23.1.2</span> 3<span class="math inline">\(\sigma\)</span>(西格玛)准则</a></li>
-  <li><a href="#z检验界值和参考值范围" id="toc-z检验界值和参考值范围" class="nav-link" data-scroll-target="#z检验界值和参考值范围"><span class="header-section-number">23.1.3</span> Z检验界值和参考值范围</a></li>
-  <li><a href="#频率分布直方图" id="toc-频率分布直方图" class="nav-link" data-scroll-target="#频率分布直方图"><span class="header-section-number">23.1.4</span> 频率分布直方图</a></li>
+  <li><a href="#密度函数分布函数" id="toc-密度函数分布函数" class="nav-link" data-scroll-target="#密度函数分布函数"><span class="header-section-number">25.1.1</span> 密度函数/分布函数</a></li>
+  <li><a href="#sigma西格玛准则" id="toc-sigma西格玛准则" class="nav-link" data-scroll-target="#sigma西格玛准则"><span class="header-section-number">25.1.2</span> 3<span class="math inline">\(\sigma\)</span>(西格玛)准则</a></li>
+  <li><a href="#z检验界值和参考值范围" id="toc-z检验界值和参考值范围" class="nav-link" data-scroll-target="#z检验界值和参考值范围"><span class="header-section-number">25.1.3</span> Z检验界值和参考值范围</a></li>
+  <li><a href="#频率分布直方图" id="toc-频率分布直方图" class="nav-link" data-scroll-target="#频率分布直方图"><span class="header-section-number">25.1.4</span> 频率分布直方图</a></li>
   </ul></li>
-  <li><a href="#离散型随机变量" id="toc-离散型随机变量" class="nav-link" data-scroll-target="#离散型随机变量"><span class="header-section-number">23.2</span> 离散型随机变量</a>
+  <li><a href="#离散型随机变量" id="toc-离散型随机变量" class="nav-link" data-scroll-target="#离散型随机变量"><span class="header-section-number">25.2</span> 离散型随机变量</a>
   <ul class="collapse">
-  <li><a href="#分布列概率质量函数pmf" id="toc-分布列概率质量函数pmf" class="nav-link" data-scroll-target="#分布列概率质量函数pmf"><span class="header-section-number">23.2.1</span> 分布列/概率质量函数(PMF)</a></li>
+  <li><a href="#分布列概率质量函数pmf" id="toc-分布列概率质量函数pmf" class="nav-link" data-scroll-target="#分布列概率质量函数pmf"><span class="header-section-number">25.2.1</span> 分布列/概率质量函数(PMF)</a></li>
   </ul></li>
-  <li><a href="#ci的含义" id="toc-ci的含义" class="nav-link" data-scroll-target="#ci的含义"><span class="header-section-number">23.3</span> 95%CI的含义</a></li>
+  <li><a href="#ci的含义" id="toc-ci的含义" class="nav-link" data-scroll-target="#ci的含义"><span class="header-section-number">25.3</span> 95%CI的含义</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/stats/base.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/base.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">基础</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/base.html"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">基础</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">基础知识</span></h1>
+<h1 class="title"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">基础知识</span></h1>
 </div>
 
 
@@ -426,8 +438,8 @@ window.Quarto = {
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggsci)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>()<span class="sc">+</span><span class="fu">theme</span>(<span class="at">text=</span><span class="fu">element_text</span>()))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="连续型随机变量" class="level2" data-number="23.1">
-<h2 data-number="23.1" class="anchored" data-anchor-id="连续型随机变量"><span class="header-section-number">23.1</span> 连续型随机变量</h2>
+<section id="连续型随机变量" class="level2" data-number="25.1">
+<h2 data-number="25.1" class="anchored" data-anchor-id="连续型随机变量"><span class="header-section-number">25.1</span> 连续型随机变量</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">x=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>,<span class="dv">5</span>,<span class="at">by=</span><span class="fl">0.01</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pdf=</span><span class="fu">dnorm</span>(x),<span class="at">cdf=</span><span class="fu">pnorm</span>(x),<span class="at">icdf=</span><span class="fu">qnorm</span>(cdf))</span>
@@ -441,8 +453,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="密度函数分布函数" class="level3" data-number="23.1.1">
-<h3 data-number="23.1.1" class="anchored" data-anchor-id="密度函数分布函数"><span class="header-section-number">23.1.1</span> 密度函数/分布函数</h3>
+<section id="密度函数分布函数" class="level3" data-number="25.1.1">
+<h3 data-number="25.1.1" class="anchored" data-anchor-id="密度函数分布函数"><span class="header-section-number">25.1.1</span> 密度函数/分布函数</h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">概率密度函数(PDF)</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">累计分布函数</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">累计分布函数的反函数</a></li></ul>
 <div class="tab-content">
@@ -491,8 +503,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="sigma西格玛准则" class="level3" data-number="23.1.2">
-<h3 data-number="23.1.2" class="anchored" data-anchor-id="sigma西格玛准则"><span class="header-section-number">23.1.2</span> 3<span class="math inline">\(\sigma\)</span>(西格玛)准则</h3>
+<section id="sigma西格玛准则" class="level3" data-number="25.1.2">
+<h3 data-number="25.1.2" class="anchored" data-anchor-id="sigma西格玛准则"><span class="header-section-number">25.1.2</span> 3<span class="math inline">\(\sigma\)</span>(西格玛)准则</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df,<span class="fu">aes</span>(x,pdf))<span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
@@ -528,8 +540,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="z检验界值和参考值范围" class="level3" data-number="23.1.3">
-<h3 data-number="23.1.3" class="anchored" data-anchor-id="z检验界值和参考值范围"><span class="header-section-number">23.1.3</span> Z检验界值和参考值范围</h3>
+<section id="z检验界值和参考值范围" class="level3" data-number="25.1.3">
+<h3 data-number="25.1.3" class="anchored" data-anchor-id="z检验界值和参考值范围"><span class="header-section-number">25.1.3</span> Z检验界值和参考值范围</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">qnorm</span>(<span class="fu">c</span>(<span class="fl">0.005</span>,<span class="fl">0.01</span>,<span class="fl">0.025</span>,<span class="fl">0.05</span>,<span class="fl">0.1</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -544,8 +556,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="频率分布直方图" class="level3" data-number="23.1.4">
-<h3 data-number="23.1.4" class="anchored" data-anchor-id="频率分布直方图"><span class="header-section-number">23.1.4</span> 频率分布直方图</h3>
+<section id="频率分布直方图" class="level3" data-number="25.1.4">
+<h3 data-number="25.1.4" class="anchored" data-anchor-id="频率分布直方图"><span class="header-section-number">25.1.4</span> 频率分布直方图</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">10000</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">qnorm</span>() <span class="sc">%&gt;%</span></span>
@@ -560,10 +572,10 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="离散型随机变量" class="level2" data-number="23.2">
-<h2 data-number="23.2" class="anchored" data-anchor-id="离散型随机变量"><span class="header-section-number">23.2</span> 离散型随机变量</h2>
-<section id="分布列概率质量函数pmf" class="level3" data-number="23.2.1">
-<h3 data-number="23.2.1" class="anchored" data-anchor-id="分布列概率质量函数pmf"><span class="header-section-number">23.2.1</span> 分布列/概率质量函数(PMF)</h3>
+<section id="离散型随机变量" class="level2" data-number="25.2">
+<h2 data-number="25.2" class="anchored" data-anchor-id="离散型随机变量"><span class="header-section-number">25.2</span> 离散型随机变量</h2>
+<section id="分布列概率质量函数pmf" class="level3" data-number="25.2.1">
+<h3 data-number="25.2.1" class="anchored" data-anchor-id="分布列概率质量函数pmf"><span class="header-section-number">25.2.1</span> 分布列/概率质量函数(PMF)</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rpois</span>(<span class="dv">1000</span>,<span class="dv">5</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>() <span class="sc">%&gt;%</span> <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
@@ -581,8 +593,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="ci的含义" class="level2" data-number="23.3">
-<h2 data-number="23.3" class="anchored" data-anchor-id="ci的含义"><span class="header-section-number">23.3</span> 95%CI的含义</h2>
+<section id="ci的含义" class="level2" data-number="25.3">
+<h2 data-number="25.3" class="anchored" data-anchor-id="ci的含义"><span class="header-section-number">25.3</span> 95%CI的含义</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">miu=</span><span class="fu">runif</span>(<span class="dv">1000</span>,<span class="at">min=</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">100</span>),<span class="at">sigma=</span><span class="fu">runif</span>(<span class="dv">1000</span>,<span class="at">min=</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">20</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
@@ -1014,13 +1026,13 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../chapter/viz/correlation_plot.html" class="pagination-link" aria-label="相关矩阵">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">相关矩阵</span></span>
+      <a href="../../chapter/viz/scatter_plot.html" class="pagination-link" aria-label="散点图">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">散点图</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../chapter/stats/distribution.html" class="pagination-link" aria-label="分布">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">分布</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">分布</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
