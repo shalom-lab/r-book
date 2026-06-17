@@ -14,6 +14,8 @@ chapters:
     href: upset_plot.qmd
   - text: 散点图
     href: scatter_plot.qmd
+  - text: 森林图
+    href: forest_plot.qmd
 editor: visual
 
 

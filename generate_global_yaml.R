@@ -50,4 +50,4 @@ system("git add .")
 system('git config user.email "15121177287@163.com"')
 system('git config user.name "shalom"')
 system('git commit -m "update"')
-system('git push')
+

@@ -73,6 +73,8 @@ book:
       href: chapter/viz/upset_plot.qmd
     - text: 散点图
       href: chapter/viz/scatter_plot.qmd
+    - text: 森林图
+      href: chapter/viz/forest_plot.qmd
   - part: 统计
     chapters:
     - text: 基础
