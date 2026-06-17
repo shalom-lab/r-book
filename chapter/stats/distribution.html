@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>26&nbsp; 二项分布 – R语言入门指南</title>
+<title>27&nbsp; 二项分布 – R语言入门指南</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -150,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/distribution.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">分布</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/distribution.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">分布</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -359,6 +359,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">散点图</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapter/viz/forest_plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">森林图</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -373,13 +379,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapter/stats/base.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">基础</span></span></a>
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">基础</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapter/stats/distribution.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">分布</span></span></a>
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">分布</span></span></a>
   </div>
 </li>
       </ul>
@@ -394,42 +400,42 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#多项分布" id="toc-多项分布" class="nav-link active" data-scroll-target="#多项分布"><span class="header-section-number">26.1</span> 多项分布</a>
+  <li><a href="#多项分布" id="toc-多项分布" class="nav-link active" data-scroll-target="#多项分布"><span class="header-section-number">27.1</span> 多项分布</a>
   <ul class="collapse">
-  <li><a href="#概率质量函数pmf" id="toc-概率质量函数pmf" class="nav-link" data-scroll-target="#概率质量函数pmf"><span class="header-section-number">26.1.1</span> <strong>概率质量函数</strong>（PMF）</a></li>
-  <li><a href="#抽样模拟" id="toc-抽样模拟" class="nav-link" data-scroll-target="#抽样模拟"><span class="header-section-number">26.1.2</span> 抽样模拟</a></li>
+  <li><a href="#概率质量函数pmf" id="toc-概率质量函数pmf" class="nav-link" data-scroll-target="#概率质量函数pmf"><span class="header-section-number">27.1.1</span> <strong>概率质量函数</strong>（PMF）</a></li>
+  <li><a href="#抽样模拟" id="toc-抽样模拟" class="nav-link" data-scroll-target="#抽样模拟"><span class="header-section-number">27.1.2</span> 抽样模拟</a></li>
   </ul></li>
-  <li><a href="#狄利克雷分布" id="toc-狄利克雷分布" class="nav-link" data-scroll-target="#狄利克雷分布"><span class="header-section-number">26.2</span> 狄利克雷分布</a>
+  <li><a href="#狄利克雷分布" id="toc-狄利克雷分布" class="nav-link" data-scroll-target="#狄利克雷分布"><span class="header-section-number">27.2</span> 狄利克雷分布</a>
   <ul class="collapse">
-  <li><a href="#性质" id="toc-性质" class="nav-link" data-scroll-target="#性质"><span class="header-section-number">26.2.1</span> 性质</a></li>
-  <li><a href="#与-beta-分布的关系" id="toc-与-beta-分布的关系" class="nav-link" data-scroll-target="#与-beta-分布的关系"><span class="header-section-number">26.2.2</span> 与 Beta 分布的关系</a></li>
-  <li><a href="#抽样模拟-1" id="toc-抽样模拟-1" class="nav-link" data-scroll-target="#抽样模拟-1"><span class="header-section-number">26.2.3</span> 抽样模拟</a></li>
+  <li><a href="#性质" id="toc-性质" class="nav-link" data-scroll-target="#性质"><span class="header-section-number">27.2.1</span> 性质</a></li>
+  <li><a href="#与-beta-分布的关系" id="toc-与-beta-分布的关系" class="nav-link" data-scroll-target="#与-beta-分布的关系"><span class="header-section-number">27.2.2</span> 与 Beta 分布的关系</a></li>
+  <li><a href="#抽样模拟-1" id="toc-抽样模拟-1" class="nav-link" data-scroll-target="#抽样模拟-1"><span class="header-section-number">27.2.3</span> 抽样模拟</a></li>
   </ul></li>
-  <li><a href="#贝塔分布" id="toc-贝塔分布" class="nav-link" data-scroll-target="#贝塔分布"><span class="header-section-number">26.3</span> 贝塔分布</a>
+  <li><a href="#贝塔分布" id="toc-贝塔分布" class="nav-link" data-scroll-target="#贝塔分布"><span class="header-section-number">27.3</span> 贝塔分布</a>
   <ul class="collapse">
-  <li><a href="#pdf" id="toc-pdf" class="nav-link" data-scroll-target="#pdf"><span class="header-section-number">26.3.1</span> PDF</a></li>
-  <li><a href="#参数解释" id="toc-参数解释" class="nav-link" data-scroll-target="#参数解释"><span class="header-section-number">26.3.2</span> 参数解释</a></li>
-  <li><a href="#期望和方差" id="toc-期望和方差" class="nav-link" data-scroll-target="#期望和方差"><span class="header-section-number">26.3.3</span> 期望和方差</a></li>
-  <li><a href="#应用" id="toc-应用" class="nav-link" data-scroll-target="#应用"><span class="header-section-number">26.3.4</span> 应用</a></li>
-  <li><a href="#pdf-1" id="toc-pdf-1" class="nav-link" data-scroll-target="#pdf-1"><span class="header-section-number">26.3.5</span> PDF</a></li>
-  <li><a href="#贝塔分布重参数化muphi" id="toc-贝塔分布重参数化muphi" class="nav-link" data-scroll-target="#贝塔分布重参数化muphi"><span class="header-section-number">26.3.6</span> 贝塔分布重参数化：<span class="math inline">\((\mu,\phi)\)</span></a></li>
-  <li><a href="#方差" id="toc-方差" class="nav-link" data-scroll-target="#方差"><span class="header-section-number">26.3.7</span> 方差</a></li>
+  <li><a href="#pdf" id="toc-pdf" class="nav-link" data-scroll-target="#pdf"><span class="header-section-number">27.3.1</span> PDF</a></li>
+  <li><a href="#参数解释" id="toc-参数解释" class="nav-link" data-scroll-target="#参数解释"><span class="header-section-number">27.3.2</span> 参数解释</a></li>
+  <li><a href="#期望和方差" id="toc-期望和方差" class="nav-link" data-scroll-target="#期望和方差"><span class="header-section-number">27.3.3</span> 期望和方差</a></li>
+  <li><a href="#应用" id="toc-应用" class="nav-link" data-scroll-target="#应用"><span class="header-section-number">27.3.4</span> 应用</a></li>
+  <li><a href="#pdf-1" id="toc-pdf-1" class="nav-link" data-scroll-target="#pdf-1"><span class="header-section-number">27.3.5</span> PDF</a></li>
+  <li><a href="#贝塔分布重参数化muphi" id="toc-贝塔分布重参数化muphi" class="nav-link" data-scroll-target="#贝塔分布重参数化muphi"><span class="header-section-number">27.3.6</span> 贝塔分布重参数化：<span class="math inline">\((\mu,\phi)\)</span></a></li>
+  <li><a href="#方差" id="toc-方差" class="nav-link" data-scroll-target="#方差"><span class="header-section-number">27.3.7</span> 方差</a></li>
   </ul></li>
-  <li><a href="#伽马分布" id="toc-伽马分布" class="nav-link" data-scroll-target="#伽马分布"><span class="header-section-number">26.4</span> 伽马分布</a>
+  <li><a href="#伽马分布" id="toc-伽马分布" class="nav-link" data-scroll-target="#伽马分布"><span class="header-section-number">27.4</span> 伽马分布</a>
   <ul class="collapse">
-  <li><a href="#pdf-2" id="toc-pdf-2" class="nav-link" data-scroll-target="#pdf-2"><span class="header-section-number">26.4.1</span> PDF</a></li>
-  <li><a href="#参数解释-2" id="toc-参数解释-2" class="nav-link" data-scroll-target="#参数解释-2"><span class="header-section-number">26.4.2</span> 参数解释</a></li>
-  <li><a href="#期望和方差-1" id="toc-期望和方差-1" class="nav-link" data-scroll-target="#期望和方差-1"><span class="header-section-number">26.4.3</span> 期望和方差</a></li>
-  <li><a href="#应用-1" id="toc-应用-1" class="nav-link" data-scroll-target="#应用-1"><span class="header-section-number">26.4.4</span> 应用</a></li>
-  <li><a href="#pdf-3" id="toc-pdf-3" class="nav-link" data-scroll-target="#pdf-3"><span class="header-section-number">26.4.5</span> PDF</a></li>
-  <li><a href="#特例" id="toc-特例" class="nav-link" data-scroll-target="#特例"><span class="header-section-number">26.4.6</span> 特例</a></li>
+  <li><a href="#pdf-2" id="toc-pdf-2" class="nav-link" data-scroll-target="#pdf-2"><span class="header-section-number">27.4.1</span> PDF</a></li>
+  <li><a href="#参数解释-2" id="toc-参数解释-2" class="nav-link" data-scroll-target="#参数解释-2"><span class="header-section-number">27.4.2</span> 参数解释</a></li>
+  <li><a href="#期望和方差-1" id="toc-期望和方差-1" class="nav-link" data-scroll-target="#期望和方差-1"><span class="header-section-number">27.4.3</span> 期望和方差</a></li>
+  <li><a href="#应用-1" id="toc-应用-1" class="nav-link" data-scroll-target="#应用-1"><span class="header-section-number">27.4.4</span> 应用</a></li>
+  <li><a href="#pdf-3" id="toc-pdf-3" class="nav-link" data-scroll-target="#pdf-3"><span class="header-section-number">27.4.5</span> PDF</a></li>
+  <li><a href="#特例" id="toc-特例" class="nav-link" data-scroll-target="#特例"><span class="header-section-number">27.4.6</span> 特例</a></li>
   </ul></li>
-  <li><a href="#威布尔分布" id="toc-威布尔分布" class="nav-link" data-scroll-target="#威布尔分布"><span class="header-section-number">26.5</span> 威布尔分布</a>
+  <li><a href="#威布尔分布" id="toc-威布尔分布" class="nav-link" data-scroll-target="#威布尔分布"><span class="header-section-number">27.5</span> 威布尔分布</a>
   <ul class="collapse">
-  <li><a href="#pdf-4" id="toc-pdf-4" class="nav-link" data-scroll-target="#pdf-4"><span class="header-section-number">26.5.1</span> PDF</a></li>
-  <li><a href="#参数解释-3" id="toc-参数解释-3" class="nav-link" data-scroll-target="#参数解释-3"><span class="header-section-number">26.5.2</span> 参数解释</a></li>
-  <li><a href="#期望和方差-2" id="toc-期望和方差-2" class="nav-link" data-scroll-target="#期望和方差-2"><span class="header-section-number">26.5.3</span> 期望和方差</a></li>
-  <li><a href="#应用场景" id="toc-应用场景" class="nav-link" data-scroll-target="#应用场景"><span class="header-section-number">26.5.4</span> 应用场景</a></li>
+  <li><a href="#pdf-4" id="toc-pdf-4" class="nav-link" data-scroll-target="#pdf-4"><span class="header-section-number">27.5.1</span> PDF</a></li>
+  <li><a href="#参数解释-3" id="toc-参数解释-3" class="nav-link" data-scroll-target="#参数解释-3"><span class="header-section-number">27.5.2</span> 参数解释</a></li>
+  <li><a href="#期望和方差-2" id="toc-期望和方差-2" class="nav-link" data-scroll-target="#期望和方差-2"><span class="header-section-number">27.5.3</span> 期望和方差</a></li>
+  <li><a href="#应用场景" id="toc-应用场景" class="nav-link" data-scroll-target="#应用场景"><span class="header-section-number">27.5.4</span> 应用场景</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/shalom-lab/r-book/edit/main/chapter/stats/distribution.qmd" class="toc-action"><i class="bi bi-github"></i>编辑该页面</a></li><li><a href="https://github.com/shalom-lab/r-book/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
@@ -437,9 +443,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/distribution.html"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">分布</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapter/stats/base.html">统计</a></li><li class="breadcrumb-item"><a href="../../chapter/stats/distribution.html"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">分布</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">二项分布</span></h1>
+<h1 class="title"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">二项分布</span></h1>
 </div>
 
 
@@ -510,13 +516,13 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="多项分布" class="level2" data-number="26.1">
-<h2 data-number="26.1" class="anchored" data-anchor-id="多项分布"><span class="header-section-number">26.1</span> 多项分布</h2>
+<section id="多项分布" class="level2" data-number="27.1">
+<h2 data-number="27.1" class="anchored" data-anchor-id="多项分布"><span class="header-section-number">27.1</span> 多项分布</h2>
 <p><strong>多项分布</strong>（Multinomial Distribution）是多次独立实验中，每次实验有多个可能结果的一种概率分布。它是二项分布的推广，适用于每次试验有超过两个可能结果的情况。</p>
 <p>假设进行 <span class="math inline">\(n\)</span> 次独立试验，每次试验有 <span class="math inline">\(k\)</span> 个可能的结果（例如，分类问题中的多个类别）。令每个试验的结果分别属于类别 <span class="math inline">\(1, 2, \dots, k\)</span>，且每个类别的概率分别为 <span class="math inline">\(p_1, p_2, \dots, p_k\)</span>（其中 <span class="math inline">\(p_1 + p_2 + \dots + p_k = 1\)</span>）。</p>
 <p>在这种情况下，记<span class="math inline">\(n\)</span>次实验后的结果用向量<span class="math inline">\(X = (X_1, X_2, ..., X_k)\)</span> 表示。多项分布描述的是X的分布，在 <span class="math inline">\(n\)</span> 次试验中，各类别 <span class="math inline">\(i\)</span> 分别被选中的次数为 <span class="math inline">\(x_i\)</span> 同时出现的概率，其中 <span class="math inline">\(i = 1, 2, \dots, k\)</span>，且 <span class="math inline">\(x_1 + x_2 + \dots + x_k = n\)</span>。</p>
-<section id="概率质量函数pmf" class="level3" data-number="26.1.1">
-<h3 data-number="26.1.1" class="anchored" data-anchor-id="概率质量函数pmf"><span class="header-section-number">26.1.1</span> <strong>概率质量函数</strong>（PMF）</h3>
+<section id="概率质量函数pmf" class="level3" data-number="27.1.1">
+<h3 data-number="27.1.1" class="anchored" data-anchor-id="概率质量函数pmf"><span class="header-section-number">27.1.1</span> <strong>概率质量函数</strong>（PMF）</h3>
 <p><span class="math display">\[
 P(X_1 = x_1, X_2 = x_2, \dots, X_k = x_k) = \frac{n!}{x_1! x_2! \dots x_k!} p_1^{x_1} p_2^{x_2} \dots p_k^{x_k}
 \]</span></p>
@@ -567,8 +573,8 @@ P(X_1 = x_1, X_2 = x_2, \dots, X_k = x_k) = \frac{n!}{x_1! x_2! \dots x_k!} p_1^
 </div>
 </div>
 </section>
-<section id="抽样模拟" class="level3" data-number="26.1.2">
-<h3 data-number="26.1.2" class="anchored" data-anchor-id="抽样模拟"><span class="header-section-number">26.1.2</span> 抽样模拟</h3>
+<section id="抽样模拟" class="level3" data-number="27.1.2">
+<h3 data-number="27.1.2" class="anchored" data-anchor-id="抽样模拟"><span class="header-section-number">27.1.2</span> 抽样模拟</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#抽样模拟</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rmultinom</span>(<span class="at">n=</span><span class="dv">100000</span>,<span class="at">size=</span><span class="dv">3</span>,<span class="at">prob=</span><span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>,<span class="dv">6</span>)) <span class="sc">%&gt;%</span> <span class="fu">t</span>() <span class="sc">%&gt;%</span></span>
@@ -596,8 +602,8 @@ P(X_1 = x_1, X_2 = x_2, \dots, X_k = x_k) = \frac{n!}{x_1! x_2! \dots x_k!} p_1^
 </div>
 </section>
 </section>
-<section id="狄利克雷分布" class="level2" data-number="26.2">
-<h2 data-number="26.2" class="anchored" data-anchor-id="狄利克雷分布"><span class="header-section-number">26.2</span> 狄利克雷分布</h2>
+<section id="狄利克雷分布" class="level2" data-number="27.2">
+<h2 data-number="27.2" class="anchored" data-anchor-id="狄利克雷分布"><span class="header-section-number">27.2</span> 狄利克雷分布</h2>
 <p>狄利克雷分布是多维概率分布的常用先验分布，广泛用于描述离散分布的参数不确定性。其概率密度函数定义如下：</p>
 <p><span class="math display">\[
 \text{Dir}(\mathbf{x}; \boldsymbol{\alpha}) = \frac{1}{B(\boldsymbol{\alpha})} \prod_{i=1}^k x_i^{\alpha_i - 1}
@@ -611,8 +617,8 @@ P(X_1 = x_1, X_2 = x_2, \dots, X_k = x_k) = \frac{n!}{x_1! x_2! \dots x_k!} p_1^
 <p><span class="math display">\[
 B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^k \Gamma(\alpha_i)}{\Gamma\left(\sum_{i=1}^k \alpha_i\right)}
 \]</span></p>
-<section id="性质" class="level3" data-number="26.2.1">
-<h3 data-number="26.2.1" class="anchored" data-anchor-id="性质"><span class="header-section-number">26.2.1</span> 性质</h3>
+<section id="性质" class="level3" data-number="27.2.1">
+<h3 data-number="27.2.1" class="anchored" data-anchor-id="性质"><span class="header-section-number">27.2.1</span> 性质</h3>
 <ol type="1">
 <li><p><strong>参数意义：</strong></p>
 <ul>
@@ -626,13 +632,13 @@ B(\boldsymbol{\alpha}) = \frac{\prod_{i=1}^k \Gamma(\alpha_i)}{\Gamma\left(\sum_
 </ul></li>
 </ol>
 </section>
-<section id="与-beta-分布的关系" class="level3" data-number="26.2.2">
-<h3 data-number="26.2.2" class="anchored" data-anchor-id="与-beta-分布的关系"><span class="header-section-number">26.2.2</span> 与 Beta 分布的关系</h3>
+<section id="与-beta-分布的关系" class="level3" data-number="27.2.2">
+<h3 data-number="27.2.2" class="anchored" data-anchor-id="与-beta-分布的关系"><span class="header-section-number">27.2.2</span> 与 Beta 分布的关系</h3>
 <p>Beta 分布是狄利克雷分布在二维（<span class="math inline">\(k=2\)</span>）情况下的特例： <span class="math inline">\(\text{Beta}(x; \alpha, \beta) = \text{Dir}(x, 1-x; \alpha, \beta)\)</span></p>
 <p>在 Beta 分布中，<span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span> 控制单一维度概率的分布形态。</p>
 </section>
-<section id="抽样模拟-1" class="level3" data-number="26.2.3">
-<h3 data-number="26.2.3" class="anchored" data-anchor-id="抽样模拟-1"><span class="header-section-number">26.2.3</span> 抽样模拟</h3>
+<section id="抽样模拟-1" class="level3" data-number="27.2.3">
+<h3 data-number="27.2.3" class="anchored" data-anchor-id="抽样模拟-1"><span class="header-section-number">27.2.3</span> 抽样模拟</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">rdirichlet</span>(<span class="dv">10000</span>,<span class="at">alpha=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
@@ -737,12 +743,12 @@ Max.    0.6284187427 0.766101663 0.830235788 0.90039167</code></pre>
 </div>
 </section>
 </section>
-<section id="贝塔分布" class="level2" data-number="26.3">
-<h2 data-number="26.3" class="anchored" data-anchor-id="贝塔分布"><span class="header-section-number">26.3</span> 贝塔分布</h2>
+<section id="贝塔分布" class="level2" data-number="27.3">
+<h2 data-number="27.3" class="anchored" data-anchor-id="贝塔分布"><span class="header-section-number">27.3</span> 贝塔分布</h2>
 <p>贝塔分布是一种定义在区间 [0, 1] 上的连续概率分布，常用于表示在某些区间内的概率，如成功概率、比例或概率密度。贝塔分布在贝叶斯统计、随机过程建模等领域中有广泛应用。</p>
 <p>贝塔分布的概率密度函数（PDF）由两个参数 <span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span> 控制，这两个参数都必须大于零。</p>
-<section id="pdf" class="level3" data-number="26.3.1">
-<h3 data-number="26.3.1" class="anchored" data-anchor-id="pdf"><span class="header-section-number">26.3.1</span> PDF</h3>
+<section id="pdf" class="level3" data-number="27.3.1">
+<h3 data-number="27.3.1" class="anchored" data-anchor-id="pdf"><span class="header-section-number">27.3.1</span> PDF</h3>
 <p>贝塔分布的概率密度函数为：</p>
 <p><span class="math display">\[
 f(x; \alpha, \beta) = \frac{x^{\alpha - 1} (1 - x)^{\beta - 1}}{B(\alpha, \beta)} \quad \text{对于} \quad 0 \leq x \leq 1
@@ -756,8 +762,8 @@ f(x; \alpha, \beta) = \frac{x^{\alpha - 1} (1 - x)^{\beta - 1}}{B(\alpha, \beta)
 B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dx
 \]</span></p>
 </section>
-<section id="参数解释" class="level3" data-number="26.3.2">
-<h3 data-number="26.3.2" class="anchored" data-anchor-id="参数解释"><span class="header-section-number">26.3.2</span> 参数解释</h3>
+<section id="参数解释" class="level3" data-number="27.3.2">
+<h3 data-number="27.3.2" class="anchored" data-anchor-id="参数解释"><span class="header-section-number">27.3.2</span> 参数解释</h3>
 <ul>
 <li><strong>形状参数</strong> <span class="math inline">\(\alpha\)</span> 和 <span class="math inline">\(\beta\)</span>：控制分布的形状。
 <ul>
@@ -768,8 +774,8 @@ B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dx
 </ul></li>
 </ul>
 </section>
-<section id="期望和方差" class="level3" data-number="26.3.3">
-<h3 data-number="26.3.3" class="anchored" data-anchor-id="期望和方差"><span class="header-section-number">26.3.3</span> 期望和方差</h3>
+<section id="期望和方差" class="level3" data-number="27.3.3">
+<h3 data-number="27.3.3" class="anchored" data-anchor-id="期望和方差"><span class="header-section-number">27.3.3</span> 期望和方差</h3>
 <ul>
 <li><p><strong>期望值（均值）</strong>： <span class="math display">\[
 \mathbb{E}(X) = \frac{\alpha}{\alpha + \beta}
@@ -779,15 +785,15 @@ B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dx
 \]</span></p></li>
 </ul>
 </section>
-<section id="应用" class="level3" data-number="26.3.4">
-<h3 data-number="26.3.4" class="anchored" data-anchor-id="应用"><span class="header-section-number">26.3.4</span> 应用</h3>
+<section id="应用" class="level3" data-number="27.3.4">
+<h3 data-number="27.3.4" class="anchored" data-anchor-id="应用"><span class="header-section-number">27.3.4</span> 应用</h3>
 <ul>
 <li><strong>贝叶斯统计</strong>：在贝叶斯框架下，贝塔分布常作为伯努利分布和二项分布的先验分布，尤其用于描述概率或比例的不确定性。</li>
 <li><strong>比例建模</strong>：贝塔分布常用于模型中比例或概率变量的分布，例如在估计成功率或失败率时使用</li>
 </ul>
 </section>
-<section id="pdf-1" class="level3" data-number="26.3.5">
-<h3 data-number="26.3.5" class="anchored" data-anchor-id="pdf-1"><span class="header-section-number">26.3.5</span> PDF</h3>
+<section id="pdf-1" class="level3" data-number="27.3.5">
+<h3 data-number="27.3.5" class="anchored" data-anchor-id="pdf-1"><span class="header-section-number">27.3.5</span> PDF</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">alpha =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>), <span class="at">beta =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data=</span><span class="fu">pmap</span>(<span class="fu">list</span>(alpha,beta),<span class="sc">~</span>{</span>
@@ -945,8 +951,8 @@ B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dx
 </div>
 </div>
 </section>
-<section id="贝塔分布重参数化muphi" class="level3" data-number="26.3.6">
-<h3 data-number="26.3.6" class="anchored" data-anchor-id="贝塔分布重参数化muphi"><span class="header-section-number">26.3.6</span> 贝塔分布重参数化：<span class="math inline">\((\mu,\phi)\)</span></h3>
+<section id="贝塔分布重参数化muphi" class="level3" data-number="27.3.6">
+<h3 data-number="27.3.6" class="anchored" data-anchor-id="贝塔分布重参数化muphi"><span class="header-section-number">27.3.6</span> 贝塔分布重参数化：<span class="math inline">\((\mu,\phi)\)</span></h3>
 <p>为便于解释和建模，可定义：</p>
 <ul>
 <li><span class="math inline">\(\mu\)</span>：均值参数（mean）</li>
@@ -971,8 +977,8 @@ B(\alpha, \beta) = \int_0^1 x^{\alpha - 1} (1 - x)^{\beta - 1} \, dx
 <p><span class="math display">\[
 X \sim \text{Beta}(\mu\phi,(1-\mu)\phi)
 \]</span></p>
-<section id="统计性质" class="level4" data-number="26.3.6.1">
-<h4 data-number="26.3.6.1" class="anchored" data-anchor-id="统计性质"><span class="header-section-number">26.3.6.1</span> 统计性质</h4>
+<section id="统计性质" class="level4" data-number="27.3.6.1">
+<h4 data-number="27.3.6.1" class="anchored" data-anchor-id="统计性质"><span class="header-section-number">27.3.6.1</span> 统计性质</h4>
 <p>由于</p>
 <p><span class="math display">\[
 \mathbb{E}(X)=\frac{\alpha}{\alpha+\beta}
@@ -984,15 +990,15 @@ X \sim \text{Beta}(\mu\phi,(1-\mu)\phi)
 <p>因此 <span class="math inline">\(\mu\)</span> 直接表示分布中心。</p>
 </section>
 </section>
-<section id="方差" class="level3" data-number="26.3.7">
-<h3 data-number="26.3.7" class="anchored" data-anchor-id="方差"><span class="header-section-number">26.3.7</span> 方差</h3>
+<section id="方差" class="level3" data-number="27.3.7">
+<h3 data-number="27.3.7" class="anchored" data-anchor-id="方差"><span class="header-section-number">27.3.7</span> 方差</h3>
 <p><span class="math display">\[
 \text{Var}(X)=
 \frac{\mu(1-\mu)}{1+\phi}
 \]</span></p>
 <hr>
-<section id="参数解释-1" class="level4" data-number="26.3.7.1">
-<h4 data-number="26.3.7.1" class="anchored" data-anchor-id="参数解释-1"><span class="header-section-number">26.3.7.1</span> 参数解释</h4>
+<section id="参数解释-1" class="level4" data-number="27.3.7.1">
+<h4 data-number="27.3.7.1" class="anchored" data-anchor-id="参数解释-1"><span class="header-section-number">27.3.7.1</span> 参数解释</h4>
 <p><span class="math inline">\(\mu\)</span>：位置参数</p>
 <p>控制分布的中心位置。</p>
 <p>例如：</p>
@@ -1014,8 +1020,8 @@ X \sim \text{Beta}(\mu\phi,(1-\mu)\phi)
 \]</span></p>
 <p>分布逐渐集中于 <span class="math inline">\(\mu\)</span>。</p>
 </section>
-<section id="为什么使用-muphi-参数化" class="level4" data-number="26.3.7.2">
-<h4 data-number="26.3.7.2" class="anchored" data-anchor-id="为什么使用-muphi-参数化"><span class="header-section-number">26.3.7.2</span> 为什么使用 <span class="math inline">\((\mu,\phi)\)</span> 参数化</h4>
+<section id="为什么使用-muphi-参数化" class="level4" data-number="27.3.7.2">
+<h4 data-number="27.3.7.2" class="anchored" data-anchor-id="为什么使用-muphi-参数化"><span class="header-section-number">27.3.7.2</span> 为什么使用 <span class="math inline">\((\mu,\phi)\)</span> 参数化</h4>
 <p>相比直接建模 <span class="math inline">\((\alpha,\beta)\)</span>，<span class="math inline">\((\mu,\phi)\)</span> 参数化具有以下优势：</p>
 <ul>
 <li>更容易解释</li>
@@ -1047,18 +1053,18 @@ X \sim \text{Beta}(\mu\phi,(1-\mu)\phi)
 </section>
 </section>
 </section>
-<section id="伽马分布" class="level2" data-number="26.4">
-<h2 data-number="26.4" class="anchored" data-anchor-id="伽马分布"><span class="header-section-number">26.4</span> 伽马分布</h2>
+<section id="伽马分布" class="level2" data-number="27.4">
+<h2 data-number="27.4" class="anchored" data-anchor-id="伽马分布"><span class="header-section-number">27.4</span> 伽马分布</h2>
 <p>伽马分布（Gamma distribution）是一种连续概率分布，广泛应用于统计学、工程学和其他科学领域。伽马分布是两个参数的分布，常用的参数是形状参数 <span class="math inline">\(\alpha\)</span>（或 <span class="math inline">\(k\)</span>）和尺度参数 <span class="math inline">\(\beta\)</span>。</p>
-<section id="pdf-2" class="level3" data-number="26.4.1">
-<h3 data-number="26.4.1" class="anchored" data-anchor-id="pdf-2"><span class="header-section-number">26.4.1</span> PDF</h3>
+<section id="pdf-2" class="level3" data-number="27.4.1">
+<h3 data-number="27.4.1" class="anchored" data-anchor-id="pdf-2"><span class="header-section-number">27.4.1</span> PDF</h3>
 <p>伽马分布的概率密度函数（PDF）为：</p>
 <p><span class="math display">\[
 f(x; \alpha, \beta) = \frac{x^{\alpha-1} e^{-x/\beta}}{\beta^\alpha \Gamma(\alpha)} \quad (x &gt; 0)
 \]</span></p>
 </section>
-<section id="参数解释-2" class="level3" data-number="26.4.2">
-<h3 data-number="26.4.2" class="anchored" data-anchor-id="参数解释-2"><span class="header-section-number">26.4.2</span> 参数解释</h3>
+<section id="参数解释-2" class="level3" data-number="27.4.2">
+<h3 data-number="27.4.2" class="anchored" data-anchor-id="参数解释-2"><span class="header-section-number">27.4.2</span> 参数解释</h3>
 <ul>
 <li><p><span class="math inline">\(\alpha\)</span> 是形状参数，决定了分布的形态。</p></li>
 <li><p><span class="math inline">\(\beta\)</span> 是尺度参数，控制分布的宽度。</p></li>
@@ -1068,15 +1074,15 @@ f(x; \alpha, \beta) = \frac{x^{\alpha-1} e^{-x/\beta}}{\beta^\alpha \Gamma(\alph
 \Gamma(\alpha) = \int_0^\infty t^{\alpha-1} e^{-t} dt
 \]</span></p>
 </section>
-<section id="期望和方差-1" class="level3" data-number="26.4.3">
-<h3 data-number="26.4.3" class="anchored" data-anchor-id="期望和方差-1"><span class="header-section-number">26.4.3</span> 期望和方差</h3>
+<section id="期望和方差-1" class="level3" data-number="27.4.3">
+<h3 data-number="27.4.3" class="anchored" data-anchor-id="期望和方差-1"><span class="header-section-number">27.4.3</span> 期望和方差</h3>
 <ul>
 <li><p>期望值：<span class="math inline">\(\mathbb{E}(X) = \alpha \beta\)</span></p></li>
 <li><p>方差：<span class="math inline">\({Var}(X) = \alpha \beta^2\)</span></p></li>
 </ul>
 </section>
-<section id="应用-1" class="level3" data-number="26.4.4">
-<h3 data-number="26.4.4" class="anchored" data-anchor-id="应用-1"><span class="header-section-number">26.4.4</span> 应用</h3>
+<section id="应用-1" class="level3" data-number="27.4.4">
+<h3 data-number="27.4.4" class="anchored" data-anchor-id="应用-1"><span class="header-section-number">27.4.4</span> 应用</h3>
 <ul>
 <li>作为等待时间模型，例如在排队理论中。</li>
 <li>作为生命时间分布模型。</li>
@@ -1086,8 +1092,8 @@ f(x; \alpha, \beta) = \frac{x^{\alpha-1} e^{-x/\beta}}{\beta^\alpha \Gamma(\alph
 <p>在 R 中，可以使用 <code>dgamma()</code>、<code>pgamma()</code>、<code>qgamma()</code> 和 <code>rgamma()</code> 函数来分别计算伽马分布的概率密度、累积概率、分位数和随机数生成。</p>
 </blockquote>
 </section>
-<section id="pdf-3" class="level3" data-number="26.4.5">
-<h3 data-number="26.4.5" class="anchored" data-anchor-id="pdf-3"><span class="header-section-number">26.4.5</span> PDF</h3>
+<section id="pdf-3" class="level3" data-number="27.4.5">
+<h3 data-number="27.4.5" class="anchored" data-anchor-id="pdf-3"><span class="header-section-number">27.4.5</span> PDF</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">alpha =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>), <span class="at">beta =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data=</span><span class="fu">pmap</span>(<span class="fu">list</span>(alpha,beta),<span class="sc">~</span>{</span>
@@ -1245,8 +1251,8 @@ f(x; \alpha, \beta) = \frac{x^{\alpha-1} e^{-x/\beta}}{\beta^\alpha \Gamma(\alph
 </div>
 </div>
 </section>
-<section id="特例" class="level3" data-number="26.4.6">
-<h3 data-number="26.4.6" class="anchored" data-anchor-id="特例"><span class="header-section-number">26.4.6</span> 特例</h3>
+<section id="特例" class="level3" data-number="27.4.6">
+<h3 data-number="27.4.6" class="anchored" data-anchor-id="特例"><span class="header-section-number">27.4.6</span> 特例</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">beta =</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data=</span><span class="fu">pmap</span>(<span class="fu">list</span>(alpha,beta),<span class="sc">~</span>{</span>
@@ -1363,11 +1369,11 @@ f(x; \alpha, \beta) = \frac{x^{\alpha-1} e^{-x/\beta}}{\beta^\alpha \Gamma(\alph
 </div>
 </section>
 </section>
-<section id="威布尔分布" class="level2" data-number="26.5">
-<h2 data-number="26.5" class="anchored" data-anchor-id="威布尔分布"><span class="header-section-number">26.5</span> 威布尔分布</h2>
+<section id="威布尔分布" class="level2" data-number="27.5">
+<h2 data-number="27.5" class="anchored" data-anchor-id="威布尔分布"><span class="header-section-number">27.5</span> 威布尔分布</h2>
 <p><strong>Weibull分布</strong>是一种常见的概率分布，常用于建模产品寿命、可靠性分析、极端事件等。</p>
-<section id="pdf-4" class="level3" data-number="26.5.1">
-<h3 data-number="26.5.1" class="anchored" data-anchor-id="pdf-4"><span class="header-section-number">26.5.1</span> PDF</h3>
+<section id="pdf-4" class="level3" data-number="27.5.1">
+<h3 data-number="27.5.1" class="anchored" data-anchor-id="pdf-4"><span class="header-section-number">27.5.1</span> PDF</h3>
 <p>其概率密度函数（PDF）为：</p>
 <p><span class="math display">\[
 f(x; k, \lambda) =
@@ -1389,8 +1395,8 @@ f(x; k, \lambda) =
 </ul></li>
 </ul>
 </section>
-<section id="参数解释-3" class="level3" data-number="26.5.2">
-<h3 data-number="26.5.2" class="anchored" data-anchor-id="参数解释-3"><span class="header-section-number">26.5.2</span> 参数解释</h3>
+<section id="参数解释-3" class="level3" data-number="27.5.2">
+<h3 data-number="27.5.2" class="anchored" data-anchor-id="参数解释-3"><span class="header-section-number">27.5.2</span> 参数解释</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1411,8 +1417,8 @@ f(x; k, \lambda) =
 </table>
 <p>当 <span class="math inline">\(k = 1\)</span> 时，Weibull 分布等价于<strong>指数分布</strong>。</p>
 </section>
-<section id="期望和方差-2" class="level3" data-number="26.5.3">
-<h3 data-number="26.5.3" class="anchored" data-anchor-id="期望和方差-2"><span class="header-section-number">26.5.3</span> 期望和方差</h3>
+<section id="期望和方差-2" class="level3" data-number="27.5.3">
+<h3 data-number="27.5.3" class="anchored" data-anchor-id="期望和方差-2"><span class="header-section-number">27.5.3</span> 期望和方差</h3>
 <ul>
 <li><p><strong>期望值（Mean）</strong>：</p>
 <p><span class="math display">\[
@@ -1426,8 +1432,8 @@ f(x; k, \lambda) =
 <p>其中 <span class="math inline">\(\Gamma(\cdot)\)</span> 是伽马函数，满足 <span class="math inline">\(\Gamma(n) = (n - 1)!\)</span> 当 <span class="math inline">\(n\)</span> 为整数时。</p>
 <hr>
 </section>
-<section id="应用场景" class="level3" data-number="26.5.4">
-<h3 data-number="26.5.4" class="anchored" data-anchor-id="应用场景"><span class="header-section-number">26.5.4</span> 应用场景</h3>
+<section id="应用场景" class="level3" data-number="27.5.4">
+<h3 data-number="27.5.4" class="anchored" data-anchor-id="应用场景"><span class="header-section-number">27.5.4</span> 应用场景</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 23%">
@@ -1896,7 +1902,7 @@ f(x; k, \lambda) =
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../chapter/stats/base.html" class="pagination-link" aria-label="基础">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">基础</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">基础</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
