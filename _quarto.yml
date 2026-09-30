@@ -4,7 +4,7 @@ project:
 book:
   title: R语言入门指南
   author: Shalom
-  date: "2026/06/17"
+  date: "2026/09/30"
   repo-url: https://github.com/shalom-lab/r-book/
   repo-actions:
   - edit
@@ -81,6 +81,10 @@ book:
       href: chapter/stats/base.qmd
     - text: 分布
       href: chapter/stats/distribution.qmd
+  - part: 流病
+    chapters:
+    - text: 发病率的置信区间
+      href: chapter/epi/incidence-rate-ci.qmd
 execute:
   freeze: auto
 format:

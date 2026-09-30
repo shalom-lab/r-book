@@ -1,0 +1,4 @@
+part: 流病
+chapters:
+  - text: 发病率的置信区间
+    href: incidence-rate-ci.qmd

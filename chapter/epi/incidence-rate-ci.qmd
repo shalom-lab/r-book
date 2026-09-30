@@ -1,0 +1,445 @@
+---
+title: "发生率的置信区间"
+subtitle: "log-Wald 与精确 Poisson：推导、比较与交互计算"
+lang: zh-CN
+author: ChatGPT
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-title: "目录"
+    number-sections: true
+    embed-resources: true
+    code-copy: true
+    html-math-method: mathjax
+execute:
+  eval: false
+---
+
+**log-Wald 和精确 Poisson 都是常用的单个发生率区间估计方法。** 前者使用正态近似，后者直接利用 Poisson 分布。它们有共同的模型前提，不能无条件用于所有称为“率”的指标。
+
+本文以事件数 $a=9$、总人时 $T=4028.16$ 人年为初始例子。原计算器用 $N$ 表示人时；本文改用 $T$，避免与人数混淆。
+
+::: {.callout-note title="如何使用这份文档"}
+在终端运行 `quarto render incidence-rate-ci.qmd`，或在 RStudio / Positron 中点击 Render。交互计算器在生成的 HTML 中运行；不需要 R、Shiny 服务器或 Crosstalk。公式由 Quarto 排版，滑块与计算逻辑直接写在本文中。本文设置不执行代码，后面的 R 代码用于自行复核。
+:::
+
+## 先动手：两种方法算出的区间有何不同？
+
+拖动**事件数**和**置信水平**滑块，或直接修改输入。区间线段共用同一横轴；点表示相同的发生率估计 $a/T$。图会自动调整横轴范围，跨不同输入比较时请同时看数值。
+
+```{=html}
+<style>
+#rate-ci-lab { --ci-log: #2967b0; --ci-exact: #16816c; font-size: 16px; }
+#rate-ci-lab .ci-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 22px; background: var(--bs-tertiary-bg, #f3f5f7); border-radius: 10px; }
+#rate-ci-lab label { display: block; font-weight: 600; margin-bottom: 8px; }
+#rate-ci-lab .ci-value { display: flex; gap: 12px; align-items: center; }
+#rate-ci-lab input[type=range] { flex: 1; min-width: 80px; accent-color: var(--ci-log); }
+#rate-ci-lab input[type=number], #rate-ci-lab select { width: 100%; border: 1px solid var(--bs-border-color, #bbc4cd); border-radius: 5px; padding: 7px 9px; background: var(--bs-body-bg, white); color: var(--bs-body-color, #233240); font: inherit; }
+#rate-ci-lab .ci-value input[type=number] { width: 100px; }
+#rate-ci-lab .ci-hint { font-size: .85em; color: var(--bs-secondary-color, #55616d); margin-top: 6px; }
+#rate-ci-lab .ci-summary { margin: 20px 0 4px; font-size: 1.08em; font-weight: 600; }
+#rate-ci-lab .ci-scroll { overflow-x: auto; }
+#rate-ci-lab table { width: 100%; border-collapse: collapse; margin: 12px 0; font-variant-numeric: tabular-nums; }
+#rate-ci-lab th, #rate-ci-lab td { padding: 10px 8px; border-bottom: 1px solid var(--bs-border-color, #dce2e8); text-align: right; white-space: nowrap; }
+#rate-ci-lab th:first-child, #rate-ci-lab td:first-child { text-align: left; }
+#rate-ci-lab svg { display: block; width: 100%; height: 210px; color: var(--bs-body-color, #233240); }
+#rate-ci-lab .ci-message { margin: 8px 0 14px; padding-left: 12px; border-left: 3px solid var(--ci-exact); line-height: 1.6; }
+#rate-ci-lab .ci-error { color: var(--bs-danger, #a12020); min-height: 1.5em; }
+#rate-ci-lab .ci-swatch { display: inline-block; width: 18px; height: 3px; vertical-align: middle; margin-right: 5px; }
+#rate-ci-lab .ci-live { font-variant-numeric: tabular-nums; }
+@media(max-width: 600px) { #rate-ci-lab .ci-controls { grid-template-columns: 1fr; padding: 16px; } #rate-ci-lab table { font-size: .88em; } }
+</style>
+<div id="rate-ci-lab">
+  <div class="ci-controls">
+    <div>
+      <label for="ci-count-slider">事件数 a</label>
+      <div class="ci-value"><input id="ci-count-slider" type="range" min="0" max="200" step="1" value="9" aria-label="事件数滑块"><input id="ci-count" type="number" min="0" max="1000000" step="1" value="9" aria-label="事件数输入"></div>
+      <div class="ci-hint">滑块 0–200；直接输入可至 1,000,000。试试 0、1、9 和 100。</div>
+    </div>
+    <div>
+      <label for="ci-exposure">总人时 T（人年）</label>
+      <input id="ci-exposure" type="number" min="0.000000000001" max="1000000000000000" step="any" value="4028.16">
+      <div class="ci-hint">必须是已知、正的人时；不是单纯的样本人数。</div>
+    </div>
+    <div>
+      <label for="ci-confidence-slider">双侧置信水平（%）</label>
+      <div class="ci-value"><input id="ci-confidence-slider" type="range" min="50" max="99.9" step="0.1" value="95" aria-label="置信水平滑块"><input id="ci-confidence" type="number" min="50" max="99.9" step="0.1" value="95" aria-label="置信水平输入"></div>
+      <div class="ci-hint">默认 95%；每侧尾概率为 α/2。</div>
+    </div>
+    <div>
+      <label for="ci-scale">报告单位</label>
+      <select id="ci-scale"><option value="1">每 1 人年</option><option value="1000" selected>每 1,000 人年</option><option value="100000">每 100,000 人年</option></select>
+      <div class="ci-hint">仅改变显示单位，不改变统计方法。</div>
+    </div>
+  </div>
+  <div id="ci-error" class="ci-error" role="alert"></div>
+  <div id="ci-results">
+    <div id="ci-summary" class="ci-summary ci-live" aria-live="polite"></div>
+    <div class="ci-scroll"><table aria-label="两种方法的置信区间比较"><thead><tr><th>方法</th><th>下限</th><th>上限</th><th>区间宽度</th></tr></thead><tbody id="ci-table"></tbody></table></div>
+    <svg id="ci-chart" role="img" aria-label="两种置信区间的同轴比较"></svg>
+    <div id="ci-difference" class="ci-message ci-live" aria-live="polite"></div>
+    <details><summary>查看当前输入对应的中间计算值</summary><div id="ci-steps" class="ci-live"></div></details>
+  </div>
+  <noscript>请在浏览器中启用 JavaScript，以使用交互计算器。</noscript>
+</div>
+<script>
+(() => {
+  'use strict';
+  const root = document.getElementById('rate-ci-lab');
+  const el = id => root.querySelector('#' + id);
+  const nf = new Intl.NumberFormat('zh-CN', {maximumFractionDigits: 6});
+  const fmt = x => !Number.isFinite(x) ? '不可计算' :
+    (x !== 0 && (Math.abs(x) < 1e-6 || Math.abs(x) >= 1e9) ? x.toExponential(5) : nf.format(x));
+
+  // Acklam inverse normal CDF; relative error is adequate for displayed precision.
+  function normalQuantile(p) {
+    const a = [-39.6968302866538,220.946098424521,-275.928510446969,138.357751867269,-30.6647980661472,2.50662827745924];
+    const b = [-54.4760987982241,161.585836858041,-155.698979859887,66.8013118877197,-13.2806815528857];
+    const c = [-0.00778489400243029,-0.322396458041136,-2.40075827716184,-2.54973253934373,4.37466414146497,2.93816398269878];
+    const d = [0.00778469570904146,0.32246712907004,2.445134137143,3.75440866190742];
+    if (p < 0.02425 || p > 0.97575) {
+      const q = Math.sqrt(-2 * Math.log(p < 0.02425 ? p : 1-p));
+      const v = (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) / ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+      return p < 0.02425 ? v : -v;
+    }
+    const q=p-0.5, r=q*q;
+    return (((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q / (((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1);
+  }
+
+  // Lanczos log-gamma, followed by series / continued fraction for gamma CDF.
+  function logGamma(x) {
+    const c=[676.5203681218851,-1259.1392167224028,771.32342877765313,-176.61502916214059,12.507343278686905,-0.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];
+    if(x<0.5) return Math.log(Math.PI)-Math.log(Math.sin(Math.PI*x))-logGamma(1-x);
+    x-=1; let s=0.99999999999980993;
+    c.forEach((v,i)=>s+=v/(x+i+1));
+    const t=x+7.5;
+    return 0.9189385332046727+(x+0.5)*Math.log(t)-t+Math.log(s);
+  }
+  function gammaCDF(shape,x) {
+    if(x<=0) return 0;
+    const factor=Math.exp(shape*Math.log(x)-x-logGamma(shape));
+    if(x<shape+1) {
+      let ap=shape, term=1/shape, sum=term;
+      for(let i=1;i<=50000;i++) {
+        term*=x/(++ap); sum+=term;
+        if(Math.abs(term)<Math.abs(sum)*1e-14) return Math.min(1,Math.max(0,sum*factor));
+      }
+    } else {
+      const tiny=1e-300; let b=x+1-shape, c=1/tiny, d=1/b, h=d;
+      for(let i=1;i<=50000;i++) {
+        const an=-i*(i-shape); b+=2; d=an*d+b;
+        if(Math.abs(d)<tiny) d=tiny;
+        c=b+an/c; if(Math.abs(c)<tiny) c=tiny;
+        d=1/d; const delta=d*c; h*=delta;
+        if(Math.abs(delta-1)<1e-14) return Math.min(1,Math.max(0,1-factor*h));
+      }
+    }
+    throw new Error('Gamma 分布数值计算未收敛。');
+  }
+  function gammaQuantile(p,shape) {
+    let lo=0, hi=Math.max(1,shape+10*Math.sqrt(shape)+10);
+    while(gammaCDF(shape,hi)<p) hi*=2;
+    for(let i=0;i<100;i++) {
+      const m=(lo+hi)/2;
+      if(gammaCDF(shape,m)<p) lo=m; else hi=m;
+      if(hi-lo<=1e-11*Math.max(m,1e-12)) break;
+    }
+    return (lo+hi)/2;
+  }
+  function compute(a,T,confidence) {
+    const alpha=1-confidence, z=normalQuantile(1-alpha/2), rate=a/T;
+    const log=a>0 ? [rate*Math.exp(-z/Math.sqrt(a)),rate*Math.exp(z/Math.sqrt(a))] : null;
+    // Gamma(shape, scale=1) quantiles equal chi-square(df=2*shape)/2.
+    const exact=[a===0 ? 0 : gammaQuantile(alpha/2,a)/T,gammaQuantile(1-alpha/2,a+1)/T];
+    return {a,T,confidence,alpha,z,rate,log,exact};
+  }
+  function draw(data,scale) {
+    const svg=el('ci-chart'), width=Math.max(300,root.clientWidth), height=210;
+    svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
+    const left=width<450?95:120, right=20, top=25, bottom=145;
+    const rows=[{name:'log-Wald',ci:data.log,y:58,color:'var(--ci-log)'},{name:'精确 Poisson',ci:data.exact,y:108,color:'var(--ci-exact)'}];
+    const upper=Math.max(...rows.filter(r=>r.ci).map(r=>r.ci[1]*scale))*1.08;
+    const x=v=>left+v/upper*(width-left-right);
+    let s=`<title>${data.confidence*100}% 置信区间；每 ${scale} 人年</title>`;
+    for(let i=0;i<4;i++) {
+      const value=upper*i/3, xx=x(value);
+      s+=`<line x1="${xx}" x2="${xx}" y1="${top}" y2="${bottom}" stroke="currentColor" opacity=".14"/><text x="${xx}" y="${bottom+20}" text-anchor="${i===0?'start':i===3?'end':'middle'}" fill="currentColor" font-size="12">${fmt(value)}</text>`;
+    }
+    s+=`<line x1="${left}" x2="${width-right}" y1="${bottom}" y2="${bottom}" stroke="currentColor" opacity=".4"/>`;
+    rows.forEach(r=>{
+      s+=`<text x="${left-10}" y="${r.y+5}" text-anchor="end" fill="currentColor" font-size="13">${r.name}</text>`;
+      if(!r.ci) s+=`<text x="${left+12}" y="${r.y+5}" fill="currentColor" font-size="13">a = 0，未定义</text>`;
+      else {
+        const lo=x(r.ci[0]*scale),hi=x(r.ci[1]*scale),point=x(data.rate*scale);
+        s+=`<g stroke="${r.color}" stroke-width="3"><line x1="${lo}" x2="${hi}" y1="${r.y}" y2="${r.y}"/><line x1="${lo}" x2="${lo}" y1="${r.y-7}" y2="${r.y+7}"/><line x1="${hi}" x2="${hi}" y1="${r.y-7}" y2="${r.y+7}"/></g><circle cx="${point}" cy="${r.y}" r="5" fill="${r.color}"/>`;
+      }
+    });
+    s+=`<text x="${(left+width-right)/2}" y="${height-10}" text-anchor="middle" fill="currentColor" font-size="13">发生率（每 ${scale.toLocaleString('zh-CN')} 人年）；点 = a/T</text>`;
+    svg.innerHTML=s;
+  }
+  let current=null;
+  function update() {
+    const a=Number(el('ci-count').value),T=Number(el('ci-exposure').value),c=Number(el('ci-confidence').value),scale=Number(el('ci-scale').value);
+    const empty=['ci-count','ci-exposure','ci-confidence'].some(id=>el(id).value.trim()==='');
+    if(empty || !Number.isInteger(a) || a<0 || a>1e6 || !Number.isFinite(T) || T<1e-12 || T>1e15 || !Number.isFinite(c) || c<50 || c>99.9) {
+      el('ci-error').textContent='请输入整数事件数 0–1,000,000、正人时 10⁻¹²–10¹⁵，以及 50%–99.9% 的置信水平。';
+      el('ci-results').hidden=true; current=null; return;
+    }
+    try {
+      current=compute(a,T,c/100); el('ci-error').textContent=''; el('ci-results').hidden=false;
+      const unit=`每 ${scale.toLocaleString('zh-CN')} 人年`;
+      el('ci-summary').textContent=`发生率 = ${fmt(current.rate*scale)} / ${scale.toLocaleString('zh-CN')} 人年；双侧 ${fmt(c)}% CI`;
+      const row=(name,ci,color)=>`<tr><td><span class="ci-swatch" style="background:${color}"></span>${name}</td>${ci?`<td>${fmt(ci[0]*scale)}</td><td>${fmt(ci[1]*scale)}</td><td>${fmt((ci[1]-ci[0])*scale)}</td>`:'<td>未定义</td><td>未定义</td><td>—</td>'}</tr>`;
+      el('ci-table').innerHTML=row('log-Wald',current.log,'var(--ci-log)')+row('精确 Poisson',current.exact,'var(--ci-exact)');
+      if(current.log) {
+        const lw=current.log[1]-current.log[0],ew=current.exact[1]-current.exact[0], pct=100*(lw/ew-1);
+        el('ci-difference').textContent=`log-Wald − 精确 Poisson：下限差 ${fmt((current.log[0]-current.exact[0])*scale)}，上限差 ${fmt((current.log[1]-current.exact[1])*scale)}（${unit}）。log-Wald 区间宽度比精确区间${pct>=0?'大':'小'} ${fmt(Math.abs(pct))}%。区间更窄不代表覆盖率更好。`;
+      } else {
+        el('ci-difference').textContent=`零事件不等于零风险。log-Wald 因 log(0) 与 1/√0 无定义而无法使用；精确 Poisson 区间为 [0, ${fmt(current.exact[1]*scale)}]（${unit}）。这里是双侧 ${fmt(c)}% 区间。`;
+      }
+      el('ci-steps').innerHTML=`<p>α = ${fmt(current.alpha)}；z = ${fmt(current.z)}；r̂ = ${fmt(current.rate)} / 人年；SE(r̂) ≈ ${fmt(Math.sqrt(a)/T)} / 人年。</p>`+
+        (a>0?`<p>SE[log(r̂)] ≈ 1/√a = ${fmt(1/Math.sqrt(a))}；log 尺度半宽 = ${fmt(current.z/Math.sqrt(a))}。</p><p>log-Wald 的乘法因子为 exp(±z/√a) = ${fmt(Math.exp(-current.z/Math.sqrt(a)))} 和 ${fmt(Math.exp(current.z/Math.sqrt(a)))}。</p>`:'<p>log-Wald 的中间值未定义。</p>')+
+        `<p>精确 Poisson 对应的事件均值区间 μ = rT 为 [${fmt(current.exact[0]*T)}, ${fmt(current.exact[1]*T)}]；两端除以 T，再乘报告单位。</p>`;
+      draw(current,scale);
+    } catch(error) { current=null; el('ci-results').hidden=true; el('ci-error').textContent=error.message; }
+  }
+  el('ci-count-slider').addEventListener('input',()=>{el('ci-count').value=el('ci-count-slider').value; update();});
+  el('ci-count').addEventListener('input',()=>{
+    const a=Number(el('ci-count').value);
+    el('ci-count-slider').max=Number.isInteger(a)&&a>200&&a<=1e6?a:200;
+    el('ci-count-slider').value=a; update();
+  });
+  el('ci-confidence-slider').addEventListener('input',()=>{el('ci-confidence').value=el('ci-confidence-slider').value; update();});
+  el('ci-confidence').addEventListener('input',()=>{el('ci-confidence-slider').value=el('ci-confidence').value; update();});
+  ['ci-exposure','ci-scale'].forEach(id=>el(id).addEventListener('input',update));
+  if(typeof ResizeObserver!=='undefined') new ResizeObserver(()=>{if(current) draw(current,Number(el('ci-scale').value));}).observe(root);
+  update();
+})();
+</script>
+```
+
+## 模型前提与所需数据
+
+令随机事件数为 $A$，实际观察到的值为 $a$。假定
+
+$$
+A\sim\operatorname{Poisson}(rT),\qquad
+\mu=rT,\qquad \widehat r=\frac{a}{T}.
+$$
+
+其中 $r$ 是目标发生率，$T$ 是已知总人时。需要的数据只有**观察事件数、总人时和置信水平**；在此模型下不需要个体原始数据。
+
+Poisson 模型要求事件计数的分布可以合理地用 Poisson 描述，满足 $\operatorname{Var}(A)=E(A)=rT$。独立事件及给定风险率下的计数过程是典型情形。风险率可以随时间变化，只要总计数仍符合 Poisson 分布，此处的 $r$ 可以解释为观察期平均发生率；不能据此推断具体的年龄或季节效应。
+
+下列情况需另外处理：
+
+-   **累计发病风险 / 比例**：每人固定随访期内是否至少发生一次事件，常用二项分布区间；即使随访时长相同，也不能仅把人数当人时就认为精确 Poisson 适用。
+-   **聚集或相关事件**：如同一儿童反复感染、家庭聚集、研究间异质性，可能需要稳健方差、负二项模型、混合模型或适合设计的 bootstrap。
+-   **加权、校正或模型预测的病例数**：不能直接当作原始 Poisson 计数；需传播模型、抽样和其他输入的不确定性。
+-   **人时本身不确定**：本文将分母视为已知，未估计分母误差。
+
+对你的 RSV 工作，直接观察的病例数和队列总人时可按上述假设评估；国家负担模型的预测率及其不确定性区间应从完整模型的抽样结果计算。
+
+## log-Wald：delta 法为什么得到 $1/\sqrt a$？
+
+### 从事件数的方差到发生率的方差
+
+由于 $T$ 是已知常数，
+
+$$
+\operatorname{Var}(\widehat r)
+=\operatorname{Var}\left(\frac{A}{T}\right)
+=\frac{\operatorname{Var}(A)}{T^2}
+=\frac{rT}{T^2}
+=\frac rT.
+$$
+
+真实的 $r$ 未知，用 $\widehat r=a/T$ 代入，得到估计的方差和标准误：
+
+$$
+\widehat{\operatorname{Var}}(\widehat r)=\frac{a}{T^2},
+\qquad
+\widehat{SE}(\widehat r)=\frac{\sqrt a}{T}.
+$$
+
+这里 $\operatorname{Var}(A)=rT$ 是模型等式；用观察值 $a$ 替代未知均值 $rT$ 才是代入估计。
+
+### 一阶 Taylor 展开就是 delta 法的出发点
+
+对可微函数 $g$，在真实参数 $r$ 附近展开：
+
+$$
+g(\widehat r)
+=g(r)+g'(r)(\widehat r-r)
++\frac12g''(r)(\widehat r-r)^2+\cdots.
+$$
+
+忽略二阶及更高阶项：
+
+$$
+g(\widehat r)\approx g(r)+g'(r)(\widehat r-r).
+$$
+
+右侧的 $g(r)$ 和 $g'(r)$ 是常数。利用 $\operatorname{Var}(bX+c)=b^2\operatorname{Var}(X)$，
+
+$$
+\boxed{\operatorname{Var}[g(\widehat r)]
+\approx [g'(r)]^2\operatorname{Var}(\widehat r).}
+$$
+
+因此，delta 法把**非线性变换的局部波动**近似为其切线的波动，导数描述变换对误差的放大或缩小。它是近似方差的方法，不会单独保证变换后的分布服从正态。[牛津大学的统计理论讲义](https://www.stats.ox.ac.uk/~reinert/stattheory/revision09part1.pdf)给出了这一推导。
+
+### 令 $g(r)=\log r$
+
+当 $r>0$ 时，$g'(r)=1/r$，所以
+
+$$
+\operatorname{Var}[\log(\widehat r)]
+\approx\left(\frac1r\right)^2\frac rT
+=\frac1{rT}.
+$$
+
+再用 $\widehat rT=a$ 代入：
+
+$$
+\boxed{\widehat{SE}[\log(\widehat r)]\approx\frac1{\sqrt a},\qquad a>0.}
+$$
+
+为什么没有 $T$？在 Poisson 假设下，log 尺度的标准误对应**相对不确定性**，由事件数控制。在事件数不变时改变 $T$，会改变率及其绝对区间宽度，但不会改变相对区间宽度。
+
+### 在 log 尺度构造区间，再指数变换
+
+令 $z=z_{1-\alpha/2}$。使用 log 尺度的渐近正态近似：
+
+$$
+\log(\widehat r)\pm z\frac1{\sqrt a}.
+$$
+
+因为指数函数单调递增，可对两个端点分别取指数：
+
+$$
+\boxed{
+L_{\log W}=\frac aT\exp\left(-\frac z{\sqrt a}\right),\qquad
+U_{\log W}=\frac aT\exp\left(\frac z{\sqrt a}\right).
+}
+$$
+
+区间在 log 尺度对称，在原始尺度呈乘法对称：$L_{\log W}U_{\log W}=\widehat r^2$。因此上端距离点估计更远，且下限始终为正。**正的下限并不等于准确的覆盖率**；事件很少时正态近似仍可能不可靠。
+
+当 $a=0$ 时，$\log(\widehat r)$ 与 $1/\sqrt a$ 均无定义，不能使用这条公式。随意加 0.5 会改变方法，并不是原始 log-Wald。
+
+## 精确 Poisson：不依赖 log 正态近似
+
+### 先求事件均值 $\mu=rT$ 的区间
+
+中央等尾的 **Garwood 精确区间**通过反演 Poisson 尾概率得到。对 $a>0$，下端点满足
+
+$$
+P_{\mu_L}(A\ge a)=\frac\alpha2;
+$$
+
+上端点满足
+
+$$
+P_{\mu_U}(A\le a)=\frac\alpha2.
+$$
+
+利用 Poisson 尾概率与 Gamma / 卡方分布的关系，可写为
+
+$$
+\mu_L=\frac12\chi^2_{2a,\,\alpha/2},\qquad
+\mu_U=\frac12\chi^2_{2(a+1),\,1-\alpha/2}.
+$$
+
+$\chi^2_{\nu,p}$ 指自由度为 $\nu$ 的卡方分布的**左尾** $p$ 分位数。等价地，$\mu_L$ 和 $\mu_U$ 分别是 $\operatorname{Gamma}(a,\mathrm{scale}=1)$ 与 $\operatorname{Gamma}(a+1,\mathrm{scale}=1)$ 的相应分位数。交互计算器使用这一等价表达式计算。
+
+### 两端除以总人时
+
+$$
+\boxed{
+L_{\mathrm{exact}}=\frac{\chi^2_{2a,\,\alpha/2}}{2T},\qquad
+U_{\mathrm{exact}}=\frac{\chi^2_{2(a+1),\,1-\alpha/2}}{2T}.
+}
+$$
+
+这里的“精确”是指：**在 Poisson 模型成立时，重复抽样覆盖率不低于名义置信水平**，而不是每个参数值处都恰好为 95%。由于计数离散，Garwood 区间往往保守。[关于离散分布精确区间的研究](https://arxiv.org/abs/1412.0442)讨论了 Garwood 区间及其性质。
+
+### 零事件怎么处理？
+
+当 $a=0$ 时，下限单独定义为 0；不能将自由度为 0 的卡方分位数直接代入一般公式。因为 $P_\mu(A=0)=e^{-\mu}$，双侧区间的上限为
+
+$$
+\boxed{L=0,\qquad U=\frac{-\log(\alpha/2)}T.}
+$$
+
+双侧 95% 上限为 $3.688879/T$。如果求的是**单侧 95% 上限**，则为 $-\log(0.05)/T=2.995732/T$，约为常见的“rule of three”。这两个数对应不同的问题，不能混用。
+
+## 怎么选？还有哪些方法？
+
+| 方法 | 核心思路 | 主要特点 |
+|:-----------------------|:-----------------------|:-----------------------|
+| **log-Wald** | log 尺度上做 Wald 区间 | 计算简单、下限为正；小事件数下依赖近似；零事件未定义 |
+| **精确 Poisson / Garwood** | 反演 Poisson 尾概率 | 支持零事件；Poisson 模型下保证至少名义覆盖率，常偏保守 |
+| 普通 Wald | $a/T\pm z\sqrt a/T$ | 原尺度对称；小事件数可能有负下限，零事件退化为 $[0,0]$ |
+| Poisson Score | 反演采用假设均值方差的 score 检验 | 区间非负；仍是近似法，不保证每个参数值处达到名义覆盖率 |
+| 似然比区间 | 反演似然比检验 | 可体现似然不对称；常用卡方近似，零事件等边界情形需谨慎 |
+| mid-P | 精确尾概率扣除一半观察值概率 | 通常减轻保守性；可能低于名义覆盖率，不能当作同样的严格精确区间 |
+| 平方根 / Anscombe | 方差稳定变换后构造区间 | 另一类近似；不同修正版公式和边界处理有所差异 |
+| 贝叶斯 Gamma–Poisson | 由先验与似然得到后验分位数 | 得到的是可信区间 CrI；解释与频率学 CI 不同，需说明先验 |
+
+[statsmodels 官方文档](https://www.statsmodels.org/stable/generated/statsmodels.stats.rates.confint_poisson.html)提供精确、Score、Wald、mid-P、平方根及 Jeffreys 等实现和方法比较参考文献。
+
+**实用选择：** 若是单个原始事件率，尤其事件数较少或为零，Garwood 精确区间是容易说明和复核的选择。log-Wald 可以用于事件数足够大、近似合理的情形。没有一个通用的事件数阈值能保证近似良好；方法应预先选定并说明，不能按哪个区间更窄挑选。
+
+95% CI 的频率学解释是：如果重复同样的抽样与计算过程，所构造的区间中约 95% 会覆盖固定的真实参数；不能直接解释成“给定这次数据，真实参数有 95% 概率在这个区间内”。
+
+## 用 R 复核
+
+下面仅使用 R 的基础 `stats` 函数；代码展示，不会在渲染本文时执行。
+
+``` r
+a <- 9L
+T <- 4028.16                       # person-years
+conf_level <- 0.95
+multiplier <- 1000                 # report per 1,000 person-years
+
+alpha <- 1 - conf_level
+z <- qnorm(1 - alpha / 2)
+rate <- a / T
+
+log_wald <- if (a > 0) {
+  rate * exp(c(-1, 1) * z / sqrt(a))
+} else {
+  c(NA_real_, NA_real_)
+}
+
+# Garwood exact Poisson CI; also valid for a = 0
+exact <- poisson.test(a, T = T, conf.level = conf_level)$conf.int
+
+# Equivalent chi-square formula, with a separate zero-count lower limit
+exact_chisq <- c(
+  if (a == 0) 0 else qchisq(alpha / 2, df = 2 * a) / (2 * T),
+  qchisq(1 - alpha / 2, df = 2 * (a + 1)) / (2 * T)
+)
+stopifnot(isTRUE(all.equal(as.numeric(exact), exact_chisq)))
+
+data.frame(
+  method = c("log-Wald", "Exact Poisson (Garwood)"),
+  rate = rep(rate * multiplier, 2),
+  lower = c(log_wald[1], exact[1]) * multiplier,
+  upper = c(log_wald[2], exact[2]) * multiplier
+)
+```
+
+`poisson.test()` 的事件数、人时和置信水平参数见 [R 官方文档](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/poisson.test.html)。
+
+## 参考来源与计算说明
+
+1.  [CUHK：C.I. Calculator—Single Incidence Rate](https://www2.ccrb.cuhk.edu.hk/stat/confidence%20interval/CI%20for%20single%20rate.htm)。其 $a=9,T=4028.16$ 示例结果与 log-Wald 公式近似吻合；这是根据示例的判断。本文直接实现所列公式，不保证逐位复现旧网页的舍入或近似算法。
+2.  [Oxford：Bias and variance approximations—the delta method](https://www.stats.ox.ac.uk/~reinert/stattheory/revision09part1.pdf)。一阶 Taylor 方差近似。
+3.  [R：`poisson.test` 官方文档](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/poisson.test.html)。精确 Poisson 检验与区间接口。
+4.  [statsmodels：`confint_poisson` 官方文档](https://www.statsmodels.org/stable/generated/statsmodels.stats.rates.confint_poisson.html)。常用 Poisson 区间及比较文献。
+5.  [Thulin & Zwanzig：Exact confidence intervals and hypothesis tests for parameters of discrete distributions](https://arxiv.org/abs/1412.0442)。精确区间的覆盖率与 Garwood 区间性质。
+
+交互计算器用正态分位数近似以及 Gamma CDF 的数值反演求端点，显示至最多 6 位小数；统计意义上的“精确 Poisson”不等于浮点运算没有误差。人时单位固定为人年；若输入人月，可将总人月除以 12 后输入。仅改变每 1 / 1,000 / 100,000 人年的显示单位，不会改变区间的相对宽度。
